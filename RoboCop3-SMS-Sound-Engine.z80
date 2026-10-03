@@ -1,0 +1,1385 @@
+; ============================================================================
+; RoboCop 3 (SMS/Game Gear) - Sound engine - bank $6 (ROM $18000)
+; Loaded at $8000 (slot 2). Z80, Krisalis tracker by Shaun Hollingworth;
+; music/SFX by Matt Furniss.
+;
+; Partial, reverse-engineered reconstruction - see RoboCop3-SMS-Sound-Engine.md
+; PSG control/data register = port $7F.
+; ============================================================================
+
+        ORG     0x8000
+
+; ================ Song/step table (62 rows x 4 bytes) ================
+; Each row is one sequencer step; the 4 bytes select the pattern for
+; music channels 0..3 (index into PatternDir). Music step = StepSong,
+; SFX step = StepSfx (reads this table 2 bytes in).
+SongTable:
+        DB      02H,01H,01H,01H    ; row 00
+        DB      03H,00H,00H,00H    ; row 01
+        DB      08H,09H,00H,00H    ; row 02
+        DB      04H,00H,06H,07H    ; row 03
+        DB      05H,00H,06H,07H    ; row 04
+        DB      04H,0AH,06H,07H    ; row 05
+        DB      05H,0BH,06H,07H    ; row 06
+        DB      0CH,0AH,06H,07H    ; row 07
+        DB      0CH,0BH,06H,07H    ; row 08
+        DB      0DH,0AH,06H,07H    ; row 09
+        DB      0EH,0BH,06H,07H    ; row 0A
+        DB      0FH,0AH,06H,07H    ; row 0B
+        DB      10H,0BH,06H,07H    ; row 0C
+        DB      11H,12H,06H,07H    ; row 0D
+        DB      11H,12H,06H,07H    ; row 0E
+        DB      11H,13H,14H,07H    ; row 0F
+        DB      11H,15H,14H,07H    ; row 10
+        DB      16H,17H,14H,07H    ; row 11
+        DB      18H,19H,14H,07H    ; row 12
+        DB      1AH,1BH,1CH,1DH    ; row 13
+        DB      1EH,1FH,20H,21H    ; row 14
+        DB      1EH,1FH,20H,21H    ; row 15
+        DB      22H,23H,20H,21H    ; row 16
+        DB      24H,25H,20H,21H    ; row 17
+        DB      1EH,1FH,20H,21H    ; row 18
+        DB      1EH,1FH,20H,21H    ; row 19
+        DB      26H,27H,20H,21H    ; row 1A
+        DB      28H,29H,2AH,2BH    ; row 1B
+        DB      2CH,29H,2DH,2BH    ; row 1C
+        DB      28H,29H,2AH,2BH    ; row 1D
+        DB      2CH,29H,2DH,2BH    ; row 1E
+        DB      2EH,29H,28H,2BH    ; row 1F
+        DB      2EH,29H,2CH,2BH    ; row 20
+        DB      2FH,30H,31H,32H    ; row 21
+        DB      33H,30H,34H,32H    ; row 22
+        DB      2FH,30H,31H,32H    ; row 23
+        DB      33H,30H,34H,32H    ; row 24
+        DB      35H,30H,31H,32H    ; row 25
+        DB      36H,37H,34H,32H    ; row 26
+        DB      38H,39H,3AH,3BH    ; row 27
+        DB      3CH,3DH,3EH,3FH    ; row 28
+        DB      3CH,3DH,3EH,3FH    ; row 29
+        DB      40H,41H,42H,43H    ; row 2A
+        DB      44H,45H,46H,47H    ; row 2B
+        DB      00H,00H,49H,48H    ; row 2C
+        DB      00H,00H,4AH,49H    ; row 2D
+        DB      00H,00H,4BH,49H    ; row 2E
+        DB      00H,00H,49H,4CH    ; row 2F
+        DB      00H,00H,49H,4DH    ; row 30
+        DB      00H,00H,4EH,49H    ; row 31
+        DB      00H,00H,49H,4FH    ; row 32
+        DB      00H,00H,49H,50H    ; row 33
+        DB      00H,00H,51H,49H    ; row 34
+        DB      00H,00H,52H,53H    ; row 35
+        DB      00H,00H,54H,55H    ; row 36
+        DB      00H,00H,56H,49H    ; row 37
+        DB      00H,00H,57H,49H    ; row 38
+        DB      00H,00H,58H,49H    ; row 39
+        DB      00H,00H,59H,49H    ; row 3A
+        DB      00H,00H,49H,5AH    ; row 3B
+        DB      00H,00H,49H,5BH    ; row 3C
+        DB      00H,00H,00H,00H    ; row 3D
+
+; ================ Pattern pointer directory ($80F8) ================
+; 92 entries; entry N = address of pattern N:  addr = dir[byte].
+PatternDir:
+        DW      81B0H               ; pattern 00 -> $81B0
+        DW      81B2H               ; pattern 01 -> $81B2
+        DW      81B6H               ; pattern 02 -> $81B6
+        DW      81C0H               ; pattern 03 -> $81C0
+        DW      81C6H               ; pattern 04 -> $81C6
+        DW      81E2H               ; pattern 05 -> $81E2
+        DW      81F2H               ; pattern 06 -> $81F2
+        DW      8212H               ; pattern 07 -> $8212
+        DW      826CH               ; pattern 08 -> $826C
+        DW      8276H               ; pattern 09 -> $8276
+        DW      827AH               ; pattern 0A -> $827A
+        DW      82AAH               ; pattern 0B -> $82AA
+        DW      82DAH               ; pattern 0C -> $82DA
+        DW      835AH               ; pattern 0D -> $835A
+        DW      8370H               ; pattern 0E -> $8370
+        DW      8388H               ; pattern 0F -> $8388
+        DW      839AH               ; pattern 10 -> $839A
+        DW      83BEH               ; pattern 11 -> $83BE
+        DW      83E4H               ; pattern 12 -> $83E4
+        DW      8408H               ; pattern 13 -> $8408
+        DW      842CH               ; pattern 14 -> $842C
+        DW      845AH               ; pattern 15 -> $845A
+        DW      847AH               ; pattern 16 -> $847A
+        DW      8498H               ; pattern 17 -> $8498
+        DW      84B4H               ; pattern 18 -> $84B4
+        DW      84D6H               ; pattern 19 -> $84D6
+        DW      84F4H               ; pattern 1A -> $84F4
+        DW      8506H               ; pattern 1B -> $8506
+        DW      8510H               ; pattern 1C -> $8510
+        DW      851AH               ; pattern 1D -> $851A
+        DW      852AH               ; pattern 1E -> $852A
+        DW      8550H               ; pattern 1F -> $8550
+        DW      8596H               ; pattern 20 -> $8596
+        DW      85C0H               ; pattern 21 -> $85C0
+        DW      8622H               ; pattern 22 -> $8622
+        DW      866AH               ; pattern 23 -> $866A
+        DW      86AEH               ; pattern 24 -> $86AE
+        DW      86FEH               ; pattern 25 -> $86FE
+        DW      8744H               ; pattern 26 -> $8744
+        DW      875AH               ; pattern 27 -> $875A
+        DW      8766H               ; pattern 28 -> $8766
+        DW      8772H               ; pattern 29 -> $8772
+        DW      8798H               ; pattern 2A -> $8798
+        DW      87A4H               ; pattern 2B -> $87A4
+        DW      87A8H               ; pattern 2C -> $87A8
+        DW      87B6H               ; pattern 2D -> $87B6
+        DW      87C4H               ; pattern 2E -> $87C4
+        DW      8824H               ; pattern 2F -> $8824
+        DW      8884H               ; pattern 30 -> $8884
+        DW      88B0H               ; pattern 31 -> $88B0
+        DW      88C8H               ; pattern 32 -> $88C8
+        DW      88DEH               ; pattern 33 -> $88DE
+        DW      893EH               ; pattern 34 -> $893E
+        DW      8956H               ; pattern 35 -> $8956
+        DW      896EH               ; pattern 36 -> $896E
+        DW      8986H               ; pattern 37 -> $8986
+        DW      89B2H               ; pattern 38 -> $89B2
+        DW      89D4H               ; pattern 39 -> $89D4
+        DW      89FAH               ; pattern 3A -> $89FA
+        DW      8A20H               ; pattern 3B -> $8A20
+        DW      8A34H               ; pattern 3C -> $8A34
+        DW      8AB4H               ; pattern 3D -> $8AB4
+        DW      8B00H               ; pattern 3E -> $8B00
+        DW      8B4AH               ; pattern 3F -> $8B4A
+        DW      8B8CH               ; pattern 40 -> $8B8C
+        DW      8BA4H               ; pattern 41 -> $8BA4
+        DW      8BBEH               ; pattern 42 -> $8BBE
+        DW      8BD6H               ; pattern 43 -> $8BD6
+        DW      8BF8H               ; pattern 44 -> $8BF8
+        DW      8C08H               ; pattern 45 -> $8C08
+        DW      8C24H               ; pattern 46 -> $8C24
+        DW      8C3AH               ; pattern 47 -> $8C3A
+        DW      8C4EH               ; pattern 48 -> $8C4E
+        DW      8C5CH               ; pattern 49 -> $8C5C
+        DW      8C60H               ; pattern 4A -> $8C60
+        DW      8C6AH               ; pattern 4B -> $8C6A
+        DW      8C88H               ; pattern 4C -> $8C88
+        DW      8C94H               ; pattern 4D -> $8C94
+        DW      8C9CH               ; pattern 4E -> $8C9C
+        DW      8CAEH               ; pattern 4F -> $8CAE
+        DW      8CBAH               ; pattern 50 -> $8CBA
+        DW      8CCCH               ; pattern 51 -> $8CCC
+        DW      8CDAH               ; pattern 52 -> $8CDA
+        DW      8CE8H               ; pattern 53 -> $8CE8
+        DW      8CEEH               ; pattern 54 -> $8CEE
+        DW      8CF8H               ; pattern 55 -> $8CF8
+        DW      8CFCH               ; pattern 56 -> $8CFC
+        DW      8D1AH               ; pattern 57 -> $8D1A
+        DW      8D3EH               ; pattern 58 -> $8D3E
+        DW      8D52H               ; pattern 59 -> $8D52
+        DW      8D58H               ; pattern 5A -> $8D58
+        DW      8D64H               ; pattern 5B -> $8D64
+
+; ====================== Pattern/command data ======================
+; Streams of 2-byte commands:  <byte0>  <byte1>
+;   opcode (3 bits) = ((byte0<<1)|(byte1>>7))&7, see PlayVoice
+;   0 rest,1 duration/env,2 stop/loop,3 set instrument,4 slide up,
+;   5 slide down, 6 arpeggio, 7 unused
+PatternData:
+P00:       ; pattern 00
+        DB      00H,3FH
+P01:       ; pattern 01
+        DB      95H,80H,00H,3EH
+P02:       ; pattern 02
+        DB      95H,80H,00H,85H,00H,0AH,01H,7FH,00H,31H
+P03:       ; pattern 03
+        DB      00H,09H,01H,01H,00H,34H
+P04:       ; pattern 04
+        DB      1DH,84H,00H,04H,1DH,85H,00H,04H,1DH,86H,00H,22H,15H,84H,00H,00H,1CH,01H,28H,01H,1CH,01H,28H,03H,02H,82H,00H,02H
+P05:       ; pattern 05
+        DB      15H,84H,00H,04H,15H,85H,00H,04H,15H,86H,00H,2EH,15H,84H,00H,02H
+P06:       ; pattern 06
+        DB      11H,81H,00H,02H,10H,03H,20H,03H,10H,07H,10H,03H,20H,03H,10H,03H,10H,03H,10H,03H,20H,03H,10H,05H,10H,01H,10H,03H,20H,03H,10H,03H
+P07:       ; pattern 07
+        DB      35H,82H,00H,02H,35H,83H,00H,00H,34H,01H,35H,82H,00H,02H,35H,83H,00H,00H,34H,01H,35H,82H,00H,02H,35H,83H,00H,00H,34H,01H,35H,82H,00H,00H,35H,83H,00H,00H,34H,00H,34H,00H,34H,01H,35H,82H,00H,02H,35H,83H,00H,00H,34H,01H,35H,82H,00H,02H,35H,83H,00H,00H,34H,01H,35H,82H,00H,02H,35H,83H,00H,00H,34H,01H,35H,82H,00H,00H,35H,83H,00H,00H,34H,00H,34H,00H,35H,82H,00H,00H
+P08:       ; pattern 08
+        DB      03H,27H,03H,4CH,00H,0C0H,01H,7FH,00H,3BH
+P09:       ; pattern 09
+        DB      00H,83H,00H,3EH
+P0A:       ; pattern 0A
+        DB      1DH,87H,00H,83H,00H,01H,1CH,03H,1CH,03H,1CH,01H,1CH,03H,1CH,01H,1CH,01H,1CH,01H,1CH,03H,1CH,01H,1CH,01H,1CH,03H,1CH,03H,1CH,03H,1CH,01H,1CH,03H,1CH,01H,1CH,01H,1CH,01H,1CH,03H,1CH,01H,1CH,01H
+P0B:       ; pattern 0B
+        DB      15H,87H,00H,83H,00H,01H,14H,03H,14H,03H,14H,01H,14H,03H,14H,01H,14H,01H,14H,01H,14H,03H,14H,01H,14H,01H,14H,03H,14H,03H,14H,03H,14H,01H,14H,03H,14H,01H,14H,01H,14H,01H,14H,03H,14H,01H,14H,01H
+P0C:       ; pattern 0C
+        DB      1DH,85H,2BH,00H,30H,00H,28H,00H,30H,00H,38H,00H,30H,00H,38H,00H,44H,00H,38H,00H,44H,00H,4CH,00H,44H,00H,4CH,00H,58H,00H,4CH,00H,58H,00H,60H,00H,58H,00H,60H,00H,68H,00H,60H,00H,68H,00H,74H,00H,68H,00H,74H,00H,7CH,00H,74H,00H,7CH,00H,88H,00H,7CH,00H,88H,00H,90H,00H,88H,00H,7CH,00H,74H,00H,7CH,00H,74H,00H,68H,00H,60H,00H,68H,00H,60H,00H,58H,00H,4CH,00H,58H,00H,4CH,00H,44H,00H,38H,00H,44H,00H,38H,00H,30H,00H,28H,00H,30H,00H,28H,00H,1CH,00H,14H,00H,1CH,00H,14H,00H,08H,00H,14H,00H,08H,00H,14H,00H,1CH,00H,28H,00H
+P0D:       ; pattern 0D
+        DB      0A5H,88H,0ACH,26H,02H,83H,00H,00H,65H,80H,00H,00H,91H,88H,00H,02H,98H,03H,0ACH,03H,0B8H,07H
+P0E:       ; pattern 0E
+        DB      00H,07H,0ADH,88H,00H,02H,98H,1DH,02H,82H,00H,00H,95H,80H,00H,06H,91H,88H,00H,02H,98H,03H,0A4H,03H
+P0F:       ; pattern 0F
+        DB      0ADH,88H,00H,06H,0A4H,03H,98H,0FH,90H,03H,98H,03H,0A4H,03H,74H,03H,7CH,13H
+P10:       ; pattern 10
+        DB      00H,1CH,02H,82H,00H,00H,95H,80H,00H,0EH,01H,85H,66H,8AH,00H,00H,66H,8AH,00H,02H,66H,8AH,00H,02H,52H,8AH,00H,00H,52H,8AH,03H,27H,03H,4CH,00H,0C0H
+P11:       ; pattern 11
+        DB      4DH,84H,00H,83H,00H,03H,4CH,05H,58H,03H,30H,05H,31H,85H,00H,04H,31H,86H,00H,02H,4DH,84H,00H,04H,4CH,05H,58H,03H,28H,03H,28H,03H,30H,05H,31H,85H,00H,00H
+P12:       ; pattern 12
+        DB      39H,84H,00H,04H,38H,05H,44H,03H,1CH,05H,1DH,85H,00H,04H,1DH,86H,00H,02H,39H,84H,00H,04H,38H,05H,44H,03H,14H,03H,14H,03H,1CH,05H,1DH,85H,00H,00H
+P13:       ; pattern 13
+        DB      00H,83H,00H,02H,91H,88H,00H,02H,98H,03H,0A4H,03H,0ACH,05H,0B4H,05H,0B8H,03H,0C0H,05H,0C8H,05H,0D4H,03H,0D4H,00H,0DCH,04H,0D4H,00H,0DCH,04H,0D4H,00H,0DCH,02H
+P14:       ; pattern 14
+        DB      11H,81H,00H,02H,20H,03H,10H,01H,10H,01H,20H,03H,10H,03H,20H,03H,10H,01H,10H,01H,20H,03H,10H,03H,20H,03H,10H,01H,10H,01H,20H,03H,10H,03H,20H,03H,10H,01H,10H,01H,20H,00H,20H,00H,20H,01H
+P15:       ; pattern 15
+        DB      0D5H,88H,0DCH,04H,0D4H,00H,0DCH,04H,0D4H,00H,0DCH,02H,0D4H,00H,0DCH,04H,0D4H,00H,0DCH,04H,0D4H,00H,0DCH,02H,0D4H,00H,0DCH,1AH,02H,82H,00H,02H
+P16:       ; pattern 16
+        DB      1DH,84H,00H,83H,00H,03H,4CH,05H,38H,03H,44H,05H,30H,05H,38H,03H,1CH,05H,4CH,05H,38H,03H,30H,03H,30H,05H,38H,03H,44H,01H
+P17:       ; pattern 17
+        DB      1DH,87H,00H,04H,4CH,05H,38H,03H,44H,05H,30H,05H,38H,03H,1CH,05H,4CH,05H,38H,03H,30H,03H,30H,05H,38H,03H,44H,01H
+P18:       ; pattern 18
+        DB      1DH,84H,00H,83H,00H,03H,4CH,05H,38H,03H,44H,05H,30H,05H,38H,03H,1CH,05H,4CH,05H,38H,03H,30H,03H,30H,05H,38H,01H,44H,01H,4CH,00H,01H,03H
+P19:       ; pattern 19
+        DB      1DH,87H,00H,04H,4CH,05H,38H,03H,44H,05H,30H,05H,38H,03H,1CH,05H,4CH,05H,38H,03H,30H,03H,30H,05H,08H,01H,14H,01H,1CH,01H
+P1A:       ; pattern 1A
+        DB      29H,82H,30H,00H,3CH,00H,44H,00H,50H,00H,58H,00H,60H,00H,6DH,7FH,00H,37H
+P1B:       ; pattern 1B
+        DB      0DH,87H,00H,00H,0CH,01H,0CH,01H,0CH,39H
+P1C:       ; pattern 1C
+        DB      00H,84H,00H,02H,11H,81H,00H,00H,10H,39H
+P1D:       ; pattern 1D
+        DB      35H,89H,00H,00H,35H,82H,00H,00H,35H,89H,00H,00H,34H,38H,34H,00H
+P1E:       ; pattern 1E
+        DB      00H,84H,00H,0AH,3DH,87H,00H,00H,44H,03H,3CH,01H,44H,03H,50H,01H,44H,01H,3CH,01H,30H,0DH,28H,01H,30H,03H,28H,01H,30H,03H,3CH,01H,30H,01H,28H,01H,20H,01H
+P1F:       ; pattern 1F
+        DB      15H,87H,00H,00H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,14H,01H,0CH,00H,14H,00H,20H,01H,20H,01H,20H,01H,20H,01H,20H,01H,20H,01H,20H,01H,20H,01H,0CH,01H,0CH,01H,0CH,01H,0CH,01H,0CH,01H,0CH,01H,0CH,01H,04H,00H,0CH,00H
+P20:       ; pattern 20
+        DB      11H,81H,00H,02H,20H,03H,10H,01H,10H,01H,20H,03H,10H,03H,20H,03H,10H,01H,10H,01H,20H,03H,10H,03H,20H,03H,10H,01H,10H,01H,20H,03H,10H,03H,20H,03H,10H,01H,10H,01H,20H,03H
+P21:       ; pattern 21
+        DB      35H,83H,00H,00H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H,34H,01H,34H,00H,34H,00H
+P22:       ; pattern 22
+        DB      7DH,88H,00H,84H,00H,05H,88H,01H,7CH,01H,88H,01H,8CH,00H,90H,06H,98H,03H,0A4H,01H,98H,01H,0A4H,01H,0ACH,00H,0A4H,00H,98H,00H,90H,00H,0ACH,00H,0A4H,00H,98H,00H,90H,00H,0ACH,00H,0A4H,00H,98H,00H,90H,00H,0ACH,00H,0A4H,00H,98H,00H,90H,00H,98H,01H,0A4H,00H,0A8H,00H,0ACH,01H,90H,03H,94H,01H,98H,01H,74H,01H
+P23:       ; pattern 23
+        DB      1DH,87H,00H,00H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,14H,00H,1CH,00H,28H,01H,28H,01H,28H,01H,28H,01H,28H,01H,28H,01H,28H,01H,28H,01H,30H,01H,30H,01H,30H,01H,30H,01H,14H,01H,14H,01H,18H,01H,18H,01H
+P24:       ; pattern 24
+        DB      7DH,88H,00H,84H,00H,01H,74H,01H,68H,01H,74H,01H,78H,01H,7CH,01H,88H,03H,88H,01H,7CH,01H,68H,01H,74H,01H,78H,01H,7CH,01H,88H,01H,90H,00H,94H,00H,98H,00H,0A4H,00H,90H,00H,94H,00H,98H,00H,0A4H,00H,90H,00H,94H,00H,98H,00H,0A4H,00H,90H,00H,94H,00H,98H,00H,0A4H,00H,0ACH,05H,02H,82H,00H,00H,0DH,87H,00H,00H,0CH,01H,0CH,01H,0CH,01H
+P25:       ; pattern 25
+        DB      1DH,87H,00H,00H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,1CH,01H,14H,00H,1CH,00H,28H,01H,28H,01H,28H,01H,28H,01H,28H,01H,28H,01H,28H,01H,28H,01H,30H,01H,30H,01H,30H,01H,30H,01H,0DH,86H,00H,00H,0CH,01H,0CH,01H,0CH,01H
+P26:       ; pattern 26
+        DB      4DH,85H,00H,00H,38H,01H,1CH,01H,48H,01H,34H,01H,18H,01H,44H,01H,30H,00H,01H,14H,00H,2FH
+P27:       ; pattern 27
+        DB      1DH,87H,00H,00H,08H,03H,18H,01H,04H,03H,14H,33H
+P28:       ; pattern 28
+        DB      35H,84H,00H,02H,35H,85H,00H,02H,35H,86H,00H,36H
+P29:       ; pattern 29
+        DB      05H,87H,00H,00H,04H,01H,04H,01H,04H,05H,04H,01H,04H,01H,04H,01H,04H,05H,04H,01H,04H,01H,04H,01H,04H,05H,04H,01H,04H,01H,04H,01H,04H,04H,01H,7FH,00H,0FH
+P2A:       ; pattern 2A
+        DB      21H,84H,00H,02H,21H,85H,00H,02H,21H,86H,00H,36H
+P2B:       ; pattern 2B
+        DB      00H,84H,00H,3EH
+P2C:       ; pattern 2C
+        DB      00H,23H,2DH,86H,00H,02H,2DH,85H,00H,02H,2DH,84H,00H,12H
+P2D:       ; pattern 2D
+        DB      00H,23H,19H,86H,00H,02H,19H,85H,00H,02H,19H,84H,00H,12H
+P2E:       ; pattern 2E
+        DB      0B1H,86H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0BCH,00H,0A0H,00H,94H,00H,0B4H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0B0H,00H,0A0H,00H,94H,00H,0BCH,00H,0A0H,00H,94H,00H,0B4H,00H,0A0H,00H,94H,10H
+P2F:       ; pattern 2F
+        DB      0DH,86H,18H,00H,20H,00H,28H,00H,20H,00H,28H,00H,34H,00H,3CH,00H,34H,00H,3CH,00H,48H,00H,50H,00H,48H,00H,50H,00H,58H,00H,64H,00H,58H,00H,64H,00H,6CH,00H,78H,00H,6CH,00H,78H,00H,80H,00H,88H,00H,80H,00H,88H,00H,94H,00H,9CH,00H,94H,00H,9CH,00H,0A8H,00H,0B0H,00H,0A8H,00H,0B0H,00H,0B8H,00H,0C4H,00H,0B8H,00H,0C4H,00H,0CCH,00H,0D8H,00H,0CCH,00H,0D8H,00H,0E0H,00H,0E8H,00H,0E0H,00H,0E8H,00H,0F4H,00H,0FCH,10H
+P30:       ; pattern 30
+        DB      0CH,03H,0CH,01H,3CH,01H,0CH,01H,3CH,01H,0CH,03H,0CH,01H,3CH,01H,0CH,01H,3CH,01H,04H,03H,04H,01H,34H,01H,04H,01H,34H,01H,04H,03H,04H,01H,34H,01H,04H,01H,34H,00H,01H,7FH,00H,0FH
+P31:       ; pattern 31
+        DB      3DH,84H,00H,02H,3DH,85H,00H,02H,3DH,86H,00H,0EH,49H,84H,00H,02H,49H,85H,00H,02H,49H,86H,00H,1EH
+P32:       ; pattern 32
+        DB      00H,84H,00H,08H,0F5H,83H,0F4H,00H,35H,82H,00H,14H,0F5H,83H,0F4H,00H,35H,82H,00H,02H,34H,17H
+P33:       ; pattern 33
+        DB      0F5H,86H,0E8H,00H,0E0H,00H,0D8H,00H,0E0H,00H,0D8H,00H,0CCH,00H,0C4H,00H,0CCH,00H,0C4H,00H,0B8H,00H,0B0H,00H,0B8H,00H,0B0H,00H,0A8H,00H,9CH,00H,0A8H,00H,9CH,00H,94H,00H,88H,00H,94H,00H,88H,00H,80H,00H,78H,00H,80H,00H,78H,00H,6CH,00H,64H,00H,6CH,00H,64H,00H,58H,00H,50H,00H,58H,00H,50H,00H,48H,00H,3CH,00H,48H,00H,3CH,00H,34H,00H,28H,00H,34H,00H,28H,00H,20H,00H,18H,00H,20H,00H,18H,00H,0CH,00H,04H,10H
+P34:       ; pattern 34
+        DB      21H,84H,00H,02H,21H,85H,00H,02H,21H,86H,00H,0EH,29H,84H,00H,02H,29H,85H,00H,02H,29H,86H,00H,1EH
+P35:       ; pattern 35
+        DB      29H,84H,00H,02H,29H,85H,00H,02H,29H,86H,00H,0EH,35H,84H,00H,02H,35H,85H,00H,02H,35H,86H,00H,1EH
+P36:       ; pattern 36
+        DB      0DH,84H,00H,02H,0DH,85H,00H,02H,0DH,86H,00H,0EH,19H,84H,00H,02H,19H,85H,00H,02H,19H,86H,00H,1EH
+P37:       ; pattern 37
+        DB      0CH,03H,0CH,01H,3CH,01H,0CH,01H,3CH,01H,0CH,03H,0CH,01H,3CH,01H,0CH,01H,3CH,01H,04H,03H,04H,01H,34H,01H,04H,01H,34H,01H,04H,03H,04H,01H,34H,01H,04H,01H,34H,00H,01H,1BH,00H,0FH
+P38:       ; pattern 38
+        DB      9DH,85H,00H,00H,94H,01H,88H,01H,94H,01H,88H,01H,80H,01H,88H,01H,80H,01H,78H,01H,80H,01H,78H,01H,6CH,01H,78H,01H,6CH,01H,64H,03H,6CH,1FH
+P39:       ; pattern 39
+        DB      0DH,84H,00H,04H,0CH,01H,3DH,87H,00H,02H,35H,84H,00H,02H,28H,01H,21H,87H,00H,02H,20H,00H,24H,00H,28H,01H,35H,84H,00H,00H,04H,03H,0CH,0BH,01H,00H,00H,12H
+P3A:       ; pattern 3A
+        DB      00H,83H,00H,01H,9DH,86H,00H,00H,94H,01H,88H,01H,94H,01H,88H,01H,80H,01H,88H,01H,80H,01H,78H,01H,80H,01H,78H,01H,6CH,01H,78H,01H,6CH,01H,64H,03H,6CH,1CH
+P3B:       ; pattern 3B
+        DB      00H,07H,95H,89H,00H,04H,94H,07H,94H,00H,94H,00H,94H,01H,94H,01H,94H,03H,94H,1FH
+P3C:       ; pattern 3C
+        DB      05H,87H,34H,00H,04H,00H,04H,00H,34H,00H,04H,00H,08H,00H,04H,00H,34H,00H,04H,00H,04H,00H,34H,00H,04H,00H,04H,00H,44H,00H,2CH,00H,04H,00H,04H,00H,34H,00H,04H,00H,04H,00H,34H,00H,08H,00H,04H,00H,34H,00H,04H,00H,04H,00H,34H,00H,04H,00H,34H,00H,44H,00H,2CH,00H,10H,00H,40H,00H,10H,00H,10H,00H,40H,00H,10H,00H,14H,00H,10H,00H,40H,00H,10H,00H,10H,00H,40H,00H,10H,00H,40H,00H,28H,00H,10H,00H,18H,00H,48H,00H,18H,00H,18H,00H,48H,00H,18H,00H,1CH,00H,18H,00H,48H,00H,18H,00H,18H,00H,48H,00H,18H,00H,48H,00H,30H,00H,1CH,00H
+P3D:       ; pattern 3D
+        DB      00H,86H,00H,00H,35H,85H,00H,00H,50H,01H,34H,01H,50H,01H,34H,00H,50H,01H,34H,00H,54H,01H,50H,01H,34H,01H,50H,01H,34H,01H,50H,01H,34H,00H,50H,01H,34H,00H,54H,00H,50H,02H,40H,01H,5CH,01H,40H,01H,5CH,01H,40H,00H,5CH,01H,40H,00H,60H,01H,48H,03H,64H,01H,48H,01H,64H,01H,48H,00H,64H,01H,48H,00H,70H,00H,68H,00H
+P3E:       ; pattern 3E
+        DB      00H,01H,51H,86H,00H,00H,6CH,01H,50H,01H,6CH,01H,50H,00H,6CH,01H,50H,00H,70H,01H,6CH,01H,50H,01H,6CH,01H,50H,01H,6CH,01H,50H,00H,6CH,01H,50H,00H,70H,00H,6CH,02H,64H,01H,80H,01H,64H,01H,80H,01H,64H,00H,80H,01H,64H,00H,84H,01H,64H,03H,78H,01H,64H,01H,78H,01H,64H,00H,78H,01H,64H,00H,8CH,00H,84H,00H
+P3F:       ; pattern 3F
+        DB      65H,83H,64H,00H,64H,03H,64H,00H,64H,00H,64H,03H,64H,00H,64H,00H,64H,03H,64H,00H,64H,00H,64H,03H,64H,00H,64H,00H,64H,03H,64H,00H,64H,00H,64H,03H,64H,00H,64H,00H,64H,03H,64H,00H,64H,00H,64H,03H,64H,00H,64H,00H,64H,03H,64H,00H,64H,00H,64H,03H,64H,00H,64H,00H,64H,01H
+P40:       ; pattern 40
+        DB      35H,87H,30H,00H,2CH,00H,28H,02H,28H,00H,24H,00H,20H,00H,1CH,02H,1CH,00H,18H,00H,14H,00H,10H,30H
+P41:       ; pattern 41
+        DB      71H,85H,6CH,00H,68H,00H,64H,02H,64H,00H,60H,00H,5CH,00H,58H,02H,58H,00H,54H,00H,50H,00H,4DH,28H,00H,2FH
+P42:       ; pattern 42
+        DB      81H,85H,7CH,00H,78H,00H,74H,02H,74H,00H,70H,00H,6CH,00H,68H,02H,68H,00H,64H,00H,60H,00H,5CH,30H
+P43:       ; pattern 43
+        DB      65H,83H,64H,00H,64H,00H,65H,89H,64H,00H,64H,00H,65H,83H,64H,00H,64H,00H,65H,89H,64H,00H,64H,00H,65H,83H,64H,00H,64H,00H,65H,89H,00H,2FH
+P44:       ; pattern 44
+        DB      05H,87H,00H,02H,04H,01H,10H,01H,40H,01H,34H,01H,05H,8AH,00H,32H
+P45:       ; pattern 45
+        DB      35H,8AH,00H,00H,34H,01H,35H,80H,00H,00H,35H,8AH,00H,00H,02H,88H,00H,00H,2DH,8AH,00H,00H,34H,17H,01H,00H,00H,1AH
+P46:       ; pattern 46
+        DB      21H,8AH,00H,00H,20H,01H,35H,80H,00H,00H,21H,8AH,00H,00H,02H,88H,00H,00H,18H,01H,20H,33H
+P47:       ; pattern 47
+        DB      00H,84H,00H,00H,35H,89H,34H,00H,34H,03H,34H,00H,34H,00H,34H,01H,35H,8BH,00H,32H
+P48:       ; pattern 48
+        DB      0F5H,8CH,02H,8AH,0E0H,02H,02H,82H,00H,1BH,01H,00H,00H,1CH
+P49:       ; pattern 49
+        DB      00H,81H,00H,3EH
+P4A:       ; pattern 4A
+        DB      35H,8DH,02H,9EH,00H,09H,01H,00H,00H,32H
+P4B:       ; pattern 4B
+        DB      35H,8DH,2CH,00H,20H,00H,40H,00H,34H,00H,2CH,00H,48H,00H,40H,00H,34H,00H,54H,00H,48H,00H,40H,00H,95H,80H,01H,00H,00H,31H
+P4C:       ; pattern 4C
+        DB      0FDH,8EH,02H,07H,02H,85H,00H,34H,01H,00H,00H,06H
+P4D:       ; pattern 4D
+        DB      0F5H,8FH,00H,00H,01H,00H,00H,3CH
+P4E:       ; pattern 4E
+        DB      0C5H,0ECH,02H,0A8H,00H,09H,0C5H,86H,02H,0A8H,00H,05H,95H,80H,01H,00H,00H,29H
+P4F:       ; pattern 4F
+        DB      0B1H,90H,00H,07H,00H,85H,00H,0BH,01H,00H,00H,28H
+P50:       ; pattern 50
+        DB      0FDH,91H,02H,0AH,02H,84H,00H,00H,02H,81H,00H,26H,0F5H,80H,01H,00H,00H,11H
+P51:       ; pattern 51
+        DB      0DH,92H,02H,32H,00H,01H,02H,0A8H,00H,03H,01H,00H,00H,35H
+P52:       ; pattern 52
+        DB      51H,8DH,02H,0A8H,00H,02H,02H,9EH,00H,03H,01H,00H,00H,34H
+P53:       ; pattern 53
+        DB      00H,81H,65H,93H,00H,3DH
+P54:       ; pattern 54
+        DB      00H,81H,81H,94H,00H,0DH,01H,00H,00H,2EH
+P55:       ; pattern 55
+        DB      65H,94H,00H,3EH
+P56:       ; pattern 56
+        DB      65H,8DH,50H,00H,34H,00H,80H,00H,64H,00H,50H,00H,94H,00H,80H,00H,64H,00H,0B0H,00H,94H,00H,80H,00H,95H,80H,01H,00H,00H,31H
+P57:       ; pattern 57
+        DB      81H,95H,02H,05H,00H,02H,02H,8FH,02H,05H,00H,02H,02H,8FH,02H,05H,00H,02H,02H,8FH,02H,05H,00H,02H,02H,8FH,02H,05H,00H,02H,95H,80H,01H,00H,00H,24H
+P58:       ; pattern 58
+        DB      0B1H,8DH,80H,04H,0B0H,00H,80H,04H,0B0H,00H,80H,04H,0B0H,00H,80H,0AH,01H,00H,00H,20H
+P59:       ; pattern 59
+        DB      29H,96H,00H,3DH,01H,3AH
+P5A:       ; pattern 5A
+        DB      0FDH,8EH,02H,07H,02H,85H,00H,34H,01H,00H,00H,06H
+P5B:       ; pattern 5B
+        DB      0D9H,98H,00H,00H,02H,81H,00H,05H,02H,80H,00H,25H,01H,00H,00H,0EH
+
+; ======================= Instrument table =======================
+; 8 bytes each; IY = InstrumentBase + instrument*8 (LoadInstrument)
+;  +0 pitch-env +step     +4 vibrato delay
+;  +1 pitch-env -step     +5 vibrato step
+;  +2 envelope lower      +6 &3F = vib amplitude, &07 = PSG vol
+;  +3 envelope upper      +7 PSG channel/volume register data
+InstrumentBase:
+Ins00:    DB      7FH,7FH,00H,00H,00H,00H,00H,00H
+Ins01:    DB      7FH,0BH,00H,76H,00H,0B6H,0A7H,00H
+Ins02:    DB      7FH,04H,00H,40H,00H,00H,00H,04H
+Ins03:    DB      7FH,1AH,00H,39H,00H,00H,00H,04H
+Ins04:    DB      7FH,05H,00H,70H,00H,00H,00H,00H
+Ins05:    DB      7FH,04H,00H,50H,00H,00H,00H,00H
+Ins06:    DB      7FH,03H,00H,30H,00H,00H,00H,00H
+Ins07:    DB      78H,09H,00H,68H,00H,28H,85H,00H
+Ins08:    DB      40H,0AH,48H,70H,10H,29H,86H,00H
+Ins09:    DB      7FH,10H,00H,58H,00H,00H,00H,05H
+Ins0A:    DB      78H,01H,00H,60H,00H,20H,85H,00H
+Ins0B:    DB      7FH,01H,00H,58H,00H,00H,00H,06H
+Ins0C:    DB      7FH,03H,00H,77H,00H,00H,00H,07H
+Ins0D:    DB      7FH,0CH,00H,78H,00H,00H,00H,00H
+Ins0E:    DB      7FH,02H,00H,7FH,00H,00H,00H,07H
+Ins0F:    DB      7FH,50H,00H,70H,00H,0B8H,0A7H,07H
+Ins10:    DB      4EH,01H,00H,68H,00H,4DH,0A7H,07H
+Ins11:    DB      23H,0AH,38H,78H,00H,00H,00H,07H
+Ins12:    DB      28H,10H,00H,70H,00H,00H,00H,00H
+Ins13:    DB      7FH,0BH,00H,58H,00H,00H,00H,05H
+Ins14:    DB      7FH,07H,00H,68H,00H,70H,0A5H,04H
+Ins15:    DB      7FH,04H,00H,78H,00H,00H,00H,00H
+Ins16:    DB      7FH,00H,00H,48H,00H,90H,0A4H,00H
+Ins17:    DB      7FH,01H,00H,7FH,00H,00H,00H,07H
+Ins18:    DB      7FH,02H,00H,68H,00H,61H,0A6H,03H
+Ins19:    DB      00H,00H,00H,00H,00H,00H,00H,00H
+
+; ========================== Driver code ==========================
+
+SoundSilence:
+        XOR A
+        LD (0DCD2H),A
+        LD (0DCD5H),A
+J8E4B:
+        XOR A
+        LD (0DC1CH),A
+        LD (0DC3DH),A
+        LD (0DCCCH),A
+        LD A,9FH
+        OUT (7FH),A
+        LD A,0BFH
+        OUT (7FH),A
+        LD A,(0DCD2H)
+        OR A
+        RET NZ
+MutePSG:
+        XOR A
+        LD (0DCD2H),A
+        LD A,0DFH
+        OUT (7FH),A
+        LD A,0FFH
+        OUT (7FH),A
+        XOR A
+        LD (0DC5EH),A
+        LD (0DC7FH),A
+        LD (0DCA0H),A
+        LD (0DCC1H),A
+        RET
+        LD HL,0DC00H
+        LD DE,0DC01H
+        LD BC,00DDH
+        LD (HL),00H
+        LDIR
+        RET
+UpdateTones:
+        LD A,(0DCD5H)
+        OR A
+        JR NZ,J8F04
+        LD IX,0DC00H
+        CALL PitchEffects
+        LD A,(IX+1)
+        AND  C
+        OR 80H
+        OUT (7FH),A
+        LD E,(IX+1)
+        LD A,(IX+0)
+        AND 03H
+        SRL E
+        SRL E
+        SRL E
+        SRL E
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        OR  E
+        OUT (7FH),A
+        LD A,7FH
+        SUB (IX+28)
+        LD HL,0DCD8H
+        CP  (HL)
+        JR NC,J8EC2
+        LD A,(HL)
+J8EC2:
+        RRA
+        RRA
+        RRA
+        AND  C
+        OR 90H
+        OUT (7FH),A
+        LD IX,0DC21H
+        CALL PitchEffects
+        LD A,(IX+1)
+        AND  C
+        OR 0A0H
+        OUT (7FH),A
+        LD E,(IX+1)
+        LD A,(IX+0)
+        AND 03H
+        SRL E
+        SRL E
+        SRL E
+        SRL E
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        OR  E
+        OUT (7FH),A
+        LD A,7FH
+        SUB (IX+28)
+        LD HL,0DCD8H
+        CP  (HL)
+        JR NC,J8EFC
+        LD A,(HL)
+J8EFC:
+        RRA
+        RRA
+        RRA
+        AND  C
+        OR 0B0H
+        OUT (7FH),A
+J8F04:
+        XOR A
+        LD (0DCC7H),A
+        LD IX,0DCA5H
+        LD A,(0DCD2H)
+        OR A
+        JR NZ,J8F1B
+        LD IX,0DC63H
+        LD A,(0DCD5H)
+        OR A
+        RET NZ
+J8F1B:
+        CALL PitchEffects
+        LD A,7FH
+        SUB (IX+28)
+        LD HL,0DCD8H
+        CP  (HL)
+        JR NC,J8F2A
+        LD A,(HL)
+J8F2A:
+        RRA
+        RRA
+        RRA
+        OR 0F0H
+        OUT (7FH),A
+        LD A,(IX+27)
+        AND 03H
+        CP 03H
+        RET NZ
+        LD (0DCC7H),A
+        LD A,(IX+1)
+        AND  C
+        OR 0C0H
+        OUT (7FH),A
+        LD E,(IX+1)
+        LD A,(IX+0)
+        AND 03H
+        SRL E
+        SRL E
+        SRL E
+        SRL E
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        OR  E
+        OUT (7FH),A
+        LD A,0FH
+        OR 0D0H
+        OUT (7FH),A
+        RET
+J8F62:
+        LD IX,0DC84H
+        LD A,(0DCD2H)
+        OR A
+        JR NZ,J8F75
+        LD IX,0DC42H
+        LD A,(0DCD5H)
+        OR A
+        RET NZ
+J8F75:
+        LD A,(0DCC7H)
+        OR A
+        RET NZ
+        CALL PitchEffects
+        LD A,(IX+1)
+        AND  C
+        OR 0C0H
+        OUT (7FH),A
+        LD E,(IX+1)
+        LD A,(IX+0)
+        AND 03H
+        SRL E
+        SRL E
+        SRL E
+        SRL E
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        OR  E
+        OUT (7FH),A
+        LD A,7FH
+        SUB (IX+28)
+        LD HL,0DCD8H
+        CP  (HL)
+        JR NC,J8FA8
+        LD A,(HL)
+J8FA8:
+        RRA
+        RRA
+        RRA
+        AND  C
+        OR 0D0H
+        OUT (7FH),A
+        RET
+LoadInstrument:
+        LD L,(IX+14)
+        LD H,00H
+        ADD HL,HL
+        ADD HL,HL
+        ADD HL,HL
+        EX DE,HL
+        LD IY,8D74H
+        ADD IY,DE
+        LD A,(IY+4)
+        LD (IX+11),A
+        LD A,(IY+5)
+        LD (IX+12),A
+        LD A,(IY+6)
+        AND 07H
+        LD (IX+13),A
+        LD A,(IY+0)
+        LD (IX+4),A
+        LD A,(IY+2)
+        LD (IX+6),A
+        LD A,(IY+1)
+        LD (IX+5),A
+        LD A,(IY+3)
+        LD (IX+7),A
+        LD A,(IY+7)
+        LD (IX+27),A
+        LD A,(IX+32)
+        OR A
+        JR Z,J900D
+        LD E,A
+        LD A,(0DCD2H)
+        OR A
+        JR Z,J9004
+        LD A,E
+        CP 05H
+        JR NZ,J900D
+J9004:
+        LD A,(IX+27)
+        AND 07H
+        OR 0E0H
+        OUT (7FH),A
+J900D:
+        LD A,(IY+6)
+        AND 0E0H
+        LD (IX+15),A
+        RET
+
+; ==================== Note -> period table ($9016) ===================
+; 72 entries, +1 semitone each, entry 0 ~ A2 (109.35 Hz, PSG @3.579545MHz/32).
+NoteTable:
+        DW      03FFH               ; 0 = A2 (109.35 Hz)
+        DW      03C7H               ; 1 = A#2 (115.68 Hz)
+        DW      0390H               ; 2 = B2 (122.65 Hz)
+        DW      035DH               ; 3 = C3 (129.92 Hz)
+        DW      032DH               ; 4 = C#3 (137.59 Hz)
+        DW      02FFH               ; 5 = D3 (145.84 Hz)
+        DW      02D4H               ; 6 = D#3 (154.50 Hz)
+        DW      02ABH               ; 7 = E3 (163.78 Hz)
+        DW      0285H               ; 8 = F3 (173.43 Hz)
+        DW      0261H               ; 9 = F#3 (183.68 Hz)
+        DW      023FH               ; 10 = G3 (194.54 Hz)
+        DW      021EH               ; 11 = G#3 (206.39 Hz)
+        DW      0200H               ; 12 = A3 (218.48 Hz)
+        DW      01E3H               ; 13 = A#3 (231.60 Hz)
+        DW      01C8H               ; 14 = B3 (245.31 Hz)
+        DW      01AFH               ; 15 = C4 (259.54 Hz)
+        DW      0196H               ; 16 = C#4 (275.52 Hz)
+        DW      0180H               ; 17 = D4 (291.30 Hz)
+        DW      016AH               ; 18 = D#4 (309.01 Hz)
+        DW      0156H               ; 19 = E4 (327.08 Hz)
+        DW      0143H               ; 20 = F4 (346.32 Hz)
+        DW      0130H               ; 21 = F#4 (367.96 Hz)
+        DW      011FH               ; 22 = G4 (389.76 Hz)
+        DW      010FH               ; 23 = G#4 (412.77 Hz)
+        DW      0100H               ; 24 = A4 (436.96 Hz)
+        DW      00F2H               ; 25 = A#4 (462.23 Hz)
+        DW      00E4H               ; 26 = B4 (490.62 Hz)
+        DW      00D7H               ; 27 = C5 (520.28 Hz)
+        DW      00CBH               ; 28 = C#5 (551.04 Hz)
+        DW      00C0H               ; 29 = D5 (582.61 Hz)
+        DW      00B5H               ; 30 = D#5 (618.02 Hz)
+        DW      00ABH               ; 31 = E5 (654.16 Hz)
+        DW      00A1H               ; 32 = F5 (694.79 Hz)
+        DW      0098H               ; 33 = F#5 (735.93 Hz)
+        DW      0090H               ; 34 = G5 (776.81 Hz)
+        DW      0088H               ; 35 = G#5 (822.51 Hz)
+        DW      0080H               ; 36 = A5 (873.91 Hz)
+        DW      0079H               ; 37 = A#5 (924.47 Hz)
+        DW      0072H               ; 38 = B5 (981.23 Hz)
+        DW      006CH               ; 39 = C6 (1035.75 Hz)
+        DW      0066H               ; 40 = C#6 (1096.67 Hz)
+        DW      0060H               ; 41 = D6 (1165.22 Hz)
+        DW      005BH               ; 42 = D#6 (1229.24 Hz)
+        DW      0055H               ; 43 = E6 (1316.01 Hz)
+        DW      0051H               ; 44 = F6 (1381.00 Hz)
+        DW      004CH               ; 45 = F#6 (1471.85 Hz)
+        DW      0048H               ; 46 = G6 (1553.62 Hz)
+        DW      0044H               ; 47 = G#6 (1645.01 Hz)
+        DW      0040H               ; 48 = A6 (1747.82 Hz)
+        DW      003CH               ; 49 = A#6 (1864.35 Hz)
+        DW      0039H               ; 50 = B6 (1962.47 Hz)
+        DW      0036H               ; 51 = C7 (2071.50 Hz)
+        DW      0033H               ; 52 = C#7 (2193.35 Hz)
+        DW      0030H               ; 53 = D7 (2330.43 Hz)
+        DW      002DH               ; 54 = D#7 (2485.80 Hz)
+        DW      002BH               ; 55 = E7 (2601.41 Hz)
+        DW      0028H               ; 56 = F7 (2796.52 Hz)
+        DW      0026H               ; 57 = F#7 (2943.70 Hz)
+        DW      0024H               ; 58 = G7 (3107.24 Hz)
+        DW      0022H               ; 59 = G#7 (3290.02 Hz)
+        DW      0020H               ; 60 = A7 (3495.65 Hz)
+        DW      001EH               ; 61 = A#7 (3728.69 Hz)
+        DW      001CH               ; 62 = B7 (3995.03 Hz)
+        DW      001BH               ; 63 = C8 (4142.99 Hz)
+        DW      0019H               ; 64 = C#8 (4474.43 Hz)
+        DW      0018H               ; 65 = D8 (4660.87 Hz)
+        DW      0016H               ; 66 = D#8 (5084.58 Hz)
+        DW      0015H               ; 67 = E8 (5326.70 Hz)
+        DW      0014H               ; 68 = F8 (5593.04 Hz)
+        DW      0013H               ; 69 = F#8 (5887.41 Hz)
+        DW      0012H               ; 70 = G8 (6214.49 Hz)
+        DW      0011H               ; 71 = G#8 (6580.05 Hz)
+
+        ; remainder of driver code follows at $90A6 (contiguous)
+
+SoundOn:
+        LD A,01H
+        LD (0DCD5H),A
+        LD A,(0DCD2H)
+        OR A
+        RET NZ
+        CALL SoundSilence
+        LD A,01H
+        LD (0DCD5H),A
+        RET
+        OR A
+        RET Z
+        LD (0DCD5H),A
+        RET
+InitSong:
+        PUSH AF
+        XOR A
+        LD (0DCD8H),A
+        LD (0DCCCH),A
+        LD (0DCD5H),A
+        LD (0DCC8H),A
+        LD (0DC0EH),A
+        LD (0DC2FH),A
+        LD (0DC50H),A
+        LD (0DC71H),A
+        LD (0DC1CH),A
+        LD (0DC3DH),A
+        LD (0DC5EH),A
+        LD (0DC7FH),A
+        LD (0DC1AH),A
+        LD (0DC3BH),A
+        LD (0DC5CH),A
+        LD (0DC7DH),A
+        LD (0DC16H),A
+        LD (0DC37H),A
+        LD (0DC58H),A
+        LD (0DC79H),A
+        LD (0DC17H),A
+        LD (0DC38H),A
+        LD (0DC59H),A
+        LD (0DC7AH),A
+        LD (0DCCBH),A
+        LD (0DC20H),A
+        LD (0DC41H),A
+        LD (0DC62H),A
+        LD (0DC7EH),A
+        CALL ResetSong
+        LD A,04H
+        LD (0DC83H),A
+        POP AF
+        LD (0DCC9H),A
+        CALL J8E4B
+        LD A,06H
+        LD (0DCCAH),A
+        LD A,05H
+        LD (0DC1DH),A
+        LD (0DC3EH),A
+        LD (0DC5FH),A
+        LD (0DC80H),A
+        LD (0DCCCH),A
+        RET
+        OR A
+        JR NZ,InitSfx
+        LD A,(0DCD2H)
+        OR A
+        RET Z
+        JP MutePSG
+InitSfx:
+        PUSH AF
+        XOR A
+        LD (0DCD2H),A
+        LD (0DCCEH),A
+        LD (0DCA0H),A
+        LD (0DCC1H),A
+        LD (0DC9EH),A
+        LD (0DCBFH),A
+        LD (0DC9AH),A
+        LD (0DCBBH),A
+        LD (0DC9BH),A
+        LD (0DCBCH),A
+        LD (0DCD1H),A
+        LD (0DCA4H),A
+        LD (0DCC0H),A
+        CALL ResetSfx
+        LD A,05H
+        LD (0DCC5H),A
+        POP AF
+        LD (0DCCFH),A
+        CALL MutePSG
+        LD A,06H
+        LD (0DCD0H),A
+        LD A,05H
+        LD (0DCA1H),A
+        LD (0DCC2H),A
+        LD (0DCD2H),A
+        RET
+SoundUpdate:
+        LD A,(0DCDAH)
+        OR A
+        RET NZ
+        LD A,(0DCD5H)
+        OR A
+        JR NZ,J91E0
+        LD A,(0DCCCH)
+        OR A
+        JR Z,J91D6
+        LD C,0FH
+        LD HL,0DCCBH
+        INC (HL)
+        LD E,(HL)
+        LD A,(0DCCAH)
+        DEC A
+        CP  E
+        JR NC,J91C8
+        XOR A
+        LD (HL),A
+        CALL StepSong
+        LD HL,0DCC8H
+        INC (HL)
+        LD A,(HL)
+        CP 40H
+        JR C,J91C8
+        XOR A
+        LD (HL),A
+        CALL ResetSong
+        LD HL,0DCC9H
+        INC (HL)
+J91C8:
+        LD A,(0DCD2H)
+        OR A
+        CALL NZ,UpdateSfx
+J91CF:
+        CALL UpdateTones
+        CALL J8F62
+        RET
+J91D6:
+        LD A,(0DCD2H)
+        OR A
+        RET Z
+        CALL UpdateSfx
+        JR J91CF
+J91E0:
+        PUSH AF
+        CALL J91D6
+        LD HL,0DCD6H
+        INC (HL)
+        LD A,(HL)
+        LD E,0FH
+        BIT 0,(HL)
+        JR Z,J91F1
+        LD E,00H
+J91F1:
+        LD A,E
+        OR 94H
+        OUT (7FH),A
+        LD A,E
+        OR 0B4H
+        OUT (7FH),A
+        POP AF
+        DEC A
+        CPL
+        LD L,A
+        LD H,00H
+        ADD HL,HL
+        ADD HL,HL
+        LD A,L
+        OR 03H
+        LD L,A
+        PUSH HL
+        LD A,L
+        AND 0FH
+        OR 80H
+        OUT (7FH),A
+        LD E,L
+        LD A,H
+        AND 03H
+        SRL E
+        SRL E
+        SRL E
+        SRL E
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        OR  E
+        OUT (7FH),A
+        POP HL
+        LD DE,0006H
+        ADD HL,DE
+        LD A,L
+        AND 0FH
+        OR 0A0H
+        OUT (7FH),A
+        LD E,L
+        LD A,H
+        AND 03H
+        SRL E
+        SRL E
+        SRL E
+        SRL E
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        ADD A,A
+        OR  E
+        OUT (7FH),A
+        RET
+UpdateSfx:
+        LD A,01H
+        LD (0DCD3H),A
+        LD C,0FH
+        LD HL,0DCD1H
+        INC (HL)
+        LD E,(HL)
+        LD A,(0DCD0H)
+        DEC A
+        CP  E
+        JR NC,J926D
+        XOR A
+        LD (HL),A
+        CALL J92AD
+        LD HL,0DCCEH
+        INC (HL)
+        LD A,(HL)
+        CP 40H
+        JR C,J926D
+        XOR A
+        LD (HL),A
+        CALL ResetSfx
+        LD HL,0DCCFH
+        INC (HL)
+        LD A,(HL)
+J926D:
+        XOR A
+        LD (0DCD3H),A
+        LD IX,0DC42H
+        CALL LoadInstrument
+        LD IX,0DC63H
+        JP LoadInstrument
+ResetSong:
+        LD A,(0DCD3H)
+        OR A
+        JR NZ,ResetSfx
+        XOR A
+        LD (0DC1FH),A
+        LD (0DC1EH),A
+        LD (0DC40H),A
+        LD (0DC3FH),A
+        LD (0DC61H),A
+        LD (0DC60H),A
+        LD (0DC82H),A
+        LD (0DC81H),A
+        RET
+ResetSfx:
+        XOR A
+        LD (0DCA3H),A
+        LD (0DCA2H),A
+        LD (0DCC4H),A
+        LD (0DCC3H),A
+        RET
+J92AD:
+        LD A,(0DCCEH)
+        LD (0DCD4H),A
+        LD A,(0DCCFH)
+        LD L,A
+        LD H,00H
+        ADD HL,HL
+        ADD HL,HL
+        LD DE,8000H
+        ADD HL,DE
+        INC HL
+        INC HL
+        LD IX,0DC84H
+        PUSH HL
+        CALL PlayVoice
+        POP HL
+        INC HL
+        LD IX,0DCA5H
+        JP PlayVoice
+StepSong:
+        LD A,(0DCC8H)
+        LD (0DCD4H),A
+        LD A,(0DCC9H)
+        LD L,A
+        LD H,00H
+        ADD HL,HL
+        ADD HL,HL
+        LD DE,8000H
+        ADD HL,DE
+        LD IX,0DC00H
+        PUSH HL
+        CALL PlayVoice
+        POP HL
+        INC HL
+        LD IX,0DC21H
+        PUSH HL
+        CALL PlayVoice
+        POP HL
+        INC HL
+        LD IX,0DC42H
+        PUSH HL
+        CALL PlayVoice
+        POP HL
+        INC HL
+        LD IX,0DC63H
+PlayVoice:
+        LD A,(IX+31)
+        OR A
+        JR Z,J9313
+        DEC (IX+31)
+        INC (IX+30)
+        RET
+J9313:
+        LD L,(HL)
+        LD H,00H
+        ADD HL,HL
+        LD DE,80F8H
+        ADD HL,DE
+        LD A,(HL)
+        INC HL
+        LD H,(HL)
+        LD L,A
+        LD A,(0DCD4H)
+        SUB (IX+30)
+        ADD A,A
+        LD E,A
+        LD D,00H
+        ADD HL,DE
+        LD A,(HL)
+        LD E,A
+        SRL A
+        SRL A
+        LD (IX+17),A
+        INC HL
+        LD A,(HL)
+        LD D,A
+        AND 7FH
+        DEC HL
+        LD (IX+19),A
+        RL D
+        LD A,E
+        RLA
+        AND 07H
+        LD (IX+16),A
+        LD DE,941CH
+        PUSH DE
+        LD A,(IX+16)
+        OR A
+        JR Z,J9364
+        DEC A
+        JR Z,J93B0
+        DEC A
+        JP Z,J93D8
+        DEC A
+        JP Z,J9411
+        DEC A
+        JR Z,J9398
+        DEC A
+        JR Z,J93A4
+        DEC A
+        JR Z,J936E
+J9363:
+        RET
+J9364:
+        LD A,(IX+19)
+        OR A
+        JR Z,J9363
+        LD (IX+31),A
+        RET
+J936E:
+        LD A,(IX+19)
+        LD D,A
+        AND 1FH
+        LD E,A
+        LD A,D
+        AND 60H
+        JR Z,J9382
+        CP 20H
+        JR Z,J9394
+        CP 40H
+        JR Z,J9390
+J9382:
+        XOR A
+        LD (IX+22),A
+        LD (IX+23),A
+        LD (IX+25),A
+        LD (IX+26),A
+        RET
+J9390:
+        LD (IX+23),E
+        RET
+J9394:
+        LD (IX+22),E
+        RET
+J9398:
+        XOR A
+        LD (IX+21),A
+        LD A,(IX+19)
+        ADD A,A
+        LD (IX+20),A
+        RET
+J93A4:
+        XOR A
+        LD (IX+20),A
+        LD A,(IX+19)
+        ADD A,A
+        LD (IX+21),A
+        RET
+J93B0:
+        LD HL,0DCD7H
+        LD A,(0DCD3H)
+        LD E,A
+        LD A,(IX+19)
+        OR A
+        JR Z,J93CE
+        CP 40H
+        JR NC,J93CF
+        BIT 0,E
+        JR Z,J93CA
+        ADD A, (HL)
+        LD (0DCD0H),A
+        RET
+J93CA:
+        ADD A, (HL)
+        LD (0DCCAH),A
+J93CE:
+        RET
+J93CF:
+        SUB 3FH
+        LD (IX+25),A
+        LD (IX+26),A
+        RET
+J93D8:
+        LD A,(0DCD3H)
+        LD E,A
+        LD A,(IX+19)
+        CP 7FH
+        JR Z,J9407
+        DEC A
+        BIT 0,E
+        JR Z,J9404
+        CP 0FFH
+        JR Z,J93F5
+        LD (0DCCFH),A
+J93EF:
+        LD A,3FH
+        LD (0DCCEH),A
+        RET
+J93F5:
+        XOR A
+        LD (0DCD2H),A
+        LD (0DCCFH),A
+        DEC A
+        LD (0DCCEH),A
+        CALL MutePSG
+        RET
+J9404:
+        LD (0DCC9H),A
+J9407:
+        BIT 0,E
+        JR NZ,J93EF
+        LD A,3FH
+        LD (0DCC8H),A
+        RET
+J9411:
+        LD A,(IX+19)
+        AND 1FH
+        LD (IX+14),A
+        JP LoadInstrument
+NoteOn:
+        LD A,(IX+17)
+        OR A
+        JR Z,J9462
+        LD (IX+18),A
+        LD E,A
+        LD A,(IX+16)
+        CP 04H
+        JR Z,J9431
+        LD (IX+20),00H
+J9431:
+        CP 05H
+        JR Z,J9439
+        LD (IX+21),00H
+J9439:
+        LD L,E
+        LD H,00H
+        LD (IX+8),00H
+        LD (IX+9),0C0H
+        LD (IX+24),03H
+        LD (IX+10),00H
+        LD (IX+29),01H
+        LD (IX+28),00H
+        LD DE,9016H
+        ADD HL,HL
+        ADD HL,DE
+        LD A,(HL)
+        LD (IX+3),A
+        INC HL
+        LD A,(HL)
+        LD (IX+2),A
+J9462:
+        RET
+PitchEffects:
+        LD A,(IX+29)
+        DEC A
+        JR Z,J9478
+        DEC A
+        JR Z,J9491
+        CP 03H
+        JR Z,J94AE
+        LD A,(IX+6)
+        LD (IX+28),A
+        JR J94AE
+J9478:
+        LD A,(IX+4)
+        ADD A,(IX+28)
+        LD (IX+28),A
+        CP (IX+7)
+        JR C,J94AE
+        INC (IX+29)
+        LD A,(IX+7)
+        LD (IX+28),A
+        JR J94AE
+J9491:
+        LD A,(IX+28)
+        SUB (IX+5)
+        LD (IX+28),A
+        JP M,J94A5
+        LD A,(IX+6)
+        CP (IX+28)
+        JR C,J94AE
+J94A5:
+        LD A,(IX+6)
+        LD (IX+28),A
+        INC (IX+29)
+J94AE:
+        LD A,(IX+32)
+        OR A
+        JR Z,J94BC
+        LD A,(IX+27)
+        AND 03H
+        CP 03H
+        RET NZ
+J94BC:
+        LD A,(IX+26)
+        OR A
+        JR Z,J9505
+        DEC (IX+25)
+        JR NZ,J9505
+        LD A,(IX+26)
+        LD (IX+25),A
+J94CD:
+        LD A,(IX+24)
+        INC A
+        AND 03H
+        LD (IX+24),A
+        JR Z,J94F0
+        CP 03H
+        JR Z,J94CD
+        CP 02H
+        JR Z,J94E8
+        LD A,(IX+22)
+        OR A
+        JR Z,J94CD
+        JR J94F1
+J94E8:
+        LD A,(IX+23)
+        OR A
+        JR Z,J94CD
+        JR J94F1
+J94F0:
+        XOR A
+J94F1:
+        ADD A,(IX+18)
+        LD DE,9016H
+        LD L,A
+        LD H,00H
+        ADD HL,HL
+        ADD HL,DE
+        LD A,(HL)
+        LD (IX+3),A
+        INC HL
+        LD A,(HL)
+        LD (IX+2),A
+J9505:
+        LD L,(IX+3)
+        LD H,(IX+2)
+        LD E,(IX+21)
+        LD D,00H
+        ADD HL,DE
+        LD E,(IX+20)
+        AND A
+        SBC HL,DE
+        LD (IX+3),L
+        LD (IX+2),H
+        LD (IX+1),L
+        LD (IX+0),H
+        LD A,(IX+15)
+        AND 80H
+        JR Z,J958A
+        LD A,(IX+8)
+        CP (IX+11)
+        JR NC,J9537
+        INC (IX+8)
+        JR J958A
+J9537:
+        LD A,(IX+12)
+        ADD A,(IX+9)
+        LD (IX+9),A
+        BIT 7,A
+        JR Z,J9546
+        NEG
+J9546:
+        SUB 40H
+        LD E,A
+        LD A,(IX+13)
+        OR A
+        JR NZ,J9551
+        LD E,00H
+J9551:
+        LD A,08H
+        SUB (IX+13)
+J9556:
+        OR A
+        JR Z,J955E
+        SRA E
+        DEC A
+        JR J9556
+J955E:
+        LD L,E
+        LD H,00H
+        BIT 7,L
+        JR Z,J9566
+        DEC H
+J9566:
+        LD A,(IX+15)
+        AND 20H
+        JR Z,J9570
+        ADD HL,HL
+        ADD HL,HL
+        ADD HL,HL
+J9570:
+        ADD HL,HL
+        LD A,(IX+18)
+        INC A
+J9575:
+        SRA H
+        RR L
+        SUB 0CH
+        JR NC,J9575
+        LD E,(IX+1)
+        LD D,(IX+0)
+        ADD HL,DE
+        LD (IX+1),L
+        LD (IX+0),H
+J958A:
+        RET
+
+        END

@@ -44,16 +44,19 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 
 	jp Audio1_LoadSFX
 
-Audio1_SetTempo:
+
+Audio1_SetTempo:
 	ld [Tempo], a
 	ret
 
-Audio1_PlaySongSFX:
+
+Audio1_PlaySongSFX:
 	call Audio1_PlaySong
 	call Audio1_PlaySFXC1
 	ret
 
-;Check the volume of the right speaker - if it is too low, then muteAudio1_CheckVolR1:
+;Check the volume of the right speaker - if it is too low, then mute
+Audio1_CheckVolR1:
 	ldh a, [rNR50]
 	;If volume is 0, then load 0 into B
 	and %00000111
@@ -69,7 +72,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 .CheckVolR10
 	ld b, 0
 
-;Now, check the volume of the left speakerAudio1_CheckVolL1:
+;Now, check the volume of the left speaker
+Audio1_CheckVolL1:
 	ldh a, [rNR50]
 	;If volume is 0, then load 0 into A
 	and %01110000
@@ -84,7 +88,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 .CheckVolL10
 	ld a, 0
 
-;Check if the resulting values are 0 or notAudio1_CtrlCheck:
+;Check if the resulting values are 0 or not
+Audio1_CtrlCheck:
 	or b
 	cp 0
 	;If not 0, then load new value into NR50
@@ -93,12 +98,14 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Otherwise, set values to 0
 	call Audio1_ClearChVol
 
-;Load the value into master volume controlAudio1_SetMasterVol:
+;Load the value into master volume control
+Audio1_SetMasterVol:
 	ldh [rNR50], a
 	ret
 
 
-;Clear all audioAudio1_ClearAudio:
+;Clear all audio
+Audio1_ClearAudio:
 	xor a
 	ldh [rNR51], a
 	ld [MasterPan], a
@@ -107,7 +114,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ret
 
 
-;Clear each channel's volumeAudio1_ClearChVol:
+;Clear each channel's volume
+Audio1_ClearChVol:
 	ld a, 0
 	ldh [rNR12], a
 	ldh [rNR22], a
@@ -117,13 +125,15 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ret
 
 
-;Turn music onAudio1_MusicOn:
+;Turn music on
+Audio1_MusicOn:
 	ld a, $FF
 	ld [PlayFlag], a
 	ret
 
 
-;Check the status of the audioAudio1_CheckVolNew:
+;Check the status of the audio
+Audio1_CheckVolNew:
 	;Set the music play flag
 	call Audio1_MusicOn
 	;Check the master volume control
@@ -138,7 +148,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ret
 
 
-;Check the volume of the right speaker again - if it is not full, then set to maxAudio1_CheckVolR2:
+;Check the volume of the right speaker again - if it is not full, then set to max
+Audio1_CheckVolR2:
 	and %00000111
 	cp %00000111
 	jr z, Audio1_CheckVolL2
@@ -148,7 +159,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld b, a
 
 
-;Check the volume of the left speaker againAudio1_CheckVolL2:
+;Check the volume of the left speaker again
+Audio1_CheckVolL2:
 	ldh a, [rNR50]
 	;If at full volume
 	and %01110000
@@ -173,7 +185,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ret
 
 
-;Get SFX from numberAudio1_LoadSFX:
+;Get SFX from number
+Audio1_LoadSFX:
 	add a
 	add a
 	ld hl, Audio1_SFXTab
@@ -184,7 +197,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc h
 
 
-;Get first channel macro valueAudio1_GetSFX:
+;Get first channel macro value
+Audio1_GetSFX:
 	ld a, [hl]
 	;$FF = Skip
 	cp $FF
@@ -230,14 +244,16 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 .ExitSFX
 	ret
 
-Audio1_PlaySFXFromMacro:
+
+Audio1_PlaySFXFromMacro:
 	push hl
 	call Audio1_GetSFXMacro
 	pop hl
 	ret
 
 
-;Clear RAM and copy waveformAudio1_Init:
+;Clear RAM and copy waveform
+Audio1_Init:
 
 	;Disable audio
 	ld a, 0
@@ -284,7 +300,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ret
 
 
-;Load songAudio1_LoadSong:
+;Load song
+Audio1_LoadSong:
 ;Get song number from A
 	ld l, a
 	ld h, $00
@@ -340,7 +357,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [Tempo], a
 	ld a, 1
 	ld [BeatCounter], a
-Audio1_ChannelInit:
+
+Audio1_ChannelInit:
 	;Turn on channels
 	ld a, %10001111
 	ldh [rNR52], a
@@ -385,7 +403,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [C4VibSeqDelay], a
 	ret
 
-Audio1_PlaySong:
+
+Audio1_PlaySong:
 	;Check to see if the song is currently playing
 	ld a, [PlayFlag]
 	and a
@@ -399,7 +418,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [BeatCounter], a
 	;Don't update if no overflow
 	ret nc
-Audio1_StartC1:
+
+Audio1_StartC1:
 	;Set current channel number (0)
 	xor a
 	ld [CurChan], a
@@ -544,7 +564,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc bc
 	ld a, [bc]
 	ld [C1ModSeq+1], a
-Audio1_StartC2:
+
+Audio1_StartC2:
 	;Set current channel number (1)
 	ld a, 1
 	ld [CurChan], a
@@ -688,7 +709,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc bc
 	ld a, [bc]
 	ld [C2ModSeq+1], a
-Audio1_StartC3:
+
+Audio1_StartC3:
 	;Set current channel number (2)
 	ld a, 2
 	ld [CurChan], a
@@ -834,7 +856,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc bc
 	ld a, [bc]
 	ld [C3ModSeq+1], a
-Audio1_StartC4:
+
+Audio1_StartC4:
 	;Set current channel number (3)
 	ld a, 3
 	ld [CurChan], a
@@ -888,7 +911,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	call Audio1_SetPerLo
 	ret
 
-Audio1_CheckEnvSeqDelay:
+
+Audio1_CheckEnvSeqDelay:
 ;Check if envelope sequence is enabled
 	ld a, [hl]
 	and a
@@ -910,7 +934,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [hl], a
 	ret
 
-Audio1_ProcessEnvSeq:
+
+Audio1_ProcessEnvSeq:
 	;Write the volume to the register
 	ld [de], a
 	;Get next byte
@@ -946,7 +971,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc bc
 	ret
 
-Audio1_CheckVibSeqDelay:
+
+Audio1_CheckVibSeqDelay:
 	;If value is 0, then return
 	ld a, [hl]
 	and a
@@ -977,7 +1003,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	pop hl
 	ret
 
-Audio1_ProcessVibSeq:
+
+Audio1_ProcessVibSeq:
 	;Is it a loop command?
 	cp $7D
 	;If so, then keep checking
@@ -1020,7 +1047,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	pop hl
 	ret
 
-Audio1_ProcessVibLoop:
+
+Audio1_ProcessVibLoop:
 	;Get the next 2 bytes (pointer) and jump to position
 	inc bc
 	ld a, [bc]
@@ -1036,7 +1064,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [hl], a
 	ret
 
-Audio1_GetNextByte:
+
+Audio1_GetNextByte:
 	;Check to see if the current channel is 1-3
 	ld a, [hl]
 	and %00000010
@@ -1083,7 +1112,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	
 	;Save the current note value
 	push af
-	ld a, [CurChan]Audio1_CheckC1:
+	ld a, [CurChan]
+Audio1_CheckC1:
 	;Is the channel 1?
 	cp 0
 	;If not, then skip to channel 2
@@ -1092,7 +1122,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Otherwise, then save current Ch1 note
 	ld a, d
 	ld [CurNoteC1], a
-Audio1_CheckC2:
+
+Audio1_CheckC2:
 	;Is the channel 2?
 	cp 1
 	;If not, then skip to channel 3
@@ -1100,7 +1131,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 
 	ld a, d
 	ld [CurNoteC2], a
-Audio1_CheckC3:
+
+Audio1_CheckC3:
 	;Is the channel 3?
 	cp 2
 	;If not, then skip to the next part
@@ -1109,7 +1141,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, d
 	ld [CurNoteC3], a
 
-;Get the current frequencyAudio1_GetFreq:
+;Get the current frequency
+Audio1_GetFreq:
 	pop af
 	ld de, Audio1_FreqsHi
 	add e
@@ -1146,7 +1179,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc hl
 	ld [hl], a
 	
-;Now get the note length from the next byteAudio1_GetLen:	
+;Now get the note length from the next byte
+Audio1_GetLen:	
 	inc bc
 	ld a, [bc]
 	;Mask out the upper 4 bits to get the note length index
@@ -1171,7 +1205,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	add hl, de
 	ld [hl], a
 	
-;Now get the instrument from the first bit of byte 1 and lower 4 bits of byte 2Audio1_GetInst:
+;Now get the instrument from the first bit of byte 1 and lower 4 bits of byte 2
+Audio1_GetInst:
 	;Get the first note byte again
 	ld a, [CurCmd]
 	;If bit is set, then add 32 to total (instrument is +16)
@@ -1279,7 +1314,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ret
 
 
-;Set frequency/period (low)Audio1_SetPerLo:
+;Set frequency/period (low)
+Audio1_SetPerLo:
 ;Check if channel is active
 	ld a, [hl]
 	and %00000001
@@ -1297,7 +1333,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Otherwise, load the period low into register NRx3
 	ld a, [hl]
 	ld [de], a
-Audio1_CheckPerTrigger:
+
+Audio1_CheckPerTrigger:
 	;Now check the period high
 	dec hl
 	inc de
@@ -1322,7 +1359,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc de
 	ld a, [hl]
 	ld [de], a
-Audio1_SetPerHi:
+
+Audio1_SetPerHi:
 ;Set period (high)
 	;Load the period low (with trigger) value from RAM
 	pop hl
@@ -1335,14 +1373,16 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [hl], a
 	ret
 
-Audio1_SetC4Freq:
+
+Audio1_SetC4Freq:
 	;Load the current noise frequency from RAM variable into Ch4 RAM and NR43
 	ld a, [CurNoise]
 	ld [C4Freq+1], a
 	ld [de], a
 	;Then do the rest
 	jr Audio1_CheckPerTrigger
-Audio1_C4CheckVibSeqDelay:
+
+Audio1_C4CheckVibSeqDelay:
 	;If value is 0, then return
 	ld a, [C4VibSeqDelay]
 	and a
@@ -1383,7 +1423,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [C4VibSeq+1], a
 	ret
 
-Audio1_C4ProcessVibLoop:
+
+Audio1_C4ProcessVibLoop:
 	;Reset the delay to 1
 	ld a, 1
 	ld [C4VibSeqDelay], a
@@ -1396,7 +1437,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [C4VibSeq+1], a
 	ret
 
-Audio1_VCMDTable:
+
+Audio1_VCMDTable:
 	dw Audio1_EventTie			;$60
 	dw Audio1_EventStop			;$61
 	dw Audio1_EventJump			;$62
@@ -1411,7 +1453,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	dw Audio1_EventC2Pan		;$6B
 	dw Audio1_EventC3Pan		;$6C
 	dw Audio1_EventC4Pan		;$6D
-Audio1_GetVCMD:
+
+Audio1_GetVCMD:
 ;Get the current voice command (VCMD)
 	sub $60
 	add a
@@ -1434,8 +1477,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld l, [hl]
 	ld h, a
 	jp hl
-Audio1_EventTie:
-;Delay the next note by length, increasing note length;Parameters: -x (- = unused, x = length)
+
+Audio1_EventTie:
+;Delay the next note by length, increasing note length
+;Parameters: -x (- = unused, x = length)
 	;Get the note lengths pointer
 	ld hl, NoteLens+1
 	ld a, [hl]
@@ -1464,7 +1509,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc bc
 	inc hl
 	jp Audio1_UpdatePtr
-Audio1_EventStop:
+
+Audio1_EventStop:
 	;Stop the channel
 	pop hl
 	;Set the channel play flag to 0
@@ -1473,8 +1519,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, 0
 	ld [hl], a
 	ret
-Audio1_EventJump:
-;Jump to the following pointer (used for looping);Parameters: xx xx (x = Pointer)
+
+Audio1_EventJump:
+;Jump to the following pointer (used for looping)
+;Parameters: xx xx (x = Pointer)
 	;Set the channel note length to 1
 	pop hl
 	ld de, -2
@@ -1489,8 +1537,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, [bc]
 	ld [hl], a
 	jp Audio1_GotoRestart
-Audio1_EventNoise:
-;Change the noise frequency value (NR43);Parameters: xx (X = Value)
+
+Audio1_EventNoise:
+;Change the noise frequency value (NR43)
+;Parameters: xx (X = Value)
 	pop hl
 	;Get next noise parameter and load it into RAM
 	inc bc
@@ -1505,8 +1555,11 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc bc
 	call Audio1_UpdatePtr
 	jp Audio1_GotoRestart
-Audio1_EventMacro:
-;Go to a macro (subroutine) with transpose for specified number of times;Parameters: xx yy zz (X = Macro number, Y = Transpose, Z = Number of times);(Note: 1 level only)
+
+Audio1_EventMacro:
+;Go to a macro (subroutine) with transpose for specified number of times
+;Parameters: xx yy zz (X = Macro number, Y = Transpose, Z = Number of times)
+;(Note: 1 level only)
 	;Set channel length to 1
 	pop hl
 	ld de, -2
@@ -1589,7 +1642,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, b
 	ld [de], a
 	jp Audio1_GotoRestart
-Audio1_EventMacroRet:
+
+Audio1_EventMacroRet:
 ;Return from the current macro
 	inc bc
 	;Set channel length flag to 1
@@ -1634,7 +1688,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [hl], a
 	jp Audio1_GotoRestart
 
-Audio1_EventMacroRetEnd:
+
+Audio1_EventMacroRetEnd:
 	;Reset macro transpose to 0
 	inc de
 	ld a, 0
@@ -1651,8 +1706,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [hl], a
 	;Go to start code
 	jp Audio1_GotoRestart
-Audio1_EventCondFlag:
-;Set a conditional flag (not used by the driver);Parameters: xx (X = Value)
+
+Audio1_EventCondFlag:
+;Set a conditional flag (not used by the driver)
+;Parameters: xx (X = Value)
 	inc bc
 	ld a, [bc]
 	ld [LoopFlag], a
@@ -1666,14 +1723,17 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc bc
 	call Audio1_UpdatePtr
 	jp Audio1_GotoRestart
-Audio1_EventGlobalPan:
-;Set global panning;Parameters: xx (X = Value, see NR51 usage)
+
+Audio1_EventGlobalPan:
+;Set global panning
+;Parameters: xx (X = Value, see NR51 usage)
 	inc bc
 	ld a, [bc]
 	ldh [rNR51], a
 	ld [MasterPan], a
 
-;Reset the note by setting the channel length to 1Audio1_ResetNote:
+;Reset the note by setting the channel length to 1
+Audio1_ResetNote:
 	;Set channel note length to 1
 	inc bc
 	pop hl
@@ -1684,8 +1744,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Update the channel pointer
 	call Audio1_UpdatePtr
 	jr Audio1_GotoRestart
-Audio1_EventC1Pan:
-;Set channel 1 panning;Parameters: xx (X = Value, only channel 1 bits are used)
+
+Audio1_EventC1Pan:
+;Set channel 1 panning
+;Parameters: xx (X = Value, only channel 1 bits are used)
 	inc bc
 	;Get current panning (NR51) value and mask out channel 1 bits
 	ld a, [MasterPan]
@@ -1698,8 +1760,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [MasterPan], a
 	ldh [rNR51], a
 	jr Audio1_ResetNote
-Audio1_EventC2Pan:
-;Set channel 2 panning;Parameters: xx (X = Value, only channel 2 bits are used)
+
+Audio1_EventC2Pan:
+;Set channel 2 panning
+;Parameters: xx (X = Value, only channel 2 bits are used)
 	inc bc
 	;Get current panning (NR51) value and mask out channel 2 bits
 	ld a, [MasterPan]
@@ -1712,8 +1776,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [MasterPan], a
 	ldh [rNR51], a
 	jr Audio1_ResetNote
-Audio1_EventC3Pan:
-;Set channel 3 panning;Parameters: xx (X = Value, only channel 3 bits are used)
+
+Audio1_EventC3Pan:
+;Set channel 3 panning
+;Parameters: xx (X = Value, only channel 3 bits are used)
 	inc bc
 	;Get current panning (NR51) value and mask out channel 3 bits
 	ld a, [MasterPan]
@@ -1726,8 +1792,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [MasterPan], a
 	ldh [rNR51], a
 	jr Audio1_ResetNote
-Audio1_EventC4Pan:
-;Set channel 4 panning;Parameters: xx (X = Value, only channel 4 bits are used)
+
+Audio1_EventC4Pan:
+;Set channel 4 panning
+;Parameters: xx (X = Value, only channel 4 bits are used)
 	inc bc
 	;Get current panning (NR51) value and mask out channel 4 bits
 	ld a, [MasterPan]
@@ -1740,8 +1808,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [MasterPan], a
 	ldh [rNR51], a
 	jr Audio1_ResetNote
-Audio1_EventNoteLens:
-;Set note lengths from the following pointer (for all channels);Parameters: xx xx (X = Pointer)
+
+Audio1_EventNoteLens:
+;Set note lengths from the following pointer (for all channels)
+;Parameters: xx xx (X = Pointer)
 	inc bc
 	ld a, [bc]
 	ld [NoteLens], a
@@ -1758,8 +1828,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc bc
 	call Audio1_UpdatePtr
 	jr Audio1_GotoRestart
-Audio1_EventTempo:
-;Set the tempo;Parameters: x (X = Value)
+
+Audio1_EventTempo:
+;Set the tempo
+;Parameters: x (X = Value)
 	inc bc
 	ld a, [bc]
 	ld [Tempo], a
@@ -1773,13 +1845,15 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	inc bc
 	call Audio1_UpdatePtr
 	jr Audio1_GotoRestart
-Audio1_UpdatePtr:
+
+Audio1_UpdatePtr:
 	ld [hl], c
 	inc hl
 	ld [hl], b
 	ret
 
-Audio1_GotoRestart:
+
+Audio1_GotoRestart:
 	pop hl
 	ld de, CurRestartPos
 	ld a, [de]
@@ -1789,7 +1863,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld h, a
 	jp hl
 
-Audio1_FreqsLo:
+
+Audio1_FreqsLo:
 	db LOW($009D), LOW($0107), LOW($016B), LOW($01CA), LOW($0223), LOW($0278), LOW($02C7), LOW($0312), LOW($0359), LOW($039C), LOW($03DB), LOW($0417)
 	db LOW($044F), LOW($0484), LOW($04B6), LOW($04E5), LOW($0512), LOW($053C), LOW($0564), LOW($0589), LOW($05AD), LOW($05CE), LOW($05EE), LOW($060C)
 	db LOW($0628), LOW($0642), LOW($065B), LOW($0673), LOW($0689), LOW($069E), LOW($06B2), LOW($06C5), LOW($06D7), LOW($06E7), LOW($06F7), LOW($0706)
@@ -1798,7 +1873,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db LOW($07C5), LOW($07C9), LOW($07CC), LOW($07CF), LOW($07D2), LOW($07D4), LOW($07D7), LOW($07D9), LOW($07DB), LOW($07DD), LOW($07DF), LOW($07E1)
 	db LOW($07E3), LOW($07E5), LOW($07E6), LOW($07E8), LOW($07E9), LOW($07EA), LOW($07EC), LOW($07ED), LOW($07EE), LOW($07EF), LOW($07F0), LOW($07F1)
 	db LOW($07F2), LOW($07F3), LOW($07F3), LOW($07F4), LOW($07F5), LOW($07F5), LOW($07F7), LOW($07F7), LOW($07F8), LOW($07F8), LOW($07FA), LOW($07FA)
-Audio1_FreqsHi:
+
+Audio1_FreqsHi:
 	db HIGH($009D), HIGH($0107), HIGH($016B), HIGH($01CA), HIGH($0223), HIGH($0278), HIGH($02C7), HIGH($0312), HIGH($0359), HIGH($039C), HIGH($03DB), HIGH($0417)
 	db HIGH($044F), HIGH($0484), HIGH($04B6), HIGH($04E5), HIGH($0512), HIGH($053C), HIGH($0564), HIGH($0589), HIGH($05AD), HIGH($05CE), HIGH($05EE), HIGH($060C)
 	db HIGH($0628), HIGH($0642), HIGH($065B), HIGH($0673), HIGH($0689), HIGH($069E), HIGH($06B2), HIGH($06C5), HIGH($06D7), HIGH($06E7), HIGH($06F7), HIGH($0706)
@@ -1807,7 +1883,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db HIGH($07C5), HIGH($07C9), HIGH($07CC), HIGH($07CF), HIGH($07D2), HIGH($07D4), HIGH($07D7), HIGH($07D9), HIGH($07DB), HIGH($07DD), HIGH($07DF), HIGH($07E1)
 	db HIGH($07E3), HIGH($07E5), HIGH($07E6), HIGH($07E8), HIGH($07E9), HIGH($07EA), HIGH($07EC), HIGH($07ED), HIGH($07EE), HIGH($07EF), HIGH($07F0), HIGH($07F1)
 	db HIGH($07F2), HIGH($07F3), HIGH($07F3), HIGH($07F4), HIGH($07F5), HIGH($07F5), HIGH($07F7), HIGH($07F7), HIGH($07F8), HIGH($07F8), HIGH($07FA), HIGH($07FA)
-Audio1_GetSFXMacro:
+
+Audio1_GetSFXMacro:
 	;Get SFX macro pointer from table
 	ld hl, Audio1_SFXMacroTab
 	sla a
@@ -1816,7 +1893,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	jr nc, Audio1_InitSFX
 
 	inc h
-Audio1_InitSFX:
+
+Audio1_InitSFX:
 	;Go to SFX pointer
 	ld a, [hl]
 	ld c, a
@@ -1842,7 +1920,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	cp 3
 	jr z, Audio1_InitSFXC4
 
-	;Otherwise, it is channel 1Audio1_InitSFXC1:
+	;Otherwise, it is channel 1
+Audio1_InitSFXC1:
 	;Set panning
 	ld a, [MasterPan]
 	ld d, a
@@ -1862,7 +1941,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, 2
 	ld [C1SFXDelay], a
 	jr Audio1_PlaySFXC1
-Audio1_InitSFXC2:
+
+Audio1_InitSFXC2:
 	;Set panning
 	ld a, [MasterPan]
 	ld d, a
@@ -1882,7 +1962,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, 2
 	ld [C2SFXDelay], a
 	jr Audio1_PlaySFXC1
-Audio1_InitSFXC3:
+
+Audio1_InitSFXC3:
 	;Set panning
 	ld a, [MasterPan]
 	ld d, a
@@ -1902,7 +1983,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, 2
 	ld [C3SFXDelay], a
 	jr Audio1_PlaySFXC1
-Audio1_InitSFXC4:
+
+Audio1_InitSFXC4:
 	;Set panning
 	ld a, [MasterPan]
 	ld d, a
@@ -1922,7 +2004,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, 2
 	ld [C4SFXDelay], a
 
-;Play the current sound effect, starting with channel 1 if presentAudio1_PlaySFXC1:
+;Play the current sound effect, starting with channel 1 if present
+Audio1_PlaySFXC1:
 	ld hl, C1PlayFlag
 	ld a, l
 	ld [CurSFX], a
@@ -1940,7 +2023,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Otherwise, then play SFX
 	ld de, rNR11
 	call Audio1_CheckSFX
-Audio1_PlaySFXC2:
+
+Audio1_PlaySFXC2:
 	ld hl, C2PlayFlag
 	ld a, l
 	ld [CurSFX], a
@@ -1957,7 +2041,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 
 	ld de, rNR21
 	call Audio1_CheckSFX
-Audio1_PlaySFXC3:
+
+Audio1_PlaySFXC3:
 	ld hl, C3PlayFlag
 	ld a, l
 	ld [CurSFX], a
@@ -1974,7 +2059,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 
 	ld de, rNR31
 	call Audio1_CheckSFX
-Audio1_PlaySFXC4:
+
+Audio1_PlaySFXC4:
 	ld hl, C4PlayFlag
 	ld a, l
 	ld [CurSFX], a
@@ -1992,10 +2078,12 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld de, rNR41
 	call Audio1_CheckSFX
 
-;Return from SFX routineAudio1_PlaySFXRet:
+;Return from SFX routine
+Audio1_PlaySFXRet:
 	ret
 
-Audio1_CheckSFX:
+
+Audio1_CheckSFX:
 	;Set the panning for SFX
 	ld a, [MasterSFXPan]
 	ldh [rNR51], a
@@ -2008,7 +2096,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Otherwise, return
 	ret
 
-Audio1_GetNextSFXCMD:
+
+Audio1_GetNextSFXCMD:
 	;Get the next SFX command
 	ld a, [bc]
 	;Is it a stop command (FF)?
@@ -2043,7 +2132,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, [bc]
 	ld [de], a
 	inc bc
-Audio1_SFXUpdatePtr:
+
+Audio1_SFXUpdatePtr:
 ;Update the pointer
 	dec hl
 	ld [hl], b
@@ -2051,7 +2141,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld [hl], c
 	ret
 
-Audio1_SFXEventStop:
+
+Audio1_SFXEventStop:
 ;Stop the macro
 	;Reset the pointer
 	ld a, 0
@@ -2074,13 +2165,15 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, [bc]
 	or %00000001
 	ld [bc], a
-Audio1_SFXRestorePan:
+
+Audio1_SFXRestorePan:
 	;Restore the original panning
 	ld a, [MasterPan]
 	ldh [rNR51], a
 	ret
 
-Audio1_SFXEventJump:
+
+Audio1_SFXEventJump:
 	;Load the loop position from the following 2 bytes as the position
 	inc bc
 	ld a, [bc]
@@ -2093,9 +2186,11 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	ld a, 1
 	ld [hl], a
 	jr Audio1_SFXUpdatePtr
-Audio1_Waveform:
+
+Audio1_Waveform:
 	db $AA, $AA, $AA, $AA, $AA, $AA, $AA, $AA, $00, $00, $00, $00, $00, $00, $00, $00
-Audio1_SFXMacroTab:
+
+Audio1_SFXMacroTab:
 	dw Audio1_SFXMacro00
 	dw Audio1_SFXMacro01
 	dw Audio1_SFXMacro02
@@ -2191,7 +2286,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	dw Audio1_SFXMacro5C
 	dw Audio1_SFXMacro5D
 	dw Audio1_SFXMacro5E
-	dw Audio1_SFXMacro5FAudio1_SFXTab:
+	dw Audio1_SFXMacro5F
+Audio1_SFXTab:
 .SFXMenuSelect
 	db $00, $FF, $FF, $FF
 .SFXConfirm
@@ -2312,7 +2408,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $5A, $5B, $FF, $FF
 .Empty
 	db $5C, $5D, $5E, $5F
-	Audio1_SFXMacro00:
+	
+Audio1_SFXMacro00:
 	db 1
 	db 1, $80, $F0, $87, $BE
 	db 1, $80, $70, $87, $B6
@@ -2322,7 +2419,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $80, $70, $87, $B6
 	db 1, $80, $F0, $87, $BE
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro01:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro01:
 	db 1
 	db 1, $80, $F0, $87, $3A
 	db 1, $80, $E0, $87, $9D
@@ -2339,7 +2437,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 3, $80, $30, $87, $3A
 	db 3, $80, $20, $87, $9D
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro02:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro02:
 	db 1
 	db 1, $80, $20, $86, $28
 	db 1, $80, $40, $86, $5B
@@ -2353,17 +2452,20 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $80, $F0, $87, $8A
 	db 150, $80, $67, $87, $8A
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro03:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro03:
 	db 0
 	db 2, $80, $F0, $81, $CA
 	db 30, $40, $80, $81, $CA
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro04:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro04:
 	db 1
 	db 2, $80, $F0, $82, $23
 	db 30, $40, $80, $82, $23
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro05:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro05:
 	db 1
 	db 2, $80, $40, $86, $28
 	db 2, $80, $80, $87, $14
@@ -2389,8 +2491,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $80, $80, $87, $A8
 	db 50, $80, $87, $87, $63
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro06:
-	db 1Audio1_SFXMacro06Loop:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro06:
+	db 1
+Audio1_SFXMacro06Loop:
 	db 6, $80, $A4, $87, $97
 	db 6, $80, $A4, $87, $AD
 	db 6, $80, $A4, $87, $BA
@@ -2399,11 +2503,13 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 6, $80, $A4, $87, $2E
 	db 6, $80, $A4, $86, $5B
 	db 1, $00, $00, $00, $00
-	db $FFAudio1_SFXMacro07:
+	db $FF
+Audio1_SFXMacro07:
 	db 0
 	db 6, $00, $00, $00, $00
 	db $FE
-	dw Audio1_SFXMacro06LoopAudio1_SFXMacro08:
+	dw Audio1_SFXMacro06Loop
+Audio1_SFXMacro08:
 	db 3
 	db 4, $00, $B0, $80, $42
 	db 1, $00, $00, $00, $00
@@ -2419,7 +2525,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $00, $00, $00
 	db 4, $00, $90, $80, $42
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro09:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro09:
 	db 3
 	db 4, $00, $F0, $80, $46
 	db 20, $00, $94, $80, $46
@@ -2433,7 +2540,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 4, $00, $80, $80, $33
 	db 80, $00, $97, $80, $32
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro0A:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro0A:
 	db 1
 	db 5, $80, $E0, $85, $12
 	db 4, $00, $00, $00, $00
@@ -2443,8 +2551,10 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $00, $00, $00
 	db 5, $80, $E0, $85, $12
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro0B:
-	db 1Audio1_SFXMacro0BLoop:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro0B:
+	db 1
+Audio1_SFXMacro0BLoop:
 	db 4, $80, $F0, $83, $00
 	db 1, $80, $C0, $83, $05
 	db 1, $80, $B0, $83, $0A
@@ -2472,12 +2582,14 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $80, $10, $83, $FA
 	db 1, $80, $10, $83, $FE
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro0C:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro0C:
 	db 3
 	db 3, $00, $F0, $80, $63
 	db 30, $00, $C1, $80, $63
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro0D:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro0D:
 	db 3
 	db 1, $00, $20, $80, $44
 	db 1, $00, $40, $80, $43
@@ -2488,17 +2600,20 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 7, $00, $00, $00, $00
 	db 3, $00, $F0, $80, $63
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro0E:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro0E:
 	db 1
 	db 4, $80, $A0, $87, $3A
 	db 70, $80, $F3, $87, $9D
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro0F:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro0F:
 	db 1
 	db 4, $80, $F0, $86, $9E
 	db 60, $80, $B4, $87, $4F
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro10:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro10:
 	db 1
 .Audio1_SFXMacro10Loop
 	db 4, $80, $F0, $83, $32
@@ -2507,17 +2622,20 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $80, $60, $83, $50
 	db 1, $80, $40, $83, $5A
 	db $FE
-	dw Audio1_SFXMacro0BLoopAudio1_SFXMacro11:
+	dw Audio1_SFXMacro0BLoop
+Audio1_SFXMacro11:
 	db 1
 	db 2, $80, $F0, $87, $BE
 	db 40, $80, $84, $87, $BE
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro12:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro12:
 	db 1
 	db 2, $80, $F0, $87, $C9
 	db 40, $80, $84, $87, $C9
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro13:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro13:
 	db 1
 	db 2, $80, $F0, $87, $D7
 	db 2, $80, $F0, $87, $DB
@@ -2527,7 +2645,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $80, $F0, $87, $EC
 	db 20, $80, $A4, $87, $AD
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro14:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro14:
 	db 1
 	db 4, $80, $F1, $87, $3A
 	db 4, $80, $F1, $87, $7C
@@ -2537,32 +2656,38 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 4, $80, $F1, $87, $B1
 	db 40, $80, $F3, $87, $9D
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro15:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro15:
 	db 0
 	db 80, $80, $1C, $81, $6B
 	db 100, $80, $F7, $81, $75
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro16:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro16:
 	db 1
 	db 80, $80, $1C, $81, $6D
 	db 100, $80, $F7, $81, $77
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro17:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro17:
 	db 3
 	db 10, $00, $F0, $80, $66
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro18:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro18:
 	db 1
 	db 10, $00, $F0, $80, $32
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro19:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro19:
 	db 3
 	db 5, $00, $F4, $80, $46
 	db 5, $00, $F4, $00, $44
 	db 5, $00, $F4, $00, $42
 	db 20, $00, $A1, $80, $44
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro1A:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro1A:
 	db 3
 	db 4, $00, $F0, $80, $71
 	db 4, $00, $F0, $80, $62
@@ -2570,31 +2695,36 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 4, $00, $F0, $80, $64
 	db 4, $00, $F0, $80, $65
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro1B:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro1B:
 	db 1
 	db 10, $00, $19, $81, $6B
 	db 30, $00, $F2, $84, $B6
 	db 30, $00, $F2, $87, $CC
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro1C:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro1C:
 	db 0
 	db 10, $00, $19, $81, $6C
 	db 30, $00, $F2, $84, $BB
 	db 30, $00, $F2, $87, $CC
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro1D:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro1D:
 	db 1
 	db 10, $00, $19, $87, $CC
 	db 30, $00, $F2, $84, $B6
 	db 30, $00, $F2, $81, $6B
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro1E:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro1E:
 	db 0
 	db 10, $00, $19, $87, $CC
 	db 30, $00, $F2, $84, $BB
 	db 30, $00, $F2, $81, $6C
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro1F:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro1F:
 	db 1
 .Audio1_SFXMacro1FLoop
 	db 1, $00, $A0, $87, $E3
@@ -2605,10 +2735,12 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $A0, $87, $E7
 	db 3, $00, $00, $87, $E8
 	db $FE
-	dw .Audio1_SFXMacro1FLoopAudio1_SFXMacro20:
+	dw .Audio1_SFXMacro1FLoop
+Audio1_SFXMacro20:
 	db 1
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro21:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro21:
 	db 0
 	db 10, $40, $A2, $87, $14
 	db 10, $40, $A2, $87, $14
@@ -2618,35 +2750,41 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 10, $40, $A2, $87, $2E
 	db 64, $40, $A7, $87, $45
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro22:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro22:
 	db 1
 	db 30, $00, $A5, $86, $89
 	db 30, $00, $A5, $87, $06
 	db 64, $00, $A7, $86, $D7
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro23:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro23:
 	db 2
 	db 30, $00, $20, $84, $4F
 	db 30, $00, $20, $85, $89
 	db 64, $00, $40, $85, $12
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro24:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro24:
 	db 3
 	db 6, $00, $F0, $80, $62
 	db 40, $00, $77, $80, $62
 	db 70, $00, $10, $80, $62
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro25:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro25:
 	db 1
 	db 6, $80, $F1, $84, $4F
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro26:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro26:
 	db 3
 	db 6, $00, $F0, $80, $47
 	db 30, $00, $84, $80, $47
 	db 20, $00, $10, $80, $47
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro27:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro27:
 	db 3
 	db 2, $00, $F0, $80, $61
 	db 2, $00, $F0, $80, $44
@@ -2655,7 +2793,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 40, $00, $A5, $80, $45
 	db 20, $00, $10, $80, $45
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro28:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro28:
 	db 3
 	db 8, $00, $0B, $80, $61
 	db 1, $00, $F0, $80, $44
@@ -2667,19 +2806,22 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $20, $80, $44
 	db 1, $00, $10, $80, $44
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro29:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro29:
 	db 1
 	db 9, $00, $00, $00, $00
 	db 10, $00, $0A, $87, $E3
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro2A:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro2A:
 	db 3
 	db 4, $00, $F0, $80, $62
 	db 10, $00, $A1, $80, $62
 	db 10, $00, $20, $80, $62
 	db 20, $00, $10, $80, $62
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro2B:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro2B:
 	db 1
 	db 1, $80, $40, $87, $78
 	db 1, $80, $60, $87, $7C
@@ -2696,39 +2838,45 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $80, $30, $87, $A8
 	db 1, $80, $20, $87, $AC
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro2C:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro2C:
 	db 3
 	db 16, $00, $60, $80, $44
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro2D:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro2D:
 	db 1
 	db 6, $80, $A1, $87, $14
 	db 6, $80, $A1, $87, $2E
 	db 6, $80, $A1, $87, $45
 	db 60, $80, $A4, $87, $63
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro2E:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro2E:
 	db 1
 	db 4, $80, $A1, $87, $2E
 	db 4, $80, $A1, $87, $45
 	db 5, $80, $A1, $87, $59
 	db 30, $80, $A2, $87, $74
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro2F:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro2F:
 	db 1
 	db 10, $40, $A9, $81, $6B
 	db 10, $40, $A9, $81, $CA
 	db 10, $40, $A9, $81, $6B
 	db 40, $40, $1A, $81, $CA
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro30:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro30:
 	db 0
 	db 10, $40, $A9, $81, $6D
 	db 10, $40, $A9, $81, $CC
 	db 10, $40, $A9, $81, $6D
 	db 40, $40, $1A, $81, $CC
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro31:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro31:
 	db 2
 	db 1, $00, $20, $87, $97
 	db 2, $00, $20, $87, $BA
@@ -2742,7 +2890,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $00, $20, $87, $C9
 	db 1, $00, $20, $87, $B1
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro31B:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro31B:
 	db 3
 	db 4, $00, $A0, $80, $69
 	db 4, $00, $A0, $80, $6A
@@ -2752,7 +2901,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 4, $00, $A0, $80, $6A
 	db 4, $00, $A9, $80, $67
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro32:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro32:
 	db 0
 	db 2, $80, $50, $84, $4F
 	db 2, $80, $60, $84, $B6
@@ -2770,7 +2920,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $80, $70, $87, $8A
 	db 40, $80, $C4, $87, $14
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro33:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro33:
 	db 1
 	db 2, $80, $50, $85, $12
 	db 2, $80, $60, $85, $64
@@ -2788,7 +2939,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $80, $70, $87, $C5
 	db 40, $80, $A4, $87, $A3
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro34:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro34:
 	db 0
 	db 2, $80, $40, $80, $FA
 	db 2, $80, $60, $80, $E6
@@ -2801,7 +2953,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 5, $80, $C0, $80, $5A
 	db 6, $80, $B0, $80, $46
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro35:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro35:
 	db 1
 	db 2, $80, $40, $80, $F5
 	db 2, $80, $60, $80, $E1
@@ -2814,12 +2967,14 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 5, $80, $C0, $80, $55
 	db 6, $80, $B0, $80, $41
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro36:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro36:
 	db 3
 	db 35, $00, $00, $00, $00
 	db 30, $00, $F1, $80, $62
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro37:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro37:
 	db 1
 	db 2, $80, $20, $87, $64
 	db 2, $80, $40, $87, $5F
@@ -2839,7 +2994,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $80, $20, $87, $19
 	db 2, $80, $10, $87, $14
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro38:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro38:
 	db 0
 	db 8, $80, $F1, $86, $C5
 	db 8, $80, $F1, $86, $C5
@@ -2852,7 +3008,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 8, $80, $F1, $87, $06
 	db 80, $80, $F7, $86, $D7
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro39:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro39:
 	db 1
 	db 8, $80, $F1, $87, $06
 	db 8, $80, $F1, $87, $06
@@ -2868,7 +3025,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 8, $80, $F1, $86, $D7
 	db 62, $80, $F5, $87, $45
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro3A:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro3A:
 	db 2
 	db 24, $00, $20, $85, $89
 	db 24, $00, $20, $85, $CE
@@ -2877,7 +3035,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 10, $00, $40, $85, $12
 	db 10, $00, $60, $85, $12
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro3B:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro3B:
 	db 3
 	db 2, $00, $F0, $80, $21
 	db 2, $00, $F0, $80, $22
@@ -2893,11 +3052,13 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $00, $20, $80, $45
 	db 4, $00, $10, $80, $60
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro3C:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro3C:
 	db 1
 	db 4, $80, $F0, $84, $4F
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro3D:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro3D:
 	db 3
 	db 1, $00, $F0, $80, $32
 	db 1, $00, $F0, $80, $33
@@ -2914,7 +3075,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $00, $20, $80, $21
 	db 2, $00, $10, $80, $45
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro3E:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro3E:
 	db 1
 	db 1, $80, $F0, $84, $4F
 	db 1, $80, $30, $83, $C8
@@ -2927,21 +3089,25 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $80, $B0, $83, $82
 	db 1, $80, $A0, $83, $78
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro3F:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro3F:
 	db 0
 	db 38, $C0, $1C, $81, $07
 	db 18, $40, $F1, $81, $07
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro40:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro40:
 	db 1
 	db 38, $C0, $1C, $81, $0C
 	db 18, $40, $F1, $81, $0C
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro41:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro41:
 	db 3
 	db 10, $00, $F1, $80, $62
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro42:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro42:
 	db 3
 	db 8, $00, $F0, $80, $63
 	db 50, $00, $A5, $80, $63
@@ -2955,11 +3121,13 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 6, $00, $80, $80, $43
 	db 80, $00, $97, $80, $42
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro43:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro43:
 	db 1
 	db 40, $80, $F5, $80, $9D
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro44:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro44:
 	db 1
 	db 5, $80, $A1, $86, $E7
 	db 5, $80, $A1, $86, $D7
@@ -2975,7 +3143,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 10, $80, $A7, $85, $CE
 	db 55, $80, $F7, $85, $CE
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro45:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro45:
 	db 0
 	db 5, $80, $A1, $86, $F7
 	db 5, $80, $A1, $86, $E7
@@ -2991,7 +3160,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 10, $80, $A7, $85, $EE
 	db 55, $80, $A7, $86, $89
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro46:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro46:
 	db 2
 	db 30, $00, $20, $85, $CE
 	db 35, $00, $20, $85, $12
@@ -2999,7 +3169,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 15, $00, $40, $83, $9C
 	db 15, $00, $60, $83, $9C
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro47:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro47:
 	db 1
 	db 2, $00, $F0, $84, $64
 	db 1, $00, $10, $84, $5A
@@ -3011,7 +3182,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $10, $84, $1E
 	db 2, $00, $B0, $84, $14
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro48:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro48:
 	db 0
 	db 2, $00, $F0, $84, $64
 	db 1, $00, $10, $84, $5A
@@ -3023,7 +3195,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $10, $84, $1E
 	db 2, $00, $B0, $84, $14
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro49:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro49:
 	db 1
 	db 1, $00, $F0, $85, $64
 	db 1, $00, $10, $85, $5A
@@ -3035,7 +3208,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $10, $85, $1E
 	db 2, $00, $B0, $85, $14
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro4A:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro4A:
 	db 0
 	db 1, $00, $F0, $85, $64
 	db 1, $00, $10, $85, $5A
@@ -3047,7 +3221,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $10, $85, $1E
 	db 2, $00, $B0, $85, $14
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro4B:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro4B:
 	db 3
 	db 2, $00, $F0, $80, $62
 	db 1, $00, $50, $80, $45
@@ -3059,7 +3234,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $50, $80, $63
 	db 2, $00, $F0, $80, $64
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro4C:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro4C:
 	db 1
 	db 4, $00, $50, $85, $64
 	db 4, $40, $70, $85, $5A
@@ -3072,7 +3248,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 10, $80, $30, $85, $14
 	db 12, $C0, $10, $85, $0A
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro4D:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro4D:
 	db 0
 	db 4, $00, $50, $85, $70
 	db 4, $40, $70, $85, $66
@@ -3085,14 +3262,16 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 10, $80, $30, $85, $20
 	db 12, $C0, $10, $85, $16
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro4E:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro4E:
 	db 3
 	db 65, $00, $1D, $80, $64
 	db 45, $00, $F7, $80, $64
 	db 10, $00, $20, $80, $64
 	db 10, $00, $10, $80, $64
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro4F:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro4F:
 	db 0
 	db 2, $00, $20, $87, $75
 	db 2, $00, $40, $87, $75
@@ -3113,7 +3292,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 4, $00, $20, $87, $7C
 	db 4, $00, $10, $87, $7A
 	db 1, $00, $00, $00, $00
-	db $FFAudio1_SFXMacro50:
+	db $FF
+Audio1_SFXMacro50:
 	db 1
 	db 2, $00, $20, $87, $7A
 	db 2, $00, $40, $87, $7A
@@ -3135,7 +3315,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 4, $00, $20, $87, $7C
 	db 4, $00, $10, $87, $7A
 	db 1, $00, $00, $00, $00
-	db $FFAudio1_SFXMacro51:
+	db $FF
+Audio1_SFXMacro51:
 	db 1
 	db 2, $00, $20, $83, $0A
 	db 2, $40, $40, $86, $0B
@@ -3157,7 +3338,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $40, $20, $83, $1B
 	db 2, $00, $10, $86, $1C
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro52:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro52:
 	db 0
 	db 2, $00, $20, $83, $0F
 	db 2, $40, $40, $86, $10
@@ -3179,7 +3361,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $40, $20, $83, $20
 	db 2, $00, $10, $86, $21
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro53:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro53:
 	db 3
 	db 10, $00, $F3, $80, $62
 	db 5, $00, $F3, $80, $60
@@ -3192,7 +3375,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 18, $00, $F3, $80, $46
 	db 150, $00, $F7, $80, $62
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro54:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro54:
 	db 3
 	db 4, $00, $F2, $80, $47
 	db 7, $00, $F2, $80, $61
@@ -3212,7 +3396,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 12, $00, $F2, $80, $62
 	db 150, $00, $F7, $80, $63
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro55:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro55:
 	db 1
 	db 4, $80, $F1, $82, $23
 	db 10, $80, $F1, $82, $23
@@ -3232,7 +3417,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 12, $80, $F1, $82, $23
 	db 5, $80, $F1, $82, $23
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro56:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro56:
 	db 3
 	db 1, $00, $F0, $80, $47
 	db 1, $00, $80, $80, $47
@@ -3247,12 +3433,14 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, $00, $20, $80, $35
 	db 1, $00, $10, $80, $35
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro57:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro57:
 	db 1
 	db 3, $00, $00, $00, $00
 	db 4, $80, $F0, $80, $9D
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro58:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro58:
 	db 3
 	db 5, $00, $F0, $80, $46
 	db 2, $00, $80, $80, $42
@@ -3263,11 +3451,13 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $00, $20, $80, $46
 	db 2, $00, $10, $80, $42
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro59:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro59:
 	db 1
 	db 5, $80, $F0, $80, $9D
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro5A:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro5A:
 	db 0
 	db 1, $80, $10, $82, $78
 	db 1, $80, $20, $82, $C7
@@ -3292,7 +3482,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $80, $20, $86, $E7
 	db 2, $80, $10, $85, $CE
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro5B:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro5B:
 	db 1
 	db 1, $80, $10, $82, $78
 	db 1, $80, $20, $82, $C7
@@ -3317,32 +3508,42 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, $80, $20, $86, $E7
 	db 2, $80, $10, $85, $CE
 	db $FE
-	dw Audio1_SFXMacro5CLoopAudio1_SFXMacro5C:
-	db 0Audio1_SFXMacro5CLoop:
+	dw Audio1_SFXMacro5CLoop
+Audio1_SFXMacro5C:
+	db 0
+Audio1_SFXMacro5CLoop:
 	db 1, $00, $00, $00, $00
-	db $FFAudio1_SFXMacro5D:
+	db $FF
+Audio1_SFXMacro5D:
 	db 1
 	db 1, $00, $00, $00, $00
-	db $FFAudio1_SFXMacro5E:
+	db $FF
+Audio1_SFXMacro5E:
 	db 2
 	db 1, $00, $00, $00, $00
-	db $FFAudio1_SFXMacro5F:
+	db $FF
+Audio1_SFXMacro5F:
 	db 3
 	db 1, $00, $00, $00, $00
 	db $FF
-	Empty1A:
+	
+Empty1A:
 	db $67, %11111111
 	db $69, 255
 	db $24, $00
 	db $66, 1
-	db $61Empty1B:
-	db $24, $00
-	db $61Empty1C:
-	db $24, $00
-	db $61Empty1D:
+	db $61
+Empty1B:
 	db $24, $00
 	db $61
-	TitleA:
+Empty1C:
+	db $24, $00
+	db $61
+Empty1D:
+	db $24, $00
+	db $61
+	
+TitleA:
 	db $67, %11111111
 	db $69, 225
 	db $24, $0C
@@ -3360,7 +3561,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $11, -17, 1
 	db $66, 1
 	db $62
-	dw TitleATitleB:
+	dw TitleA
+TitleB:
 	db $24, $0C
 	db $24, $0C
 	db $24, $0C
@@ -3375,7 +3577,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $10, -5, 2
 	db $64, $12, -17, 1
 	db $62
-	dw TitleBTitleC:
+	dw TitleB
+TitleC:
 	db $64, $00, -17, 2
 	db $64, $00, -12, 2
 	db $64, $00, -17, 2
@@ -3390,7 +3593,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $0E, -17, 4
 	db $64, $13, -5, 1
 	db $62
-	dw TitleCTitleD:
+	dw TitleC
+TitleD:
 	db $64, $01, 0, 2
 	db $64, $02, 0, 1
 	db $64, $01, 0, 3
@@ -3408,7 +3612,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $0F, 0, 2
 	db $64, $14, 0, 1
 	db $62
-	dw TitleDAudio1_SongMacro00:
+	dw TitleD
+Audio1_SongMacro00:
 	db $A1, $14
 	db $A1, $14
 	db $A8, $14
@@ -3417,7 +3622,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A7, $14
 	db $A4, $14
 	db $A3, $14
-	db $65Audio1_SongMacro01:
+	db $65
+Audio1_SongMacro01:
 	db $18, $12
 	db $1E, $32
 	db $1E, $32
@@ -3450,7 +3656,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $1E, $32
 	db $18, $12
 	db $1E, $32
-	db $65Audio1_SongMacro02:
+	db $65
+Audio1_SongMacro02:
 	db $18, $12
 	db $1E, $32
 	db $1E, $32
@@ -3483,7 +3690,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $1A, $22
 	db $1A, $22
 	db $1E, $32
-	db $65Audio1_SongMacro03:
+	db $65
+Audio1_SongMacro03:
 	db $45, $C6
 	db $45, $CA
 	db $24, $06
@@ -3504,7 +3712,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $39, $C6
 	db $39, $CB
 	db $24, $06
-	db $65Audio1_SongMacro04:
+	db $65
+Audio1_SongMacro04:
 	db $3F, $F6
 	db $40, $FA
 	db $24, $06
@@ -3525,7 +3734,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $33, $F6
 	db $34, $FB
 	db $24, $06
-	db $65Audio1_SongMacro05:
+	db $65
+Audio1_SongMacro05:
 	db $4A, $C6
 	db $4A, $C9
 	db $24, $04
@@ -3572,7 +3782,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3C, $C4
 	db $39, $C4
 	db $3C, $C4
-	db $65Audio1_SongMacro06:
+	db $65
+Audio1_SongMacro06:
 	db $44, $F6
 	db $45, $F9
 	db $24, $0A
@@ -3585,7 +3796,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $38, $F6
 	db $39, $FA
 	db $24, $09
-	db $65Audio1_SongMacro07:
+	db $65
+Audio1_SongMacro07:
 	db $D1, $A5
 	db $D1, $A5
 	db $D1, $A2
@@ -3680,7 +3892,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $D1, $A2
 	db $D1, $A8
 	db $24, $02
-	db $65Audio1_SongMacro08:
+	db $65
+Audio1_SongMacro08:
 	db $4B, $F2
 	db $4C, $F4
 	db $4B, $F2
@@ -3730,7 +3943,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $4B, $F2
 	db $4C, $F8
 	db $24, $02
-	db $65Audio1_SongMacro09:
+	db $65
+Audio1_SongMacro09:
 	db $40, $F2
 	db $40, $F4
 	db $40, $F2
@@ -3771,7 +3985,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $40, $F4
 	db $40, $F4
 	db $CC, $CA
-	db $65Audio1_SongMacro0A:
+	db $65
+Audio1_SongMacro0A:
 	db $3B, $C2
 	db $3B, $C4
 	db $3B, $C2
@@ -3813,7 +4028,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3B, $C4
 	db $3B, $C4
 	db $C7, $CA
-	db $65Audio1_SongMacro0B:
+	db $65
+Audio1_SongMacro0B:
  	db $A8, $12
 	db $A8, $14
 	db $A8, $12
@@ -3855,7 +4071,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A8, $14
 	db $A8, $14
 	db $A8, $1A
-	db $65Audio1_SongMacro0C:
+	db $65
+Audio1_SongMacro0C:
 	db $18, $16
 	db $18, $16
 	db $18, $16
@@ -3883,7 +4100,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $18, $24
 	db $18, $24
 	db $18, $24
-	db $65Audio1_SongMacro0D:
+	db $65
+Audio1_SongMacro0D:
 	db $2D, $C6
 	db $30, $C6
 	db $32, $C4
@@ -3893,7 +4111,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $32, $C4
 	db $33, $C6
 	db $34, $C6
-	db $65Audio1_SongMacro0E:
+	db $65
+Audio1_SongMacro0E:
 	db $A1, $26
 	db $A4, $26
 	db $A6, $24
@@ -3903,7 +4122,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A6, $24
 	db $A7, $26
 	db $A8, $26
-	db $65Audio1_SongMacro0F:
+	db $65
+Audio1_SongMacro0F:
 	db $18, $14
 	db $1E, $34
 	db $1A, $22
@@ -3954,7 +4174,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $1E, $32
 	db $1A, $22
 	db $1A, $22
-	db $65Audio1_SongMacro10:
+	db $65
+Audio1_SongMacro10:
 	db $26, $76
 	db $24, $76
 	db $23, $74
@@ -3979,13 +4200,17 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $1F, $72
 	db $1F, $74
 	db $1F, $74
-	db $65Audio1_SongMacro11:
+	db $65
+Audio1_SongMacro11:
 	db $C0, $CC
-	db $65Audio1_SongMacro12:
+	db $65
+Audio1_SongMacro12:
 	db $BB, $CC
-	db $65Audio1_SongMacro13:
+	db $65
+Audio1_SongMacro13:
 	db $B9, $DC
-	db $65Audio1_SongMacro14:
+	db $65
+Audio1_SongMacro14:
 	db $19, $6A
 	db $1A, $26
 	db $1A, $27
@@ -3994,7 +4219,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $1A, $24
 	db $1A, $24
 	db $65
-	GraveyardA:
+	
+GraveyardA:
 	db $67, %11111111
 	db $69, 200
 	db $24, $03
@@ -4024,7 +4250,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $2B, -27, 1
 	db $66, 1
 	db $62
-	dw GraveyardAGraveyardB:
+	dw GraveyardA
+GraveyardB:
 	db $64, $18, -29, 1
 	db $64, $18, -25, 1
 	db $64, $18, -29, 1
@@ -4054,7 +4281,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $29, -26, 1
 	db $64, $2C, -27, 1
 	db $62
-	dw GraveyardBGraveyardC:
+	dw GraveyardB
+GraveyardC:
 	db $64, $17, -17, 1
 	db $64, $17, -13, 1
 	db $64, $17, -17, 1
@@ -4078,7 +4306,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $2A, -17, 1
 	db $64, $2D, -15, 1
 	db $62
-	dw GraveyardCGraveyardD:
+	dw GraveyardC
+GraveyardD:
 	db $64, $15, 0, 3
 	db $64, $16, 0, 1
 	db $64, $15, 0, 4
@@ -4093,7 +4322,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $15, 0, 4
 	db $64, $16, 0, 1
 	db $62
-	dw GraveyardDAudio1_SongMacro18:
+	dw GraveyardD
+Audio1_SongMacro18:
 	db $35, $D6
 	db $38, $D6
 	db $3C, $D6
@@ -4106,12 +4336,14 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3D, $D6
 	db $3C, $D6
 	db $38, $D6
-	db $65Audio1_SongMacro17:
+	db $65
+Audio1_SongMacro17:
 	db $9D, $09
 	db $A9, $09
 	db $9D, $09
 	db $A9, $09
-	db $65Audio1_SongMacro15:
+	db $65
+Audio1_SongMacro15:
 	db $98, $E4
 	db $98, $E4
 	db $27, $56
@@ -4133,7 +4365,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $9A, $F4
 	db $98, $E4
 	db $98, $E4
-	db $65Audio1_SongMacro16:
+	db $65
+Audio1_SongMacro16:
 	db $98, $E4
 	db $98, $E4
 	db $27, $56
@@ -4157,7 +4390,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $9A, $F4
 	db $9A, $F2
 	db $9A, $F2
-	db $65Audio1_SongMacro19:
+	db $65
+Audio1_SongMacro19:
 	db $3C, $D6
 	db $40, $D6
 	db $43, $D6
@@ -4171,7 +4405,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $44, $D6
 	db $43, $D4
 	db $24, $00
-	db $65Audio1_SongMacro1A:
+	db $65
+Audio1_SongMacro1A:
 	db $A4, $08
 	db $A4, $04
 	db $A4, $04
@@ -4184,7 +4419,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $B0, $06
 	db $AB, $06
 	db $A8, $06
-	db $65Audio1_SongMacro1B:
+	db $65
+Audio1_SongMacro1B:
 	db $41, $E8
 	db $43, $E6
 	db $44, $E8
@@ -4215,7 +4451,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $40, $E6
 	db $44, $E9
 	db $45, $E9
-	db $65Audio1_SongMacro1C:
+	db $65
+Audio1_SongMacro1C:
 	db $4F, $E4
 	db $4D, $E4
 	db $4B, $E6
@@ -4246,7 +4483,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $46, $E8
 	db $47, $E6
 	db $44, $E9
-	db $65Audio1_SongMacro1D:
+	db $65
+Audio1_SongMacro1D:
 	db $42, $D6
 	db $42, $D4
 	db $3E, $D4
@@ -4267,7 +4505,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3D, $D4
 	db $41, $D4
 	db $3D, $D4
-	db $65Audio1_SongMacro1E:
+	db $65
+Audio1_SongMacro1E:
 	db $3E, $D6
 	db $3E, $D4
 	db $3B, $D4
@@ -4288,7 +4527,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $35, $D4
 	db $3D, $D4
 	db $35, $D4
-	db $65Audio1_SongMacro1F:
+	db $65
+Audio1_SongMacro1F:
 	db $A3, $07
 	db $A5, $04
 	db $A6, $04
@@ -4322,7 +4562,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A2, $04
 	db $A6, $04
 	db $A5, $09
-	db $65Audio1_SongMacro20:
+	db $65
+Audio1_SongMacro20:
 	db $1E, $42
 	db $1E, $42
 	db $2E, $42
@@ -4335,7 +4576,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $1E, $42
 	db $2E, $42
 	db $1E, $42
-	db $65Audio1_SongMacro21:
+	db $65
+Audio1_SongMacro21:
 	db $32, $D6
 	db $36, $D6
 	db $39, $D6
@@ -4346,7 +4588,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $36, $D6
 	db $39, $D6
 	db $37, $D9
-	db $65Audio1_SongMacro22:
+	db $65
+Audio1_SongMacro22:
 	db $51, $D2
 	db $50, $D2
 	db $4F, $D2
@@ -4381,7 +4624,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $32, $D6
 	db $00, $02
 	db $37, $D9
-	db $65Audio1_SongMacro23:
+	db $65
+Audio1_SongMacro23:
 	db $A6, $06
 	db $A4, $06
 	db $A2, $06
@@ -4391,7 +4635,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A1, $06
 	db $9E, $08
 	db $9F, $09
-	db $65Audio1_SongMacro24:
+	db $65
+Audio1_SongMacro24:
 	db $43, $E4
 	db $45, $E4
 	db $46, $E6
@@ -4433,7 +4678,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $4A, $E8
 	db $3E, $E6
 	db $43, $E9
-	db $65Audio1_SongMacro25:
+	db $65
+Audio1_SongMacro25:
 	db $37, $D4
 	db $32, $D4
 	db $2E, $D6
@@ -4466,7 +4712,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $32, $D4
 	db $2E, $D6
 	db $2E, $D6
-	db $65Audio1_SongMacro26:
+	db $65
+Audio1_SongMacro26:
 	db $9F, $06
 	db $AB, $06
 	db $AB, $06
@@ -4491,7 +4738,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $9A, $06
 	db $AB, $06
 	db $AB, $06
-	db $65Audio1_SongMacro27:
+	db $65
+Audio1_SongMacro27:
 	db $98, $E6
 	db $1E, $44
 	db $1E, $44
@@ -4508,7 +4756,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $1E, $44
 	db $1E, $44
 	db $1E, $46
-	db $65Audio1_SongMacro28:
+	db $65
+Audio1_SongMacro28:
 	db $43, $E8
 	db $3D, $E6
 	db $43, $E4
@@ -4522,7 +4771,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $43, $E4
 	db $3D, $E4
 	db $43, $E9
-	db $65Audio1_SongMacro29:
+	db $65
+Audio1_SongMacro29:
 	db $3D, $E8
 	db $37, $E6
 	db $3D, $E4
@@ -4536,7 +4786,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3D, $E4
 	db $37, $E4
 	db $3D, $E9
-	db $65Audio1_SongMacro2A:
+	db $65
+Audio1_SongMacro2A:
 	db $9F, $08
 	db $AB, $06
 	db $A5, $08
@@ -4564,7 +4815,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A9, $06
 	db $AA, $09
 	db $A9, $09
-	db $65Audio1_SongMacro2B:
+	db $65
+Audio1_SongMacro2B:
 	db $46, $D8
 	db $44, $D6
 	db $42, $D8
@@ -4573,7 +4825,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3E, $D4
 	db $3C, $D4
 	db $3A, $D9
-	db $65Audio1_SongMacro2C:
+	db $65
+Audio1_SongMacro2C:
 	db $2E, $D6
 	db $32, $D6
 	db $35, $D6
@@ -4586,7 +4839,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $36, $D6
 	db $35, $D6
 	db $32, $D6
-	db $65Audio1_SongMacro2D:
+	db $65
+Audio1_SongMacro2D:
 	db $A2, $08
 	db $A2, $04
 	db $A2, $04
@@ -4599,7 +4853,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A9, $06
 	db $A6, $06
 	db $65
-SweetshopA:
+
+SweetshopA:
 	db $67, %11111111
 	db $69, 216
 	db $24, $0B
@@ -4631,7 +4886,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $4D, -31, 1
 	db $66, 1
 	db $62
-	dw SweetshopASweetshopB:
+	dw SweetshopA
+SweetshopB:
 	db $64, $30, -31, 5
 	db $64, $30, -29, 4
 	db $64, $33, -31, 3
@@ -4657,7 +4913,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $4E, -31, 2
 	db $64, $4F, -31, 1
 	db $62
-	dw SweetshopBSweetshopC:
+	dw SweetshopB
+SweetshopC:
 	db $64, $31, -19, 5
 	db $64, $31, -17, 4
 	db $64, $35, -19, 3
@@ -4678,10 +4935,12 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $50, -19, 2
 	db $64, $51, -19, 1
 	db $62
-	dw SweetshopCSweetshopD:
+	dw SweetshopC
+SweetshopD:
 	db $61
 	db $62
-	dw SweetshopDAudio1_SongMacro2E:
+	dw SweetshopD
+Audio1_SongMacro2E:
 	db $4C, $B7
 	db $4A, $B4
 	db $4C, $B6
@@ -4726,7 +4985,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $4F, $B6
 	db $48, $B6
 	db $4A, $B9
-	db $65Audio1_SongMacro2F:
+	db $65
+Audio1_SongMacro2F:
 	db $4E, $B4
 	db $4C, $B4
 	db $4A, $B6
@@ -4781,7 +5041,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $4C, $B4
 	db $4A, $B6
 	db $51, $B9
-	db $65Audio1_SongMacro30:
+	db $65
+Audio1_SongMacro30:
 	db $34, $A4
 	db $3C, $A4
 	db $34, $A4
@@ -4806,7 +5067,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $43, $A4
 	db $3B, $A4
 	db $43, $A4
-	db $65Audio1_SongMacro31:
+	db $65
+Audio1_SongMacro31:
 	db $A4, $96
 	db $B0, $96
 	db $B0, $96
@@ -4819,7 +5081,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $AB, $96
 	db $B7, $96
 	db $B7, $96
-	db $65Audio1_SongMacro32:
+	db $65
+Audio1_SongMacro32:
 	db $4C, $B4
 	db $4B, $B4
 	db $4A, $B4
@@ -4886,7 +5149,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $47, $B4
 	db $45, $B8
 	db $43, $B9
-	db $65Audio1_SongMacro33:
+	db $65
+Audio1_SongMacro33:
 	db $38, $A4
 	db $40, $A4
 	db $38, $A4
@@ -4911,7 +5175,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $45, $A4
 	db $3C, $A4
 	db $45, $A4
-	db $65Audio1_SongMacro34:
+	db $65
+Audio1_SongMacro34:
 	db $38, $A4
 	db $40, $A4
 	db $38, $A4
@@ -4936,7 +5201,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $43, $A4
 	db $3B, $A4
 	db $43, $A4
-	db $65Audio1_SongMacro35:
+	db $65
+Audio1_SongMacro35:
 	db $A8, $96
 	db $B4, $96
 	db $B4, $96
@@ -4949,7 +5215,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $AD, $96
 	db $B9, $96
 	db $B9, $96
-	db $65Audio1_SongMacro36:
+	db $65
+Audio1_SongMacro36:
 	db $A8, $96
 	db $B4, $96
 	db $B4, $96
@@ -4962,7 +5229,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $AB, $96
 	db $B7, $96
 	db $B7, $96
-	db $65Audio1_SongMacro37:
+	db $65
+Audio1_SongMacro37:
 	db $3C, $B4
 	db $3F, $B4
 	db $43, $B6
@@ -4975,7 +5243,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $43, $B6
 	db $44, $B6
 	db $43, $B9
-	db $65Audio1_SongMacro38:
+	db $65
+Audio1_SongMacro38:
 	db $33, $A4
 	db $3C, $A4
 	db $33, $A4
@@ -5000,7 +5269,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3C, $A4
 	db $33, $A4
 	db $3C, $A4
-	db $65Audio1_SongMacro39:
+	db $65
+Audio1_SongMacro39:
 	db $A4, $96
 	db $B0, $96
 	db $B0, $96
@@ -5013,12 +5283,14 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A4, $96
 	db $B0, $96
 	db $B0, $96
-	db $65Audio1_SongMacro3A:
+	db $65
+Audio1_SongMacro3A:
 	db $4B, $BA
 	db $47, $B6
 	db $4B, $B6
 	db $4C, $BB
-	db $65Audio1_SongMacro3B:
+	db $65
+Audio1_SongMacro3B:
 	db $3F, $A4
 	db $47, $A4
 	db $3F, $A4
@@ -5043,7 +5315,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $40, $A4
 	db $38, $A4
 	db $40, $A4
-	db $65Audio1_SongMacro3C:
+	db $65
+Audio1_SongMacro3C:
 	db $3F, $A4
 	db $47, $A4
 	db $3F, $A4
@@ -5068,7 +5341,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $4C, $A4
 	db $43, $A4
 	db $4C, $A4
-	db $65Audio1_SongMacro3D:
+	db $65
+Audio1_SongMacro3D:
 	db $3F, $A4
 	db $47, $A4
 	db $3F, $A4
@@ -5093,7 +5367,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $4C, $A4
 	db $44, $A4
 	db $4C, $A4
-	db $65Audio1_SongMacro3E:
+	db $65
+Audio1_SongMacro3E:
 	db $AF, $96
 	db $BB, $96
 	db $BB, $96
@@ -5106,7 +5381,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A8, $96
 	db $B4, $96
 	db $B4, $96
-	db $65Audio1_SongMacro3F:
+	db $65
+Audio1_SongMacro3F:
 	db $AF, $96
 	db $BB, $96
 	db $BB, $96
@@ -5119,7 +5395,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $B4, $96
 	db $C0, $96
 	db $C0, $96
-	db $65Audio1_SongMacro40:
+	db $65
+Audio1_SongMacro40:
 	db $4B, $AD
 	db $4A, $AD
 	db $49, $AD
@@ -5144,7 +5421,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $36, $AD
 	db $35, $AD
 	db $33, $AD
-	db $65Audio1_SongMacro41:
+	db $65
+Audio1_SongMacro41:
 	db $36, $AD
 	db $37, $AD
 	db $38, $AD
@@ -5169,7 +5447,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $4B, $AD
 	db $4C, $AD
 	db $4D, $AD
-	db $65Audio1_SongMacro42:
+	db $65
+Audio1_SongMacro42:
 	db $39, $AD
 	db $3A, $AD
 	db $3B, $AD
@@ -5183,7 +5462,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $43, $AD
 	db $44, $AD
 	db $45, $A9
-	db $65Audio1_SongMacro43:
+	db $65
+Audio1_SongMacro43:
 	db $BF, $BD
 	db $C2, $BD
 	db $C6, $BD
@@ -5208,7 +5488,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $C7, $BD
 	db $C6, $BD
 	db $C2, $BD
-	db $65Audio1_SongMacro44:
+	db $65
+Audio1_SongMacro44:
 	db $C0, $B4
 	db $B9, $B4
 	db $BC, $B4
@@ -5218,7 +5499,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $BC, $B4
 	db $C0, $B4
 	db $B9, $B9
-	db $65Audio1_SongMacro45:
+	db $65
+Audio1_SongMacro45:
 	db $A7, $09
 	db $A7, $04
 	db $A9, $04
@@ -5230,7 +5512,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $AA, $08
 	db $A3, $08
 	db $AA, $08
-	db $65Audio1_SongMacro46:
+	db $65
+Audio1_SongMacro46:
 	db $A6, $07
 	db $A8, $02
 	db $A9, $02
@@ -5248,7 +5531,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $AB, $04
 	db $AC, $06
 	db $A4, $06
-	db $65Audio1_SongMacro47:
+	db $65
+Audio1_SongMacro47:
 	db $A1, $07
 	db $A3, $04
 	db $A4, $06
@@ -5265,13 +5549,15 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A6, $04
 	db $A7, $06
 	db $A4, $06
-	db $65Audio1_SongMacro48:
+	db $65
+Audio1_SongMacro48:
 	db $A1, $98
 	db $A8, $98
 	db $A1, $96
 	db $A8, $96
 	db $A8, $96
-	db $65Audio1_SongMacro49:
+	db $65
+Audio1_SongMacro49:
 	db $45, $B8
 	db $48, $B6
 	db $4C, $B8
@@ -5286,7 +5572,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $4A, $B8
 	db $4F, $B6
 	db $4C, $B9
-	db $65Audio1_SongMacro4A:	
+	db $65
+Audio1_SongMacro4A:	
 	db $40, $A4
 	db $39, $A4
 	db $3C, $A4
@@ -5311,7 +5598,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3C, $A4
 	db $34, $A4
 	db $39, $A4
-	db $65Audio1_SongMacro4B:
+	db $65
+Audio1_SongMacro4B:
 	db $A1, $96
 	db $AD, $96
 	db $AD, $96
@@ -5324,14 +5612,16 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A1, $96
 	db $AD, $96
 	db $AD, $96
-	db $65Audio1_SongMacro4C:
+	db $65
+Audio1_SongMacro4C:
 	db $39, $B8
 	db $45, $B6
 	db $41, $B9
 	db $45, $B8
 	db $4C, $B6
 	db $4D, $B9
-	db $65Audio1_SongMacro4D:
+	db $65
+Audio1_SongMacro4D:
 	db $45, $B7
 	db $47, $B4
 	db $48, $B6
@@ -5344,7 +5634,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $47, $B6
 	db $45, $B6
 	db $43, $B6
-	db $65Audio1_SongMacro4E:
+	db $65
+Audio1_SongMacro4E:
  	db $40, $A4
 	db $39, $A4
 	db $3C, $A4
@@ -5357,7 +5648,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3F, $A4
 	db $39, $A4
 	db $3C, $A4
-	db $65Audio1_SongMacro4F:
+	db $65
+Audio1_SongMacro4F:
 	db $40, $A4
 	db $39, $A4
 	db $3C, $A4
@@ -5379,14 +5671,16 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $41, $A6
 	db $3E, $A6
 	db $3B, $A6
-	db $65Audio1_SongMacro50:
+	db $65
+Audio1_SongMacro50:
 	db $A1, $96
 	db $AD, $96
 	db $AD, $96
 	db $9D, $96
 	db $A9, $96
 	db $A9, $96
-	db $65Audio1_SongMacro51:
+	db $65
+Audio1_SongMacro51:
 	db $A1, $96
 	db $AD, $96
 	db $AD, $96
@@ -5400,7 +5694,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $AB, $96
 	db $AB, $96
 	db $65
-	SubwayA:
+	
+SubwayA:
 	db $67, %11111111
 	db $69, 180
 	db $64, $52, -31, 1
@@ -5423,7 +5718,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $6D, -31, 2
 	db $66, 1
 	db $62
-	dw SubwayASubwayB:
+	dw SubwayA
+SubwayB:
 	db $64, $53, -31, 1
 	db $64, $57, -31, 2
 	db $64, $59, -31, 2
@@ -5446,7 +5742,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $65, -31, 1
 	db $64, $6E, -31, 2
 	db $62
-	dw SubwayBSubwayC:
+	dw SubwayB
+SubwayC:
 	db $64, $54, -19, 3
 	db $64, $5A, -19, 6
 	db $64, $60, -19, 1
@@ -5467,12 +5764,14 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $64, $66, -19, 1
 	db $64, $6F, -19, 2
 	db $62
-	dw SubwayCSubwayD:
+	dw SubwayC
+SubwayD:
 	db $64, $55, 0, 6
 	db $64, $5B, 0, 31
 	db $64, $55, 0, 1
 	db $62
-	dw SubwayDAudio1_SongMacro52:
+	dw SubwayD
+Audio1_SongMacro52:
 	db $43, $D5
 	db $43, $D5
 	db $43, $D6
@@ -5496,7 +5795,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $40, $D6
 	db $40, $D4
 	db $40, $D6
-	db $65Audio1_SongMacro53:
+	db $65
+Audio1_SongMacro53:
 	db $3D, $D5
 	db $3D, $D5
 	db $3D, $D6
@@ -5520,7 +5820,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3C, $D6
 	db $3C, $D4
 	db $3C, $D6
-	db $65Audio1_SongMacro54:
+	db $65
+Audio1_SongMacro54:
 	db $A1, $95
 	db $A1, $95
 	db $A1, $96
@@ -5545,7 +5846,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A4, $94
 	db $A4, $94
 	db $A3, $94
-	db $65Audio1_SongMacro55:
+	db $65
+Audio1_SongMacro55:
 	db $1E, $46
 	db $1E, $46
 	db $1E, $46
@@ -5555,7 +5857,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $1E, $46
 	db $1E, $44
 	db $2E, $54
-	db $65Audio1_SongMacro56:
+	db $65
+Audio1_SongMacro56:
 	db $43, $D5
 	db $43, $D5
 	db $43, $D6
@@ -5584,7 +5887,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $40, $D5
 	db $40, $D4
 	db $40, $D4
-	db $65Audio1_SongMacro57:
+	db $65
+Audio1_SongMacro57:
 	db $3D, $D5
 	db $3D, $D5
 	db $3D, $D6
@@ -5608,7 +5912,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3C, $D5
 	db $3C, $D4
 	db $3C, $D4
-	db $65Audio1_SongMacro58:
+	db $65
+Audio1_SongMacro58:
 	db $43, $D4
 	db $43, $D4
 	db $43, $D4
@@ -5698,7 +6003,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $40, $D4
 	db $40, $D6
 	db $24, $02
-	db $65Audio1_SongMacro59:
+	db $65
+Audio1_SongMacro59:
 	db $40, $D4
 	db $40, $D4
 	db $40, $D4
@@ -5787,7 +6093,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3C, $D4
 	db $3C, $D6
 	db $24, $02
-	db $65Audio1_SongMacro5A:
+	db $65
+Audio1_SongMacro5A:
 	db $A4, $94
 	db $A4, $94
 	db $A8, $92
@@ -5834,7 +6141,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A4, $92
 	db $A2, $92
 	db $A3, $92
-	db $65Audio1_SongMacro5B:
+	db $65
+Audio1_SongMacro5B:
 	db $98, $E2
 	db $1E, $42
 	db $98, $E2
@@ -5863,7 +6171,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $98, $E2
 	db $98, $E2
 	db $1E, $42
-	db $65Audio1_SongMacro5C:
+	db $65
+Audio1_SongMacro5C:
 	db $46, $D2
 	db $46, $D2
 	db $46, $D2
@@ -5951,7 +6260,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $43, $D2
 	db $43, $D4
 	db $43, $D5
-	db $65Audio1_SongMacro5D:
+	db $65
+Audio1_SongMacro5D:
 	db $40, $D2
 	db $40, $D2
 	db $40, $D2
@@ -6039,7 +6349,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $40, $D2
 	db $40, $D4
 	db $40, $D5
-	db $65Audio1_SongMacro5E:
+	db $65
+Audio1_SongMacro5E:
 	db $30, $D6
 	db $34, $D6
 	db $37, $D6
@@ -6058,7 +6369,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $39, $D4
 	db $37, $D4
 	db $39, $D8
-	db $65Audio1_SongMacro60:
+	db $65
+Audio1_SongMacro60:
 	db $A4, $94
 	db $A4, $94
 	db $A8, $92
@@ -6080,7 +6392,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $AB, $94
 	db $A8, $92
 	db $A6, $94
-	db $65Audio1_SongMacro5F:
+	db $65
+Audio1_SongMacro5F:
 	db $32, $84
 	db $32, $84
 	db $2F, $85
@@ -6113,7 +6426,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $32, $82
 	db $2F, $84
 	db $2B, $84
-	db $65Audio1_SongMacro61:
+	db $65
+Audio1_SongMacro61:
 	db $43, $D6
 	db $41, $D5
 	db $3E, $D4
@@ -6128,7 +6442,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $43, $D6
 	db $24, $02
 	db $24, $06
-	db $65Audio1_SongMacro62:
+	db $65
+Audio1_SongMacro62:
 	db $34, $D2
 	db $37, $D2
 	db $38, $D2
@@ -6153,7 +6468,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $43, $D2
 	db $40, $D2
 	db $43, $D8
-	db $65Audio1_SongMacro63:
+	db $65
+Audio1_SongMacro63:
 	db $3B, $D6
 	db $39, $D5
 	db $35, $D4
@@ -6168,7 +6484,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3B, $D6
 	db $24, $02
 	db $24, $06
-	db $65Audio1_SongMacro64:
+	db $65
+Audio1_SongMacro64:
 	db $3A, $D4
 	db $3A, $D4
 	db $3A, $D4
@@ -6187,7 +6504,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3B, $D2
 	db $3B, $D4
 	db $3B, $D4
-	db $65Audio1_SongMacro65:
+	db $65
+Audio1_SongMacro65:
 	db $38, $D4
 	db $38, $D4
 	db $38, $D4
@@ -6206,7 +6524,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $35, $D2
 	db $35, $D4
 	db $35, $D4
-	db $65Audio1_SongMacro66:
+	db $65
+Audio1_SongMacro66:
  	db $A2, $94
 	db $A2, $94
 	db $A2, $94
@@ -6225,7 +6544,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $9F, $92
 	db $9F, $94
 	db $9F, $94
-	db $65Audio1_SongMacro67:
+	db $65
+Audio1_SongMacro67:
 	db $37, $D2
 	db $3A, $D2
 	db $3B, $D2
@@ -6281,7 +6601,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $48, $D2
 	db $4B, $D4
 	db $4D, $D4
-	db $65Audio1_SongMacro68:
+	db $65
+Audio1_SongMacro68:
 	db $A4, $96
 	db $B0, $95
 	db $AE, $94
@@ -6301,7 +6622,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $AB, $92
 	db $A9, $92
 	db $A7, $94
-	db $65Audio1_SongMacro69:
+	db $65
+Audio1_SongMacro69:
 	db $4D, $D2
 	db $4D, $D4
 	db $4D, $D2
@@ -6348,7 +6670,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $52, $D2
 	db $53, $D2
 	db $54, $D8
-	db $65Audio1_SongMacro6A:
+	db $65
+Audio1_SongMacro6A:
 	db $47, $D2
 	db $48, $D4
 	db $47, $D2
@@ -6395,7 +6718,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $46, $D2
 	db $47, $D2
 	db $48, $D8
-	db $65Audio1_SongMacro6B:
+	db $65
+Audio1_SongMacro6B:
 	db $4F, $D2
 	db $4F, $D4
 	db $4F, $D2
@@ -6462,7 +6786,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $43, $D4
 	db $48, $D8
 	db $24, $02
-	db $65Audio1_SongMacro6C:
+	db $65
+Audio1_SongMacro6C:
 	db $49, $D2
 	db $4A, $D4
 	db $49, $D2
@@ -6499,7 +6824,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3C, $D5
 	db $43, $D8
 	db $24, $02
-	db $65Audio1_SongMacro6D:
+	db $65
+Audio1_SongMacro6D:
 	db $40, $D4
 	db $40, $D4
 	db $40, $D4
@@ -6509,7 +6835,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $40, $D2
 	db $40, $D4
 	db $40, $D4
-	db $65Audio1_SongMacro6E:
+	db $65
+Audio1_SongMacro6E:
 	db $3C, $D4
 	db $3B, $D4
 	db $3C, $D4
@@ -6519,7 +6846,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $3B, $D2
 	db $3C, $D4
 	db $3B, $D4
-	db $65Audio1_SongMacro6F:
+	db $65
+Audio1_SongMacro6F:
 	db $A4, $94
 	db $A4, $94
 	db $A4, $94
@@ -6530,7 +6858,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $A4, $94
 	db $A4, $94
 	db $65
-Audio1_SongTab:
+
+Audio1_SongTab:
 .Empty
 	dw Empty1A, Empty1B, Empty1C, Empty1D, Audio1_NoteLens1
 .Title
@@ -6541,9 +6870,11 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	dw SweetshopA, SweetshopB, SweetshopC, SweetshopD, Audio1_NoteLens1
 .Subway
 	dw SubwayA, SubwayB, SubwayC, SubwayD, Audio1_NoteLens1
-	Audio1_NoteLens1:
+	
+Audio1_NoteLens1:
 	db 3, 4, 6, 9, 12, 18, 24, 36, 48, 72, 96, 144, 192, 8, 16, 32
-	Audio1_InsTab:
+	
+Audio1_InsTab:
 	dw Audio1_InsRest
 	dw Audio1_InsBassDrum
 	dw Audio1_InsSnare
@@ -6576,7 +6907,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	dw Audio1_InsSlideDown2
 	dw Audio1_InsBassDrum2
 	dw Audio1_InsSnare2
-	Audio1_InsRest:
+	
+Audio1_InsRest:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6594,7 +6926,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsBassDrum:
+	dw 0
+Audio1_InsBassDrum:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -6612,7 +6945,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsSnare:
+	dw 0
+Audio1_InsSnare:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6630,7 +6964,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsHiHatC:
+	dw 0
+Audio1_InsHiHatC:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -6648,7 +6983,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsHiHatP:
+	dw 0
+Audio1_InsHiHatP:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -6666,7 +7002,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsHiHatO:
+	dw 0
+Audio1_InsHiHatO:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6684,7 +7021,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsCymbal:
+	dw 0
+Audio1_InsCymbal:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6702,7 +7040,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsTomTom1:
+	dw 0
+Audio1_InsTomTom1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6720,7 +7059,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq00Audio1_InsTomTom2:
+	dw Audio1_ModSeq00
+Audio1_InsTomTom2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6738,7 +7078,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq00Audio1_InsPlain1:
+	dw Audio1_ModSeq00
+Audio1_InsPlain1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6756,7 +7097,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsArp1:
+	dw 0
+Audio1_InsArp1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6774,7 +7116,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq02Audio1_InsArp2:
+	dw Audio1_ModSeq02
+Audio1_InsArp2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6792,7 +7135,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq03Audio1_InsPlain2:
+	dw Audio1_ModSeq03
+Audio1_InsPlain2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6810,7 +7154,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsBell1:
+	dw 0
+Audio1_InsBell1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6828,7 +7173,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsPiano1:
+	dw 0
+Audio1_InsPiano1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6846,7 +7192,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsPlain3:
+	dw 0
+Audio1_InsPlain3:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6864,7 +7211,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsSweep1:
+	dw 0
+Audio1_InsSweep1:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -6882,7 +7230,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsSweep2:
+	dw 0
+Audio1_InsSweep2:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -6900,7 +7249,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsSweep3:
+	dw 0
+Audio1_InsSweep3:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -6918,7 +7268,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsArp7:
+	dw 0
+Audio1_InsArp7:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6936,7 +7287,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq04Audio1_InsArp12:
+	dw Audio1_ModSeq04
+Audio1_InsArp12:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6954,7 +7306,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq05Audio1_InsSweep4:
+	dw Audio1_ModSeq05
+Audio1_InsSweep4:
 	;Period ctrl
 	db $80
 	;Duty
@@ -6972,7 +7325,11 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq06Audio1_InsDoNotUse1:Audio1_InsDoNotUse2:Audio1_InsDoNotUse3:Audio1_InsSweep5:
+	dw Audio1_ModSeq06
+Audio1_InsDoNotUse1:
+Audio1_InsDoNotUse2:
+Audio1_InsDoNotUse3:
+Audio1_InsSweep5:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -6990,7 +7347,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsArpTrem:
+	dw 0
+Audio1_InsArpTrem:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7008,7 +7366,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq07Audio1_InsBell2:
+	dw Audio1_ModSeq07
+Audio1_InsBell2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7026,7 +7385,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsSlideDown1:
+	dw 0
+Audio1_InsSlideDown1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7044,7 +7404,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq08Audio1_InsSlideDown2:
+	dw Audio1_ModSeq08
+Audio1_InsSlideDown2:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7062,7 +7423,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio1_ModSeq08Audio1_InsBassDrum2:
+	dw Audio1_ModSeq08
+Audio1_InsBassDrum2:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7080,7 +7442,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio1_InsSnare2:
+	dw 0
+Audio1_InsSnare2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7099,26 +7462,30 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 0
 	;Pitch mod ptr
 	dw 0
-Audio1_EnvSeq00:
+
+Audio1_EnvSeq00:
 	db $F0, 1
 	db $00, 1
 	db $40, 1
 	db $00, 1
-	db $FFAudio1_EnvSeq01:
+	db $FF
+Audio1_EnvSeq01:
 	db $F0, 1
 	db $80, 1
 	db $40, 2
 	db $20, 2
 	db $10, 5
 	db $00, 1
-	db $FFAudio1_EnvSeq02:
+	db $FF
+Audio1_EnvSeq02:
 	db $50, 2
 	db $30, 4
 	db $20, 8
 	db $10, 8
 	db $10, 8
 	db $00, 1
-	db $FFAudio1_EnvSeq03:
+	db $FF
+Audio1_EnvSeq03:
 	db $F0, 2
 	db $80, 2
 	db $60, 2
@@ -7126,26 +7493,30 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $20, 2
 	db $10, 2
 	db $00, 1
-	db $FFAudio1_EnvSeq04:
+	db $FF
+Audio1_EnvSeq04:
 	db $C0, 2
 	db $70, 4
 	db $40, 4
 	db $20, 4
 	db $00, 1
-	db $FFAudio1_EnvSeq05:
+	db $FF
+Audio1_EnvSeq05:
 	db $80, 1
 	db $40, 1
 	db $00, 2
 	db $10, 1
 	db $00, 1
-	db $FFAudio1_EnvSeq06:
+	db $FF
+Audio1_EnvSeq06:
 	db $A0, 1
 	db $50, 1
 	db $40, 1
 	db $30, 1
 	db $20, 1
 	db $00, 1
-	db $FFAudio1_EnvSeq07:
+	db $FF
+Audio1_EnvSeq07:
 	db $80, 1
 	db $70, 3
 	db $60, 4
@@ -7155,7 +7526,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $20, 60
 	db $10, 60
 	db $00, 1
-	db $FFAudio1_EnvSeq08:
+	db $FF
+Audio1_EnvSeq08:
 	db $80, 1
 	db $70, 1
 	db $60, 4
@@ -7165,7 +7537,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $20, 60
 	db $10, 60
 	db $00, $01
-	db $FFAudio1_EnvSeq09:
+	db $FF
+Audio1_EnvSeq09:
 	db $A0, 2
 	db $90, 4
 	db $70, 40
@@ -7175,7 +7548,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $30, 40
 	db $10, 40
 	db $00, 1
-	db $FFAudio1_EnvSeq0A:
+	db $FF
+Audio1_EnvSeq0A:
 	db $90, 2
 	db $80, 3
 	db $70, 2
@@ -7187,14 +7561,16 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $10, 60
 	db $10, 60
 	db $00, 1
-	db $FFAudio1_EnvSeq0B:
+	db $FF
+Audio1_EnvSeq0B:
 	db $80, 5
 	db $60, 200
 	db $40, 200
 	db $20, 200
 	db $10, 60
 	db $00, 1
-	db $FFAudio1_EnvSeq0C:
+	db $FF
+Audio1_EnvSeq0C:
 	db $90, 2
 	db $80, 4
 	db $60, 40
@@ -7202,33 +7578,39 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $30, 40
 	db $10, 80
 	db $00, 1
-	db $FFAudio1_EnvSeq0D:
+	db $FF
+Audio1_EnvSeq0D:
 	db $20, 1
 	db $40, 30
 	db $60, 240
 	db $00, 1
-	db $FFAudio1_EnvSeq0E:
+	db $FF
+Audio1_EnvSeq0E:
 	db $20, 3
 	db $40, 12
 	db $60, 50
 	db $00, $01
-	db $FFAudio1_EnvSeq0F:
+	db $FF
+Audio1_EnvSeq0F:
 	db $20, 3
 	db $40, 40
 	db $60, 240
 	db $60, 240
 	db $00, 1
-	db $FFAudio1_EnvSeq10:
+	db $FF
+Audio1_EnvSeq10:
 	db $20, 8
 	db $40, 20
 	db $60, 100
 	db $00, $01
-	db $FFAudio1_EnvSeq11:
+	db $FF
+Audio1_EnvSeq11:
 	db $20, 4
 	db $40, 200
 	db $40, 100
 	db $60, 40
-	db $FFAudio1_EnvSeq12:
+	db $FF
+Audio1_EnvSeq12:
 	db $90, 3
 	db $80, 5
 	db $70, 4
@@ -7239,12 +7621,14 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $10, 40
 	db $10, 40
 	db $00, 1
-	db $FFAudio1_EnvSeq13:
+	db $FF
+Audio1_EnvSeq13:
 	db $60, 1
 	db $40, 58
 	db $20, 50
 	db $00, 1
-	db $FFAudio1_EnvSeq14:
+	db $FF
+Audio1_EnvSeq14:
 	db $20, 5
 	db $30, 5
 	db $40, 5
@@ -7252,12 +7636,14 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $50, 200
 	db $30, 200
 	db $00, 1
-	db $FFAudio1_EnvSeq15:
+	db $FF
+Audio1_EnvSeq15:
 	db $C0, 1
 	db $00, 1
 	db $30, 1
 	db $00, 1
-	db $FFAudio1_EnvSeq16:
+	db $FF
+Audio1_EnvSeq16:
 	db $C0, 1
 	db $90, 1
 	db $60, 1
@@ -7265,9 +7651,11 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db $20, 2
 	db $10, 5
 	db $00, 1
-	db $FFAudio1_VibSeq00:
+	db $FF
+Audio1_VibSeq00:
 	db 96, 200
-	db $7EAudio1_VibSeq01:
+	db $7E
+Audio1_VibSeq01:
 	db 55, 2
 	db 100, 2
 	db 34, 1
@@ -7284,42 +7672,50 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 34, 1
 	db 55, 1
 	db 34, 16
-	db $7EAudio1_VibSeq02:
+	db $7E
+Audio1_VibSeq02:
 	db 18, 200
-	db $7EAudio1_VibSeq03:
+	db $7E
+Audio1_VibSeq03:
 	db 34, 1
 	db 16, 200
-	db $7EAudio1_VibSeq04:
+	db $7E
+Audio1_VibSeq04:
 	db 3, 3
 	db -3, 3
 	db -3, 3
 	db 3, 3
 	db $7D
-	dw Audio1_VibSeq04Audio1_VibSeq05:
+	dw Audio1_VibSeq04
+Audio1_VibSeq05:
 	db 1, 2
 	db -1, 2
 	db 1, 2
 	db -1, 2
 	db $7D
-	dw Audio1_VibSeq04Audio1_VibSeq06:
+	dw Audio1_VibSeq04
+Audio1_VibSeq06:
 	db 6, 2
 	db -6, 2
 	db -6, 2
 	db 6, 2
 	db $7D
-	dw Audio1_VibSeq06Audio1_VibSeq07:
+	dw Audio1_VibSeq06
+Audio1_VibSeq07:
 	db -3, 2
 	db 3, 2
 	db 3, 2
 	db -3, 2
 	db $7D
-	dw Audio1_VibSeq07Audio1_VibSeq08:
+	dw Audio1_VibSeq07
+Audio1_VibSeq08:
 	db 13, 3
 	db -13, 3
 	db -13, 3
 	db 13, 3
 	db $7D
-	dw Audio1_VibSeq04Audio1_ModSeq00:
+	dw Audio1_VibSeq04
+Audio1_ModSeq00:
 	db 1, -1
 	db 1, -2
 	db 1, -3
@@ -7335,14 +7731,16 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, -13
 	db 200, -13
 	db $FF
-	dw Audio1_ModSeq00Audio1_ModSeq01:
+	dw Audio1_ModSeq00
+Audio1_ModSeq01:
 	db 2, 0
 	db 1, 1
 	db 1, 2
 	db 1, 3
 	db 200, 3
 	db $FF
-	dw Audio1_ModSeq01Audio1_ModSeq02:
+	dw Audio1_ModSeq01
+Audio1_ModSeq02:
 	db 3, 0
 	db 3, 12
 	db 3, 0
@@ -7350,7 +7748,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 3, 0
 	db 3, 12
 	db $FF
-	dw Audio1_ModSeq02Audio1_ModSeq03:
+	dw Audio1_ModSeq02
+Audio1_ModSeq03:
 	db 4, 12
 	db 4, 0
 	db 4, 12
@@ -7358,7 +7757,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 4, 12
 	db 4, 0
 	db $FF
-	dw Audio1_ModSeq03Audio1_ModSeq04:
+	dw Audio1_ModSeq03
+Audio1_ModSeq04:
 	db 1, 0
 	db 1, 4
 	db 1, 7
@@ -7366,7 +7766,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, 4
 	db 1, 7
 	db $FF
-	dw Audio1_ModSeq04Audio1_ModSeq05:
+	dw Audio1_ModSeq04
+Audio1_ModSeq05:
 	db 1, 4
 	db 1, 7
 	db 1, 12
@@ -7374,7 +7775,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, 7
 	db 1, 12
 	db $FF
-	dw Audio1_ModSeq05Audio1_ModSeq06:
+	dw Audio1_ModSeq05
+Audio1_ModSeq06:
 	db 1, 7
 	db 1, 12
 	db 1, 16
@@ -7382,7 +7784,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 1, 12
 	db 1, 16
 	db $FF
-	dw Audio1_ModSeq06Audio1_ModSeq07:
+	dw Audio1_ModSeq06
+Audio1_ModSeq07:
 	db 2, 12
 	db 2, 0
 	db 2, 12
@@ -7390,7 +7793,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 2, 12
 	db 2, 0
 	db $FF
-	dw Audio1_ModSeq07Audio1_ModSeq08:
+	dw Audio1_ModSeq07
+Audio1_ModSeq08:
 	db 12, 0
 	db 3, -1
 	db 3, -2
@@ -7417,7 +7821,8 @@ SECTION "Audio1", ROMX[$4000], BANK[$1]
 	db 3, -23
 	db 200, -24
 	db $FF
-	dw Audio1_ModSeq08Audio1_SongMacroTab:
+	dw Audio1_ModSeq08
+Audio1_SongMacroTab:
 	dw Audio1_SongMacro00
 	dw Audio1_SongMacro01
 	dw Audio1_SongMacro02

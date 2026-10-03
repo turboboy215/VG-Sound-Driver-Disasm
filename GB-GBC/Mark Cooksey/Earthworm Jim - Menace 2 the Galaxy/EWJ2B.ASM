@@ -3524,19 +3524,24 @@ Audio2_SFXMacro5F:
 	db 3
 	db 1, $00, $00, $00, $00
 	db $FF
-Empty2A:
+
+Empty2A:
 	db $67, %11111111
 	db $69, 255
 	db $24, $00
 	db $66, 1
-	db $61Empty2B:
-	db $24, $00
-	db $61Empty2C:
-	db $24, $00
-	db $61Empty2D:
+	db $61
+Empty2B:
 	db $24, $00
 	db $61
-	SciFiA:
+Empty2C:
+	db $24, $00
+	db $61
+Empty2D:
+	db $24, $00
+	db $61
+	
+SciFiA:
 	db $67, %11111111
 	db $69, 170
 	db $24, $0C
@@ -3562,7 +3567,8 @@ Audio2_SFXMacro5F:
 	db $64, $13, -41, 1
 	db $66, 1
 	db $62
-	dw SciFiASciFiB:
+	dw SciFiA
+SciFiB:
 	db $64, $00, -29, 12
 	db $64, $00, -29, 1
 	db $64, $01, -31, 1
@@ -3590,7 +3596,8 @@ Audio2_SFXMacro5F:
 	db $64, $11, -5, 1
 	db $64, $14, -29, 7
 	db $62
-	dw SciFiBSciFiC:
+	dw SciFiB
+SciFiC:
 	db $64, $02, -17, 5
 	db $64, $02, -15, 2
 	db $64, $09, -17, 2
@@ -3602,11 +3609,13 @@ Audio2_SFXMacro5F:
 	db $64, $12, -17, 1
 	db $64, $15, -17, 7
 	db $62
-	dw SciFiCSciFiD:
+	dw SciFiC
+SciFiD:
 	db $64, $03, 0, 8
 	db $64, $04, 0, 17
 	db $62
-	dw SciFiDAudio2_SongMacro05:
+	dw SciFiD
+Audio2_SongMacro05:
 	db $45, $E2
 	db $47, $E2
 	db $48, $E2
@@ -3635,7 +3644,8 @@ Audio2_SFXMacro5F:
 	db $4A, $E8
 	db $4D, $E6
 	db $4C, $EA
-	db $65Audio2_SongMacro06:
+	db $65
+Audio2_SongMacro06:
 	db $40, $E4
 	db $3E, $E2
 	db $40, $E5
@@ -3670,7 +3680,8 @@ Audio2_SFXMacro5F:
 	db $39, $E4
 	db $37, $E4
 	db $39, $EA
-	db $65Audio2_SongMacro00:
+	db $65
+Audio2_SongMacro00:
 	db $2D, $92
 	db $2D, $92
 	db $39, $92
@@ -3687,7 +3698,8 @@ Audio2_SFXMacro5F:
 	db $3C, $92
 	db $39, $92
 	db $39, $92
-	db $65Audio2_SongMacro01:
+	db $65
+Audio2_SongMacro01:
 	db $2D, $92
 	db $2D, $92
 	db $39, $92
@@ -3704,7 +3716,8 @@ Audio2_SFXMacro5F:
 	db $3D, $92
 	db $39, $92
 	db $39, $92
-	db $65Audio2_SongMacro02:
+	db $65
+Audio2_SongMacro02:
 	db $A1, $92
 	db $A1, $92
 	db $24, $06
@@ -3741,7 +3754,8 @@ Audio2_SFXMacro5F:
 	db $A8, $92
 	db $A6, $92
 	db $A4, $92
-	db $65Audio2_SongMacro03:
+	db $65
+Audio2_SongMacro03:
 	db $1E, $44
 	db $1E, $44
 	db $1E, $44
@@ -3750,7 +3764,8 @@ Audio2_SFXMacro5F:
 	db $1E, $44
 	db $1E, $44
 	db $1E, $44
-	db $65Audio2_SongMacro04:
+	db $65
+Audio2_SongMacro04:
 	db $98, $E2
 	db $1E, $42
 	db $1E, $42
@@ -3806,7 +3821,8 @@ Audio2_SFXMacro5F:
 	db $98, $F2
 	db $98, $F2
 	db $98, $F4
-	db $65Audio2_SongMacro07:
+	db $65
+Audio2_SongMacro07:
 	db $4D, $E5
 	db $4C, $E2
 	db $4A, $E4
@@ -3851,7 +3867,8 @@ Audio2_SFXMacro5F:
 	db $3E, $E6
 	db $41, $E8
 	db $41, $78
-	db $65Audio2_SongMacro08:
+	db $65
+Audio2_SongMacro08:
 	db $45, $92
 	db $4A, $92
 	db $4C, $92
@@ -3916,7 +3933,8 @@ Audio2_SFXMacro5F:
 	db $45, $92
 	db $41, $92
 	db $40, $92
-	db $65Audio2_SongMacro09:
+	db $65
+Audio2_SongMacro09:
 	db $A6, $92
 	db $A6, $92
 	db $24, $06
@@ -3953,13 +3971,16 @@ Audio2_SFXMacro5F:
 	db $9A, $92
 	db $9A, $94
 	db $9A, $94
-	db $65Audio2_SongMacro0A:
+	db $65
+Audio2_SongMacro0A:
 	db $45, $7A
 	db $39, $7A
-	db $65Audio2_SongMacro0B:
+	db $65
+Audio2_SongMacro0B:
 	db $40, $7A
 	db $34, $7A
-	db $65Audio2_SongMacro0C:
+	db $65
+Audio2_SongMacro0C:
 	db $A1, $92
 	db $A1, $92
 	db $24, $06
@@ -3996,7 +4017,8 @@ Audio2_SFXMacro5F:
 	db $A1, $94
 	db $A4, $94
 	db $9F, $94
-	db $65Audio2_SongMacro0D:
+	db $65
+Audio2_SongMacro0D:
 	db $2D, $E8
 	db $34, $E8
 	db $33, $E8
@@ -4005,7 +4027,8 @@ Audio2_SFXMacro5F:
 	db $40, $E8
 	db $3F, $E8
 	db $46, $E8
-	db $65Audio2_SongMacro0E:
+	db $65
+Audio2_SongMacro0E:
 	db $2D, $11
 	db $2F, $11
 	db $30, $11
@@ -4030,7 +4053,8 @@ Audio2_SFXMacro5F:
 	db $3E, $11
 	db $3C, $11
 	db $39, $11
-	db $65Audio2_SongMacro0F:
+	db $65
+Audio2_SongMacro0F:
 	db $A1, $92
 	db $AD, $94
 	db $A1, $92
@@ -4051,13 +4075,16 @@ Audio2_SFXMacro5F:
 	db $AD, $94
 	db $AE, $94
 	db $AB, $94
-	db $65Audio2_SongMacro10:
+	db $65
+Audio2_SongMacro10:
 	db $34, $7A
 	db $28, $7A
-	db $65Audio2_SongMacro11:
+	db $65
+Audio2_SongMacro11:
 	db $2C, $7A
 	db $20, $7A
-	db $65Audio2_SongMacro12:
+	db $65
+Audio2_SongMacro12:
 	db $9C, $92
 	db $9C, $92
 	db $24, $06
@@ -4073,7 +4100,8 @@ Audio2_SFXMacro5F:
 	db $A6, $94
 	db $A4, $94
 	db $A3, $94
-	db $65Audio2_SongMacro13:
+	db $65
+Audio2_SongMacro13:
 	db $C0, $A6
 	db $C5, $A5
 	db $C7, $A2
@@ -4123,7 +4151,8 @@ Audio2_SFXMacro5F:
 	db $C7, $A8
 	db $C5, $AA
 	db $51, $7A
-	db $65Audio2_SongMacro14:
+	db $65
+Audio2_SongMacro14:
 	db $2D, $92
 	db $2D, $92
 	db $34, $92
@@ -4156,7 +4185,8 @@ Audio2_SFXMacro5F:
 	db $35, $92
 	db $30, $92
 	db $30, $92
-	db $65Audio2_SongMacro15:
+	db $65
+Audio2_SongMacro15:
 	db $A1, $92
 	db $A1, $92
 	db $24, $06
@@ -4172,7 +4202,8 @@ Audio2_SFXMacro5F:
 	db $9F, $94
 	db $9D, $98
 	db $65
-DesolationA:
+
+DesolationA:
 	db $67, %11111111
 	db $69, 173
 	db $64, $1D, -29, 4
@@ -4190,7 +4221,8 @@ Audio2_SFXMacro5F:
 	db $24, $00
 	db $66, 1
 	db $62
-	dw DesolationADesolationB:
+	dw DesolationA
+DesolationB:
 	db $64, $16, 0, 4
 	db $64, $1E, -29, 3
 	db $64, $16, 0, 2
@@ -4207,7 +4239,8 @@ Audio2_SFXMacro5F:
 	db $64, $22, -31, 4
 	db $64, $2C, -41, 1
 	db $62
-	dw DesolationBDesolationC:
+	dw DesolationB
+DesolationC:
 	db $64, $1B, -17, 2
 	db $64, $1C, -17, 2
 	db $64, $1F, -17, 3
@@ -4220,7 +4253,8 @@ Audio2_SFXMacro5F:
 	db $64, $1B, -17, 1
 	db $24, $00
 	db $62
-	dw DesolationCDesolationD:
+	dw DesolationC
+DesolationD:
 	db $64, $17, 0, 11
 	db $64, $18, 0, 1
 	db $64, $19, 0, 16
@@ -4228,9 +4262,11 @@ Audio2_SFXMacro5F:
 	db $64, $17, 0, 8
 	db $24, $00
 	db $62
-	dw DesolationDAudio2_SongMacro16:
+	dw DesolationD
+Audio2_SongMacro16:
 	db $24, $0A
-	db $65Audio2_SongMacro1D:
+	db $65
+Audio2_SongMacro1D:
 	db $2B, $E8
 	db $2C, $E6
 	db $29, $E6
@@ -4244,7 +4280,8 @@ Audio2_SFXMacro5F:
 	db $30, $E6
 	db $2C, $E6
 	db $2F, $E8
-	db $65Audio2_SongMacro1E:
+	db $65
+Audio2_SongMacro1E:
 	db $26, $E8
 	db $29, $E6
 	db $24, $E6
@@ -4258,7 +4295,8 @@ Audio2_SFXMacro5F:
 	db $2C, $E6
 	db $29, $E6
 	db $2B, $E8
-	db $65Audio2_SongMacro1B:
+	db $65
+Audio2_SongMacro1B:
 	db $9F, $98
 	db $A0, $96
 	db $9D, $96
@@ -4272,7 +4310,8 @@ Audio2_SFXMacro5F:
 	db $A4, $96
 	db $A0, $96
 	db $A3, $98
-	db $65Audio2_SongMacro1C:
+	db $65
+Audio2_SongMacro1C:
 	db $9F, $94
 	db $9F, $92
 	db $9F, $94
@@ -4309,7 +4348,8 @@ Audio2_SFXMacro5F:
 	db $A3, $92
 	db $A3, $94
 	db $A3, $94
-	db $65Audio2_SongMacro17:
+	db $65
+Audio2_SongMacro17:
 	db $1E, $44
 	db $1E, $44
 	db $1E, $44
@@ -4318,7 +4358,8 @@ Audio2_SFXMacro5F:
 	db $1E, $44
 	db $1E, $44
 	db $1E, $44
-	db $65Audio2_SongMacro18:
+	db $65
+Audio2_SongMacro18:
 	db $1E, $44
 	db $1E, $44
 	db $1E, $44
@@ -4328,7 +4369,8 @@ Audio2_SFXMacro5F:
 	db $98, $F4
 	db $98, $F2
 	db $98, $F2
-	db $65Audio2_SongMacro19:
+	db $65
+Audio2_SongMacro19:
 	db $98, $E4
 	db $1E, $44
 	db $98, $F5
@@ -4348,7 +4390,8 @@ Audio2_SFXMacro5F:
 	db $98, $E2
 	db $1E, $42
 	db $98, $F5
-	db $98, $E2Audio2_SongMacro1A:
+	db $98, $E2
+Audio2_SongMacro1A:
 	db $98, $E4
 	db $1E, $44
 	db $98, $F5
@@ -4371,7 +4414,8 @@ Audio2_SFXMacro5F:
 	db $98, $F2
 	db $98, $F2
 	db $98, $F4
-	db $65Audio2_SongMacro22:
+	db $65
+Audio2_SongMacro22:
 	db $51, $12
 	db $51, $12
 	db $51, $12
@@ -4383,14 +4427,16 @@ Audio2_SFXMacro5F:
 	db $4F, $14
 	db $4A, $14
 	db $4A, $14
-	db $65Audio2_SongMacro20:
+	db $65
+Audio2_SongMacro20:
 	db $39, $E7
 	db $3A, $E2
 	db $3C, $E5
 	db $3A, $E4
 	db $39, $E4
 	db $36, $E4
-	db $65Audio2_SongMacro21:
+	db $65
+Audio2_SongMacro21:
 	db $C5, $A8
 	db $C5, $A4
 	db $C3, $A4
@@ -4425,7 +4471,8 @@ Audio2_SFXMacro5F:
 	db $C0, $A2
 	db $BE, $A4
 	db $BE, $A9
-	db $65Audio2_SongMacro1F:
+	db $65
+Audio2_SongMacro1F:
 	db $A1, $96
 	db $A1, $95
 	db $A2, $94
@@ -4458,7 +4505,8 @@ Audio2_SFXMacro5F:
 	db $A1, $92
 	db $A4, $94
 	db $A1, $94
-	db $65Audio2_SongMacro25:
+	db $65
+Audio2_SongMacro25:
 	db $48, $E2
 	db $47, $E4
 	db $48, $E2
@@ -4479,7 +4527,8 @@ Audio2_SFXMacro5F:
 	db $43, $E4
 	db $48, $E4
 	db $48, $E4
-	db $65Audio2_SongMacro27:
+	db $65
+Audio2_SongMacro27:
 	db $2B, $A6
 	db $2D, $A5
 	db $2E, $A2
@@ -4528,7 +4577,8 @@ Audio2_SFXMacro5F:
 	db $2B, $A2
 	db $32, $A6
 	db $26, $A6
-	db $65Audio2_SongMacro24:
+	db $65
+Audio2_SongMacro24:
 	db $45, $E2
 	db $44, $E4
 	db $45, $E2
@@ -4549,7 +4599,8 @@ Audio2_SFXMacro5F:
 	db $3F, $E4
 	db $44, $E4
 	db $44, $E4
-	db $65Audio2_SongMacro26:
+	db $65
+Audio2_SongMacro26:
 	db $4A, $12
 	db $49, $12
 	db $48, $12
@@ -4582,7 +4633,8 @@ Audio2_SFXMacro5F:
 	db $47, $12
 	db $48, $12
 	db $49, $12
-	db $65Audio2_SongMacro23:
+	db $65
+Audio2_SongMacro23:
 	db $A1, $94
 	db $A1, $94
 	db $A1, $94
@@ -4624,7 +4676,8 @@ Audio2_SFXMacro5F:
 	db $9B, $92
 	db $9F, $92
 	db $A0, $92
-	db $65Audio2_SongMacro2A:
+	db $65
+Audio2_SongMacro2A:
 	db $4F, $12
 	db $4F, $14
 	db $4F, $12
@@ -4645,7 +4698,8 @@ Audio2_SFXMacro5F:
 	db $48, $12
 	db $48, $14
 	db $48, $14
-	db $65Audio2_SongMacro29:
+	db $65
+Audio2_SongMacro29:
 	db $37, $E2
 	db $43, $E4
 	db $37, $E2
@@ -4666,7 +4720,8 @@ Audio2_SFXMacro5F:
 	db $45, $E4
 	db $43, $E4
 	db $41, $E4
-	db $65Audio2_SongMacro2B:
+	db $65
+Audio2_SongMacro2B:
 	db $37, $A6
 	db $39, $A5
 	db $3A, $A2
@@ -4708,7 +4763,8 @@ Audio2_SFXMacro5F:
 	db $37, $A6
 	db $35, $A8
 	db $30, $A8
-	db $65Audio2_SongMacro28:
+	db $65
+Audio2_SongMacro28:
 	db $9F, $92
 	db $9F, $94
 	db $9F, $92
@@ -4730,7 +4786,8 @@ Audio2_SFXMacro5F:
 	db $98, $94
 	db $9B, $92
 	db $9D, $92
-	db $65Audio2_SongMacro2C:
+	db $65
+Audio2_SongMacro2C:
 	db $37, $E4
 	db $37, $E4
 	db $37, $E4
@@ -4768,7 +4825,8 @@ Audio2_SFXMacro5F:
 	db $3B, $E4
 	db $3B, $E4
 	db $65
-LaboratoryA:
+
+LaboratoryA:
 	db $67, %11111111
 	db $69, 206
 	db $24, $0C
@@ -4789,7 +4847,8 @@ Audio2_SFXMacro5F:
 	db $64, $48, -29, 1
 	db $66, 1
 	db $62
-	dw LaboratoryALaboratoryB:
+	dw LaboratoryA
+LaboratoryB:
 	db $64, $2F, -29, 10
 	db $64, $2F, -29, 1
 	db $64, $2F, -26, 1
@@ -4813,7 +4872,8 @@ Audio2_SFXMacro5F:
 	db $64, $2F, -29, 5
 	db $64, $47, -29, 1
 	db $62
-	dw LaboratoryBLaboratoryC:
+	dw LaboratoryB
+LaboratoryC:
 	db $64, $2E, -17, 5
 	db $64, $31, -17, 3
 	db $64, $33, -41, 1
@@ -4827,7 +4887,8 @@ Audio2_SFXMacro5F:
 	db $64, $2E, -17, 2
 	db $64, $46, -17, 1
 	db $62
-	dw LaboratoryCLaboratoryD:
+	dw LaboratoryC
+LaboratoryD:
 	db $64, $2D, 0, 5
 	db $64, $2D, 0, 6
 	db $64, $2D, 0, 2
@@ -4841,7 +4902,8 @@ Audio2_SFXMacro5F:
 	db $64, $2D, 0, 2
 	db $64, $2D, 0, 2
 	db $62
-	dw LaboratoryDAudio2_SongMacro30:
+	dw LaboratoryD
+Audio2_SongMacro30:
 	db $43, $E8
 	db $3E, $E8
 	db $3F, $E9
@@ -4901,7 +4963,8 @@ Audio2_SFXMacro5F:
 	db $45, $E6
 	db $46, $E6
 	db $45, $EA
-	db $65Audio2_SongMacro2F:
+	db $65
+Audio2_SongMacro2F:
 	db $37, $DE
 	db $3A, $DE
 	db $3E, $DE
@@ -4914,7 +4977,8 @@ Audio2_SFXMacro5F:
 	db $3F, $DE
 	db $3E, $DE
 	db $3A, $DE
-	db $65Audio2_SongMacro2E:
+	db $65
+Audio2_SongMacro2E:
 	db $9F, $98
 	db $AB, $98
 	db $A9, $98
@@ -4923,7 +4987,8 @@ Audio2_SFXMacro5F:
 	db $A7, $98
 	db $A6, $98
 	db $9A, $98
-	db $65Audio2_SongMacro2D:
+	db $65
+Audio2_SongMacro2D:
 	db $98, $E6
 	db $27, $56
 	db $9A, $F6
@@ -4944,7 +5009,8 @@ Audio2_SFXMacro5F:
 	db $9A, $F4
 	db $9A, $F2
 	db $9A, $F2
-	db $65Audio2_SongMacro32:
+	db $65
+Audio2_SongMacro32:
 	db $C3, $A6
 	db $C6, $A6
 	db $CA, $A6
@@ -5035,7 +5101,8 @@ Audio2_SFXMacro5F:
 	db $BF, $A6
 	db $C2, $A8
 	db $C6, $A8
-	db $65Audio2_SongMacro31:
+	db $65
+Audio2_SongMacro31:
 	db $9F, $99
 	db $24, $04
 	db $A1, $92
@@ -5060,7 +5127,8 @@ Audio2_SFXMacro5F:
 	db $9E, $96
 	db $A2, $98
 	db $9B, $98
-	db $65Audio2_SongMacro34:
+	db $65
+Audio2_SongMacro34:
 	db $4A, $E2
 	db $48, $E2
 	db $4A, $E7
@@ -5078,7 +5146,8 @@ Audio2_SFXMacro5F:
 	db $3A, $E6
 	db $36, $E6
 	db $37, $E8
-	db $65Audio2_SongMacro33:
+	db $65
+Audio2_SongMacro33:
 	db $CA, $92
 	db $C8, $92
 	db $CA, $97
@@ -5096,7 +5165,8 @@ Audio2_SFXMacro5F:
 	db $BA, $96
 	db $B6, $96
 	db $B7, $98
-	db $65Audio2_SongMacro38:
+	db $65
+Audio2_SongMacro38:
 	db $24, $06
 	db $2A, $E8
 	db $30, $E8
@@ -5107,7 +5177,8 @@ Audio2_SFXMacro5F:
 	db $39, $E6
 	db $3B, $EB
 	db $24, $08
-	db $65Audio2_SongMacro37:
+	db $65
+Audio2_SongMacro37:
 	db $24, $08
 	db $2D, $E8
 	db $33, $E8
@@ -5115,12 +5186,14 @@ Audio2_SFXMacro5F:
 	db $37, $EA
 	db $37, $EB
 	db $24, $08
-	db $65Audio2_SongMacro36:
+	db $65
+Audio2_SongMacro36:
 	db $9E, $2C
 	db $9F, $2A
 	db $9F, $2B
 	db $24, $08
-	db $65Audio2_SongMacro35:
+	db $65
+Audio2_SongMacro35:
 	db $98, $E6
 	db $27, $56
 	db $9A, $F6
@@ -5145,7 +5218,8 @@ Audio2_SFXMacro5F:
 	db $9A, $F4
 	db $9A, $F2
 	db $9A, $F2
-	db $65Audio2_SongMacro3B:
+	db $65
+Audio2_SongMacro3B:
 	db $43, $E2
 	db $3E, $E2
 	db $45, $E2
@@ -5225,7 +5299,8 @@ Audio2_SFXMacro5F:
 	db $39, $E2
 	db $32, $E2
 	db $36, $E4
-	db $65Audio2_SongMacro3A:
+	db $65
+Audio2_SongMacro3A:
 	db $9F, $94
 	db $9F, $94
 	db $9F, $94
@@ -5235,7 +5310,8 @@ Audio2_SFXMacro5F:
 	db $9A, $92
 	db $9B, $94
 	db $9E, $94
-	db $65Audio2_SongMacro39:
+	db $65
+Audio2_SongMacro39:
 	db $1E, $42
 	db $1E, $42
 	db $1E, $42
@@ -5252,7 +5328,8 @@ Audio2_SFXMacro5F:
 	db $1E, $42
 	db $1E, $42
 	db $1E, $42
-	db $65Audio2_SongMacro3F:
+	db $65
+Audio2_SongMacro3F:
 	db $43, $E2
 	db $46, $E2
 	db $4B, $E2
@@ -5276,7 +5353,8 @@ Audio2_SFXMacro5F:
 	db $3F, $E4
 	db $48, $E4
 	db $4A, $E6
-	db $65Audio2_SongMacro3E:
+	db $65
+Audio2_SongMacro3E:
 	db $37, $D2
 	db $3A, $D2
 	db $3F, $D2
@@ -5300,7 +5378,8 @@ Audio2_SFXMacro5F:
 	db $33, $D4
 	db $43, $D4
 	db $42, $D6
-	db $65Audio2_SongMacro3D:
+	db $65
+Audio2_SongMacro3D:
 	db $9F, $94
 	db $AB, $94
 	db $A9, $94
@@ -5316,7 +5395,8 @@ Audio2_SFXMacro5F:
 	db $A7, $94
 	db $9B, $94
 	db $9A, $96
-	db $65Audio2_SongMacro3C:
+	db $65
+Audio2_SongMacro3C:
 	db $98, $E2
 	db $1E, $42
 	db $1E, $42
@@ -5332,7 +5412,8 @@ Audio2_SFXMacro5F:
 	db $9A, $F2
 	db $1E, $42
 	db $1E, $42
-	db $1E, $42Audio2_SongMacro40:
+	db $1E, $42
+Audio2_SongMacro40:
 	db $98, $E2
 	db $1E, $42
 	db $1E, $42
@@ -5348,22 +5429,26 @@ Audio2_SFXMacro5F:
 	db $9A, $F2
 	db $9A, $F2
 	db $9A, $F4
-	db $65Audio2_SongMacro44:
+	db $65
+Audio2_SongMacro44:
 	db $46, $EA
 	db $45, $EA
 	db $43, $EC
-	db $65Audio2_SongMacro43:
+	db $65
+Audio2_SongMacro43:
 	db $40, $EA
 	db $3E, $EA
 	db $3C, $E8
 	db $3B, $E6
 	db $39, $E6
 	db $3B, $EA
-	db $65Audio2_SongMacro42:
+	db $65
+Audio2_SongMacro42:
 	db $A5, $2A
 	db $A6, $2A
 	db $9F, $2C
-	db $65Audio2_SongMacro41:
+	db $65
+Audio2_SongMacro41:
 	db $27, $56
 	db $27, $58
 	db $27, $56
@@ -5376,7 +5461,8 @@ Audio2_SFXMacro5F:
 	db $27, $56
 	db $27, $56
 	db $27, $58
-	db $65Audio2_SongMacro45:
+	db $65
+Audio2_SongMacro45:
 	db $4A, $E2
 	db $48, $E2
 	db $4A, $EA
@@ -5387,7 +5473,8 @@ Audio2_SFXMacro5F:
 	db $43, $E6
 	db $42, $EA
 	db $43, $EA
-	db $65Audio2_SongMacro48:
+	db $65
+Audio2_SongMacro48:
 	db $CA, $A8
 	db $24, $0E
 	db $C8, $AE
@@ -5411,7 +5498,8 @@ Audio2_SFXMacro5F:
 	db $C6, $A6
 	db $C8, $A6
 	db $C3, $AA
-	db $65Audio2_SongMacro47:
+	db $65
+Audio2_SongMacro47:
 	db $33, $DE
 	db $37, $DE
 	db $3A, $DE
@@ -5448,7 +5536,8 @@ Audio2_SFXMacro5F:
 	db $3F, $DE
 	db $3E, $DE
 	db $3A, $DE
-	db $65Audio2_SongMacro46:
+	db $65
+Audio2_SongMacro46:
 	db $9F, $98
 	db $AB, $98
 	db $A9, $98
@@ -5466,7 +5555,8 @@ Audio2_SFXMacro5F:
 	db $AB, $98
 	db $9F, $98
 	db $65
-HappinessA:
+
+HappinessA:
 	db $67, %11111111
 	db $69, 199
 	db $64, $16, 0, 4
@@ -5482,7 +5572,8 @@ Audio2_SFXMacro5F:
 	db $64, $58, -29, 2
 	db $66, 1
 	db $62
-	dw HappinessAHappinessB:
+	dw HappinessA
+HappinessB:
 	db $64, $16, 0, 8
 	db $64, $4C, -29, 1
 	db $64, $50, -29, 1
@@ -5493,7 +5584,8 @@ Audio2_SFXMacro5F:
 	db $64, $57, -5, 3
 	db $64, $57, -5, 3
 	db $62
-	dw HappinessBHappinessC:
+	dw HappinessB
+HappinessC:
 	db $64, $4B, -29, 6
 	db $64, $4E, -29, 1
 	db $64, $4E, -22, 2
@@ -5527,7 +5619,8 @@ Audio2_SFXMacro5F:
 	db $64, $59, -29, 3
 	db $64, $59, -29, 3
 	db $62
-	dw HappinessCHappinessD:
+	dw HappinessC
+HappinessD:
 	db $64, $49, 0, 1
 	db $64, $4A, 0, 1
 	db $64, $49, 0, 3
@@ -5551,7 +5644,8 @@ Audio2_SFXMacro5F:
 	db $64, $49, 0, 5
 	db $64, $4A, 0, 1
 	db $62
-	dw HappinessDAudio2_SongMacro4D:
+	dw HappinessD
+Audio2_SongMacro4D:
 	db $4C, $14
 	db $48, $14
 	db $43, $14
@@ -5588,7 +5682,8 @@ Audio2_SFXMacro5F:
 	db $43, $14
 	db $4C, $14
 	db $48, $14
-	db $65Audio2_SongMacro4C:
+	db $65
+Audio2_SongMacro4C:
 	db $30, $D8
 	db $34, $D8
 	db $35, $D8
@@ -5597,7 +5692,8 @@ Audio2_SFXMacro5F:
 	db $35, $D8
 	db $37, $D8
 	db $34, $D8
-	db $65Audio2_SongMacro4B:
+	db $65
+Audio2_SongMacro4B:
 	db $A4, $96
 	db $B0, $95
 	db $AE, $94
@@ -5612,7 +5708,8 @@ Audio2_SFXMacro5F:
 	db $AB, $94
 	db $AE, $94
 	db $AF, $94
-	db $65Audio2_SongMacro49:
+	db $65
+Audio2_SongMacro49:
 	db $98, $E4
 	db $1E, $44
 	db $9A, $F4
@@ -5633,7 +5730,8 @@ Audio2_SFXMacro5F:
 	db $1E, $42
 	db $9A, $F4
 	db $98, $E4
-	db $65Audio2_SongMacro4A:
+	db $65
+Audio2_SongMacro4A:
 	db $98, $E4
 	db $1E, $44
 	db $9A, $F4
@@ -5655,7 +5753,8 @@ Audio2_SFXMacro5F:
 	db $9A, $F4
 	db $9A, $F2
 	db $9A, $F2
-	db $65Audio2_SongMacro51:
+	db $65
+Audio2_SongMacro51:
 	db $3C, $D2
 	db $37, $D2
 	db $3C, $D2
@@ -5701,7 +5800,8 @@ Audio2_SFXMacro5F:
 	db $3C, $D4
 	db $3B, $D4
 	db $3C, $DA
-	db $65Audio2_SongMacro50:
+	db $65
+Audio2_SongMacro50:
 	db $48, $14
 	db $4C, $14
 	db $4F, $14
@@ -5774,7 +5874,8 @@ Audio2_SFXMacro5F:
 	db $4C, $14
 	db $4F, $14
 	db $4C, $14
-	db $65Audio2_SongMacro4E:
+	db $65
+Audio2_SongMacro4E:
 	db $A4, $96
 	db $B0, $95
 	db $AD, $94
@@ -5784,7 +5885,8 @@ Audio2_SFXMacro5F:
 	db $A8, $92
 	db $A9, $94
 	db $A6, $92
-	db $65Audio2_SongMacro4F:
+	db $65
+Audio2_SongMacro4F:
 	db $A4, $94
 	db $B0, $94
 	db $AD, $94
@@ -5804,7 +5906,8 @@ Audio2_SFXMacro5F:
 	db $A9, $92
 	db $A8, $92
 	db $A6, $94
-	db $65Audio2_SongMacro52:
+	db $65
+Audio2_SongMacro52:
 	db $37, $D4
 	db $3B, $D4
 	db $3E, $D4
@@ -5851,7 +5954,8 @@ Audio2_SFXMacro5F:
 	db $36, $D4
 	db $39, $D4
 	db $37, $DA
-	db $65Audio2_SongMacro53:
+	db $65
+Audio2_SongMacro53:
 	db $43, $D8
 	db $47, $D8
 	db $48, $DA
@@ -5864,7 +5968,8 @@ Audio2_SFXMacro5F:
 	db $4A, $D8
 	db $48, $D8
 	db $47, $DA
-	db $65Audio2_SongMacro56:
+	db $65
+Audio2_SongMacro56:
 	db $43, $D4
 	db $43, $D2
 	db $43, $D2
@@ -5905,7 +6010,8 @@ Audio2_SFXMacro5F:
 	db $43, $D4
 	db $43, $D4
 	db $43, $D4
-	db $65Audio2_SongMacro55:
+	db $65
+Audio2_SongMacro55:
 	db $3C, $D4
 	db $3C, $D2
 	db $3C, $D2
@@ -5946,7 +6052,8 @@ Audio2_SFXMacro5F:
 	db $3C, $D4
 	db $3C, $D4
 	db $3C, $D4
-	db $65Audio2_SongMacro54:
+	db $65
+Audio2_SongMacro54:
 	db $A4, $94
 	db $A6, $92
 	db $A7, $92
@@ -5957,12 +6064,14 @@ Audio2_SFXMacro5F:
 	db $AB, $94
 	db $A8, $94
 	db $A6, $94
-	db $65Audio2_SongMacro57:
+	db $65
+Audio2_SongMacro57:
 	db $95, $6A
 	db $9A, $6A
 	db $93, $6A
 	db $98, $6A
-	db $65Audio2_SongMacro58:
+	db $65
+Audio2_SongMacro58:
 	db $39, $D2
 	db $3D, $D2
 	db $40, $D2
@@ -5987,7 +6096,8 @@ Audio2_SFXMacro5F:
 	db $40, $D2
 	db $3E, $D2
 	db $3C, $D9
-	db $65Audio2_SongMacro59:
+	db $65
+Audio2_SongMacro59:
 	db $A1, $94
 	db $A1, $94
 	db $A5, $94
@@ -6025,7 +6135,8 @@ Audio2_SFXMacro5F:
 	db $A8, $94
 	db $AB, $94
 	db $65
-BedroomA:
+
+BedroomA:
 	db $67, %11111111
 	db $69, 199
 	db $64, $5A, -29, 2
@@ -6040,7 +6151,8 @@ Audio2_SFXMacro5F:
 	db $24, $02
 	db $66, 1
 	db $62
-	dw BedroomABedroomB:
+	dw BedroomA
+BedroomB:
 	db $24, $05
 	db $64, $5A, -29, 2
 	db $64, $5C, -29, 2
@@ -6052,7 +6164,8 @@ Audio2_SFXMacro5F:
 	db $20, $29
 	db $24, $02
 	db $62
-	dw BedroomBBedroomC:
+	dw BedroomB
+BedroomC:
 	db $64, $5B, -17, 2
 	db $64, $5D, -17, 2
 	db $64, $5F, -17, 2
@@ -6064,20 +6177,23 @@ Audio2_SFXMacro5F:
 	db $24, $05
 	db $24, $02
 	db $62
-	dw BedroomCBedroomD:
+	dw BedroomC
+BedroomD:
 	db $64, $64, 0, 96
 	db $24, $09
 	db $24, $05
 	db $24, $02
 	db $62
-	dw BedroomDAudio2_SongMacro64:
+	dw BedroomD
+Audio2_SongMacro64:
 	db $98, $E4
  	db $2A, $44
  	db $2A, $44
  	db $2A, $44
  	db $98, $E4
  	db $2A, $44
-	db $65Audio2_SongMacro5A:
+	db $65
+Audio2_SongMacro5A:
 	db $45, $24
  	db $44, $24
  	db $43, $24
@@ -6107,7 +6223,8 @@ Audio2_SFXMacro5F:
  	db $3B, $24
  	db $39, $28
  	db $3B, $29
-	db $65Audio2_SongMacro5B:
+	db $65
+Audio2_SongMacro5B:
 	db $A1, $96
  	db $AD, $96
  	db $AD, $96
@@ -6132,7 +6249,8 @@ Audio2_SFXMacro5F:
  	db $9C, $96
  	db $A8, $96
  	db $A8, $96
-	db $65Audio2_SongMacro5C:
+	db $65
+Audio2_SongMacro5C:
 	db $4A, $24
  	db $47, $24
  	db $44, $24
@@ -6168,7 +6286,8 @@ Audio2_SFXMacro5F:
  	db $47, $26
  	db $44, $26
  	db $40, $26
-	db $65Audio2_SongMacro5D:
+	db $65
+Audio2_SongMacro5D:
 	db $9C, $96
  	db $A8, $96
  	db $A8, $96
@@ -6193,7 +6312,8 @@ Audio2_SFXMacro5F:
  	db $9C, $96
  	db $A8, $96
  	db $A8, $96
-	db $65Audio2_SongMacro5E:
+	db $65
+Audio2_SongMacro5E:
 	db $40, $24
  	db $3E, $24
  	db $3C, $26
@@ -6228,7 +6348,8 @@ Audio2_SFXMacro5F:
  	db $47, $26
  	db $44, $26
  	db $40, $26
-	db $65Audio2_SongMacro5F:
+	db $65
+Audio2_SongMacro5F:
 	db $A1, $96
  	db $AD, $96
  	db $AD, $96
@@ -6253,7 +6374,8 @@ Audio2_SFXMacro5F:
  	db $9C, $96
  	db $A8, $96
  	db $A8, $96
-	db $65Audio2_SongMacro60:
+	db $65
+Audio2_SongMacro60:
 	db $41, $24
  	db $3E, $24
  	db $41, $26
@@ -6285,7 +6407,8 @@ Audio2_SFXMacro5F:
  	db $48, $24
  	db $4A, $24
  	db $4C, $29
-	db $65Audio2_SongMacro61:
+	db $65
+Audio2_SongMacro61:
 	db $A6, $96
  	db $B2, $96
  	db $B2, $96
@@ -6310,7 +6433,8 @@ Audio2_SFXMacro5F:
  	db $A8, $96
  	db $B4, $96
  	db $B4, $96
-	db $65Audio2_SongMacro62:
+	db $65
+Audio2_SongMacro62:
 	db $43, $24
  	db $47, $24
  	db $4A, $24
@@ -6364,7 +6488,8 @@ Audio2_SFXMacro5F:
  	db $53, $26
  	db $54, $26
  	db $56, $29
-	db $65Audio2_SongMacro63:
+	db $65
+Audio2_SongMacro63:
 	db $AB, $96
  	db $B7, $96
  	db $B7, $96
@@ -6414,29 +6539,34 @@ Audio2_SFXMacro5F:
  	db $B4, $96
  	db $B4, $96
 	db $65
-Boss1A:
+
+Boss1A:
 	db $67, %11111111
 	db $69, 216
 	db $64, $16, 0, 12
 	db $64, $65, -26, 1
 	db $66, 1
 	db $62
-	dw Boss1ABoss1B:
+	dw Boss1A
+Boss1B:
 	db $64, $66, -26, 4
 	db $64, $66, -21, 2
 	db $64, $66, -26, 2
 	db $64, $66, -21, 4
 	db $62
-	dw Boss1BBoss1C:
+	dw Boss1B
+Boss1C:
 	db $64, $67, -26, 4
 	db $64, $67, -21, 2
 	db $64, $67, -26, 2
 	db $64, $67, -21, 4
 	db $62
-	dw Boss1CBoss1D:
+	dw Boss1C
+Boss1D:
 	db $64, $68, 0, 12
 	db $62
-	dw Boss1DAudio2_SongMacro65:
+	dw Boss1D
+Audio2_SongMacro65:
 	db $40, $D4
 	db $45, $D4
 	db $48, $D4
@@ -6476,7 +6606,8 @@ Audio2_SFXMacro5F:
 	db $43, $D4
 	db $45, $D6
 	db $44, $DC
-	db $65Audio2_SongMacro66:
+	db $65
+Audio2_SongMacro66:
 	db $2D, $B4
 	db $2D, $B4
 	db $2D, $B4
@@ -6493,7 +6624,8 @@ Audio2_SFXMacro5F:
 	db $2E, $B4
 	db $2B, $B4
 	db $2B, $B4
-	db $65Audio2_SongMacro67:
+	db $65
+Audio2_SongMacro67:
 	db $A1, $16
 	db $24, $04
 	db $A1, $14
@@ -6508,7 +6640,8 @@ Audio2_SFXMacro5F:
 	db $A1, $14
 	db $24, $04
 	db $A1, $14
-	db $65Audio2_SongMacro68:
+	db $65
+Audio2_SongMacro68:
 	db $98, $E6
 	db $98, $F4
 	db $98, $E6
@@ -6522,29 +6655,34 @@ Audio2_SFXMacro5F:
 	db $98, $F4
 	db $98, $F4
 	db $65
-Boss2A:
+
+Boss2A:
 	db $67, %11111111
 	db $69, 220
 	db $64, $16, 0, 8
 	db $64, $69, -29, 1
 	db $66, 1
 	db $62
-	dw Boss2ABoss2B:
+	dw Boss2A
+Boss2B:
 	db $64, $6A, -29, 1
 	db $64, $6A, -26, 1
 	db $64, $6A, -33, 1
 	db $64, $6A, -27, 1
 	db $62
-	dw Boss2BBoss2C:
+	dw Boss2B
+Boss2C:
 	db $64, $6B, -17, $01
 	db $64, $6B, -14, $01
 	db $64, $6B, -21, $01
 	db $64, $6B, -15, $01
 	db $62
-	dw Boss2CBoss2D:
+	dw Boss2C
+Boss2D:
 	db $64, $6C, 0, 12
 	db $62
-	dw Boss2DAudio2_SongMacro69:
+	dw Boss2D
+Audio2_SongMacro69:
 	db $45, $27
 	db $40, $24
 	db $3C, $24
@@ -6596,7 +6734,8 @@ Audio2_SFXMacro5F:
 	db $47, $29
 	db $4A, $26
 	db $4E, $2A
-	db $65Audio2_SongMacro6A:
+	db $65
+Audio2_SongMacro6A:
 	db $2D, $12
 	db $2F, $12
 	db $30, $12
@@ -6629,7 +6768,8 @@ Audio2_SFXMacro5F:
 	db $32, $12
 	db $30, $12
 	db $2F, $12
-	db $65Audio2_SongMacro6B:
+	db $65
+Audio2_SongMacro6B:
 	db $A1, $94
 	db $A1, $94
 	db $AD, $94
@@ -6646,7 +6786,8 @@ Audio2_SFXMacro5F:
 	db $A1, $94
 	db $AD, $94
 	db $A1, $94
-	db $65Audio2_SongMacro6C:
+	db $65
+Audio2_SongMacro6C:
 	db $98, $E4
 	db $98, $E4
 	db $98, $F4
@@ -6666,26 +6807,31 @@ Audio2_SFXMacro5F:
 	db $98, $F4
 	db $98, $E4
 	db $65
-Boss3A:
+
+Boss3A:
 	db $67, %11111111
 	db $69, 220
 	db $64, $6D, -16, 6
 	db $64, $6D, -11, 4
 	db $66, 1
 	db $62
-	dw Boss3ABoss3B:
+	dw Boss3A
+Boss3B:
 	db $64, $6E, -28, 6
 	db $64, $6E, -23, 4
 	db $62
-	dw Boss3BBoss3C:
+	dw Boss3B
+Boss3C:
 	db $64, $6F, -28, 2
 	db $64, $70, -16, 1
 	db $64, $71, -16, 1
 	db $62
-	dw Boss3CBoss3D:
+	dw Boss3C
+Boss3D:
 	db $64, $72, $00, $0A
 	db $62
-	dw Boss3DAudio2_SongMacro6D:
+	dw Boss3D
+Audio2_SongMacro6D:
 	db $3C, $1D
 	db $3E, $1D
 	db $3F, $1D
@@ -6710,7 +6856,8 @@ Audio2_SFXMacro5F:
 	db $42, $1D
 	db $44, $1D
 	db $46, $1D
-	db $65Audio2_SongMacro6E:
+	db $65
+Audio2_SongMacro6E:
 	db $30, $2E
 	db $30, $2D
 	db $30, $2E
@@ -6723,12 +6870,14 @@ Audio2_SFXMacro5F:
 	db $33, $2D
 	db $3A, $26
 	db $3A, $26
-	db $65Audio2_SongMacro6F:
+	db $65
+Audio2_SongMacro6F:
 	db $A4, $18
 	db $A7, $18
 	db $AE, $18
 	db $AA, $18
-	db $65Audio2_SongMacro70:
+	db $65
+Audio2_SongMacro70:
 	db $A4, $17
 	db $9F, $17
 	db $98, $16
@@ -6754,7 +6903,8 @@ Audio2_SFXMacro5F:
 	db $A6, $14
 	db $A7, $16
 	db $9B, $1A
-	db $65Audio2_SongMacro71:
+	db $65
+Audio2_SongMacro71:
 	db $9D, $17
 	db $9F, $14
 	db $A0, $16
@@ -6782,7 +6932,8 @@ Audio2_SFXMacro5F:
 	db $9D, $16
 	db $A0, $16
 	db $A3, $1A
-	db $65Audio2_SongMacro72:
+	db $65
+Audio2_SongMacro72:
 	db $98, $EE
 	db $98, $ED
 	db $9A, $FE
@@ -6797,7 +6948,8 @@ Audio2_SFXMacro5F:
 	db $9A, $FD
 	db $9A, $FD
 	db $65
-Boss4A:
+
+Boss4A:
 	db $67, %11111111
 	db $69, 222
 	db $64, $16, 0, 2
@@ -6807,18 +6959,22 @@ Audio2_SFXMacro5F:
 	db $64, $16, 0, 2
 	db $66, 1
 	db $62
-	dw Boss4ABoss4B:
+	dw Boss4A
+Boss4B:
 	db $64, $75, -28, 6
 	db $64, $75, -23, 6
 	db $62
-	dw Boss4BBoss4C:
+	dw Boss4B
+Boss4C:
 	db $64, $76, -16, 6
 	db $64, $76, -11, 6
 	db $62
-	dw Boss4CBoss4D:
+	dw Boss4C
+Boss4D:
 	db $64, $77, $00, $0A
 	db $62
-	dw Boss4DAudio2_SongMacro73:
+	dw Boss4D
+Audio2_SongMacro73:
 	db $4F, $26
 	db $4A, $26
 	db $4B, $24
@@ -6864,7 +7020,8 @@ Audio2_SFXMacro5F:
 	db $43, $26
 	db $43, $24
 	db $43, $26
-	db $65Audio2_SongMacro74:
+	db $65
+Audio2_SongMacro74:
 	db $4F, $26
 	db $4B, $24
 	db $4E, $26
@@ -6906,7 +7063,8 @@ Audio2_SFXMacro5F:
 	db $3F, $24
 	db $3E, $24
 	db $3C, $28
-	db $65Audio2_SongMacro75:
+	db $65
+Audio2_SongMacro75:
 	db $2B, $F4
 	db $2B, $F4
 	db $2B, $F4
@@ -6923,7 +7081,8 @@ Audio2_SFXMacro5F:
 	db $2A, $F4
 	db $2D, $F4
 	db $2D, $F4
-	db $65Audio2_SongMacro76:
+	db $65
+Audio2_SongMacro76:
 	db $9F, $96
 	db $A2, $96
 	db $9E, $96
@@ -6932,7 +7091,8 @@ Audio2_SFXMacro5F:
 	db $A2, $96
 	db $9E, $96
 	db $A1, $96
-	db $65Audio2_SongMacro77:
+	db $65
+Audio2_SongMacro77:
 	db $98, $E4
 	db $98, $E4
 	db $98, $F4
@@ -6950,7 +7110,8 @@ Audio2_SFXMacro5F:
 	db $98, $F4
 	db $98, $E4
 	db $65
-Audio2_SongTab:
+
+Audio2_SongTab:
 .Empty
 	dw Empty2A, Empty2B, Empty2C, Empty2D, Audio2_NoteLens1
 .SciFi
@@ -6971,9 +7132,11 @@ Audio2_SFXMacro5F:
 	dw Boss3A, Boss3B, Boss3C, Boss3D, Audio2_NoteLens1
 .Boss4
 	dw Boss4A, Boss4B, Boss4C, Boss4D, Audio2_NoteLens1
-	Audio2_NoteLens1:
+	
+Audio2_NoteLens1:
 	db 3, 4, 6, 9, 12, 18, 24, 36, 48, 72, 96, 144, 192, 8, 16, 32
-	Audio2_InsTab:
+	
+Audio2_InsTab:
 	dw Audio2_InsRest
 	dw Audio2_InsBeep
 	dw Audio2_InsArpSlow
@@ -7006,7 +7169,8 @@ Audio2_SFXMacro5F:
 	dw Audio2_InsSlideDown2
 	dw Audio2_InsBassDrum2
 	dw Audio2_InsSnare2
-	Audio2_InsRest:
+	
+Audio2_InsRest:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7024,7 +7188,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsBeep:
+	dw 0
+Audio2_InsBeep:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7042,7 +7207,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsArpSlow:
+	dw 0
+Audio2_InsArpSlow:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7060,7 +7226,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq0AAudio2_InsHiHatO:
+	dw Audio2_ModSeq0A
+Audio2_InsHiHatO:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7078,7 +7245,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsHiHatC:
+	dw 0
+Audio2_InsHiHatC:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7096,7 +7264,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsWeird1:
+	dw 0
+Audio2_InsWeird1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7114,7 +7283,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsWeird2:
+	dw 0
+Audio2_InsWeird2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7132,7 +7302,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsSciFi1:
+	dw 0
+Audio2_InsSciFi1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7150,7 +7321,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq00Audio2_InsSciFi2:
+	dw Audio2_ModSeq00
+Audio2_InsSciFi2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7168,7 +7340,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq00Audio2_InsPlain1:
+	dw Audio2_ModSeq00
+Audio2_InsPlain1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7186,7 +7359,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsArpFast:
+	dw 0
+Audio2_InsArpFast:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7204,7 +7378,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq02Audio2_InsArpMed:
+	dw Audio2_ModSeq02
+Audio2_InsArpMed:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7222,7 +7397,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq03Audio2_InsPiano1:
+	dw Audio2_ModSeq03
+Audio2_InsPiano1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7240,7 +7416,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsBell1:
+	dw 0
+Audio2_InsBell1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7258,7 +7435,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsPiano2:
+	dw 0
+Audio2_InsPiano2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7276,7 +7454,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsPiano3:
+	dw 0
+Audio2_InsPiano3:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7294,7 +7473,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsNoise:
+	dw 0
+Audio2_InsNoise:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7312,7 +7492,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsSweep1:
+	dw 0
+Audio2_InsSweep1:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7330,7 +7511,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsSweep2:
+	dw 0
+Audio2_InsSweep2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7348,7 +7530,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsArp7:
+	dw 0
+Audio2_InsArp7:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7366,7 +7549,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq04Audio2_InsArp12:
+	dw Audio2_ModSeq04
+Audio2_InsArp12:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7384,7 +7568,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq05Audio2_InsArp16:
+	dw Audio2_ModSeq05
+Audio2_InsArp16:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7402,7 +7587,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq06Audio2_InsScale:
+	dw Audio2_ModSeq06
+Audio2_InsScale:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7420,7 +7606,10 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq07Audio2_InsDoNotUse1:Audio2_InsDoNotUse2:Audio2_InsSweep3:
+	dw Audio2_ModSeq07
+Audio2_InsDoNotUse1:
+Audio2_InsDoNotUse2:
+Audio2_InsSweep3:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7438,7 +7627,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsArpTrem:
+	dw 0
+Audio2_InsArpTrem:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7456,7 +7646,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq08Audio2_InsBell2:
+	dw Audio2_ModSeq08
+Audio2_InsBell2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7474,7 +7665,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsSlideDown1:
+	dw 0
+Audio2_InsSlideDown1:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7492,7 +7684,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq09Audio2_InsSlideDown2:
+	dw Audio2_ModSeq09
+Audio2_InsSlideDown2:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7510,7 +7703,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 1
 	;Pitch mod ptr
-	dw Audio2_ModSeq09Audio2_InsBassDrum2:
+	dw Audio2_ModSeq09
+Audio2_InsBassDrum2:
 	;Period ctrl
 	db $C0
 	;Duty
@@ -7528,7 +7722,8 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_InsSnare2:
+	dw 0
+Audio2_InsSnare2:
 	;Period ctrl
 	db $80
 	;Duty
@@ -7546,12 +7741,14 @@ Audio2_SFXMacro5F:
 	;Pitch mod delay
 	db 0
 	;Pitch mod ptr
-	dw 0Audio2_EnvSeq00:
+	dw 0
+Audio2_EnvSeq00:
 	db $F0, 1
 	db $00, 1
 	db $40, 1
 	db $00, 1
-	db $FFAudio2_EnvSeq01:
+	db $FF
+Audio2_EnvSeq01:
 	db $60, 3
 	db $40, 10
 	db $50, 20
@@ -7564,53 +7761,61 @@ Audio2_SFXMacro5F:
 	db $00, 6
 	db $20, 20
 	db $00, 6
-	db $FFAudio2_EnvSeq02:
+	db $FF
+Audio2_EnvSeq02:
 	db $70, 2
 	db $50, 4
 	db $30, 8
 	db $20, 8
 	db $10, 8
 	db $00, 1
-	db $FFAudio2_EnvSeq03:
+	db $FF
+Audio2_EnvSeq03:
 	db $20, 8
 	db $50, 8
 	db $90, 4
 	db $40, 64
 	db $20, 32
 	db $00, 1
-	db $FFAudio2_EnvSeq04:
+	db $FF
+Audio2_EnvSeq04:
 	db $90, 2
 	db $50, 4
 	db $20, 4
 	db $10, 4
 	db $00, 1
-	db $FFAudio2_EnvSeq05:
+	db $FF
+Audio2_EnvSeq05:
 	db $90, 1
 	db $40, 1
 	db $00, 2
 	db $10, 1
 	db $00, 1
-	db $FFAudio2_EnvSeq06:
+	db $FF
+Audio2_EnvSeq06:
 	db $C0, 1
 	db $50, 1
 	db $40, 1
 	db $30, 1
 	db $20, 1
 	db $00, 1
-	db $FFAudio2_EnvSeq07:
+	db $FF
+Audio2_EnvSeq07:
 	db $90, 1
 	db $80, 3
 	db $60, 60
 	db $10, 60
 	db $00, 1
-	db $FFAudio2_EnvSeq08:
+	db $FF
+Audio2_EnvSeq08:
 	db $90, 2
 	db $70, 1
 	db $50, 20
 	db $30, 60
 	db $10, 60
 	db $00, 1
-	db $FFAudio2_EnvSeq09:
+	db $FF
+Audio2_EnvSeq09:
 	db $A0, 2
 	db $80, 4
 	db $70, 40
@@ -7620,21 +7825,24 @@ Audio2_SFXMacro5F:
 	db $20, 40
 	db $10, 40
 	db $00, 1
-	db $FFAudio2_EnvSeq0A:
+	db $FF
+Audio2_EnvSeq0A:
 	db $90, 1
 	db $70, 2
 	db $40, 30
 	db $20, 60
 	db $10, 60
 	db $00, 1
-	db $FFAudio2_EnvSeq0B:
+	db $FF
+Audio2_EnvSeq0B:
 	db $90, 5
 	db $60, 200
 	db $40, 200
 	db $20, 200
 	db $10, 60
 	db $00, 1
-	db $FFAudio2_EnvSeq0C:
+	db $FF
+Audio2_EnvSeq0C:
 	db $90, 2
 	db $70, 4
 	db $60, 40
@@ -7642,34 +7850,40 @@ Audio2_SFXMacro5F:
 	db $20, 40
 	db $10, 80
 	db $00, 1
-	db $FFAudio2_EnvSeq0D:
+	db $FF
+Audio2_EnvSeq0D:
 	db $20, 4
 	db $40, 30
 	db $60, 240
 	db $00, 1
-	db $FFAudio2_EnvSeq0E:
+	db $FF
+Audio2_EnvSeq0E:
 	db $20, 6
 	db $40, 20
 	db $60, 50
 	db $00, 1
-	db $FFAudio2_EnvSeq0F:
+	db $FF
+Audio2_EnvSeq0F:
 	db $20, 5
 	db $40, 200
 	db $40, 200
 	db $60, 240
 	db $60, 240
 	db $00, 1
-	db $FFAudio2_EnvSeq10:
+	db $FF
+Audio2_EnvSeq10:
 	db $20, 5
 	db $40, 5
 	db $60, 100
 	db $00, 1
-	db $FFAudio2_EnvSeq11:
+	db $FF
+Audio2_EnvSeq11:
 	db $20, 5
 	db $40, 200
 	db $40, 100
 	db $60, 40
-	db $FFAudio2_EnvSeq12:
+	db $FF
+Audio2_EnvSeq12:
 	db $90, 2
 	db $80, 1
 	db $60, 60
@@ -7678,13 +7892,15 @@ Audio2_SFXMacro5F:
 	db $20, 40
 	db $10, 40
 	db $00, 1
-	db $FFAudio2_EnvSeq13:
+	db $FF
+Audio2_EnvSeq13:
 	db $80, 1
 	db $40, 58
 	db $30, 50
 	db $10, 1
 	db $00, 1
-	db $FFAudio2_EnvSeq14:
+	db $FF
+Audio2_EnvSeq14:
 	db $20, 5
 	db $40, 5
 	db $50, 5
@@ -7692,12 +7908,14 @@ Audio2_SFXMacro5F:
 	db $70, 200
 	db $40, 200
 	db $00, 1
-	db $FFAudio2_EnvSeq15:
+	db $FF
+Audio2_EnvSeq15:
 	db $C0, 1
 	db $00, 1
 	db $20, 1
 	db $00, 1
-	db $FFAudio2_EnvSeq16:
+	db $FF
+Audio2_EnvSeq16:
 	db $A0, 1
 	db $50, 1
 	db $34, 1
@@ -7705,9 +7923,11 @@ Audio2_SFXMacro5F:
 	db $10, 2
 	db $10, 5
 	db $00, 1
-	db $FFAudio2_VibSeq00:
+	db $FF
+Audio2_VibSeq00:
 	db 96, 200
-	db $7EAudio2_VibSeq01:
+	db $7E
+Audio2_VibSeq01:
 	db 55, 2
 	db 100, 2
 	db 34, 1
@@ -7724,12 +7944,15 @@ Audio2_SFXMacro5F:
 	db 34, 1
 	db 55, 1
 	db 34, 16
-	db $7EAudio2_VibSeq02:
+	db $7E
+Audio2_VibSeq02:
 	db 18, 200
-	db $7EAudio2_VibSeq03:
+	db $7E
+Audio2_VibSeq03:
 	db 34, 1
 	db 16, 200
-	db $7EAudio2_VibSeq04:
+	db $7E
+Audio2_VibSeq04:
 	db 3, 3
 	db -3, 3
 	db -3, 3
@@ -7743,25 +7966,29 @@ Audio2_SFXMacro5F:
 	db -3, 2
 	db 3, 3
 	db $7D
-	dw Audio2_VibSeq04Audio2_VibSeq05:
+	dw Audio2_VibSeq04
+Audio2_VibSeq05:
 	db 1, 2
 	db -1, 2
 	db 1, 2
 	db -1, 2
 	db $7D
-	dw Audio2_VibSeq04Audio2_VibSeq06:
+	dw Audio2_VibSeq04
+Audio2_VibSeq06:
 	db 6, 2
 	db -6, 2
 	db -6, 2
 	db 6, 2
 	db $7D
-	dw Audio2_VibSeq06Audio2_VibSeq07:
+	dw Audio2_VibSeq06
+Audio2_VibSeq07:
 	db -3, 2
 	db 3, 2
 	db 3, 2
 	db -3, 2
 	db $7D
-	dw Audio2_VibSeq07Audio2_VibSeq08:
+	dw Audio2_VibSeq07
+Audio2_VibSeq08:
 	db 13, 3
 	db -13, 3
 	db -13, 3
@@ -7775,7 +8002,8 @@ Audio2_SFXMacro5F:
 	db -13, 3
 	db 13, 3
 	db $7D
-	dw Audio2_VibSeq04Audio2_ModSeq00:
+	dw Audio2_VibSeq04
+Audio2_ModSeq00:
 	db 3, 36
 	db 1, 0
 	db 3, 35
@@ -7825,14 +8053,16 @@ Audio2_SFXMacro5F:
 	db 3, 12
 	db 1, 0
 	db $FF
-	dw Audio2_ModSeq00Audio2_ModSeq01:
+	dw Audio2_ModSeq00
+Audio2_ModSeq01:
 	db 2, 0
 	db 1, 1
 	db 1, 2
 	db 1, 3
 	db 200, 3
 	db $FF
-	dw Audio2_ModSeq01Audio2_ModSeq02:
+	dw Audio2_ModSeq01
+Audio2_ModSeq02:
 	db 3, 12
 	db 3, 0
 	db 3, 12
@@ -7840,7 +8070,8 @@ Audio2_SFXMacro5F:
 	db 3, 12
 	db 3, 0
 	db $FF
-	dw Audio2_ModSeq02Audio2_ModSeq03:
+	dw Audio2_ModSeq02
+Audio2_ModSeq03:
 	db 4, 12
 	db 4, 0
 	db 4, 12
@@ -7848,7 +8079,8 @@ Audio2_SFXMacro5F:
 	db 4, 12
 	db 4, 0
 	db $FF
-	dw Audio2_ModSeq03Audio2_ModSeq04:
+	dw Audio2_ModSeq03
+Audio2_ModSeq04:
 	db 1, 0
 	db 1, 4
 	db 1, 7
@@ -7856,7 +8088,8 @@ Audio2_SFXMacro5F:
 	db 1, 4
 	db 1, 7
 	db $FF
-	dw Audio2_ModSeq04Audio2_ModSeq05:
+	dw Audio2_ModSeq04
+Audio2_ModSeq05:
 	db 1, 4
 	db 1, 7
 	db 1, 12
@@ -7864,7 +8097,8 @@ Audio2_SFXMacro5F:
 	db 1, 7
 	db 1, 12
 	db $FF
-	dw Audio2_ModSeq05Audio2_ModSeq06:
+	dw Audio2_ModSeq05
+Audio2_ModSeq06:
 	db 1, 7
 	db 1, 12
 	db 1, 16
@@ -7872,7 +8106,8 @@ Audio2_SFXMacro5F:
 	db 1, 12
 	db 1, 16
 	db $FF
-	dw Audio2_ModSeq06Audio2_ModSeq07:
+	dw Audio2_ModSeq06
+Audio2_ModSeq07:
 	db 6, 0
 	db 6, 4
 	db 6, 7
@@ -7890,7 +8125,8 @@ Audio2_SFXMacro5F:
 	db 6, 7
 	db 6, 4
 	db $FF
-	dw Audio2_ModSeq07Audio2_ModSeq08:
+	dw Audio2_ModSeq07
+Audio2_ModSeq08:
 	db 2, 12
 	db 1, 0
 	db 1, 24
@@ -7898,7 +8134,8 @@ Audio2_SFXMacro5F:
 	db 2, 12
 	db 2, 0
 	db $FF
-	dw Audio2_ModSeq08Audio2_ModSeq09:
+	dw Audio2_ModSeq08
+Audio2_ModSeq09:
 	db 12, 0
 	db 3, -1
 	db 3, -2
@@ -7925,7 +8162,8 @@ Audio2_SFXMacro5F:
 	db 3, -23
 	db 200, -24
 	db $FF
-	dw Audio2_ModSeq09Audio2_ModSeq0A:
+	dw Audio2_ModSeq09
+Audio2_ModSeq0A:
 	db 5, 12
 	db 5, 0
 	db 5, 12
@@ -7934,7 +8172,8 @@ Audio2_SFXMacro5F:
 	db 5, 0
 	db 5, 12
 	db $FF
-	dw Audio2_ModSeq0AAudio2_SongMacroTab:
+	dw Audio2_ModSeq0A
+Audio2_SongMacroTab:
 	dw Audio2_SongMacro00
 	dw Audio2_SongMacro01
 	dw Audio2_SongMacro02

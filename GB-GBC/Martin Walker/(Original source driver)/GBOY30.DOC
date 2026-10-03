@@ -1,0 +1,96 @@
+-------------------------------------------------------------------------------
+NINTENDO GAMEBOY MUSIC DRIVER - (c) Martin Walker 1992/1993/1994
+-------------------------------------------------------------------------------
+
+DEVELOPERS MANUAL - UPDATED:
+
+25/07/94 - Driver updated to version 3.0/ RAM usage 226 bytes
+27/05/93 - Driver updated to version 2.4
+
+
+
+
+------------------------------------------------------------------------------
+DEMOING THE MUSIC/ EFFECTS
+------------------------------------------------------------------------------
+
+To help test the music files, a file named 'GBOYMUS.ROM' may be supplied.
+You can download this to the GAMEBOY at address 0000h for a demo of the music
+and effects. The GAMEBOY keys to use are as follows:
+
+UP/DOWN           Increment/Decrement current call number.
+A                 Select Music call (default).
+B                 Select Effect call.
+SELECT            Stop music/effects.
+START             Start music/effect.
+
+
+
+------------------------------------------------------------------------------
+OVERVIEW & CONTENTS OF DRIVER FILE
+-------------------------------------------------------------------------------
+
+The players and self contained music/effect data are in the  form of pure
+object code with no headers (for minimum size and maximum portability).
+They  are assembled to any address specified by the customer.
+
+
+
+Each  driver  has its calls at the beginning,  as follows:
+
+START OF ROM (CARTRIDGE) DATA:
+INITSND        equ  00
+INTSND         equ  03
+NEWLOAD        equ  06
+
+START OF RAM (WORKSPACE) DATA: (CURRENT USAGE 226 BYTES)
+SFXNO          equ  00
+TUNENO         equ  01
+STATUS         equ  02
+
+
+------------------------------------------------------------------------------
+INSTALLING THE DRIVER INTO THE GAME
+------------------------------------------------------------------------------
+
+1. The player needs to be initialised once only on starting the game. This
+sets up the initial values of all RAM variables and the sound chip, and also
+initialises the data for LOAD0 (see below). It is done using:
+
+               CALL JUMPTABLE+0         ;Initialise driver
+
+
+
+
+2. The  music  player needs to be added to an  existing  64Hz interrupt
+routine, as follows:
+
+               CALL JUMPTABLE+3         ;Sound Interrupt Routine every 64Hz
+
+
+
+
+3. MUSIC CALLS:
+
+STRTUNE:       LD A,00h                 ;Desired value
+               LD (TUNENO),A
+
+Values are:    000h-07Fh                ;Music tracks
+               080h                     ;Stop Music immediately
+               081h-0FEh                ;Fade Music (Typical speed 084h)
+
+During a fade,the value of STATUS will change from 0FFh (music active) to 00h
+(music stopped) at the instant the fade has finished. In normal usage, STATUS
+will have a value of 0FFh while music is playing, and return to 00h as soon as
+a tune has finished. Sound effects are entirely independant of the music.
+
+
+
+
+4. EFFECT CALLS:
+
+STRTFX:        LD A,00h
+               LD (SFXNO),A
+
+Any Effect triggered after a fade has finished will restore the output volume
+to maximum automatically.

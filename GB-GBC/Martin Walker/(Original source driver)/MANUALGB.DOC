@@ -1,0 +1,580 @@
+******************************************************************************
+                  NINTENDO GAMEBOY EDITOR Version 3.1
+******************************************************************************
+
+NEW FEATURES IN THIS VERSION
+
+3.1  Release date 31/10/94
+--------------------------
+1. Bug in track plot cured.
+
+2. Bug causing clock to start after ALT L cured.
+
+3. 'ALT X' added to convert GAMEBOY format .SND file to GAMEGEAR format.
+Procedure is:a) Alt L to load in GAMEBOY file b) Alt X to convert c)Alt S to
+Save (use NEW filename to avoid writing over GAMEBOY file).
+
+4. Auto parallel port detection of comms. board (allows you to use any of LPT1
+2 or 3). If comms. board is found the port number is displayed on screen.
+
+5. Bug causing editor screen to appear blank if entered from Windows in
+windowed mode cured.
+
+
+
+
+3.0  Release date 22/08/94
+--------------------------
+1. New command 'I' (Info toggle) toggles between note names and note values.
+
+2. New pan/note length display.
+
+3. Keyboard repeat speed forced to maximum for quick movement while editing.
+
+4. 'END', 'CTRL HOME' and 'CTRL END' added to move to start/end of current
+column data.
+
+5. New tiny format adopted - new commands are ALT A (Add column), ALT E
+(expand column). ALT C (Compress file) can now be used at any time.
+
+6. New max limits:
+256 effects ($00-$FF)
+256 tables  ($00-$FF)
+256 voices  ($00-$FF)
+256 subs    ($00-$FF)
+128 tracks  ($00-$7F)
+
+7. Info box added, showing: current file size, Comms board & Download status.
+
+8. ALT V toggles verify of download (this takes more time, but is useful if
+you think there may be problems with your ESYS unit)
+
+9. Drumbend voice special added ($40). Note1 value gives amount & direction.
+
+10. ALT F/ ALT N Find & find Next added.
+
+11. All downloads to console now verified. Single byte edits are still sent to
+the console immediately, but any block edits (C/R/A/ALT A/ALT C/ALT E) are
+only updated on the PC. When the next 'Play' command is sent, the console is
+updated and the new data verified. This ensures:
+a) On-screen editing is always as quick as possible.
+b) The data is only sent and verified when next needed. If your ESYS has any
+problems downloading you will know straight away (normally you can just try
+downloading straight away unless a hardware problem has occurred).
+
+
+
+
+2.3 Release date ??/05/93
+-------------------------
+1. General updates for file management and screen layout.
+2. Global Offset added for key changes.
+3. 'Instant' screen updates bypassing BIOS.
+
+
+
+
+2.2 Internal Release Only
+-------------------------
+1. Spidersoft bugs removed in ESYS routines after bug report on 11/12/92.
+
+
+
+
+2.1 Release date 30/11/92
+-------------------------
+1. Directory re-shown after saves.
+2. Effect & Fxtable limits both increased to 80.
+3. Bug removed when compressing subroutines grester than 60h.
+4. Master limit increased to 24.
+5. Improved override of effects over music.
+6. Voice atklvl special added.
+7. Bug ignoring subroutines over 80h cured.
+8. Complex Lo effect special added.
+9. Automatic file limits calculated for each load/compression.
+10.Voice limit increased to 64.
+11.Arpeggio voice special added.
+
+
+
+
+2.0 Release date 25/09/1992
+----------------------------
+1. Default tempo not reset to 125bpm on playing a new master.
+2. Swap nibbles effect special added.
+3. Waver effect special improved.
+4. Mask input for directory.
+5. Directory allows multiple columns to display up to 100 filenames.
+6. Sub-directories filtered out from directory listing.
+7. Music file compression added.
+8. Sound effect table call with priority settings.
+9. New editor layout to include table column and effect readout.
+10.New format music files to accommodate effect table (old files no longer
+work).
+
+
+
+
+1.4 Internal release only
+-------------------------
+Gate reset to FF at the start of each new subroutine.
+Stereo display on editor screen.
+Offset parameter added to music voices for instant transpose.
+Stereo effects/stereo noise added.
+Lowest Gameboy note (24h=C1=65Hz) limit now plotted correctly.
+Error beeps rationalised (on error or any unknown key)
+Shadow on directory listing.
+
+
+
+
+1.3 Release date 03/09/1992
+---------------------------
+Gate subroutine parameter added to allow staccato phrasing.
+Tied note subroutine parameter added for legato phrasing.
+Directory shown on load/save.
+More accurate realtime clock.
+Stereo placement (left/centre/right) for each music voice.
+New notetable - MIDI notes from 24h (C1 65Hz) to 7Fh (F#8 11839Hz).
+New noise frequency table - smoother sweeps.
+
+
+
+
+1.2 Internal release only
+-------------------------
+Selectable pulse width waves in all 3 channels.
+Uses 'No' option from ESC to re-initialise and show version number.
+Current filename remembered correctly after re-initialisation.
+Limits properly enabled in Gameboy driver for up to 64 effects/ 32 voices.
+Bug causing crash when copying track cured.
+All ESYS error crashes trapped.
+
+
+1.1 Release date 18/08/1992
+---------------------------
+Version number on top right of PC screen.
+ESYS crashes greatly reduced.
+Garbage error on PC screen cured.
+Tempo values calculated on PC top line display when music is running.
+With no tempo commands, music now defaults to 125bpm.
+
+
+
+
+1.0 Release date 15/08/1992
+---------------------------
+Initial release with ESYS bugs.
+
+
+
+
+------------------------------------------------------------------------------
+FUNCTIONS
+
+ESC              Escape from editor ('no' option re-initialises ESYS)
+Alt A            Add a column at the cursor position
+Alt C            Compress a music file
+Alt D            Download current music file
+Alt E            Expand a compressed column to full size
+Alt F            Find 1 or 2 hex bytes
+Alt L            Load a music file
+Alt N            find Next matching hex byte
+Alt O            download On/Off
+Alt S            Save a music file
+Alt T            Time signature (e.g. 0006/0008 for 6/8)
+Alt X            convert GameBoy to GameGear .SND format
+Return/Enter     Play current music track
+Spacebar         Stop all music/effects
+F                Fade music (uses value 84h)
+I                Info switch (toggle between note name/ note value display
+K                Keymode (toggle between sharps and flats)
+S                Play current SFX effect (use when editing a single sound)
+T                play current TAB effect (for channel allocated sounds)
+
+
+MOVEMENT
+
+Home             Move cursor to top of column
+Ctrl Home        Move cursor to beginning of column data
+End              Move cursor to bottom of column
+Ctrl End         Move cursor to end of column data
+Right & Left     Change edit column
+Up & Page Up     Move cursor up
+Down & Page Down Move cursor down
+
++ & Shift +      Channel up
+- & Shift -      Channel down
+
+[ & ]            Play up/down
+P                Play (using setting above)
+
+
+EDITING
+
+< & >            Up/Down current parameter
+Keypad *         Zero current parameter
+
+D                Down 1 octave for current parameter
+U                Up 1 octave for current parameter
+1/2/4/8          Bitflip current parameter
+
+Insert           Insert a byte at current cursor position
+Delete           Delete a byte at current cursor position
+
+
+BLOCK
+
+C                Copy current column into buffer
+R                Replace current column with buffer
+A                Append buffer to current column
+
+
+
+
+GAMEBOY FUNCTIONS
+
+To help test the music files, several keys have been set up on the Gameboy,
+as follows:
+
+UP/DOWN          Increment/Decrement current call number.
+A                Select Music call.
+B                Select Effect call.
+SELECT           Stop music/effects.
+START            Start music/effect.
+
+
+
+
+SOUND EFFECT PARAMETERS (SFX)
+
+atkdec           Attack 00-0F/ Decay 00-0F
+
+susrel           Sustain 00-0F/ Release 00-0F
+
+atkcnt           length of atkdec portion
+
+endcnt           length of susrel portion (FF=continuous)
+
+wve ad           A/D wave (see waveform table)
+
+wve sr           S/R wave (see waveform table)
+
+freqhi           High byte of start frequency (00-FF only 00-07 used)
+
+freqlo           Low byte of start frequency (00-FF)
+
+bend             Bend type 00-09 (see below)
+
+bendhi           High byte of bend
+
+bendlo           Low byte of bend
+
+stereo           Stereo placement (10=left/11=centre/01=right)
+
+specls           Specials (see below)
+
+newcnt           Extra counter used by specials (see below)
+
+newfhi           Extra freqhi used by specials (see below)
+
+newflo           Extra freqlo used by specials (see below)
+
+
+EFFECT SPECIALS
+
+01               Swap bytes (freqhi/freqlo swapped every frame)
+
+02               Complex Hi (freqhi - bendhi/ eor with newfhi)
+
+04               Waver      (adds small random to freqlo every frame)
+
+08               Reload     (freqhi reloaded with newfhi after each newcnt)
+
+10               Swap nibbles (freqlo nibbles swapped every frame)
+
+20               Complex Lo (freqlo - bendlo/ eor with newflo)
+
+
+
+EFFECT BEND TABLE
+
+00               No bend
+01               Up
+02               Down
+03               Up start              (only during atkcnt)
+04               Down start
+05               Up/down               (up during atkcnt/down during endcnt)
+06               Down/up
+07               Up release            (only during endcnt)
+08               Down release
+09               Up/down cycle         (changes direction every newcnt)
+
+EFFECT TABLE PARAMETERS (TAB)
+
+prior             priority 0 (highest) to FF (lowest)
+
+chan0             sfx to be called in channel 0 (FF=unused)
+
+chan1             sfx to be called in channel 1 (FF=unused)
+
+chan2             sfx to be called in channel 2 (FF=unused)
+
+
+MUSIC VOICE PARAMETERS (VCE)
+
+atkdec            Attack time 00-0F/ Decay time 00-0F
+
+susrel            Sustain level 00-0F/ Release time 00-0F
+
+wvefrm            Waveform (see waveform table)
+
+specls            Specials (see waveform table)
+
+stereo            Stereo placement (10=left/11=centre/01=right)
+
+offset            signed Offset to note (e.g. 0C=up 1 octave/FF=down 1 note)
+
+atklvl            Attack peak level 00-0F (can be used to set overall volume)
+
+atkcnt            Attack count 00-03
+
+atkwve            Attack wave (see waveform table)
+
+note 1/2/3/4      Used by chord/atkwave/atknote specials
+
+trills            Used by trill special
+
+vibrto            Vibrato presets 00-12h (0=off)
+
+vdelay            Vibrato delay 00-FF (in frames)
+
+
+VOICE SPECIALS
+
+01                Arpeggio   (uses Note 1/2/3/4 values at half chord speed)
+
+02                Trill note (alternating with normal note)
+                  24-7F/80-FF Normally used with drum sounds.
+
+04                Drum       (wave alternates with voice/freq bend down)
+
+08                Chord      (uses Note 1/2/3/4 values)
+
+10                Atk wave   (Used instead of Wavfrm during Atkcnt)
+                  Normally used with 81h value for noise 'chiff' attack.
+
+20                Atk note   (used instead of normal note during Atkcnt)
+
+40                DrumBend (note1 sets amount & direction)
+
+80                Fixed      (unaffected by global offsets e.g. for drums)
+
+
+NOTE 1/2/3/4 VALUES
+
+24-7F fixed notes    (e.g. 3C = C3 = middle C)
+80-BF offsets higher (e.g. 8C = 12 up = 1 octave higher)
+C0-FF offsets lower  (e.g. C7 = 7 down = perfect 5th lower)
+
+
+WAVEFORM TABLE
+
+01                gate on
+40                pulse width 12.5%
+50                pulse width 25%
+60                pulse width 50% (square)
+70                pulse width 75% (sounds identical to 25%)
+80                noise
+
+N.B. Noise & pulse waves may be used simultaneously.
+
+
+SUBROUTINE PARAMETERS
+
+BYTE 1            BYTE 2                DETAILS
+
+24-7F NOTE        00-7F duration        normal note pair
+
+
+80    VOICE       00-1F voice number    change to new voice
+
+
+81    REST        00-7F duration        ADSR is set to release
+
+
+82    BEND        00-7F bend up         reset to 0 with next note
+                  80-FF bend down       (use '8' to set up/down)
+
+83    TEMPO       01-FF value           global tempo (default is 6C = 125bpm)
+
+
+84    TIED        0     (dummy)         the following note pair is legato
+
+
+85    GATE        00-FF length          notes gated off (released) at length
+
+
+86    GLBOF       00-FF signed offset   global key change
+
+
+FF    END         -                     End of subroutine
+
+
+N.B. When using frequency effects in combination, please note that the Trill
+and Chord specials override all vibrato and bend settings. For minimum Gameboy
+processor usage set Vibrto=0/ Vdelay=FF when using these specials.
+
+
+MASTER PARAMETERS
+
+BYTE 1              BYTE 2              DETAILS
+
+00-3F no. of times  00-BF sequence no.  normal subroutine pair
+
+
+40    loop end      -                   use only after loop start
+
+
+41-7F loop start    -                   e.g. 46 = loop 6 times
+
+
+FD    fade          00-FF time          start fade in all channels
+
+
+FE    end           00    (dummy)       end in all channels
+
+
+FF    loop channel  00-5F loop point    loop channel to any step
+                                        e.g. FF/02=loop to step 02
+
+
+
+
+APPENDIX A - NOTE VALUES
+
+NAME           NORMAL         DOTTED         DOUBLE DOT     TRIPLET
+
+Semibreve      30h            48h            54h            20h
+
+Minim          18h            24h            2Ah            10h
+
+Crotchet       0Ch            12h            15h            08h
+
+Quaver         06h            09h            -              04h
+
+Semiquaver     03h            -              -              02h
+
+Demisemiquaver 2/2/1/1        -              -              01h
+
+
+
+APPENDIX B - FILE COMPRESSION/ TESTING
+
+1. Compressing music files is a simple matter of a keypress, but to get the
+most efficient compression the following should be noted:
+
+ a) Effects, Table and Voices are each scanned from the highest to the lowest
+ for the first non-zero entry.
+
+ b) Subroutines are each scanned from the lowest to the highest existing for
+ any non-zero bytes.
+
+ c) Masters are scanned from 00 to the current highest, stopping at the first
+ non-zero step 00 in channel 0. You can use this fact to allow temporary edit
+ masters used for perfecting later sections of music - either leave a blank
+ master before your  temporary ones, or temporarily insert a 00 byte at step
+ 00/ channel 00 of the first undesired master before  compressing the file.
+
+
+
+
+APPENDIX C - HINTS AND TIPS
+
+1. The easiest way to set up a project is to add the path of the Gameboy
+Editor to your AUTOEXEC.BAT file. You can then create a directory for each
+new project. Move to this directory and then use the 'M' command. The driver
+and editor will then be loaded, but only the project files will show when
+using Load and Save, making it far easier to manage filenames.
+
+2. Always leave SFX 00 as silence, and leave TAB 00 as 00/00/00/00. This will
+ensure that effect call 00 = kill all sound effects. Similarly, leave priority
+00 for this call only, and give the highest priority effect a value of 01.
+
+3. Always make subroutine 00 a bar's rest - the quickest way to declare this
+is 81 30 FF for a 4/4 time signature. Empty masters will then be read as
+silence, which lets you hear individual channels. In the same way, by
+temporarily inserting two 00 bytes at the start of a master channel you can
+mute that channel (useful when tracking down rogue notes).
+
+4. Use higher unused masters for writing a later section of music. Once
+perfected, use COPY and APPEND with each channel in turn to add the completed
+section to the main piece.
+
+5. To abort a Load or Save, press Return with a blank filename. This is also
+useful for viewing the directory only.
+
+6. To transfer a single voice, subroutine or master from another music file,
+save your current file, load in the other file and use 'C' (copy) in the
+desired place. Then re-load your current file and use 'R' (replace) to
+transfer.
+
+7. Often, improvements to percussion sounds involve changing the note value.
+By setting all percussion notes to 3C (middle C) the actual pitch of each
+sound can be universally set using offset, making global changes to the sound
+far easier.
+
+8. Alt D (Download) is a useful command if you ever get a stray ESYS error.
+Assuming this is a single misread, and no further errors occur, by downloading
+the complete music file again it ensures that the Gameboy holds exactly the
+same information as the PC music file.
+
+9. The default tempo is set to 125bpm when the Gameboy is first initialised.
+This is a global setting, and any music played will use the current value
+(shown on the top line of the editor). Using a tempo command changes the
+global setting permanently until another tempo command is found. This is
+useful when working with many sections from one piece of music - as long as
+the main piece sets the tempo initially, every test master will use this
+global setting, removing the need to add extraneous tempo bytes just to try
+out all the sections at the correct tempo.
+
+10. Do ensure that each finished tune has its own tempo command as the first
+command in one of the channels. Don't rely on the first piece setting it for
+any others - it may not be the first piece to be played!
+
+11. Chord specials - By setting the 80 offset bit of each note you can produce
+a chord 'shape' which can then be used universally e.g. set 80 84 87 8C for a
+root position major chord. Then in a subroutine , a C3 plays C major, a D3
+plays D major etc. By doing this, you should find that you need far less
+chord voices. By setting both the 80 and 40 bits an offset down is set. This
+is  useful for retaining the correct subroutine note value when inversions are
+used e.g. C5 80 83 87 plays G/C/E/G or C minor, 2nd inversion. The advantage
+of this is that the correct subroutine note is retained, so that in a
+subroutine a 'C' will always indicate some sort of 'C' chord.
+
+12. The battery backup supply in the ESYS unit will retain the driver and
+latest music data for years if left undisturbed. It is quite unnecessary to
+download the driver every time you want to use the editor. However, one
+precaution needs to be taken. The PC will initialise its parallel port
+whenever you switch it on - this unfortunately corrupts the ESYS data if the
+Gameboy is not switched on at the time. However, if you switch on the Gameboy
+before the PC, it will safely retain its data. When actively working on a
+project, it is far easier just to load the editor each time.
+
+13. The Arpeggio voice special is a half speed version of the Chord special.
+Since the chord 'note speed' is a high 64Hz, it can sound distorted,
+particularly with low notes - the Arpeggio will often improve the overall
+sound.
+
+14. If you accidentally set the tempo to 000, the notes will never get updated,
+and resetting the tempo to a higher value will now work. To recover from this
+condition press 'B' on the gameboy to Re-Initialise the sound driver (this will
+reset the global tempo to 125bpm.
+
+15. Echo effects in music can be achieved by the following method. Play the
+first note using the desired voice, and then copy this voice to a vacant slot.
+Give the new voice an envelope like 0C/0C, and change the wvefrm setting from
+gate on to gate off e.g. from 61h to 60h. The following notes using this new
+voice will contine this envelope as it fades away. The same effect can also be
+achieved by using the existing voice but making all subsequent notes tied, but
+this often produces much longer subroutines and degrades readability.

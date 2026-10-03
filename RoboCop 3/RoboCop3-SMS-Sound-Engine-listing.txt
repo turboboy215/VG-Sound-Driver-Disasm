@@ -1,0 +1,918 @@
+﻿8E44  AF                XOR A
+8E45  32 D2 DC 32       LD (nn),A
+8E49  D5                PUSH DE
+8E4A  DC AF 32          CALL C,nn
+8E4D  1C                INC E
+8E4E  DC 32 3D          CALL C,nn
+8E51  DC 32 CC          CALL C,nn
+8E54  DC 3E 9F          CALL C,nn
+8E57  D3 7F             OUT (n),A
+8E59  3E BF             LD A,n
+8E5B  D3 7F             OUT (n),A
+8E5D  3A D2 DC B7       LD A,(nn)
+8E61  C0                RET NZ
+8E62  AF                XOR A
+8E63  32 D2 DC 3E       LD (nn),A
+8E67  DF                RST 18H
+8E68  D3 7F             OUT (n),A
+8E6A  3E FF             LD A,n
+8E6C  D3 7F             OUT (n),A
+8E6E  AF                XOR A
+8E6F  32 5E DC 32       LD (nn),A
+8E73  7F                LD A,A
+8E74  DC 32 A0          CALL C,nn
+8E77  DC 32 C1          CALL C,nn
+8E7A  DC C9 21          CALL C,nn
+8E7D  00                NOP
+8E7E  DC 11 01          CALL C,nn
+8E81  DC 01 DD          CALL C,nn
+8E84  00                NOP
+8E85  36 00             LD (HL),n
+8E87  ED B0             LDIR
+8E89  C9                RET
+8E8A  3A D5 DC B7       LD A,(nn)
+8E8E  20 74             JR NZ,#8F04
+8E90  DD 21 00 DC       LD IX,nn
+8E94  CD 63 94          CALL nn
+8E97  DD 7E 01          LD A,(IX+1)
+8E9A  A1                AND C
+8E9B  F6 80             OR n
+8E9D  D3 7F             OUT (n),A
+8E9F  DD 5E 01          LD E,(IX+1)
+8EA2  DD 7E 00          LD A,(IX+0)
+8EA5  E6 03             AND n
+8EA7  CB 3B             RLC E
+8EA9  CB 3B             RLC E
+8EAB  CB 3B             RLC E
+8EAD  CB 3B             RLC E
+8EAF  87                ADD A,A
+8EB0  87                ADD A,A
+8EB1  87                ADD A,A
+8EB2  87                ADD A,A
+8EB3  B3                OR E
+8EB4  D3 7F             OUT (n),A
+8EB6  3E 7F             LD A,n
+8EB8  DD 96 1C          SUB (IX+28)
+8EBB  21 D8 DC          LD HL,nn
+8EBE  BE                CP (HL)
+8EBF  30 01             JR NC,#8EC2
+8EC1  7E                LD A,(HL)
+8EC2  1F                RRA
+8EC3  1F                RRA
+8EC4  1F                RRA
+8EC5  A1                AND C
+8EC6  F6 90             OR n
+8EC8  D3 7F             OUT (n),A
+8ECA  DD 21 21 DC       LD IX,nn
+8ECE  CD 63 94          CALL nn
+8ED1  DD 7E 01          LD A,(IX+1)
+8ED4  A1                AND C
+8ED5  F6 A0             OR n
+8ED7  D3 7F             OUT (n),A
+8ED9  DD 5E 01          LD E,(IX+1)
+8EDC  DD 7E 00          LD A,(IX+0)
+8EDF  E6 03             AND n
+8EE1  CB 3B             RLC E
+8EE3  CB 3B             RLC E
+8EE5  CB 3B             RLC E
+8EE7  CB 3B             RLC E
+8EE9  87                ADD A,A
+8EEA  87                ADD A,A
+8EEB  87                ADD A,A
+8EEC  87                ADD A,A
+8EED  B3                OR E
+8EEE  D3 7F             OUT (n),A
+8EF0  3E 7F             LD A,n
+8EF2  DD 96 1C          SUB (IX+28)
+8EF5  21 D8 DC          LD HL,nn
+8EF8  BE                CP (HL)
+8EF9  30 01             JR NC,#8EFC
+8EFB  7E                LD A,(HL)
+8EFC  1F                RRA
+8EFD  1F                RRA
+8EFE  1F                RRA
+8EFF  A1                AND C
+8F00  F6 B0             OR n
+8F02  D3 7F             OUT (n),A
+8F04  AF                XOR A
+8F05  32 C7 DC DD       LD (nn),A
+8F09  21 A5 DC          LD HL,nn
+8F0C  3A D2 DC B7       LD A,(nn)
+8F10  20 09             JR NZ,#8F1B
+8F12  DD 21 63 DC       LD IX,nn
+8F16  3A D5 DC B7       LD A,(nn)
+8F1A  C0                RET NZ
+8F1B  CD 63 94          CALL nn
+8F1E  3E 7F             LD A,n
+8F20  DD 96 1C          SUB (IX+28)
+8F23  21 D8 DC          LD HL,nn
+8F26  BE                CP (HL)
+8F27  30 01             JR NC,#8F2A
+8F29  7E                LD A,(HL)
+8F2A  1F                RRA
+8F2B  1F                RRA
+8F2C  1F                RRA
+8F2D  F6 F0             OR n
+8F2F  D3 7F             OUT (n),A
+8F31  DD 7E 1B          LD A,(IX+27)
+8F34  E6 03             AND n
+8F36  FE 03             CP n
+8F38  C0                RET NZ
+8F39  32 C7 DC DD       LD (nn),A
+8F3D  7E                LD A,(HL)
+8F3E  01 A1 F6          LD BC,nn
+8F41  C0                RET NZ
+8F42  D3 7F             OUT (n),A
+8F44  DD 5E 01          LD E,(IX+1)
+8F47  DD 7E 00          LD A,(IX+0)
+8F4A  E6 03             AND n
+8F4C  CB 3B             RLC E
+8F4E  CB 3B             RLC E
+8F50  CB 3B             RLC E
+8F52  CB 3B             RLC E
+8F54  87                ADD A,A
+8F55  87                ADD A,A
+8F56  87                ADD A,A
+8F57  87                ADD A,A
+8F58  B3                OR E
+8F59  D3 7F             OUT (n),A
+8F5B  3E 0F             LD A,n
+8F5D  F6 D0             OR n
+8F5F  D3 7F             OUT (n),A
+8F61  C9                RET
+8F62  DD 21 84 DC       LD IX,nn
+8F66  3A D2 DC B7       LD A,(nn)
+8F6A  20 09             JR NZ,#8F75
+8F6C  DD 21 42 DC       LD IX,nn
+8F70  3A D5 DC B7       LD A,(nn)
+8F74  C0                RET NZ
+8F75  3A C7 DC B7       LD A,(nn)
+8F79  C0                RET NZ
+8F7A  CD 63 94          CALL nn
+8F7D  DD 7E 01          LD A,(IX+1)
+8F80  A1                AND C
+8F81  F6 C0             OR n
+8F83  D3 7F             OUT (n),A
+8F85  DD 5E 01          LD E,(IX+1)
+8F88  DD 7E 00          LD A,(IX+0)
+8F8B  E6 03             AND n
+8F8D  CB 3B             RLC E
+8F8F  CB 3B             RLC E
+8F91  CB 3B             RLC E
+8F93  CB 3B             RLC E
+8F95  87                ADD A,A
+8F96  87                ADD A,A
+8F97  87                ADD A,A
+8F98  87                ADD A,A
+8F99  B3                OR E
+8F9A  D3 7F             OUT (n),A
+8F9C  3E 7F             LD A,n
+8F9E  DD 96 1C          SUB (IX+28)
+8FA1  21 D8 DC          LD HL,nn
+8FA4  BE                CP (HL)
+8FA5  30 01             JR NC,#8FA8
+8FA7  7E                LD A,(HL)
+8FA8  1F                RRA
+8FA9  1F                RRA
+8FAA  1F                RRA
+8FAB  A1                AND C
+8FAC  F6 D0             OR n
+8FAE  D3 7F             OUT (n),A
+8FB0  C9                RET
+8FB1  DD 6E 0E          LD L,(IX+14)
+8FB4  26 00             LD H,n
+8FB6  29                ADD HL,HL
+8FB7  29                ADD HL,HL
+8FB8  29                ADD HL,HL
+8FB9  EB                EX DE,HL
+8FBA  FD 21 74 8D       LD IY,nn
+8FBE  FD 19             DB-0x19 (IY op 19)
+8FC0  FD 7E 04          LD A,(IY+4)
+8FC3  DD 77 0B          LD (IX+11),A
+8FC6  FD 7E 05          LD A,(IY+5)
+8FC9  DD 77 0C          LD (IX+12),A
+8FCC  FD 7E 06          LD A,(IY+6)
+8FCF  E6 07             AND n
+8FD1  DD 77 0D          LD (IX+13),A
+8FD4  FD 7E 00          LD A,(IY+0)
+8FD7  DD 77 04          LD (IX+4),A
+8FDA  FD 7E 02          LD A,(IY+2)
+8FDD  DD 77 06          LD (IX+6),A
+8FE0  FD 7E 01          LD A,(IY+1)
+8FE3  DD 77 05          LD (IX+5),A
+8FE6  FD 7E 03          LD A,(IY+3)
+8FE9  DD 77 07          LD (IX+7),A
+8FEC  FD 7E 07          LD A,(IY+7)
+8FEF  DD 77 1B          LD (IX+27),A
+8FF2  DD 7E 20          LD A,(IX+32)
+8FF5  B7                OR A
+8FF6  28 15             JR Z,#900D
+8FF8  5F                LD E,A
+8FF9  3A D2 DC B7       LD A,(nn)
+8FFD  28 05             JR Z,#9004
+8FFF  7B                LD A,E
+9000  FE 05             CP n
+9002  20 09             JR NZ,#900D
+9004  DD 7E 1B          LD A,(IX+27)
+9007  E6 07             AND n
+9009  F6 E0             OR n
+900B  D3 7F             OUT (n),A
+900D  FD 7E 06          LD A,(IY+6)
+9010  E6 E0             AND n
+9012  DD 77 0F          LD (IX+15),A
+9015  C9                RET
+9016  FF                RST 38H
+9017  03                INC BC
+9018  C7                RST 00H
+9019  03                INC BC
+901A  90                SUB B
+901B  03                INC BC
+901C  5D                LD E,L
+901D  03                INC BC
+901E  2D                DEC L
+901F  03                INC BC
+9020  FF                RST 38H
+9021  02                LD (BC),A
+9022  D4 02 AB          CALL NC,nn
+9025  02                LD (BC),A
+9026  85                ADD A,L
+9027  02                LD (BC),A
+9028  61                LD H,C
+9029  02                LD (BC),A
+902A  3F                CCF
+902B  02                LD (BC),A
+902C  1E 02             LD E,n
+902E  00                NOP
+902F  02                LD (BC),A
+9030  E3                EX (SP),HL
+9031  01 C8 01          LD BC,nn
+9034  AF                XOR A
+9035  01 96 01          LD BC,nn
+9038  80                ADD A,B
+9039  01 6A 01          LD BC,nn
+903C  56                LD D,(HL)
+903D  01 43 01          LD BC,nn
+9040  30 01             JR NC,#9043
+9042  1F                RRA
+9043  01 0F 01          LD BC,nn
+9046  00                NOP
+9047  01 F2 00          LD BC,nn
+904A  E4                ??? 0xE4
+904B  00                NOP
+904C  D7                RST 10H
+904D  00                NOP
+904E  CB 00             RLC B
+9050  C0                RET NZ
+9051  00                NOP
+9052  B5                OR L
+9053  00                NOP
+9054  AB                XOR E
+9055  00                NOP
+9056  A1                AND C
+9057  00                NOP
+9058  98                SBC A,B
+9059  00                NOP
+905A  90                SUB B
+905B  00                NOP
+905C  88                ADC A,B
+905D  00                NOP
+905E  80                ADD A,B
+905F  00                NOP
+9060  79                LD A,C
+9061  00                NOP
+9062  72                LD (HL),D
+9063  00                NOP
+9064  6C                LD L,H
+9065  00                NOP
+9066  66                LD H,(HL)
+9067  00                NOP
+9068  60                LD H,B
+9069  00                NOP
+906A  5B                LD E,E
+906B  00                NOP
+906C  55                LD D,L
+906D  00                NOP
+906E  51                LD D,C
+906F  00                NOP
+9070  4C                LD C,H
+9071  00                NOP
+9072  48                LD C,B
+9073  00                NOP
+9074  44                LD B,H
+9075  00                NOP
+9076  40                LD B,B
+9077  00                NOP
+9078  3C                INC A
+9079  00                NOP
+907A  39                ADD HL,SP
+907B  00                NOP
+907C  36 00             LD (HL),n
+907E  33                ??? 0x33
+907F  00                NOP
+9080  30 00             JR NC,#9082
+9082  2D                DEC L
+9083  00                NOP
+9084  2B                DEC HL
+9085  00                NOP
+9086  28 00             JR Z,#9088
+9088  26 00             LD H,n
+908A  24                INC H
+908B  00                NOP
+908C  22 00 20 00       LD (nn),HL
+9090  1E 00             LD E,n
+9092  1C                INC E
+9093  00                NOP
+9094  1B                ??? 0x1B
+9095  00                NOP
+9096  19                ADD HL,DE
+9097  00                NOP
+9098  18 00             JR #909A
+909A  16 00             LD D,n
+909C  15                DEC D
+909D  00                NOP
+909E  14                INC D
+909F  00                NOP
+90A0  13                INC DE
+90A1  00                NOP
+90A2  12                LD (DE),A
+90A3  00                NOP
+90A4  11 00 3E          LD DE,nn
+90A7  01 32 D5          LD BC,nn
+90AA  DC 3A D2          CALL C,nn
+90AD  DC B7 C0          CALL C,nn
+90B0  CD 44 8E          CALL nn
+90B3  3E 01             LD A,n
+90B5  32 D5 DC C9       LD (nn),A
+90B9  B7                OR A
+90BA  C8                RET Z
+90BB  32 D5 DC C9       LD (nn),A
+90BF  F5                PUSH AF
+90C0  AF                XOR A
+90C1  32 D8 DC 32       LD (nn),A
+90C5  CC DC 32          CALL Z,nn
+90C8  D5                PUSH DE
+90C9  DC 32 C8          CALL C,nn
+90CC  DC 32 0E          CALL C,nn
+90CF  DC 32 2F          CALL C,nn
+90D2  DC 32 50          CALL C,nn
+90D5  DC 32 71          CALL C,nn
+90D8  DC 32 1C          CALL C,nn
+90DB  DC 32 3D          CALL C,nn
+90DE  DC 32 5E          CALL C,nn
+90E1  DC 32 7F          CALL C,nn
+90E4  DC 32 1A          CALL C,nn
+90E7  DC 32 3B          CALL C,nn
+90EA  DC 32 5C          CALL C,nn
+90ED  DC 32 7D          CALL C,nn
+90F0  DC 32 16          CALL C,nn
+90F3  DC 32 37          CALL C,nn
+90F6  DC 32 58          CALL C,nn
+90F9  DC 32 79          CALL C,nn
+90FC  DC 32 17          CALL C,nn
+90FF  DC 32 38          CALL C,nn
+9102  DC 32 59          CALL C,nn
+9105  DC 32 7A          CALL C,nn
+9108  DC 32 CB          CALL C,nn
+910B  DC 32 20          CALL C,nn
+910E  DC 32 41          CALL C,nn
+9111  DC 32 62          CALL C,nn
+9114  DC 32 7E          CALL C,nn
+9117  DC CD 7F          CALL C,nn
+911A  92                SUB D
+911B  3E 04             LD A,n
+911D  32 83 DC F1       LD (nn),A
+9121  32 C9 DC CD       LD (nn),A
+9125  4B                LD C,E
+9126  8E                ADC A,(HL)
+9127  3E 06             LD A,n
+9129  32 CA DC 3E       LD (nn),A
+912D  05                DEC B
+912E  32 1D DC 32       LD (nn),A
+9132  3E DC             LD A,n
+9134  32 5F DC 32       LD (nn),A
+9138  80                ADD A,B
+9139  DC 32 CC          CALL C,nn
+913C  DC C9 B7          CALL C,nn
+913F  20 08             JR NZ,#9149
+9141  3A D2 DC B7       LD A,(nn)
+9145  C8                RET Z
+9146  C3 62 8E          JP nn
+9149  F5                PUSH AF
+914A  AF                XOR A
+914B  32 D2 DC 32       LD (nn),A
+914F  CE DC             ADC A,n
+9151  32 A0 DC 32       LD (nn),A
+9155  C1                POP BC
+9156  DC 32 9E          CALL C,nn
+9159  DC 32 BF          CALL C,nn
+915C  DC 32 9A          CALL C,nn
+915F  DC 32 BB          CALL C,nn
+9162  DC 32 9B          CALL C,nn
+9165  DC 32 BC          CALL C,nn
+9168  DC 32 D1          CALL C,nn
+916B  DC 32 A4          CALL C,nn
+916E  DC 32 C0          CALL C,nn
+9171  DC CD 9F          CALL C,nn
+9174  92                SUB D
+9175  3E 05             LD A,n
+9177  32 C5 DC F1       LD (nn),A
+917B  32 CF DC CD       LD (nn),A
+917F  62                LD H,D
+9180  8E                ADC A,(HL)
+9181  3E 06             LD A,n
+9183  32 D0 DC 3E       LD (nn),A
+9187  05                DEC B
+9188  32 A1 DC 32       LD (nn),A
+918C  C2 DC 32          JP NZ,nn
+918F  D2 DC C9          JP NC,nn
+9192  3A DA DC B7       LD A,(nn)
+9196  C0                RET NZ
+9197  3A D5 DC B7       LD A,(nn)
+919B  20 43             JR NZ,#91E0
+919D  3A CC DC B7       LD A,(nn)
+91A1  28 33             JR Z,#91D6
+91A3  0E 0F             LD C,n
+91A5  21 CB DC          LD HL,nn
+91A8  34                INC (HL)
+91A9  5E                LD E,(HL)
+91AA  3A CA DC 3D       LD A,(nn)
+91AE  BB                CP E
+91AF  30 17             JR NC,#91C8
+91B1  AF                XOR A
+91B2  77                LD (HL),A
+91B3  CD D2 92          CALL nn
+91B6  21 C8 DC          LD HL,nn
+91B9  34                INC (HL)
+91BA  7E                LD A,(HL)
+91BB  FE 40             CP n
+91BD  38 09             JR C,#91C8
+91BF  AF                XOR A
+91C0  77                LD (HL),A
+91C1  CD 7F 92          CALL nn
+91C4  21 C9 DC          LD HL,nn
+91C7  34                INC (HL)
+91C8  3A D2 DC B7       LD A,(nn)
+91CC  C4 42 92          CALL NZ,nn
+91CF  CD 8A 8E          CALL nn
+91D2  CD 62 8F          CALL nn
+91D5  C9                RET
+91D6  3A D2 DC B7       LD A,(nn)
+91DA  C8                RET Z
+91DB  CD 42 92          CALL nn
+91DE  18 EF             JR #91CF
+91E0  F5                PUSH AF
+91E1  CD D6 91          CALL nn
+91E4  21 D6 DC          LD HL,nn
+91E7  34                INC (HL)
+91E8  7E                LD A,(HL)
+91E9  1E 0F             LD E,n
+91EB  CB 46             RRC (HL)
+91ED  28 02             JR Z,#91F1
+91EF  1E 00             LD E,n
+91F1  7B                LD A,E
+91F2  F6 94             OR n
+91F4  D3 7F             OUT (n),A
+91F6  7B                LD A,E
+91F7  F6 B4             OR n
+91F9  D3 7F             OUT (n),A
+91FB  F1                POP AF
+91FC  3D                DEC A
+91FD  2F                CPL
+91FE  6F                LD L,A
+91FF  26 00             LD H,n
+9201  29                ADD HL,HL
+9202  29                ADD HL,HL
+9203  7D                LD A,L
+9204  F6 03             OR n
+9206  6F                LD L,A
+9207  E5                PUSH HL
+9208  7D                LD A,L
+9209  E6 0F             AND n
+920B  F6 80             OR n
+920D  D3 7F             OUT (n),A
+920F  5D                LD E,L
+9210  7C                LD A,H
+9211  E6 03             AND n
+9213  CB 3B             RLC E
+9215  CB 3B             RLC E
+9217  CB 3B             RLC E
+9219  CB 3B             RLC E
+921B  87                ADD A,A
+921C  87                ADD A,A
+921D  87                ADD A,A
+921E  87                ADD A,A
+921F  B3                OR E
+9220  D3 7F             OUT (n),A
+9222  E1                POP HL
+9223  11 06 00          LD DE,nn
+9226  19                ADD HL,DE
+9227  7D                LD A,L
+9228  E6 0F             AND n
+922A  F6 A0             OR n
+922C  D3 7F             OUT (n),A
+922E  5D                LD E,L
+922F  7C                LD A,H
+9230  E6 03             AND n
+9232  CB 3B             RLC E
+9234  CB 3B             RLC E
+9236  CB 3B             RLC E
+9238  CB 3B             RLC E
+923A  87                ADD A,A
+923B  87                ADD A,A
+923C  87                ADD A,A
+923D  87                ADD A,A
+923E  B3                OR E
+923F  D3 7F             OUT (n),A
+9241  C9                RET
+9242  3E 01             LD A,n
+9244  32 D3 DC 0E       LD (nn),A
+9248  0F                RRCA
+9249  21 D1 DC          LD HL,nn
+924C  34                INC (HL)
+924D  5E                LD E,(HL)
+924E  3A D0 DC 3D       LD A,(nn)
+9252  BB                CP E
+9253  30 18             JR NC,#926D
+9255  AF                XOR A
+9256  77                LD (HL),A
+9257  CD AD 92          CALL nn
+925A  21 CE DC          LD HL,nn
+925D  34                INC (HL)
+925E  7E                LD A,(HL)
+925F  FE 40             CP n
+9261  38 0A             JR C,#926D
+9263  AF                XOR A
+9264  77                LD (HL),A
+9265  CD 9F 92          CALL nn
+9268  21 CF DC          LD HL,nn
+926B  34                INC (HL)
+926C  7E                LD A,(HL)
+926D  AF                XOR A
+926E  32 D3 DC DD       LD (nn),A
+9272  21 42 DC          LD HL,nn
+9275  CD B1 8F          CALL nn
+9278  DD 21 63 DC       LD IX,nn
+927C  C3 B1 8F          JP nn
+927F  3A D3 DC B7       LD A,(nn)
+9283  20 1A             JR NZ,#929F
+9285  AF                XOR A
+9286  32 1F DC 32       LD (nn),A
+928A  1E DC             LD E,n
+928C  32 40 DC 32       LD (nn),A
+9290  3F                CCF
+9291  DC 32 61          CALL C,nn
+9294  DC 32 60          CALL C,nn
+9297  DC 32 82          CALL C,nn
+929A  DC 32 81          CALL C,nn
+929D  DC C9 AF          CALL C,nn
+92A0  32 A3 DC 32       LD (nn),A
+92A4  A2                AND D
+92A5  DC 32 C4          CALL C,nn
+92A8  DC 32 C3          CALL C,nn
+92AB  DC C9 3A          CALL C,nn
+92AE  CE DC             ADC A,n
+92B0  32 D4 DC 3A       LD (nn),A
+92B4  CF                RST 08H
+92B5  DC 6F 26          CALL C,nn
+92B8  00                NOP
+92B9  29                ADD HL,HL
+92BA  29                ADD HL,HL
+92BB  11 00 80          LD DE,nn
+92BE  19                ADD HL,DE
+92BF  23                INC HL
+92C0  23                INC HL
+92C1  DD 21 84 DC       LD IX,nn
+92C5  E5                PUSH HL
+92C6  CD 06 93          CALL nn
+92C9  E1                POP HL
+92CA  23                INC HL
+92CB  DD 21 A5 DC       LD IX,nn
+92CF  C3 06 93          JP nn
+92D2  3A C8 DC 32       LD A,(nn)
+92D6  D4 DC 3A          CALL NC,nn
+92D9  C9                RET
+92DA  DC 6F 26          CALL C,nn
+92DD  00                NOP
+92DE  29                ADD HL,HL
+92DF  29                ADD HL,HL
+92E0  11 00 80          LD DE,nn
+92E3  19                ADD HL,DE
+92E4  DD 21 00 DC       LD IX,nn
+92E8  E5                PUSH HL
+92E9  CD 06 93          CALL nn
+92EC  E1                POP HL
+92ED  23                INC HL
+92EE  DD 21 21 DC       LD IX,nn
+92F2  E5                PUSH HL
+92F3  CD 06 93          CALL nn
+92F6  E1                POP HL
+92F7  23                INC HL
+92F8  DD 21 42 DC       LD IX,nn
+92FC  E5                PUSH HL
+92FD  CD 06 93          CALL nn
+9300  E1                POP HL
+9301  23                INC HL
+9302  DD 21 63 DC       LD IX,nn
+9306  DD 7E 1F          LD A,(IX+31)
+9309  B7                OR A
+930A  28 07             JR Z,#9313
+930C  DD 35 1F          DEC (IX+31)
+930F  DD 34 1E          INC (IX+30)
+9312  C9                RET
+9313  6E                LD L,(HL)
+9314  26 00             LD H,n
+9316  29                ADD HL,HL
+9317  11 F8 80          LD DE,nn
+931A  19                ADD HL,DE
+931B  7E                LD A,(HL)
+931C  23                INC HL
+931D  66                LD H,(HL)
+931E  6F                LD L,A
+931F  3A D4 DC DD       LD A,(nn)
+9323  96                SUB (HL)
+9324  1E 87             LD E,n
+9326  5F                LD E,A
+9327  16 00             LD D,n
+9329  19                ADD HL,DE
+932A  7E                LD A,(HL)
+932B  5F                LD E,A
+932C  CB 3F             RLC A
+932E  CB 3F             RLC A
+9330  DD 77 11          LD (IX+17),A
+9333  23                INC HL
+9334  7E                LD A,(HL)
+9335  57                LD D,A
+9336  E6 7F             AND n
+9338  2B                DEC HL
+9339  DD 77 13          LD (IX+19),A
+933C  CB 12             RLC D
+933E  7B                LD A,E
+933F  17                RLA
+9340  E6 07             AND n
+9342  DD 77 10          LD (IX+16),A
+9345  11 1C 94          LD DE,nn
+9348  D5                PUSH DE
+9349  DD 7E 10          LD A,(IX+16)
+934C  B7                OR A
+934D  28 15             JR Z,#9364
+934F  3D                DEC A
+9350  28 5E             JR Z,#93B0
+9352  3D                DEC A
+9353  CA D8 93          JP Z,nn
+9356  3D                DEC A
+9357  CA 11 94          JP Z,nn
+935A  3D                DEC A
+935B  28 3B             JR Z,#9398
+935D  3D                DEC A
+935E  28 44             JR Z,#93A4
+9360  3D                DEC A
+9361  28 0B             JR Z,#936E
+9363  C9                RET
+9364  DD 7E 13          LD A,(IX+19)
+9367  B7                OR A
+9368  28 F9             JR Z,#9363
+936A  DD 77 1F          LD (IX+31),A
+936D  C9                RET
+936E  DD 7E 13          LD A,(IX+19)
+9371  57                LD D,A
+9372  E6 1F             AND n
+9374  5F                LD E,A
+9375  7A                LD A,D
+9376  E6 60             AND n
+9378  28 08             JR Z,#9382
+937A  FE 20             CP n
+937C  28 16             JR Z,#9394
+937E  FE 40             CP n
+9380  28 0E             JR Z,#9390
+9382  AF                XOR A
+9383  DD 77 16          LD (IX+22),A
+9386  DD 77 17          LD (IX+23),A
+9389  DD 77 19          LD (IX+25),A
+938C  DD 77 1A          LD (IX+26),A
+938F  C9                RET
+9390  DD 73 17          LD (IX+23),E
+9393  C9                RET
+9394  DD 73 16          LD (IX+22),E
+9397  C9                RET
+9398  AF                XOR A
+9399  DD 77 15          LD (IX+21),A
+939C  DD 7E 13          LD A,(IX+19)
+939F  87                ADD A,A
+93A0  DD 77 14          LD (IX+20),A
+93A3  C9                RET
+93A4  AF                XOR A
+93A5  DD 77 14          LD (IX+20),A
+93A8  DD 7E 13          LD A,(IX+19)
+93AB  87                ADD A,A
+93AC  DD 77 15          LD (IX+21),A
+93AF  C9                RET
+93B0  21 D7 DC          LD HL,nn
+93B3  3A D3 DC 5F       LD A,(nn)
+93B7  DD 7E 13          LD A,(IX+19)
+93BA  B7                OR A
+93BB  28 11             JR Z,#93CE
+93BD  FE 40             CP n
+93BF  30 0E             JR NC,#93CF
+93C1  CB 43             RRC E
+93C3  28 05             JR Z,#93CA
+93C5  86                ADD A,(HL)
+93C6  32 D0 DC C9       LD (nn),A
+93CA  86                ADD A,(HL)
+93CB  32 CA DC C9       LD (nn),A
+93CF  D6 3F             SUB n
+93D1  DD 77 19          LD (IX+25),A
+93D4  DD 77 1A          LD (IX+26),A
+93D7  C9                RET
+93D8  3A D3 DC 5F       LD A,(nn)
+93DC  DD 7E 13          LD A,(IX+19)
+93DF  FE 7F             CP n
+93E1  28 24             JR Z,#9407
+93E3  3D                DEC A
+93E4  CB 43             RRC E
+93E6  28 1C             JR Z,#9404
+93E8  FE FF             CP n
+93EA  28 09             JR Z,#93F5
+93EC  32 CF DC 3E       LD (nn),A
+93F0  3F                CCF
+93F1  32 CE DC C9       LD (nn),A
+93F5  AF                XOR A
+93F6  32 D2 DC 32       LD (nn),A
+93FA  CF                RST 08H
+93FB  DC 3D 32          CALL C,nn
+93FE  CE DC             ADC A,n
+9400  CD 62 8E          CALL nn
+9403  C9                RET
+9404  32 C9 DC CB       LD (nn),A
+9408  43                LD B,E
+9409  20 E4             JR NZ,#93EF
+940B  3E 3F             LD A,n
+940D  32 C8 DC C9       LD (nn),A
+9411  DD 7E 13          LD A,(IX+19)
+9414  E6 1F             AND n
+9416  DD 77 0E          LD (IX+14),A
+9419  C3 B1 8F          JP nn
+941C  DD 7E 11          LD A,(IX+17)
+941F  B7                OR A
+9420  28 40             JR Z,#9462
+9422  DD 77 12          LD (IX+18),A
+9425  5F                LD E,A
+9426  DD 7E 10          LD A,(IX+16)
+9429  FE 04             CP n
+942B  28 04             JR Z,#9431
+942D  DD 36 14 00       LD (IX+20),n
+9431  FE 05             CP n
+9433  28 04             JR Z,#9439
+9435  DD 36 15 00       LD (IX+21),n
+9439  6B                LD L,E
+943A  26 00             LD H,n
+943C  DD 36 08 00       LD (IX+8),n
+9440  DD 36 09 C0       LD (IX+9),n
+9444  DD 36 18 03       LD (IX+24),n
+9448  DD 36 0A 00       LD (IX+10),n
+944C  DD 36 1D 01       LD (IX+29),n
+9450  DD 36 1C 00       LD (IX+28),n
+9454  11 16 90          LD DE,nn
+9457  29                ADD HL,HL
+9458  19                ADD HL,DE
+9459  7E                LD A,(HL)
+945A  DD 77 03          LD (IX+3),A
+945D  23                INC HL
+945E  7E                LD A,(HL)
+945F  DD 77 02          LD (IX+2),A
+9462  C9                RET
+9463  DD 7E 1D          LD A,(IX+29)
+9466  3D                DEC A
+9467  28 0F             JR Z,#9478
+9469  3D                DEC A
+946A  28 25             JR Z,#9491
+946C  FE 03             CP n
+946E  28 3E             JR Z,#94AE
+9470  DD 7E 06          LD A,(IX+6)
+9473  DD 77 1C          LD (IX+28),A
+9476  18 36             JR #94AE
+9478  DD 7E 04          LD A,(IX+4)
+947B  DD 86 1C          ADD A,(IX+28)
+947E  DD 77 1C          LD (IX+28),A
+9481  DD BE 07          CP (IX+7)
+9484  38 28             JR C,#94AE
+9486  DD 34 1D          INC (IX+29)
+9489  DD 7E 07          LD A,(IX+7)
+948C  DD 77 1C          LD (IX+28),A
+948F  18 1D             JR #94AE
+9491  DD 7E 1C          LD A,(IX+28)
+9494  DD 96 05          SUB (IX+5)
+9497  DD 77 1C          LD (IX+28),A
+949A  FA                ??? 0xFA
+949B  A5                AND L
+949C  94                SUB H
+949D  DD 7E 06          LD A,(IX+6)
+94A0  DD BE 1C          CP (IX+28)
+94A3  38 09             JR C,#94AE
+94A5  DD 7E 06          LD A,(IX+6)
+94A8  DD 77 1C          LD (IX+28),A
+94AB  DD 34 1D          INC (IX+29)
+94AE  DD 7E 20          LD A,(IX+32)
+94B1  B7                OR A
+94B2  28 08             JR Z,#94BC
+94B4  DD 7E 1B          LD A,(IX+27)
+94B7  E6 03             AND n
+94B9  FE 03             CP n
+94BB  C0                RET NZ
+94BC  DD 7E 1A          LD A,(IX+26)
+94BF  B7                OR A
+94C0  28 43             JR Z,#9505
+94C2  DD 35 19          DEC (IX+25)
+94C5  20 3E             JR NZ,#9505
+94C7  DD 7E 1A          LD A,(IX+26)
+94CA  DD 77 19          LD (IX+25),A
+94CD  DD 7E 18          LD A,(IX+24)
+94D0  3C                INC A
+94D1  E6 03             AND n
+94D3  DD 77 18          LD (IX+24),A
+94D6  28 18             JR Z,#94F0
+94D8  FE 03             CP n
+94DA  28 F1             JR Z,#94CD
+94DC  FE 02             CP n
+94DE  28 08             JR Z,#94E8
+94E0  DD 7E 16          LD A,(IX+22)
+94E3  B7                OR A
+94E4  28 E7             JR Z,#94CD
+94E6  18 09             JR #94F1
+94E8  DD 7E 17          LD A,(IX+23)
+94EB  B7                OR A
+94EC  28 DF             JR Z,#94CD
+94EE  18 01             JR #94F1
+94F0  AF                XOR A
+94F1  DD 86 12          ADD A,(IX+18)
+94F4  11 16 90          LD DE,nn
+94F7  6F                LD L,A
+94F8  26 00             LD H,n
+94FA  29                ADD HL,HL
+94FB  19                ADD HL,DE
+94FC  7E                LD A,(HL)
+94FD  DD 77 03          LD (IX+3),A
+9500  23                INC HL
+9501  7E                LD A,(HL)
+9502  DD 77 02          LD (IX+2),A
+9505  DD 6E 03          LD L,(IX+3)
+9508  DD 66 02          LD H,(IX+2)
+950B  DD 5E 15          LD E,(IX+21)
+950E  16 00             LD D,n
+9510  19                ADD HL,DE
+9511  DD 5E 14          LD E,(IX+20)
+9514  A7                AND A
+9515  ED 52             DB 0xED,52
+9517  DD 75 03          LD (IX+3),L
+951A  DD 74 02          LD (IX+2),H
+951D  DD 75 01          LD (IX+1),L
+9520  DD 74 00          LD (IX+0),H
+9523  DD 7E 0F          LD A,(IX+15)
+9526  E6 80             AND n
+9528  28 60             JR Z,#958A
+952A  DD 7E 08          LD A,(IX+8)
+952D  DD BE 0B          CP (IX+11)
+9530  30 05             JR NC,#9537
+9532  DD 34 08          INC (IX+8)
+9535  18 53             JR #958A
+9537  DD 7E 0C          LD A,(IX+12)
+953A  DD 86 09          ADD A,(IX+9)
+953D  DD 77 09          LD (IX+9),A
+9540  CB 7F             RRC A
+9542  28 02             JR Z,#9546
+9544  ED 44             NEG
+9546  D6 40             SUB n
+9548  5F                LD E,A
+9549  DD 7E 0D          LD A,(IX+13)
+954C  B7                OR A
+954D  20 02             JR NZ,#9551
+954F  1E 00             LD E,n
+9551  3E 08             LD A,n
+9553  DD 96 0D          SUB (IX+13)
+9556  B7                OR A
+9557  28 05             JR Z,#955E
+9559  CB 2B             RLC E
+955B  3D                DEC A
+955C  18 F8             JR #9556
+955E  6B                LD L,E
+955F  26 00             LD H,n
+9561  CB 7D             RRC L
+9563  28 01             JR Z,#9566
+9565  25                DEC H
+9566  DD 7E 0F          LD A,(IX+15)
+9569  E6 20             AND n
+956B  28 03             JR Z,#9570
+956D  29                ADD HL,HL
+956E  29                ADD HL,HL
+956F  29                ADD HL,HL
+9570  29                ADD HL,HL
+9571  DD 7E 12          LD A,(IX+18)
+9574  3C                INC A
+9575  CB 2C             RLC H
+9577  CB 1D             RLC L
+9579  D6 0C             SUB n
+957B  30 F8             JR NC,#9575
+957D  DD 5E 01          LD E,(IX+1)
+9580  DD 56 00          LD D,(IX+0)
+9583  19                ADD HL,DE
+9584  DD 75 01          LD (IX+1),L
+9587  DD 74 00          LD (IX+0),H

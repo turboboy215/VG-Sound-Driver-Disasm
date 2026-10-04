@@ -1,0 +1,370 @@
+Pinball Challenge Deluxe (E) -- GBAModPlay version 1 ("GBAMOD1."): data dump
+Generated from "Pinball Challenge Deluxe (E).gba".  All addresses are GBA ROM addresses.
+Notes are step-table indices, 8 per semitone: 8 = C-1 (ProTracker naming) ... 288 = B-3.
+====================================================================================================
+
+1. MODULE REFERENCES
+----------------------------------------------------------------------------------------------------
+module  0 @ 0805993C: 080076E4
+module  1 @ 0805EA54: 08003A54, 08004020
+module  2 @ 08094C58: not referenced
+module  3 @ 0814CCF4: 083D763C
+module  4 @ 08172E80: 083DAA20
+module  5 @ 0818EF0C: 083DD7D0
+module  6 @ 081AC024: 083E0B88
+module  7 @ 0826A58C: 083C8EBC
+module  8 @ 08293D54: 083CC86C
+module  9 @ 082BEC3C: 083D0C18
+module 10 @ 082EAB4C: 083D46B4
+
+2. MODULES
+----------------------------------------------------------------------------------------------------
+module 0 @ 0805993C-0805EA52 (20758 bytes)
+   4 channels, 1 patterns, song length 2, mix rate 21024, pattern bytes 960, sample bytes 17958
+   orders: 00 00
+   stored rows per pattern: 60
+   notes F-3..F-3; instruments 1
+   effects: none
+   samples:  #   length  fine vol loopStart loopLen
+             1    2238    0  64         0       0
+             2   12810    0  64         0       0
+             3    2910    0  64         0       0
+
+module 1 @ 0805EA54-08094C58 (221700 bytes)
+   4 channels, 42 patterns, song length 16, mix rate 21024, pattern bytes 40768, sample bytes 179092
+   orders: 11 12 13 18 19 1A 1B 1C 1F 20 1D 21 22 23 28 29
+   stored rows per pattern: 63 63 63 64 64 63 53 64 63 63 63 63 63 64 64 60 63 6 64 61 64 63 61 61 64 63 63 63 63 64 64 63 64 64 64 64 22 64 64 64 64 64
+   notes C-1..B-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 24 25
+   effects: 0xx (arpeggio) x1, 1xx (porta up) x3, 2xx (porta down) x64, 3xx (tone porta) x205, 4xx (vibrato) x463, Axx (volume slide) x1826, Bxx (order jump) x2, Cxx (set volume) x422, Dxx (pattern break) x3, E0x x1, E9x x8, Fxx (speed/tempo) x40
+   Fxx values: 05x30 07x7 08x1 09x1 0Fx1
+   samples:  #   length  fine vol loopStart loopLen
+             1    9554    0  64      2282    7228
+             2   15004    0  64         0   15004
+             3   15054    0  64         0   15054
+             4    2314    0  64         0       0
+             5   14950    0  64      5590    9360
+             6    3884    0  64         0       0
+             7    2190    0  64       312    1878
+             8    7028    0  64         0       0
+             9    1602   15  64      1424     176
+            10    5296    0  64         0       0
+            11   14874    0  64      5400    8340
+            12    2126    0  64         0       0
+            13   14942    0  64         0   14942
+            14    1892    0  64         0       0
+            15    1746    0  64         0       0
+            16    3054    0  64      2792     254
+            17   13612    0  64     11076    2536
+            19   10378    0  64      6898    3480
+            20    1726    0  64      1546     180
+            21    5884    2  64      3198    2676
+            22   14990    0  64         0   14990
+            24    5872    0  64       112    5760
+            25   11120    0  64         0       0
+
+module 2 @ 08094C58-080A50E8 (66704 bytes)
+   4 channels, 23 patterns, song length 23, mix rate 21024, pattern bytes 22160, sample bytes 42704
+   orders: 00 01 02 03 04 06 05 07 09 0A 0B 09 0A 10 0D 12 11 0E 0F 13 14 15 16
+   stored rows per pattern: 64 64 64 32 64 63 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 10
+   notes C-1..E-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12
+   effects: 1xx (porta up) x3, 2xx (porta down) x51, 3xx (tone porta) x2, 4xx (vibrato) x593, Axx (volume slide) x363, Cxx (set volume) x634, Dxx (pattern break) x1, E9x x12, Fxx (speed/tempo) x3
+   Fxx values: 06x3
+   samples:  #   length  fine vol loopStart loopLen
+             1    3384    0  64         0       2
+             2    1244    0  64         0       2
+             3    1244    0  48         0       2
+             4     440    0  64       290     150
+             5    5250    0  31      4280     970
+             6    7110    0  53      4362    2748
+             7    5276    0  64      4282     994
+             8    2202    0  48      1696     506
+             9    4782    0  64      2132    2650
+            10    3198    0  64       924    2274
+            11    5118    0  64      1496    3622
+            12    3456    0  48         0       2
+
+module 3 @ 0814CCF4-08172E80 (156044 bytes)
+   4 channels, 55 patterns, song length 55, mix rate 21024, pattern bytes 33936, sample bytes 120268
+   orders: 00 17 06 18 01 25 26 27 28 07 08 09 0A 0B 0C 0D 0E 05 0F 10 11 03 12 13 15 16 14 02 04 19 1A 1B 1C 1D 1E 1F 20 21 22 23 24 29 2A 2B 2C 2D 2E 2F 30 31 32 33 34 35 36
+   stored rows per pattern: 64 64 8 32 48 64 10 64 64 64 64 64 64 64 64 64 64 64 64 64 22 64 47 9 64 35 20 11 64 43 8 27 17 17 19 9 21 64 64 64 64 9 20 10 43 14 10 11 24 24 50 13 11 2 5
+   notes C-1..B-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 20 21 23 24
+   effects: 0xx (arpeggio) x9, 1xx (porta up) x146, 2xx (porta down) x174, 3xx (tone porta) x78, 4xx (vibrato) x56, Axx (volume slide) x1627, Bxx (order jump) x36, Cxx (set volume) x1487, E9x x37, Fxx (speed/tempo) x63
+   Fxx values: 03x2 04x3 05x1 06x4 07x50 08x1 0Dx1 0Fx1
+   samples:  #   length  fine vol loopStart loopLen
+             1    3352    0  48         0       0
+             2    7742    0  64      2514    5228
+             3    8524    0  64      4452    4072
+             4    1232    0  64        62    1170
+             5    1886    0  64         0       0
+             6    5492    0  64         0       0
+             7    5422    0  64         0       0
+             8    6504    0  64      4058    2446
+             9      22    4  64         0      14
+            10     454    0  64         0       0
+            11     764    0  64       632     128
+            12    3132    0  64         0    3132
+            13    5534    0  64         0       0
+            14    2066    0  64         0       0
+            15    4104    0  64         0       0
+            16    3118    0  64         0       0
+            17    3748    0  64         0       0
+            18    3044    0  64         0       0
+            19   19326    0  64         0       0
+            20    5646    0  64         0       0
+            21    2704    0  64         0       0
+            22    2014    0  64         0       0
+            23    6722    0  64         0       0
+            24    4804    0  64         0       0
+            26    6728    0  64         0       0
+            27    1250    0  64         0       0
+            29    4934    0  64         0       0
+
+module 4 @ 08172E80-0818EF0C (114828 bytes)
+   4 channels, 63 patterns, song length 62, mix rate 21024, pattern bytes 39440, sample bytes 73548
+   orders: 02 09 04 07 00 05 06 0B 08 0A 0C 0D 03 01 0F 10 14 11 12 15 16 17 18 19 13 1A 1B 1D 23 1E 22 24 1C 1F 20 21 25 26 27 28 29 2A 2B 2C 2D 2E 2F 30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E
+   stored rows per pattern: 64 64 64 6 64 64 64 64 64 7 64 64 64 64 64 64 64 64 64 13 64 24 13 14 21 35 23 64 23 64 64 13 35 11 64 64 64 47 17 31 17 33 39 13 35 35 35 17 2 53 29 11 11 21 11 38 29 57 17 26 26 16 25
+   notes C-1..B-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 24
+   effects: 0xx (arpeggio) x3, 1xx (porta up) x105, 2xx (porta down) x146, 3xx (tone porta) x156, 4xx (vibrato) x185, Axx (volume slide) x1535, Bxx (order jump) x40, Cxx (set volume) x2138, Dxx (pattern break) x2, E9x x32, Fxx (speed/tempo) x75
+   Fxx values: 03x2 04x9 05x8 06x27 07x17 08x7 09x1 0Ax1 0Cx1 0Dx1 0Fx1
+   samples:  #   length  fine vol loopStart loopLen
+             1    3090    0  64       514    2576
+             2     840    0  48       712     128
+             3    1366    0  64      1238     128
+             4    3448    0  64      1596    1836
+             5    2512    0  64         0       0
+             6     288    0  53       210      76
+             7    2306    0  64         0       0
+             8    2516    0  64         0       0
+             9    1404    0  64         0       0
+            10    1000    0  64         0       0
+            11     318    0  38       254      64
+            12    2162    0  37      2094      64
+            13    1522    0  64         0       0
+            14    3626    0  64         0    3626
+            15     740    0  64       696      44
+            16    3650    0  64         0       0
+            17    3724    0  64         0       0
+            18    3238    0  64         0    3238
+            19    8292    0  64      8054     238
+            20    5646    0  64      4260    1386
+            21    4914    0  64         0       0
+            22    1568    0  64         0       0
+            23    3742    0  64         0       0
+            24    6140    0  64         0       0
+            26    2930    0  64         0       0
+            29    2566    0  64         0       0
+
+module 5 @ 0818EF0C-081AC022 (119062 bytes)
+   4 channels, 49 patterns, song length 49, mix rate 21024, pattern bytes 26576, sample bytes 90646
+   orders: 02 01 00 03 04 05 06 09 07 08 0D 0C 0E 0F 0B 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 20 21 22 23 24 25 26 27 28 29 2A 0A 2B 2C 2D 2E 2F 30
+   stored rows per pattern: 64 64 64 64 64 64 64 64 64 64 16 64 64 64 64 64 33 49 16 23 24 49 24 23 19 11 31 25 23 6 12 10 64 6 12 15 16 20 21 8 10 22 21 8 19 19 21 23 2
+   notes C-1..B-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 24 29
+   effects: 0xx (arpeggio) x22, 1xx (porta up) x35, 2xx (porta down) x45, 3xx (tone porta) x63, 4xx (vibrato) x71, Axx (volume slide) x474, Bxx (order jump) x38, Cxx (set volume) x1281, E9x x12, Fxx (speed/tempo) x58
+   Fxx values: 03x3 04x4 05x14 06x10 07x17 08x8 0Fx2
+   samples:  #   length  fine vol loopStart loopLen
+             1    2036    0  64         0       0
+             2    2484    0  64         0       0
+             3    3940    0  64         0       0
+             4    2472    0  64         0       0
+             5    2482    0  64         0       0
+             6     614    0  64       484     128
+             7     832    0  64       758      64
+             8    3314    0  64         0       0
+             9    3924    0  64       150    3774
+            10    2186    0  64         0       0
+            11    2250    0  64         0       0
+            12    3928    0  64         0       0
+            13     286    0  64       222      64
+            14    3514    0  64         0       0
+            15    3672    0  64         0       0
+            16    5774    0  64         0       0
+            17    9428    0  64         0       0
+            18    9104    0  64         0       0
+            19   10770    0  64         0       0
+            20    7024    0  64         0       0
+            22    2018    0  64         0       0
+            24    3520    0  64         0       0
+            26    2802    0  64         0       0
+            29    2272    0  64         0       0
+
+module 6 @ 081AC024-081C8C5E (117818 bytes)
+   4 channels, 64 patterns, song length 65, mix rate 21024, pattern bytes 46816, sample bytes 69162
+   orders: 00 03 03 04 05 06 07 02 08 0A 13 09 0B 0C 0E 0D 0F 14 10 11 16 16 17 18 15 19 1A 1B 1C 1D 1E 1F 20 21 22 23 24 25 26 27 28 28 29 29 3E 2B 2C 2D 2E 2F 30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3F
+   stored rows per pattern: 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 63 64 64 64 64 64 64 64 64 64 10 64 33 25 13 23 47 57 15 48 26 13 55 63 63 64 9 8 32 23 12 7 23 63 64 61 24 25 9 64 7 17 18 38 11 9 60 60
+   notes C-1..B-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12 13 14 24
+   effects: 0xx (arpeggio) x7, 1xx (porta up) x204, 2xx (porta down) x316, 3xx (tone porta) x114, 4xx (vibrato) x637, Axx (volume slide) x1107, Bxx (order jump) x39, Cxx (set volume) x1254, E9x x59, Fxx (speed/tempo) x74
+   Fxx values: 04x11 05x17 06x6 07x5 08x32 09x1 0Ax1 0Fx1
+   samples:  #   length  fine vol loopStart loopLen
+             1     692    0  64         0       0
+             2    6266    0  64      4190    2074
+             3    9860    0  64      1380    8454
+             4    9854    0  64         0       0
+             5     180    0  64       148      32
+             6    2686    0  64         0       0
+             7    4344    0  64         0       0
+             8    2614    0  64       100    2514
+             9    2554    0  64       170    2384
+            10     444    0  64       316     128
+            11    4142    0  64         0       0
+            12     838    0  64         0       0
+            13    6984    0  64      1266    5718
+            14    2770    0  64       360    2396
+            22    2980    0  64         0       0
+            24    6542    0  64         0       0
+            26    2804    0  64         0       0
+            29    2608    0  64         0       0
+
+module 7 @ 0826A58C-08293D52 (169926 bytes)
+   4 channels, 64 patterns, song length 64, mix rate 21024, pattern bytes 41904, sample bytes 126182
+   orders: 06 07 00 03 05 08 04 14 15 0E 17 16 11 09 0A 0B 0C 0D 0F 10 01 02 12 13 1B 2A 18 19 1A 1C 1D 1E 1F 20 21 22 23 24 25 26 27 28 29 2B 2C 2D 2E 2F 30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3F
+   stored rows per pattern: 64 20 16 64 19 64 64 64 64 64 64 64 64 64 48 64 64 48 31 30 64 48 48 48 64 64 64 60 64 56 54 48 49 11 22 27 18 46 6 35 8 34 28 28 64 64 31 25 21 8 12 15 27 10 33 12 8 17 64 63 33 12 2 60
+   notes C-1..B-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 22 24 29
+   effects: 0xx (arpeggio) x188, 1xx (porta up) x285, 2xx (porta down) x213, 3xx (tone porta) x68, 4xx (vibrato) x417, 6xx (vibrato+vol slide) x137, 9xx (sample offset) x11, Axx (volume slide) x923, Bxx (order jump) x44, Cxx (set volume) x2278, Dxx (pattern break) x6, E9x x56, Fxx (speed/tempo) x129
+   Fxx values: 01x2 02x2 03x6 04x17 05x61 06x31 07x2 08x5 09x2 0Fx1
+   samples:  #   length  fine vol loopStart loopLen
+             1     814    0  64         0       0
+             2     848    0  64         0       0
+             3    2134    0  64         0       0
+             4    1032    0  64         0       0
+             5     792    0  64       664     128
+             6    2674    0  64         0       0
+             7    9352    0  64         0       0
+             8    2188    0  64        48    2126
+             9   10178    0  64      8202    1970
+            10    1334    2  64      1302      32
+            11    3364    0  64      2142    1222
+            12   15480    0  64      8874    6604
+            13    1398    0  64         0       0
+            14    8132    0  64         0       0
+            15    7212    0  64         0       0
+            16    7496    0  64         0       0
+            17   12856    0  64         0       0
+            18   13832    0  64         0       0
+            19    3578    0  64         0       0
+            22    3986    0  64         0       0
+            23    7486    0  64         0       0
+            24    6116    0  64         0       0
+            29    3900    0  64         0       0
+
+module 8 @ 08293D54-082BEC3A (175846 bytes)
+   4 channels, 64 patterns, song length 65, mix rate 21024, pattern bytes 46192, sample bytes 127814
+   orders: 03 01 02 05 05 07 06 08 0A 0B 04 09 0C 0E 10 0F 11 12 13 00 16 00 14 15 17 18 19 1A 1B 1C 1D 1E 1F 20 21 22 23 24 25 26 27 28 29 2A 2B 2C 2D 2E 2F 30 31 32 35 34 36 33 37 38 39 3A 3B 3C 3D 3E 3F
+   stored rows per pattern: 64 64 64 13 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 63 64 64 17 15 64 23 64 18 14 31 15 16 28 64 32 23 64 27 6 64 14 13 23 14 42 10 12 39 62 47 2 64 16 64 36 64 64 64 31 64 64 64 9
+   notes C-1..B-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 24 26 27 29 31
+   effects: 0xx (arpeggio) x100, 1xx (porta up) x294, 2xx (porta down) x104, 3xx (tone porta) x189, 4xx (vibrato) x837, 6xx (vibrato+vol slide) x312, 9xx (sample offset) x15, Axx (volume slide) x1193, Bxx (order jump) x42, Cxx (set volume) x1980, Dxx (pattern break) x1, E9x x76, Fxx (speed/tempo) x113
+   Fxx values: 03x3 04x9 05x11 06x33 07x51 08x3 0Ax2 0Cx1
+   samples:  #   length  fine vol loopStart loopLen
+             1    2288    0  64         0       0
+             2    3572    0  64         0       0
+             3    2288    0  64         0       0
+             4    1396   13  64      1216     176
+             5    1484    0  64      1358     126
+             6     460    4  64       336     124
+             7    2856    0  64         0       0
+             8    2790    0  64       718    2072
+             9   13612    0  64      9840    3772
+            10    2734    0  64      1844     888
+            11    2796    0  64      2002     794
+            12    3074    0  64      2184     890
+            13    1582    0  64      1518      64
+            14    3658    0  64      1584    2074
+            15    2146    0  64         0       0
+            16    4050    0  64      2810    1240
+            17     636    1  64       602      32
+            18    9702    0  64         0       0
+            19    7702    0  64         0       0
+            20   11698    0  64         0       0
+            21    4222    0  64      1880    2342
+            23    7200    0  64         0       0
+            24    5002    0  64         0       0
+            26   16396    0  64         0       0
+            27    3566    0  64         0       0
+            29    6062    0  64         0       0
+            31    4842    0  64         0       0
+
+module 9 @ 082BEC3C-082EAB4C (179984 bytes)
+   4 channels, 62 patterns, song length 61, mix rate 21024, pattern bytes 42768, sample bytes 135376
+   orders: 00 01 03 04 05 06 07 08 0A 0C 0C 0D 0D 0E 0F 0E 10 11 16 17 18 19 1A 1B 12 13 15 1C 1D 1E 1F 20 21 22 23 24 25 26 30 27 28 31 29 2A 2B 2C 2D 2E 2F 32 33 34 35 36 37 38 39 3A 3B 3C 3D
+   stored rows per pattern: 48 48 48 48 48 48 48 56 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 64 10 64 9 13 8 10 27 40 50 16 47 64 64 63 17 9 20 17 45 16 28 21 47 44 63 33 12 41 2 20 25 20 12 24
+   notes C-1..B-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 24 25 29
+   effects: 0xx (arpeggio) x88, 1xx (porta up) x123, 2xx (porta down) x107, 3xx (tone porta) x82, 4xx (vibrato) x532, 6xx (vibrato+vol slide) x141, 9xx (sample offset) x5, Axx (volume slide) x2045, Bxx (order jump) x41, Cxx (set volume) x1216, Dxx (pattern break) x6, E9x x41, Fxx (speed/tempo) x138
+   Fxx values: 03x5 04x11 05x15 06x40 07x34 08x25 0Ax1 0Bx2 0Cx1 0Fx4
+   samples:  #   length  fine vol loopStart loopLen
+             1    4744    0  64      3672    1058
+             2    6178    0  64      2532    3644
+             3    4844    0  64      3450    1394
+             4     386    0  64       258     126
+             5     864    0  64       674     190
+             6   12726    0  64         0   12726
+             7    3928    0  64         0       0
+             8    5998    0  42      2146    3852
+             9    7286    0  64         0       0
+            10    7566    0  64         0       0
+            11     446    2  64       414      32
+            12    3360    0  64         0       0
+            13    4598    0  64         0       0
+            14     978    0  64         0     978
+            15    2786    0  64         0       0
+            16    6564    0  64         0       0
+            17   10632    0  64         0       0
+            18   11504    0  64         0       0
+            19    8472    0  64         0       0
+            20   11608    0  64         0       0
+            22    4002    0  64         0       0
+            23    6794    0  64         0       0
+            24    3948    0  64         0       0
+            29    5164    0  64         0       0
+
+module 10 @ 082EAB4C-08316E1C (180944 bytes)
+   4 channels, 64 patterns, song length 66, mix rate 21024, pattern bytes 46784, sample bytes 132320
+   orders: 00 01 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 1B 0F 1B 1C 1D 1E 1F 20 21 2B 10 11 12 13 14 15 16 17 18 19 1A 22 23 24 25 26 27 28 29 2A 2C 2D 2E 2F 30 31 32 33 34 35 36 37 38 38 39 3A 3B 3C 3D 3E 3F
+   stored rows per pattern: 64 64 64 64 64 64 64 64 64 64 64 13 64 64 64 64 38 12 24 63 32 24 64 43 12 16 45 64 64 64 64 64 64 64 30 7 17 35 64 17 48 64 33 52 19 16 64 64 64 64 16 2 10 64 20 34 64 64 37 42 12 10 33 64
+   notes C-1..B-3; instruments 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 28
+   effects: 0xx (arpeggio) x179, 1xx (porta up) x463, 2xx (porta down) x509, 3xx (tone porta) x96, 4xx (vibrato) x997, 6xx (vibrato+vol slide) x412, 9xx (sample offset) x5, Axx (volume slide) x1674, Bxx (order jump) x41, Cxx (set volume) x2042, Dxx (pattern break) x1, E9x x31, Fxx (speed/tempo) x156
+   Fxx values: 01x1 02x5 03x4 04x18 05x8 06x38 07x5 08x58 09x3 0Ax7 0Bx2 0Cx3 0Dx1 0Ex1 0Fx2
+   samples:  #   length  fine vol loopStart loopLen
+             1    1544    0  64         0       0
+             2    9958    0  64         0       0
+             3    3858    0  64         0       0
+             4   22832    0  64      7416   15416
+             5    3520    0  64      1512    2008
+             6    1544    0  64         0       0
+             7    3168    0  64       170    2998
+             8    2534    4  64         8    2526
+             9    1740    0  64      1570     170
+            10    3452    0  64         0       0
+            11    6092    0  64         0       0
+            12    6164    0  64      4102    2062
+            13    5234    0  64       182    5040
+            14    3470    3  64      1856    1614
+            15    5778    0  64      4250    1520
+            16    8238    0  64      6086    2152
+            17    6288    0  64         0       0
+            18    9810    0  64         0       0
+            19   13936    0  64         0       0
+            23    7200    0  64         0       0
+            24    2888    0  64         0       0
+            29    3072    0  64         0       0
+
+
+3. EFFECT USE (all modules)
+----------------------------------------------------------------------------------------------------
+   0xx (arpeggio)               597
+   1xx (porta up)               1661
+   2xx (porta down)             1729
+   3xx (tone porta)             1053
+   4xx (vibrato)                4788
+   6xx (vibrato+vol slide)      1002
+   9xx (sample offset)          36
+   Axx (volume slide)           12767
+   Bxx (order jump)             323
+   Cxx (set volume)             14732
+   Dxx (pattern break)          20
+   E0x                          1
+   E9x                          364
+   Fxx (speed/tempo)            849
+   Not implemented by v1 (ignored): 5xx, 6xx, 7xx, 8xx, 9xx and every Exx.
+   Arpeggio (0xy) is parsed but its pitch is overwritten each tick, so it has no effect.
+   A15 (x & y != 0) triggers the channel-skip bug in gmpProcessTick.
+
+The patterns themselves are in gbamod1_data.s, one R line per row.

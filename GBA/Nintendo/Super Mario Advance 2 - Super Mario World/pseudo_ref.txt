@@ -1,0 +1,937 @@
+@@ sndInit
+void sndInit(const SndConfig *cfg)          /* the game calls this once at boot */
+{
+    REG_SOUNDCNT_X = 0; REG_SOUNDCNT_X = 0x80;          /* reset all sound registers, master on */
+    REG_SOUNDCNT_L = 0xFF77;                           /* PSG 7/7 volume, ch1-4 on both sides   */
+    REG_SOUNDCNT_H_lo = 0x0D;                          /* PSG 50 %, FIFO A/B 100 %              */
+    REG_SOUNDBIAS = (REG_SOUNDBIAS & 0x3FFF) | 0x4000; /* 8-bit / 65.536 kHz PWM                */
+    REG_SOUND1CNT_L = 8;  REG_SOUND1CNT_H = 0xF000;    /* sweep off                             */
+    gCfg = cfg;
+    CpuFastSet(armDownmix, gIwramCode, 0xD8);          /* copy the three ARM loops to IWRAM     */
+    gFnDownmix  = gIwramCode;
+    gFnMixVoice = gIwramCode + (armMixVoice - armDownmix);
+    gFnEcho     = gIwramCode + (armEcho     - armDownmix);
+    gEchoHistory = (s16 *)0x02036000;                  /* 18 frames x 0x2C0 bytes in EWRAM       */
+    mixInit(gDmaBuffers);
+    cmdInit(); kitInstInit(); voiceInitAll(); trackInitAll(); playerInitAll();
+}
+@@ sndVSync
+void sndVSync(void)        /* the game calls this first thing in its V-blank handler */
+{
+    mixDmaRestart();
+}
+@@ sndMain
+void sndMain(void)          /* the game calls this once per frame, after sndVSync */
+{
+    cmdProcess();           /* apply the commands queued by the snd* API          */
+    playerTickAll();        /* sequencer: fades, then every track of every player */
+    psgUpdate();            /* the four Game Boy channels                         */
+    if (gMixEnabled)
+        mixFrame();         /* render 176 samples into the buffer DMA plays next  */
+}
+@@ mixInit
+void mixInit(u8 *dmaBuf)    /* dmaBuf: 4 x 176 bytes */
+{
+    gMixEnabled = 1;
+    CpuFastSet(&zero, gEchoHistory, FILL | 0xC60);     /* 18 x 0x2C0 bytes                      */
+    CpuFastSet(&zero, dmaBuf, FILL | 0xB0);
+    gDmaBufA[0] = dmaBuf;          gDmaBufB[0] = dmaBuf + 0xB0;
+    gDmaBufA[1] = dmaBuf + 0x160;  gDmaBufB[1] = dmaBuf + 0x210;
+    gTimerReload = 0xF9C4;                             /* 65536-1596: 16777216/1596 = 10512 Hz  */
+    gDmaBufIdx = 0;
+    REG_SOUNDCNT_H_hi = 0x9A;      /* FIFO A -> left, FIFO B -> right, both timer 0, reset both */
+    REG_FIFO_A = 0; REG_FIFO_B = 0;
+}
+@@ mixDmaRestart
+void mixDmaRestart(void)    /* V-blank: restart DMA1/DMA2 on the buffer mixed last frame */
+{
+    REG_TM0CNT = gTimerReload | TIMER_ENABLE;
+    if (!gMixEnabled) return;
+    REG_DMA1CNT_H &= 0xC5FF; REG_DMA1CNT_H &= 0x7FFF;  /* stop DMA1, clear repeat/timing bits  */
+    REG_DMA2CNT_H &= 0xC5FF; REG_DMA2CNT_H &= 0x7FFF;
+    REG_DMA1SAD = gDmaBufA[gDmaBufIdx]; REG_DMA1DAD = &REG_FIFO_A; REG_DMA1CNT = 0xB6400004;
+    REG_DMA2SAD = gDmaBufB[gDmaBufIdx]; REG_DMA2DAD = &REG_FIFO_B; REG_DMA2CNT = 0xB6400004;
+    gDmaBufIdx ^= 1;                                   /* mixFrame now fills the other half     */
+}
+@@ sndStopOutput
+void sndStopOutput(void)    /* stop mixing and DMA (the game calls it before e.g. saving) */
+{
+    gMixEnabled = 0;
+    REG_DMA1CNT_H &= 0xC5FF; REG_DMA1CNT_H &= 0x7FFF;
+    REG_DMA2CNT_H &= 0xC5FF; REG_DMA2CNT_H &= 0x7FFF;
+}
+@@ sndStartOutput
+void sndStartOutput(void)
+{
+    gMixEnabled = 1;        /* DMA restarts at the next sndVSync */
+}
+@@ mixVoice
+/* Mix one frame (176 samples) of a sampled voice into gMixDry, or into gMixWet when the
+   echo is on and the voice's track has echo enabled.  Returns 1 when a one-shot sample
+   ended (the caller then frees the voice). */
+u32 mixVoice(Voice *v, u32 vol, u32 step /* 24.8 */, u32 pan /* 0..127 */)
+{
+    s16 *out = (gEchoShift < 16 && v->echo) ? gMixWet : gMixDry;
+    s16 *outEnd = out + 176;
+    u32  volL = (vol * (127 - pan)) >> 8 & 0xFF;       /* 8-bit gains                          */
+    u32  volR = (vol * pan) >> 8 & 0xFF;
+    u32  pos  = v->pos;                                /* 24.8 sample position                 */
+    u32  end  = v->sample->loopEnd ? v->sample->loopEnd : v->sample->length;
+    s16 *stop = outEnd;
+    int  hitEnd = end <= (pos + step * 176) >> 8;
+    if (hitEnd)                                        /* samples until the end is reached     */
+        stop = out + Div(end * 256 - pos - 1 + step, step);
+    if (!v->sample->loopEnd || !hitEnd) {
+        pos = gFnMixVoice(v->sample->pcm, out, out + 176, stop, pos, step, volL, volR);
+        if (hitEnd) return 1;                          /* one-shot sample finished             */
+    } else {
+        u32 loopLen = v->sample->loopEnd - v->sample->loopStart;
+        pos = gFnMixVoice(v->sample->pcm, out, out + 176, stop, pos, step, volL, volR) - loopLen * 256;
+        for (int left = 176 - (stop - out); left; ) {  /* keep wrapping until the frame is full */
+            out = stop;
+            int n = left; hitEnd = end <= (pos + left * step) >> 8;
+            if (hitEnd) n = Div(end * 256 - pos - 1 + step, step);
+            stop = out + n;
+            pos = gFnMixVoice(v->sample->pcm, out, out + 176, stop, pos, step, volL, volR);
+            if (hitEnd) pos -= loopLen * 256;
+            left -= stop - out;
+        }
+    }
+    v->pos = pos;
+    return 0;
+}
+@@ kitInstInit
+void kitInstInit(void)      /* the RAM instrument used by type-0x11 "sample kit" instruments */
+{
+    gKitInst.type = 0; gKitInst.flags = 0; gKitInst.data = 0;
+    gKitInst.envOfs = 0; gKitInst.release = 0; gKitInst.rootKey = 0x30;
+}
+@@ instLookup
+/* Resolve the track's current bank/program for one key into an instrument record,
+   its envelope table and its optional PSG duty / wave data. */
+void instLookup(Track *t, u32 key, NoteInfo *out)
+{
+    u8 *bank = cfgTable(gCfg->instBanks, t->player->bankMap[t->bank]);  /* base + base[i]     */
+    InstRec *top = (InstRec *)(bank + ((u16 *)bank)[t->program]);
+    InstRec *ins;
+    out->isKit = 0; out->isSampleKit = 0;
+    switch (top->type) {
+    case 0x00 ... 0x0F:                    /* plain instrument                                  */
+        ins = top; break;
+    case 0x10: {                           /* drum kit: 4-byte entry per key from top->envOfs   */
+        KitEntry *e = (KitEntry *)(bank + top->data) + (u8)(key - (u8)top->envOfs);
+        out->isKit = 1;
+        out->kitPan = e->pan;
+        ins = (InstRec *)(bank + e->inst);
+        break; }
+    case 0x11:                             /* sample kit: one sample number per key             */
+        gKitInst.data = ((u16 *)(bank + top->data))[key];
+        out->inst = &gKitInst;
+        out->env  = kFlatEnvelope;         /* {1, 0x7FFF}, {0x7FFF, 0x7FFF}, {-1, 0}            */
+        out->isSampleKit = 1;
+        goto tail;
+    case 0x12: {                           /* key split: {u8 maxKey, u8 -, u16 inst} entries    */
+        u8 *e = bank + top->data;
+        while (e[0] < key) e += 4;
+        ins = (InstRec *)(bank + *(u16 *)(e + 2));
+        break; }
+    default:                               /* any other type: out->inst is left unset (bug)     */
+        goto tail;
+    }
+    out->inst = ins;
+    out->env  = (s16 *)(bank + ins->envOfs);
+tail:
+    if (out->inst->type == 3)              /* wave channel: 16-byte wave at top->data           */
+        out->wave = bank + top->data;
+    if (out->inst->flags & 1)              /* PSG duty/noise-mode sequence at ins->data          */
+        out->duty = bank + out->inst->data;
+}
+@@ voiceInitAll
+void voiceInitAll(void)
+{
+    gLastWave = NULL;
+    for (i = 0; i < 4; i++) gPsgVoices[i].state = 0, ...;
+    gPsgVoices[0].type = 1; gPsgVoices[1].type = 2; gPsgVoices[2].type = 3; gPsgVoices[3].type = 4;
+    for (i = 0; i < 7; i++) gDsVoices[i].state = 0, gDsVoices[i].type = 0, gDsVoices[i].track = NULL;
+    gVoiceCount = 7;
+    gFreeVoices = &gDsVoices[0];                       /* doubly linked: 0 <-> 1 <-> ... <-> 6 */
+    for (i = 0; i < 7; i++) {
+        gDsVoices[i].prev = i ? &gDsVoices[i - 1] : NULL;
+        gDsVoices[i].next = i < 6 ? &gDsVoices[i + 1] : NULL;
+    }
+    gActiveVoices = NULL; gReservedVoices = NULL;
+    gEchoPos = 0; gEchoLen = 18; gEchoShift = 16; gEchoShiftTarget = 16; gEchoTail = 0;
+}
+@@ voiceListRemove
+void voiceListRemove(Voice *v, Voice **head)
+{
+    if (v->prev) v->prev->next = v->next; else *head = v->next;
+    if (v->next) v->next->prev = v->prev;
+}
+@@ voiceListPush
+void voiceListPush(Voice *v, Voice **head)
+{
+    v->next = *head; v->prev = NULL;
+    if (*head) (*head)->prev = v;
+    *head = v;
+}
+@@ voiceListInsertActive
+/* The active list is kept sorted so that its head is the best voice to steal:
+   released voices first (by ascending priority), then playing voices by ascending priority.
+   Among equal priorities a new voice goes after the existing ones. */
+void voiceListInsertActive(Voice *v)
+{
+    Voice *before = NULL, *after = gActiveVoices;
+    if (v->state == 1) {                       /* skip all released voices and every playing   */
+        if (after && (after->state != 1 || after->priority <= v->priority))   /* voice of <= prio */
+            do { before = after; after = before->next; }
+            while (after && (after->state != 1 || after->priority <= v->priority));
+    } else if (v->state == 2) {                /* among the released voices, by priority       */
+        if (after && after->state != 1)
+            while (after->priority <= v->priority) {
+                before = after; after = after->next;
+                if (!after || after->state == 1) break;
+            }
+    } else return;
+    v->next = after; if (after) after->prev = v;
+    v->prev = before;
+    if (before) before->next = v; else gActiveVoices = v;
+}
+@@ keyToFreq
+/* Key -> pitch value for the voice's channel type.  n = key + 48 - rootKey, clamped. */
+s32 keyToFreq(Voice *v, u32 key, u32 root)
+{
+    s16 n = (u8)key + 0x30 - (u8)root;
+    if (n < 0) n = 0; else if (n > 119) n = 120;     /* BUG: 120 is one past both tables     */
+    if (v->type == 0) return kDsPitch[n];            /* 32768 * 2^((n-48)/12), 32768 = 1.0   */
+    if (v->type == 4) return n;                      /* noise: index into kNoiseTable        */
+    return kPsgFreq[n];                              /* GB frequency register value          */
+}
+@@ noiseDivider
+u8 noiseDivider(u32 n)
+{
+    if ((u16)n > 119) n = 119;
+    return kNoiseTable[n];                           /* NR43 value: shift<<4 | ratio         */
+}
+@@ envStep
+/* Advance the voice's envelope by one frame and return the new level (0..0x7FFF).
+   The table is {s16 frames, s16 level} pairs; each segment moves linearly from the
+   current level to 'level' in 'frames' frames.  frames < 0 marks the last pair: the
+   envelope stays on the previous segment (i.e. holds its level) for ever. */
+s32 envStep(Voice *v)
+{
+    if (v->envCount == 0) {
+        v->envLevel = v->envTarget;
+        if (v->envTable[(v->envIndex + 1) * 2] >= 0) v->envIndex++;
+        s16 *seg = &v->envTable[v->envIndex * 2];
+        v->envTarget = seg[1];
+        v->envCount  = seg[0];
+        v->envStep   = (s16)(seg[1] - (s16)v->envLevel) / (u16)v->envCount;   /* __divsi3 */
+    }
+    v->envLevel += v->envStep;
+    v->envCount--;
+    return v->envLevel;
+}
+@@ echoSetFeedback
+void echoSetFeedback(u32 shift)     /* command 0x300: 16 = echo off, n < 16: feedback 2^-n */
+{
+    gEchoShiftTarget = shift;       /* mixFrame moves gEchoShift towards it by 1 per frame */
+}
+@@ voiceSetCount
+/* Command 0x304: change the number of sampled voices (at most 7).  Fewer voices: steal
+   voices through voiceAlloc and park them on gReservedVoices; more: return them. */
+void voiceSetCount(u32 n)
+{
+    s8 d = (u8)n - gVoiceCount;
+    if (d > 0) {
+        for (Voice *v = gReservedVoices, *nx; v && d > 0; v = nx, d--) {
+            nx = v->next;
+            voiceListRemove(v, &gReservedVoices); voiceListPush(v, &gFreeVoices);
+            gVoiceCount++;
+        }
+    } else if (d < 0) {
+        for (d = -d; d > 0; d--) {
+            Voice *v = voiceAlloc(0, 0xFF);                /* priority 255 always succeeds */
+            if (!v) break;
+            voiceListRemove(v, &gActiveVoices); v->state = 0;
+            voiceListPush(v, &gReservedVoices);
+            gVoiceCount--;
+        }
+    }
+}
+@@ dsVolume
+/* Sampled voice: advance the envelope (key on) or the release, return the mix volume. */
+u32 dsVolume(Voice *v)
+{
+    if (v->state == 1) {
+        Track *t = v->track; Player *p = t->player;
+        u32 x = (p->volume * v->velocity * 128) >> 8;          /* player volume 0x8000 = 1.0 */
+        x = (x * p->songVolume) >> 7;                          /* 0x80 = 1.0 (command EA)    */
+        x = (x * p->volume2)    >> 8;                          /* 0x80 = 0.5 (command 5)     */
+        x = (x * t->volume)     >> 8;                          /* 0x80 = 0.5 (command E0)    */
+        x = (x * t->expression) >> 15;                         /* 0x80 = 1/256 (command 0x102)*/
+        v->volume = (envStep(v) * x) >> 11;
+    } else                                                     /* released: exponential decay */
+        v->volume = v->volume * (v->release + 230) >> 9;
+    return v->volume >> 8;
+}
+@@ psgEnvelope
+/* PSG voice: advance the envelope and, at the start of each envelope segment, return a
+   new NRx2 value that lets the hardware envelope approximate the segment:
+   start volume = current level, direction up/down, step time = (frames+15)/|delta| (1..7).
+   Returns 8 ("no change") between segment starts.  For the wave channel (type 3) it
+   returns an index into kWaveVolume (0 = mute .. 4 = 100 %) instead.
+   'loud' doubles the velocity for voices panned hard left or right. */
+u32 psgEnvelope(Voice *v, u32 loud)
+{
+    u32 vel = v->velocity;
+    s16 wasCount = v->envCount;
+    envStep(v);
+    if (wasCount != 0) return 8;
+    if (loud) vel <<= 1;
+    Track *t = v->track; Player *p = t->player;
+    u32 x = (t->volume * vel * 0x8000) >> 14;
+    x = (x * t->expression) >> 7;  x = (x * p->songVolume) >> 7;
+    x = p->volume * ((x * p->volume2) >> 8);
+    if (v->type == 3) {
+        v->volume = x >> 22;
+        return min(v->volume * 5 >> 7, 4);
+    }
+    v->volume = x >> 15;
+    u32 from = min((v->envLevel  * v->volume) >> 25, 15);
+    v->volume = min((v->volume * v->envTarget) >> 25, 15);
+    u32 to = v->volume;
+    if (to != from) {
+        u16 st = (u16)(v->envCount + 15) / abs(to - from);
+        if (st) return from << 4 | min(st, 7) | (to > from ? 8 : 0);
+    }
+    return from << 4 | 8;            /* constant volume (direction 'up', step 0 = off)      */
+}
+@@ voicePitch
+/* Pitch for this frame: base + portamento, then pitch bend, then vibrato.
+   Sampled voices use kDsPitch units (bigger = higher); PSG voices use GB register
+   values (2048 - x is the period), so the maths is done on the period. */
+u32 voicePitch(Voice *v)
+{
+    Track *t = v->track;
+    if (v->portaDelay) v->portaDelay--;
+    else if (v->portaCount) {
+        v->portaOfs += v->portaStep;
+        if (--v->portaCount == 0) v->portaOfs = v->portaTotal;
+    }
+    u32 f = v->freq + v->portaOfs;
+    if (t->bend) {                   /* ratio = 1 + bend/128 * (2^(range/12) - ... ) (linear)  */
+        u32 r = kDsPitch[t->bendRange + 48] * abs(t->bend) + 0x400000;   /* 1.0 = 0x400000  */
+        if (t->bend > 0) f = v->type ? 0x800 - (0x800 - f) * 0x400000 / r : (r >> 7) * f >> 15;
+        else             f = v->type ? max(0x800 - ((r >> 7) * (0x800 - f) >> 15), 0)
+                                     : f * 0x8000 / (r >> 7);
+    }
+    if (t->lfoDepth) {               /* vibrato: sine table, depth in 1/256-ish units          */
+        if (v->lfoDelay) v->lfoDelay--;
+        else {
+            s32 s = kLfoSine[v->lfoPhase >> 1];                     /* -127..127              */
+            if (v->type == 0)
+                f = s < 0 ? (f * 0x1000 / ((t->lfoDepth * -s >> 3) + 0x10000)) << 4
+                          : f + (t->lfoDepth * f * s >> 19);
+            else
+                f = 0x800 - (s < 0 ? (t->lfoDepth * -s + 0x80000) * (0x800 - f) >> 19
+                                   : (0x800 - f) * 0x80000 / (t->lfoDepth * s + 0x80000));
+            v->lfoPhase += t->lfoSpeed;
+            if ((v->lfoPhase >> 1) > 255) v->lfoPhase -= 0x200;
+        }
+    }
+    return f;
+}
+@@ mixFrame
+/* Render one frame: 176 stereo samples at 10 512 Hz. */
+void mixFrame(void)
+{
+    if (gEchoShift < 16)             /* the wet bus starts with the output of 18 frames ago    */
+        CpuFastSet(gEchoHistory + gEchoPos * 0x160, gMixWet, 0xB0);
+    CpuFastSet(&zero, gMixDry, FILL | 0xB0);
+    for (Voice *v = gActiveVoices, *nx; v; v = nx) {
+        nx = v->next;
+        if (v->track && v->track->player && (v->track->player->flags & PAUSED))
+            continue;                                /* paused player: voice frozen          */
+        u32 vol = dsVolume(v), pan, f;
+        if (v->state == 1) {
+            v->length--;
+            pan = v->fixedPan ? v->pan : v->track->pan;
+            f = v->outFreq = voicePitch(v);
+            v->echo = v->track->echo;
+        } else {
+            if (vol == 0) { voiceStop(v); continue; }
+            pan = v->pan; f = v->outFreq;
+        }
+        u32 step = (v->sample->rate * (f >> 2) / 10512) >> 5;   /* 24.8 input samples/output */
+        if (mixVoice(v, vol, step, pan) == 1) voiceStop(v);
+    }
+    for (i = 0; i < 7; i++)                          /* notes whose length ran out          */
+        if (gDsVoices[i].state == 1 && gDsVoices[i].length == 0) noteOff(&gDsVoices[i]);
+    if (gEchoShift > gEchoShiftTarget) gEchoShift--;
+    else if (gEchoShift < gEchoShiftTarget) gEchoShift++;
+    if (gEchoShift < 16) gEchoTail = gEchoLen;       /* keep feeding the history for one     */
+    else if (gEchoTail) gEchoTail--;                 /* more round after the echo is turned off */
+    else goto out;
+    if (gEchoTail) {
+        gFnEcho(gMixDry, gMixWet, gMixDry + 352, gEchoShift);   /* dry += wet; wet >>= shift */
+        CpuFastSet(gMixWet, gEchoHistory + gEchoPos * 0x160, 0xB0);
+    }
+out:
+    if (++gEchoPos >= gEchoLen) gEchoPos = 0;
+    gFnDownmix(gMixDry, gDmaBufA[gDmaBufIdx], gMixDry + 352);   /* L -> buffer A, R -> B      */
+}
+@@ psgUpdate
+/* Once per frame for the four Game Boy channels. */
+void psgUpdate(void)
+{
+    for (i = 0; i < 4; i++) {
+        Voice *v = &gPsgVoices[i];                     /* type 1..4 = square 1, square 2, wave, noise */
+        if (v->state == 1 && v->length == 0) noteOff(v);
+        else if (v->track && v->track->player && (v->track->player->flags & PAUSED)) noteOff(v);
+        if (v->state == 0) continue;
+        u32 f, pan;
+        if (v->state == 1) { f = v->outFreq = voicePitch(v); pan = v->fixedPan ? v->pan : v->track->pan; }
+        else               { f = v->outFreq; pan = v->pan; }
+        u32 env = psgEnvelope(v, pan != 64) & 0xFF;    /* 8 = keep the current envelope       */
+        u8 bit = 1 << (v->type - 1);                   /* hard pan: 64 = both, <64 left, >64 right */
+        REG_NR51 = (REG_NR51 & ~(bit * 0x11)) | (pan == 64 ? bit * 0x11 : pan < 64 ? bit << 4 : bit);
+        if (v->state == 1) {
+            if (v->pos == 0) {                         /* first frame of the note: trigger     */
+                psgKeyOn(v, env); v->pos = 1; v->length--; continue;
+            }
+            v->pos++; v->length--;                     /* pos = frames since key-on            */
+        } else if (v->type == 3) {                     /* released wave voice: software fade   */
+            v->volume = v->volume * (v->release + 230) >> 9;
+            u32 x = (pan != 64 ? v->volume << 1 : v->volume) * 5 >> 7;
+            if (x == 0) voiceStop(v); else REG_NR32 = kWaveVolume[min(x, 4)];
+            continue;
+        }
+        /* duty / noise-mode sequence: u16 n, then n bytes; the last one is held */
+        u32 duty = 0xFF;
+        if (v->inst->flags & 1) {
+            u16 *seq = (u16 *)v->psgData;
+            duty = v->pos < seq[0] ? ((u8 *)seq)[2 + v->pos] : ((u8 *)seq)[1 + seq[0]];
+        }
+        switch (v->type) {
+        case 1: if (env == 8) { if (v->inst->sweep == 8) REG_SOUND1CNT_X = f; }   /* no sweep: glide */
+                else { REG_NR12 = env; REG_SOUND1CNT_X = f | 0x8000; }
+                REG_NR11 &= 0xC0; if (duty != 0xFF) REG_NR11 = duty << 6; break;
+        case 2: if (env == 8) REG_SOUND2CNT_H = f;
+                else { REG_NR22 = env; REG_SOUND2CNT_H = f | 0x8000; }
+                REG_NR21 &= 0xC0; if (duty != 0xFF) REG_NR21 = duty << 6; break;
+        case 3: REG_SOUND3CNT_X = (REG_SOUND3CNT_X & 0x4000) | f;
+                if (env != 8) REG_NR32 = kWaveVolume[env]; break;
+        case 4: if (env != 8) { REG_NR42 = env; REG_NR44 = 0x80; }
+                if (duty == 0xFF) REG_NR43 = (REG_NR43 & 8) | noiseDivider(f);
+                else REG_NR43 = noiseDivider(f) | (duty ? 8 : 0);        /* duty != 0: 7-bit LFSR */
+                break;
+        }
+    }
+}
+@@ noteOn
+/* Sequencer note event.  len = note length in ticks * 150. */
+void noteOn(Track *t, u32 key, u32 vel, u32 len)
+{
+    Player *p = t->player;
+    NoteInfo ni;
+    if (t->mute) return;
+    u8 k = key + t->transpose;
+    instLookup(t, k, &ni);
+    u32 frames = len / ((ni.inst->flags & 0x10) ? p->tempo : p->tempo + p->tempoOfs);
+    Voice *v;
+    if (!t->hold || !(v = t->voices)) {                /* tie (C5): keep the running voice      */
+        v = voiceAlloc(kVoiceForType[ni.inst->type], t->priority);   /* {0,1,2,3,4}            */
+        if (!v) return;
+        trackAddVoice(t, v);
+        v->key = key; v->pos = 0;
+        v->lfoParams = &t->lfoDelay; v->lfoPhase = 0; v->lfoDelay = t->lfoDelay;
+        v->envTable = ni.env; v->envLevel = 0; v->envTarget = 0; v->envCount = 0; v->envIndex = -1;
+        v->release = ni.inst->release;
+        v->inst = ni.inst;
+    }
+    v->fixedPan = ni.isKit;
+    if (ni.isKit) { k = 48; v->pan = ni.kitPan; }      /* kits play at the root key            */
+    else if (ni.isSampleKit) k = 48;
+    v->velocity = vel; v->volume = 0; v->length = frames;
+    v->echo = t->echo;
+    v->freq = keyToFreq(v, k, ni.inst->rootKey);
+    if (!t->portaOn)
+        gameMemClear(&v->portaDelay, 20);              /* no portamento                         */
+    else {
+        s32 from = keyToFreq(v, t->portaKey, ni.inst->rootKey);
+        v->portaDelay = t->portaDelay;
+        v->portaCount = t->portaLen * frames >> 8;     /* portaLen/256 of the note              */
+        if (t->portaMode & 2) v->portaTotal = from - v->freq;           /* slide away to portaKey */
+        else { v->portaTotal = v->freq - from; v->freq = from; }        /* slide from portaKey    */
+        v->portaStep = v->portaTotal / v->portaCount;  /* __divsi3; /0 if portaCount == 0        */
+        if (t->portaMode & 4) t->portaKey = k;         /* chain: next note slides from this one  */
+        else t->portaOn = 0;                           /* one note only                          */
+        v->portaOfs = 0;
+    }
+    if (v->type == 0)
+        v->sample = (SampleHdr *)(t->sampleBank + ((u32 *)t->sampleBank)[ni.inst->data]);
+    else if (v->type == 3 || (ni.inst->flags & 1))
+        v->psgData = v->type == 3 ? ni.wave : ni.duty;
+    else
+        *(u8 *)&v->psgData = ni.inst->data;            /* fixed duty / noise mode               */
+    if (frames == 0) noteOff(v);
+}
+@@ noteOff
+void noteOff(Voice *v)
+{
+    if (v->state != 1 || v->track->hold) return;
+    if (v->type == 0) {                                /* sampled: re-sort as 'released'        */
+        voiceListRemove(v, &gActiveVoices); v->state = 2; voiceListInsertActive(v);
+    } else if (v->type == 3) v->state = 2;             /* wave: faded by psgUpdate              */
+    else {                                             /* squares, noise: hardware envelope     */
+        u8 env = (v->release >> 5) ? (v->volume & 15) << 4 | v->release >> 5 : 0;   /* decrease */
+        switch (v->type) {
+        case 1: REG_NR12 = env; REG_SOUND1CNT_X = v->outFreq | 0x8000; REG_NR11 &= 0xC0; break;
+        case 2: REG_NR22 = env; REG_SOUND2CNT_H = v->outFreq | 0x8000; REG_NR21 &= 0xC0; break;
+        case 4: REG_NR42 = env; REG_NR44 = 0x80; break;
+        }
+        v->state = 0;                                  /* the channel is free again at once     */
+    }
+    if (!v->fixedPan) v->pan = v->track->pan;          /* freeze the pan for the release        */
+    trackRemoveVoice(v->track, v);
+}
+@@ voiceStop
+void voiceStop(Voice *v)            /* immediate silence */
+{
+    if (v->state == 0) return;
+    switch (v->type) {
+    case 0: voiceListRemove(v, &gActiveVoices); voiceListPush(v, &gFreeVoices); break;
+    case 1: REG_NR12 = 8; REG_NR14 = 0xC0; break;      /* volume 0, restart with length stop    */
+    case 2: REG_NR22 = 8; REG_NR24 = 0xC0; break;
+    case 3: REG_NR30 = 0; break;
+    case 4: REG_NR42 = 8; REG_NR44 = 0xC0; break;
+    }
+    trackRemoveVoice(v->track, v);
+    v->state = 0;
+}
+@@ psgKeyOn
+void psgKeyOn(Voice *v, u32 env)
+{
+    u8 duty = (v->inst->flags & 1) ? v->psgData[2] : (u8)(u32)v->psgData;
+    switch (v->type) {
+    case 1: REG_NR10 = v->inst->sweep; REG_SOUND1CNT_X = v->freq | 0x8000;
+            REG_NR12 = env; REG_NR11 = duty << 6; REG_SOUND1CNT_X = v->freq | 0x8000; break;
+    case 2: REG_NR22 = env; REG_SOUND2CNT_H = v->freq | 0x8000;
+            REG_NR21 = (u8)(u32)v->psgData << 6;       /* BUG: ignores a duty sequence          */
+            break;
+    case 3: if (v->psgData != gLastWave) {             /* upload the 16-byte wave               */
+                REG_NR30 = 0; CpuSet(v->psgData, REG_WAVE_RAM, 8); gLastWave = v->psgData;
+            }
+            REG_NR30 = 0xC0;                           /* play the bank just written            */
+            REG_SOUND3CNT_X = v->freq | 0x8000; REG_NR32 = kWaveVolume[env]; REG_NR31 = 0; break;
+    case 4: REG_NR42 = env; REG_NR43 = noiseDivider(v->freq) | (duty ? 8 : 0);
+            REG_NR44 = 0x80; REG_NR41 = 0; break;
+    }
+}
+@@ voiceAlloc
+/* type 0: take a free sampled voice, or steal the head of the active list (a released
+   voice, or the lowest-priority playing one if its priority is <= prio).
+   type 1..4: the PSG channel, if it is idle, released, or playing at priority <= prio. */
+Voice *voiceAlloc(u32 type, u32 prio)
+{
+    Voice *v;
+    if (type == 0) {
+        if (!(v = gFreeVoices)) {
+            v = gActiveVoices;
+            if (!v || (v->state == 1 && prio < v->priority)) return NULL;
+            voiceStop(v);                              /* moves it to gFreeVoices               */
+        }
+        voiceListRemove(v, &gFreeVoices);
+        v->state = 1; v->priority = prio;
+        voiceListInsertActive(v);
+        return v;
+    }
+    v = &gPsgVoices[type - 1];
+    if (v->state == 1 && prio < v->priority) return NULL;
+    if (v->state) voiceStop(v);
+    v->state = 1; v->priority = prio;
+    return v;
+}
+@@ trackInitAll
+void trackInitAll(void)
+{
+    for (i = 0; i < 24; i++) gTracks[i].player = NULL, gTracks[i].voices = NULL;
+}
+@@ trackAlloc
+Track *trackAlloc(void)             /* first track not owned by a player, or NULL */
+{
+    for (Track *t = gTracks; t < &gTracks[24]; t++) if (!t->player) return t;
+    return NULL;
+}
+@@ trackStart
+void trackStart(Track *t, Player *p, u8 *data)
+{
+    if (!t) return;                                    /* no free track: silently ignored       */
+    if (t->player) trackStop(t);
+    t->wait = 0; t->hold = 0; t->mute = 0;
+    t->ptr = data; t->player = p; t->voices = NULL;
+    trackSetBank(t, 0);
+    t->pan = 64; t->lfoDelay = 0; t->lfoSpeed = 34; t->lfoDepth = 0;
+    t->portaOn = t->portaMode = t->portaKey = 0; t->portaDelay = t->portaLen = 0;
+    t->volume = 128; t->expression = 128; t->bend = 0; t->bendRange = 2; t->transpose = 0;
+    if (p->isSfx == 1) { t->priority = 12; t->echo = 127; t->noteAdvances = 1; }
+    else               { t->priority = 3;  t->echo = 0;   t->noteAdvances = 0; }
+    t->noteLen = 127; t->velocity = 127; t->restLen = 0;
+    t->sp = t->stack;
+}
+@@ trackReleaseAll
+void trackReleaseAll(Track *t)      /* key-off every voice of the track, even in hold mode */
+{
+    if (!t) return;
+    u8 h = t->hold; t->hold = 0;
+    for (Voice *v = t->voices, *nx; v; v = nx) { nx = v->tnext; noteOff(v); }
+    t->hold = h;
+}
+@@ trackStop
+void trackStop(Track *t)
+{
+    if (!t) return;
+    trackReleaseAll(t);
+    t->player = NULL;                                  /* back to the free pool                 */
+}
+@@ trackTick
+/* Run one frame of a track.  Returns 0 while it plays, 2 when it ended (FF at call
+   depth 0), 1 for a NULL track or one without a player.  Time: 'wait' counts in
+   ticks*150; every frame it drops by tempo (+ tempoOfs), so tempo 150 = 1 tick/frame. */
+u32 trackTick(Track *t)
+{
+    Player *p;
+    if (!t || !(p = t->player)) return 1;
+    if (p->flags & PAUSED) return 0;
+    while (t->wait <= 0) {
+        u8 c = *t->ptr++;
+        if (c < 0xC0) {                                /* ---- note ----                        */
+            u32 len, vel;
+            if (c < 0x60) { len = t->noteLen; vel = t->velocity; }
+            else { t->noteLen = len = readVarLen(t); t->velocity = vel = *t->ptr++; c -= 0x60; }
+            len *= 150;
+            if (gHookNote && (p->flags44 & 1)) gHookNote(t, c, vel, len);
+            else noteOn(t, c, vel, len);
+            if (t->noteAdvances == 1) t->wait += len;
+            continue;
+        }
+        switch (c) {
+        case 0xC0: t->wait += t->restLen * 150; break;                     /* rest            */
+        case 0xC1: t->wait += (t->restLen = readVarLen(t)) * 150; break;   /* rest n          */
+        case 0xC2: t->program   = *t->ptr++; break;
+        case 0xC3: t->pan       = *t->ptr++; break;
+        case 0xC4: t->priority  = *t->ptr++; break;
+        case 0xC5: case 0xC6: trackReleaseAll(t); t->hold = (c == 0xC5); break;   /* tie on/off */
+        case 0xC7: trackSetBank(t, *t->ptr++); break;
+        case 0xC8: t->noteAdvances = 1; break;
+        case 0xC9: t->noteAdvances = 0; break;
+        case 0xCA: if (gHookCA) gHookCA(t, *t->ptr++); else t->ptr++; break;
+        case 0xD0 ... 0xDF:                                                 /* portamento      */
+            t->portaMode = c & 15; t->portaKey = t->transpose + *t->ptr++;
+            t->portaLen = *t->ptr++;
+            t->portaDelay = (c & 1) ? *t->ptr++ : 0;
+            t->portaOn = 1; break;
+        case 0xE0: t->volume     = *t->ptr++; break;
+        case 0xE1: t->bend       = *t->ptr++; break;
+        case 0xE2: t->bendRange  = *t->ptr++; break;
+        case 0xE3: t->echo       = *t->ptr++; break;
+        case 0xE4: p->tempo      = readVarLen(t); break;
+        case 0xE5: t->lfoDelay   = *t->ptr++; break;
+        case 0xE6: t->lfoSpeed   = *t->ptr++; break;
+        case 0xE7: t->lfoDepth   = *t->ptr++; break;
+        case 0xE8: t->portaOn    = 0; break;
+        case 0xE9: t->transpose  = *t->ptr++; break;
+        case 0xEA: p->songVolume = *t->ptr++; break;
+        case 0xF0: t->ptr = p->base + read16(t); break;                     /* jump            */
+        case 0xF4: { u16 o = read16(t); *t->sp++ = t->ptr; t->ptr = p->base + o; break; } /* call */
+        case 0xF8: {                                                        /* start track n   */
+            u8 n = *t->ptr++; u16 o = read16(t);
+            Track *c2 = p->tracks[n];
+            if (!c2) p->tracks[n] = c2 = trackAlloc(); else trackStop(c2);
+            trackStart(c2, p, p->base + o);                 /* NULL c2 is not checked here:  */
+            c2->sampleBank = t->sampleBank; c2->bank = t->bank; c2->program = t->program;
+            c2->pan = t->pan; c2->echo = t->echo; c2->volume = t->volume;   /* writes to NULL */
+            c2->expression = t->expression; c2->priority = t->priority;
+            c2->bend = t->bend; c2->bendRange = t->bendRange; c2->transpose = t->transpose;
+            break; }
+        case 0xFF:                                                          /* return / end    */
+            if (t->sp == t->stack) { trackStop(t); return 2; }
+            t->ptr = *--t->sp; break;
+        default: break;              /* CB-CF, EB-EF, F1-F3, F5-F7, F9-FE: one-byte no-ops     */
+        }
+    }
+    t->wait -= p->tempo;
+    t->wait -= p->tempoOfs;
+    return 0;
+}
+@@ trackAddVoice
+void trackAddVoice(Track *t, Voice *v)
+{
+    if (v->track) return;
+    v->track = t; v->tprev = NULL; v->tnext = t->voices;
+    t->voices = v;
+    if (v->tnext) v->tnext->tprev = v;
+}
+@@ trackRemoveVoice
+void trackRemoveVoice(Track *t, Voice *v)
+{
+    if (!v->track) return;
+    v->track = NULL;
+    if (v->tnext) v->tnext->tprev = v->tprev;
+    if (v->tprev) v->tprev->tnext = v->tnext; else t->voices = v->tnext;
+}
+@@ readVarLen
+u32 readVarLen(Track *t)            /* 1 byte 0..7F, or 2 bytes 1xxxxxxx yyyyyyyy = x<<8 | y */
+{
+    u8 b = *t->ptr++;
+    if (b & 0x80) return (b & 0x7F) << 8 | *t->ptr++;
+    return b;
+}
+@@ trackSetBank
+/* Command C7: select a bank.  The song's bank map turns the bank number into an
+   instrument bank index; gCfg->instToSampleBank maps that to the sample bank. */
+void trackSetBank(Track *t, u32 bank)
+{
+    t->bank = bank; t->program = 0;
+    t->sampleBank = cfgTable(gCfg->sampleBanks, gCfg->instToSampleBank[t->player->bankMap[bank]]);
+}
+@@ playerInitAll
+void playerInitAll(void)
+{
+    for (i = 0; i < 20; i++) { gPlayers[i].state = 0; for (j = 0; j < 10; j++) gPlayers[i].tracks[j] = NULL; }
+}
+@@ playerReset
+void playerReset(Player *p)
+{
+    p->flags &= ~PAUSED; p->tempo = 150; p->tempoOfs = 0;
+    p->songVolume = 128; p->volume2 = 128; p->volume = 0x8000;
+    p->fadeStep = 0; p->fadeCount = 0; p->fadeTarget = 0; p->flags44 = 0;
+}
+@@ playerTickAll
+void playerTickAll(void)
+{
+    for (u32 i = 0; i < 20; i++) {
+        Player *p = &gPlayers[i];
+        if (!p->state) continue;
+        if (p->fadeCount) {
+            p->volume += p->fadeStep;
+            if (--p->fadeCount == 0) p->volume = p->fadeTarget;
+        } else if (p->state == 2) { playerStop(i); continue; }   /* fade-out finished       */
+        int alive = 0;
+        for (j = 0; j < 10; j++)
+            if (p->tracks[j]) {
+                if (trackTick(p->tracks[j]) == 0) alive = 1; else p->tracks[j] = NULL;
+            }
+        if (!alive) playerStop(i);
+    }
+}
+@@ doPlaySong
+void doPlaySong(u32 pl, u32 song)
+{
+    playerStartSong(pl, cfgTable(gCfg->songs, song), cfgTable(gCfg->songBankMaps, song));
+}
+@@ doPlaySfx
+void doPlaySfx(u32 pl, u32 set, u32 idx)
+{
+    playerStartSfx(pl, cfgTable(gCfg->sfxSets, set), cfgTable(gCfg->sfxBankMaps, set), idx);
+}
+@@ playerStartSong
+/* song: s8 trackCount, then u16 offsets (from the song header) of each track; 0 = none */
+void playerStartSong(u32 pl, u8 *song, u16 *bankMap)
+{
+    Player *p = &gPlayers[pl];
+    if (p->state) playerStop(pl);
+    p->base = song; p->bankMap = bankMap; p->isSfx = 0;
+    playerReset(p);
+    u16 *ofs = (u16 *)song;
+    for (int i = 0; i < (s8)song[0]; i++)             /* no check against the 10 slots        */
+        if (ofs[i + 1]) {
+            p->tracks[i] = trackAlloc();
+            trackStart(p->tracks[i], p, p->base + ofs[i + 1]);
+        }
+    p->state = 1;
+}
+@@ playerStartSfx
+/* set: u16 offsets (from the set) of single-track sequences */
+void playerStartSfx(u32 pl, u8 *set, u16 *bankMap, u32 idx)
+{
+    Player *p = &gPlayers[pl];
+    if (p->state) playerStop(pl);
+    p->base = set; p->bankMap = bankMap; p->isSfx = 1;
+    playerReset(p);
+    p->tracks[0] = trackAlloc();
+    trackStart(p->tracks[0], p, p->base + ((u16 *)p->base)[idx]);
+    p->state = 1;
+}
+@@ playerStop
+void playerStop(u32 pl)
+{
+    Player *p = &gPlayers[pl];
+    if (!p->state) return;
+    for (j = 0; j < 10; j++) { trackStop(p->tracks[j]); p->tracks[j] = NULL; }
+    p->state = 0;
+}
+@@ playerFadeOut
+void playerFadeOut(u32 pl, u32 frames)
+{
+    Player *p = &gPlayers[pl];
+    if (!p->state) return;
+    p->state = 2; p->fadeTarget = 0; p->fadeCount = frames;
+    p->fadeStep = -p->volume / frames;                 /* frames == 0 divides by zero          */
+}
+@@ playerSetPause
+void playerSetPause(u32 pl, u32 on)
+{
+    gPlayers[pl].flags = (gPlayers[pl].flags & ~PAUSED) | (on & 1);
+}
+@@ sndGetPlayerState
+u32 sndGetPlayerState(u32 pl)       /* 0 idle, 1 playing, 2 fading out (read directly) */
+{
+    return gPlayers[pl].state;
+}
+@@ cmdNext
+void cmdNext(void)                  /* advance the write pointer (wraps at 46 entries) */
+{
+    if (++gCmdWrite == gCmdEnd) gCmdWrite = gCmdQueue;
+}
+@@ cmdInit
+void cmdInit(void)
+{
+    gCmdRead = gCmdWrite = gCmdCommitted = gCmdQueue; gCmdEnd = &gCmdQueue[46];
+    gHookNote = NULL; gHookCA = NULL;
+}
+@@ cmdPop
+SndCmd *cmdPop(void)                /* next committed command, or NULL */
+{
+    if (gCmdRead == gCmdCommitted) return NULL;
+    SndCmd *c = gCmdRead;
+    if (++gCmdRead == gCmdEnd) gCmdRead = gCmdQueue;
+    return c;
+}
+@@ sndCommit
+void sndCommit(void)                /* make the commands queued since the last call visible */
+{
+    gCmdCommitted = gCmdWrite;      /* no overflow check: 47 queued commands lose 46         */
+}
+@@ sndPlaySong
+void sndPlaySong(u32 pl, u32 song)             { queue(0x000, pl, song); }
+@@ sndPlaySfx
+void sndPlaySfx(u32 pl, u32 set, u32 idx)      { queue(0x001, pl << 16 | set, idx); }
+@@ sndFadeOut
+void sndFadeOut(u32 pl, u32 frames)            { queue(0x002, pl, frames); }
+@@ sndPause
+void sndPause(u32 pl, u32 on)                  { queue(0x003, pl, on); }
+@@ sndFadeOutMask
+void sndFadeOutMask(u32 mask, u32 frames)      { queue(0x200, frames, mask); }
+@@ sndPauseMask
+void sndPauseMask(u32 mask, u32 on)            { queue(0x201, on, mask); }
+@@ sndSetTempo
+void sndSetTempo(u32 pl, s32 ofs)              { queue(0x004, pl, ofs); }   /* tempo offset   */
+@@ sndSetVolume2
+void sndSetVolume2(u32 pl, u32 v)              { queue(0x005, pl, v); }     /* 0x80 = default */
+@@ sndSetHookFlags
+void sndSetHookFlags(u32 pl, u32 v)            { queue(0x006, pl, v); }     /* bit 0: note hook */
+@@ sndMuteTracks
+void sndMuteTracks(u32 pl, u32 mask, u32 on)   { queue(0x100, pl << 16 | on, mask); }
+@@ sndSetTrackExpr
+void sndSetTrackExpr(u32 pl, u32 mask, u32 v)  { queue(0x102, pl << 16 | v, mask); }
+@@ sndSetTrackBend
+void sndSetTrackBend(u32 pl, u32 mask, u32 range, u32 bend) { queue(0x103, pl << 16 | range << 8 | bend, mask); }
+@@ sndSetTrackPan
+void sndSetTrackPan(u32 pl, u32 mask, u32 pan) { queue(0x101, pl << 16 | pan, mask); }
+@@ sndSetEcho
+void sndSetEcho(u32 shift)                     { queue(0x300, shift); }     /* 16 = off       */
+@@ sndSetVoices
+void sndSetVoices(u32 n)                       { queue(0x304, n); }
+@@ sndCallback
+void sndCallback(void (*fn)(u32), u32 arg)     { queue(0x301, fn, arg); }   /* run fn(arg) in sndMain */
+@@ sndSetHookCA
+void sndSetHookCA(void *fn)                    { queue(0x302, fn); }
+@@ sndSetHookNote
+void sndSetHookNote(void *fn)                  { queue(0x303, fn); }
+@@ cmdPlayer
+void cmdPlayer(SndCmd *c)           /* commands 0x000-0x006 */
+{
+    Player *p = &gPlayers[c->a];
+    switch (c->op) {
+    case 0: doPlaySong(c->a, c->b); break;
+    case 1: doPlaySfx(c->a >> 16, c->a & 0xFFFF, c->b); break;
+    case 2: playerFadeOut(c->a, c->b); break;
+    case 3: playerSetPause(c->a, c->b); break;
+    case 4: p->tempoOfs = c->b; break;
+    case 5: p->volume2 = c->b; break;
+    case 6: p->flags44 = c->b; break;
+    }
+}
+@@ cmdTrack
+void cmdTrack(SndCmd *c)            /* commands 0x100-0x103: a = player<<16 | value, b = track mask */
+{
+    Player *p = &gPlayers[c->a >> 16];
+    for (i = 0; c->b && i < 10; i++, c->b >>= 1)
+        if ((c->b & 1) && p->tracks[i])
+            switch (c->op) {
+            case 0x100: p->tracks[i]->mute = c->a; break;
+            case 0x101: p->tracks[i]->pan = c->a; break;
+            case 0x102: p->tracks[i]->expression = c->a; break;
+            case 0x103: p->tracks[i]->bendRange = c->a >> 8; p->tracks[i]->bend = c->a; break;
+            }
+}
+@@ cmdMask
+void cmdMask(SndCmd *c)             /* commands 0x200-0x201: b = player mask */
+{
+    for (i = 0; c->b && i < 20; i++, c->b >>= 1)
+        if (c->b & 1) {
+            if (c->op == 0x200) playerFadeOut(i, c->a);
+            else if (c->op == 0x201) playerSetPause(i, c->a);
+        }
+}
+@@ cmdGlobal
+void cmdGlobal(SndCmd *c)           /* commands 0x300-0x304 */
+{
+    switch (c->op) {
+    case 0x300: echoSetFeedback(c->a); break;
+    case 0x301: ((void (*)(u32))c->a)(c->b); break;
+    case 0x302: gHookCA = (void *)c->a; break;
+    case 0x303: gHookNote = (void *)c->a; break;
+    case 0x304: voiceSetCount(c->a); break;
+    }
+}
+@@ cmdProcess
+void cmdProcess(void)
+{
+    for (SndCmd *c; (c = cmdPop()); )
+        kCmdHandlers[c->op >> 8](c);   /* cmdPlayer, cmdTrack, cmdMask, cmdGlobal (no range check) */
+}
+@@ armDownmix
+/* ARM, runs from IWRAM.  16-bit mix accumulator -> 8-bit output, with saturation:
+   out = clamp(x / 128, -128, 127)   (division rounds towards zero) */
+void armDownmix(const s16 *src, s8 *dst, const s16 *end)
+{
+    do {                                   /* unrolled x8 */
+        s32 x = *src++;
+        x = (x < 0 ? x + 127 : x) >> 7;
+        if ((x & 0xFF80) && (x & 0xFF80) != 0xFF80) x = 127 + ((u32)x >> 31);   /* 127 / -128 */
+        *dst++ = x;
+    } while (src != end);
+}
+@@ armMixVoice
+/* ARM, runs from IWRAM.  Add a sample to the left and right accumulators without
+   interpolation: pos is 24.8, the sample is s8, gains are 8-bit.  Unrolled x4 when the
+   count is a multiple of 4.  Returns the new position. */
+u32 armMixVoice(const s8 *pcm, s16 *l, s16 *r, s16 *lEnd, u32 pos, u32 step, u32 vl, u32 vr)
+{
+    while (l < lEnd) {
+        s32 s = pcm[pos >> 8];
+        *l++ += vl * s;  *r++ += vr * s;
+        pos += step;
+    }
+    return pos;
+}
+@@ armEcho
+/* ARM, runs from IWRAM.  dry += wet; wet = wet >> shift (rounding towards zero). */
+void armEcho(s16 *dry, s16 *wet, const s16 *dryEnd, u32 shift)
+{
+    do { s16 w = *wet; *dry++ += w; *wet++ = (w < 0 ? w + (1 << shift) - 1 : w) >> shift; }
+    while (dry < dryEnd);          /* unrolled x4 */
+}

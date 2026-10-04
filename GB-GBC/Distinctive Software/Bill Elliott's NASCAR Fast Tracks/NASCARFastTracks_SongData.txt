@@ -1,0 +1,491 @@
+Bill Elliott's NASCAR Fast Tracks (GB) - music data (tracker format)
+======================================================================
+
+Row notation: note/duration ("~" = tied into next row), DC n, E0 n, D9 (next order), DB (rewind), DA (stop)
+
+SONG ENTRY 05:66C6 (called from $3841, $38BE)  instrTable=66E2  orderTable=66DA  word3=66E2
+  ch0 order list 05:6C56
+    order  0: pat 6C8A transpose +0 : DC 5 E0 1 A6/6 G#6/6 G6/6 F#6/6 F6/6 E6/6 D#6/6 D6/6 C#6/6 C6/6 B5/6 A#5/6 A5/6 G#5/6 G5/6 F#5/6 F5/72 D9
+    order  1: pat 2289 transpose +0 : DA
+  ch1 order list 05:6C5C
+    order  0: pat 6CB2 transpose +0 : DC 6 E0 1 A5/6 G#5/6 G5/6 F#5/6 F5/6 E5/6 D#5/6 D5/6 C#5/6 C5/6 B4/6 A#4/6 A4/6 G#4/6 G4/6 F#4/6 F4/72 D9
+    order  1: pat 2289 transpose +0 : DA
+  ch2 order list 05:6C50
+    order  0: pat 6C62 transpose +0 : DC 7 E0 1 A4/6 G#4/6 G4/6 F#4/6 F4/6 E4/6 D#4/6 D4/6 C#4/6 C4/6 B3/6 A#3/6 A3/6 G#3/6 G3/6 F#3/6 F3/72 D9
+    order  1: pat 2289 transpose +0 : DA
+  ch3 order list pointer = $0000 (channel unused / reads ROM header)
+
+SONG ENTRY 05:66CC (called from $3AA3, $3B8A)  instrTable=66E2  orderTable=66D2  word3=66E2
+  ch0 order list 05:67F0
+    order  0: pat 6A8A transpose -24 : DC 1 E0 0 D9
+    order  1: pat 6A90 transpose -24 : F#4/12 r--/12 C#5/12 F#4/12 r--/12 F#4/12 B4/12 F#4/12 D9
+    order  2: pat 6AA2 transpose -24 : r--/12 F#4/12 A4/12 F#4/12 A4/12 B4/12 A4/12 E4/12 D9
+    order  3: pat 6AB4 transpose -24 : F#4/12 r--/12 C#5/12 F#4/12 r--/12 F#4/12 B4/12 F#4/12 D9
+    order  4: pat 6AC6 transpose -24 : r--/12 F#4/12 A4/12 F#4/12 A4/12 B4/12 A4/12 E4/12 D9
+    order  5: pat 6AD8 transpose -24 : F#4/12 r--/12 C#5/12 F#4/12 r--/12 F#4/12 B4/12 F#4/12 D9
+    order  6: pat 6AEA transpose -24 : r--/12 F#4/12 A4/12 F#4/12 A4/12 B4/12 A4/12 E4/12 D9
+    order  7: pat 6AFC transpose -24 : F#4/12 r--/12 C#5/12 F#4/12 r--/12 F#4/12 B4/12 F#4/12 D9
+    order  8: pat 6B0E transpose -24 : r--/12 F#4/12 A4/12 F#4/12 A4/12 B4/12 A4/12 E4/12 D9
+    order  9: pat 6B20 transpose -24 : E4/12 E4/12 E4/12 E4/12 E4/12 E4/12 E4/12 E4/12 D9
+    order 10: pat 6B32 transpose -24 : F#4/12 F#4/12 F#4/12 F#4/12 F#4/12 F#4/12 F#4/12 F#4/12 D9
+    order 11: pat 6B44 transpose -24 : A4/12 A4/12 A4/12 A4/12 A4/12 A4/12 A4/12 A4/12 D9
+    order 12: pat 6B56 transpose -24 : B4/12 B4/12 B4/12 B4/12 B4/12 B4/12 A4/12 G#4/12 D9
+    order 13: pat 2287 transpose +0 : DB
+  ch1 order list 05:681A
+    order  0: pat 6B68 transpose -24 : DC 2 E0 0 D9
+    order  1: pat 6B6E transpose -24 : F#6/12 r--/12 E6/12 F#6/12 r--/12 E6/12 F#6/12 r--/12~ D9
+    order  2: pat 6B80 transpose -24 : r--/12 E6/12 F#6/12 E6/12 A6/12 B6/12 A6/12 C#6/12 D9
+    order  3: pat 6B92 transpose -24 : F#6/12 r--/12 E6/12 F#6/12 r--/12 E6/12 F#6/12 r--/12~ D9
+    order  4: pat 6BA4 transpose -24 : r--/12 E6/12 F#6/12 E6/6 r--/6 C#7/3 r--/3 C#7/3 r--/3 C#7/3 r--/9 B6/12 C#7/12 D9
+    order  5: pat 6BC0 transpose -24 : F#6/12 r--/12 E6/12 F#6/12 r--/12 E6/12 F#6/12 r--/12~ D9
+    order  6: pat 6BD2 transpose -24 : r--/12 E6/12 F#6/12 E6/12 A6/12 B6/12 A6/12 C#6/12 D9
+    order  7: pat 6BE4 transpose -24 : F#6/12 r--/12 E6/12 F#6/12 r--/12 E6/12 F#6/12 r--/12~ D9
+    order  8: pat 6BF6 transpose -24 : r--/12 E6/12 A6/12 B6/12 A6/12 B6/12 C#7/12 D7/12 D9
+    order  9: pat 6C08 transpose -24 : B6/36 r--/12 B6/12 A6/12 G#6/12 F#6/12~ D9
+    order 10: pat 6C16 transpose -24 : F#6/6 r--/6 F#6/12 r--/12 E6/12 F#6/18 r--/6 F#6/12 E6/12 D9
+    order 11: pat 6C2A transpose -24 : A6/18 r--/6 A6/18 r--/6 A6/12 G#6/12 A6/12 B6/12 D9
+    order 12: pat 6C3C transpose -24 : r--/12 B6/18 r--/6 A6/12 B6/6 r--/6 B6/12 A6/12 G#6/12 D9
+    order 13: pat 2287 transpose +0 : DB
+  ch2 order list 05:679C
+    order  0: pat 6844 transpose -12 : DC 3 E0 0 D9
+    order  1: pat 6B6E transpose -12 : F#6/12 r--/12 E6/12 F#6/12 r--/12 E6/12 F#6/12 r--/12~ D9
+    order  2: pat 6B80 transpose -12 : r--/12 E6/12 F#6/12 E6/12 A6/12 B6/12 A6/12 C#6/12 D9
+    order  3: pat 6B92 transpose -12 : F#6/12 r--/12 E6/12 F#6/12 r--/12 E6/12 F#6/12 r--/12~ D9
+    order  4: pat 6BA4 transpose -12 : r--/12 E6/12 F#6/12 E6/6 r--/6 C#7/3 r--/3 C#7/3 r--/3 C#7/3 r--/9 B6/12 C#7/12 D9
+    order  5: pat 6BC0 transpose -12 : F#6/12 r--/12 E6/12 F#6/12 r--/12 E6/12 F#6/12 r--/12~ D9
+    order  6: pat 6BD2 transpose -12 : r--/12 E6/12 F#6/12 E6/12 A6/12 B6/12 A6/12 C#6/12 D9
+    order  7: pat 6BE4 transpose -12 : F#6/12 r--/12 E6/12 F#6/12 r--/12 E6/12 F#6/12 r--/12~ D9
+    order  8: pat 6BF6 transpose -12 : r--/12 E6/12 A6/12 B6/12 A6/12 B6/12 C#7/12 D7/12 D9
+    order  9: pat 6C08 transpose -12 : B6/36 r--/12 B6/12 A6/12 G#6/12 F#6/12~ D9
+    order 10: pat 6C16 transpose -12 : F#6/6 r--/6 F#6/12 r--/12 E6/12 F#6/18 r--/6 F#6/12 E6/12 D9
+    order 11: pat 6C2A transpose -12 : A6/18 r--/6 A6/18 r--/6 A6/12 G#6/12 A6/12 B6/12 D9
+    order 12: pat 6C3C transpose -12 : r--/12 B6/18 r--/6 A6/12 B6/6 r--/6 B6/12 A6/12 G#6/12 D9
+    order 13: pat 2287 transpose +0 : DB
+  ch3 order list 05:67C6
+    order  0: pat 6922 transpose +0 : D9
+    order  1: pat 6926 transpose +0 : C3/12 r--/12 D3/12 C3/12 r--/12 C3/6 r--/6 D3/12 C3/6 r--/6 D9
+    order  2: pat 693C transpose +0 : r--/12 C3/6 r--/6 D3/12 C3/6 r--/6 C3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 D9
+    order  3: pat 695A transpose +0 : C3/6 r--/18 D3/6 r--/6 C3/12 r--/12 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 D9
+    order  4: pat 6974 transpose +0 : r--/12 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 C4/6 C4/6 C4/6 r--/6 A3/6 r--/6 F3/6 r--/6 D9
+    order  5: pat 6994 transpose +0 : C3/6 r--/18 D3/12 C3/6 r--/18 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 D9
+    order  6: pat 69AC transpose +0 : r--/12 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 C3/6 r--/6 D9
+    order  7: pat 69CC transpose +0 : C3/6 r--/18 D3/6 r--/6 C3/6 r--/18 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 D9
+    order  8: pat 69E6 transpose +0 : r--/12 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 D3/6 r--/6 D9
+    order  9: pat 6A06 transpose +0 : C3/6 r--/6 C3/6 r--/6 D3/12 r--/12 C3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 D9
+    order 10: pat 6A24 transpose +0 : C3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 C3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 D9
+    order 11: pat 6A46 transpose +0 : C3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 C3/6 r--/6 C3/6 r--/6 D3/6 C3/6 C3/6 r--/6 D9
+    order 12: pat 6A68 transpose +0 : C3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 r--/6 D3/6 D3/6 D3/6 r--/6 D3/6 r--/6 D3/6 r--/6 D9
+    order 13: pat 2287 transpose +0 : DB
+
+SONG ENTRY 05:4000 (called from 07:$5C33)  instrTable=400E  orderTable=4006  word3=400E
+  ch0 order list 05:41C4
+    order  0: pat 4E02 transpose +0 : E0 0 DC 0 F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order  1: pat 4E28 transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order  2: pat 4E4A transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order  3: pat 4E6C transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order  4: pat 4E8E transpose +0 : B3/6 r--/6 B3/6 B3/6 A3/6 B3/6 B3/6 B3/6 D4/6 B3/6 B3/6 B3/6 A3/6 B3/6 B3/6 B3/6 D9
+    order  5: pat 4EB0 transpose +0 : B3/6 r--/6 B3/6 B3/6 A3/6 B3/6 B3/6 B3/6 D4/6 B3/6 B3/6 B3/6 A3/6 B3/6 B3/6 B3/6 D9
+    order  6: pat 4ED2 transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order  7: pat 4EF4 transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/12 D9
+    order  8: pat 4F14 transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order  9: pat 4F36 transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/12 D9
+    order 10: pat 4F56 transpose +0 : E3/6 r--/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D9
+    order 11: pat 4F78 transpose +0 : E3/6 r--/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/12 D9
+    order 12: pat 4F98 transpose +0 : D3/6 r--/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 D9
+    order 13: pat 4FBA transpose +0 : D3/6 r--/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 C#3/6 D3/6 D3/12 D9
+    order 14: pat 4FDA transpose +0 : E3/6 r--/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D9
+    order 15: pat 4FFC transpose +0 : E3/6 r--/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/12 D9
+    order 16: pat 501C transpose +0 : F#3/18 r--/6 F#3/18 r--/6 F#3/12 F#4/12 F#3/6 r--/6 E3/12~ D9
+    order 17: pat 5030 transpose +0 : E3/6 r--/6 E3/6 r--/6 E4/12 E3/6 r--/6 E3/12 E4/12 E3/6 r--/6 D3/12~ D9
+    order 18: pat 504A transpose +0 : D3/6 r--/6 D3/12 D4/12 D3/6 r--/6 D3/12 D4/12 D3/6 r--/6 E3/12~ D9
+    order 19: pat 5062 transpose +0 : E3/6 r--/6 E3/12 E4/12 E3/6 r--/18 E3/6 r--/6 E4/12 E3/6 r--/6 D9
+    order 20: pat 507A transpose +0 : F#3/18 r--/6 F#3/12 r--/12 F#3/12 F#4/12 F#3/6 r--/6 E3/12 D9
+    order 21: pat 508E transpose +0 : r--/12 E3/12 E4/12 E3/6 r--/6 E3/12 E4/12 E3/6 r--/6 D3/12~ D9
+    order 22: pat 50A4 transpose +0 : D3/6 r--/6 D3/12 D4/12 D3/6 r--/6 D3/12 D4/12 D3/12 D4/6 r--/6 D9
+    order 23: pat 50BC transpose +0 : E3/18 r--/6 E3/18 r--/6 E3/18 r--/6 E3/18 r--/6 D9
+    order 24: pat 50CE transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order 25: pat 50F0 transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order 26: pat 5112 transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order 27: pat 5134 transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order 28: pat 5156 transpose +0 : B3/6 r--/6 B3/6 B3/6 A3/6 B3/6 B3/6 B3/6 D4/6 B3/6 B3/6 B3/6 A3/6 B3/6 B3/6 B3/6 D9
+    order 29: pat 5178 transpose +0 : B3/6 r--/6 B3/6 B3/6 A3/6 B3/6 B3/6 B3/6 D4/6 B3/6 B3/6 B3/6 A3/6 B3/6 B3/6 B3/6 D9
+    order 30: pat 519A transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order 31: pat 51BC transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 A3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/12 D9
+    order 32: pat 51DC transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 D9
+    order 33: pat 51FE transpose +0 : F#3/6 r--/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/6 F#3/6 E3/6 F#3/6 F#3/12 D9
+    order 34: pat 521E transpose +0 : E3/6 r--/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D9
+    order 35: pat 5240 transpose +0 : E3/6 r--/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/12 D9
+    order 36: pat 5260 transpose +0 : D3/6 r--/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 D9
+    order 37: pat 5282 transpose +0 : D3/6 r--/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 C#3/6 D3/6 D3/6 D3/6 C#3/6 D3/6 D3/12 D9
+    order 38: pat 52A2 transpose +0 : E3/6 r--/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D9
+    order 39: pat 52C4 transpose +0 : E3/6 r--/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/6 E3/6 D3/6 E3/6 E3/12 D9
+    order 40: pat 52E4 transpose +0 : F#3/18 r--/6 F#3/18 r--/6 F#3/12 F#4/12 F#3/6 r--/6 E3/12~ D9
+    order 41: pat 52F8 transpose +0 : E3/6 r--/6 E3/6 r--/6 E4/12 E3/6 r--/6 E3/12 E4/12 E3/6 r--/6 D3/12~ D9
+    order 42: pat 5312 transpose +0 : D3/6 r--/6 D3/12 D4/12 D3/6 r--/6 D3/12 D4/12 D3/6 r--/6 E3/12~ D9
+    order 43: pat 532A transpose +0 : E3/6 r--/6 E3/12 E4/12 E3/6 r--/18 E3/6 r--/6 E4/12 E3/6 r--/6 D9
+    order 44: pat 5342 transpose +0 : F#3/18 r--/6 F#3/12 r--/12 F#3/12 F#4/12 F#3/6 r--/6 E3/12 D9
+    order 45: pat 5356 transpose +0 : r--/12 E3/12 E4/12 E3/6 r--/6 E3/12 E4/12 E3/6 r--/6 D3/12~ D9
+    order 46: pat 536C transpose +0 : D3/6 r--/6 D3/12 D4/12 D3/6 r--/6 D3/12 D4/12 D3/12 D4/6 r--/6 D9
+    order 47: pat 5384 transpose +0 : E3/18 r--/6 E3/18 r--/6 E3/18 r--/6 E3/18 r--/6 D9
+    order 48: pat 2287 transpose +0 : DB
+  ch1 order list 05:4257
+    order  0: pat 5396 transpose -12 : E0 1 DC 1 F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  1: pat 53BC transpose -12 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  2: pat 53DE transpose -12 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  3: pat 5400 transpose -12 : r--/12 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  4: pat 5420 transpose -12 : B6/6 r--/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D7/6 B6/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D9
+    order  5: pat 5442 transpose -12 : B6/6 r--/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D7/6 B6/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D9
+    order  6: pat 5464 transpose -12 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  7: pat 5486 transpose -12 : A6/6 r--/6 A6/6 A6/6 G#6/6 A6/6 A6/6 A6/6 C#7/6 A6/6 A6/6 A6/6 G#6/6 A6/6 A6/6 A6/6 D9
+    order  8: pat 54A8 transpose +0 : F#5/18 r--/6 F#5/12 C#5/12 E5/12 F#5/18 r--/6 A5/12~ D9
+    order  9: pat 54BA transpose +0 : A5/6 r--/6 A5/18 r--/6 A5/6 r--/6 G#5/12 F#5/30 r--/6 D9
+    order 10: pat 54CE transpose +0 : F#5/12 r--/48 C#5/12 E5/12 F#5/12 D9
+    order 11: pat 54DA transpose +0 : r--/60 C#5/12 E5/12 C#5/6 E5/3 r--/3 D9
+    order 12: pat 54E8 transpose +0 : F#5/18 r--/6 F#5/24 E5/12 F#5/24 A5/12~ D9
+    order 13: pat 54F6 transpose +0 : A5/6 r--/6 A5/18 r--/6 A5/12 G#5/12 F#5/12 G#5/24 D9
+    order 14: pat 5508 transpose +0 : F#5/12 r--/48 E5/12 F#5/12 F#5/12 D9
+    order 15: pat 5514 transpose +0 : r--/60 F#5/12 A5/12 F#5/12 D9
+    order 16: pat 551E transpose +0 : F#5/60 E5/12 F#5/12 G#5/12~ D9
+    order 17: pat 5528 transpose +0 : G#5/60 A5/12 G#5/12 A5/12~ D9
+    order 18: pat 5532 transpose +0 : A5/60 B5/36~ D9
+    order 19: pat 5538 transpose +0 : B5/6 r--/6 B5/12 C#6/12 B5/12 D6/12 B5/12 C#6/12 B5/12 D9
+    order 20: pat 554C transpose +0 : C#6/60 D6/12 C#6/12 B5/12~ D9
+    order 21: pat 5556 transpose +0 : B5/60 C#6/12 B5/12 A5/12~ D9
+    order 22: pat 5560 transpose +0 : A5/54 r--/6 A5/12 G#5/12 F#5/12 D9
+    order 23: pat 556C transpose +0 : G#5/6 F#5/6 E5/6 F#5/6 G#5/6 F#5/6 E5/6 F#5/6 G#5/6 F#5/6 E5/6 F#5/6 G#5/6 F#5/6 E5/6 F#5/6 D9
+    order 24: pat 558E transpose -12 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 25: pat 55B0 transpose -12 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 26: pat 55D2 transpose -12 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 27: pat 55F4 transpose -12 : r--/12 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 28: pat 5614 transpose -12 : B6/6 r--/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D7/6 B6/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D9
+    order 29: pat 5636 transpose -12 : B6/6 r--/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D7/6 B6/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D9
+    order 30: pat 5658 transpose -12 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 31: pat 567A transpose -12 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 32: pat 569C transpose +0 : F#5/18 r--/6 F#5/12 C#5/12 E5/12 F#5/18 r--/6 A5/12~ D9
+    order 33: pat 56AE transpose +0 : A5/6 r--/6 A5/18 r--/6 A5/6 r--/6 G#5/12 F#5/30 r--/6 D9
+    order 34: pat 56C2 transpose +0 : F#5/12 r--/48 C#5/12 E5/12 F#5/12 D9
+    order 35: pat 56CE transpose +0 : r--/60 C#5/12 E5/12 C#5/6 E5/3 r--/3 D9
+    order 36: pat 56DC transpose +0 : F#5/18 r--/6 F#5/24 E5/12 F#5/24 A5/12~ D9
+    order 37: pat 56EA transpose +0 : A5/6 r--/6 A5/18 r--/6 A5/12 G#5/12 F#5/12 G#5/24 D9
+    order 38: pat 56FC transpose +0 : F#5/12 r--/48 E5/12 F#5/12 F#5/12 D9
+    order 39: pat 5708 transpose +0 : r--/60 F#5/12 A5/12 F#5/12 D9
+    order 40: pat 5712 transpose +0 : F#5/60 E5/12 F#5/12 G#5/12~ D9
+    order 41: pat 571C transpose +0 : G#5/60 A5/12 G#5/12 A5/12~ D9
+    order 42: pat 5726 transpose +0 : A5/60 B5/36~ D9
+    order 43: pat 572C transpose +0 : B5/6 r--/6 B5/12 C#6/12 B5/12 D6/12 B5/12 C#6/12 B5/12 D9
+    order 44: pat 5740 transpose +0 : C#6/60 D6/12 C#6/12 B5/12~ D9
+    order 45: pat 574A transpose +0 : B5/60 C#6/12 B5/12 A5/12~ D9
+    order 46: pat 5754 transpose +0 : A5/54 r--/6 A5/12 G#5/12 F#5/12 D9
+    order 47: pat 5760 transpose +0 : G#5/6 F#5/6 E5/6 F#5/6 G#5/6 F#5/6 E5/6 F#5/6 G#5/6 F#5/6 E5/6 F#5/6 G#5/6 F#5/6 E5/6 F#5/6 D9
+    order 48: pat 2287 transpose +0 : DB
+  ch2 order list 05:4131
+    order  0: pat 4902 transpose +0 : E0 0 DC 2 F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  1: pat 4928 transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  2: pat 494A transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  3: pat 496C transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  4: pat 498E transpose +0 : B6/6 r--/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D7/6 B6/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D9
+    order  5: pat 49B0 transpose +0 : B6/6 r--/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D7/6 B6/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D9
+    order  6: pat 49D2 transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order  7: pat 49F4 transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/12 D9
+    order  8: pat 4A14 transpose +0 : F#6/18 r--/6 F#6/12 C#6/12 E6/12 F#6/18 r--/6 A6/12~ D9
+    order  9: pat 4A26 transpose +0 : A6/6 r--/6 A6/18 r--/6 A6/6 r--/6 G#6/12 F#6/30 r--/6 D9
+    order 10: pat 4A3A transpose +0 : F#6/12 r--/48 C#6/12 E6/12 F#6/12 D9
+    order 11: pat 4A46 transpose +0 : r--/60 C#6/12 E6/12 C#6/6 E6/3 r--/3 D9
+    order 12: pat 4A54 transpose +0 : F#6/18 r--/6 F#6/24 E6/12 F#6/24 A6/12~ D9
+    order 13: pat 4A62 transpose +0 : A6/6 r--/6 A6/18 r--/6 A6/12 G#6/12 F#6/12 G#6/24 D9
+    order 14: pat 4A74 transpose +0 : F#6/12 r--/48 E6/12 F#6/12 F#6/12 D9
+    order 15: pat 4A80 transpose +0 : r--/96 D9
+    order 16: pat 4A84 transpose +0 : F#6/3 r--/9 F#6/3 r--/3 F#6/3 r--/3 F#6/6 r--/6 F#6/6 r--/6 F#6/12 E6/12 F#6/6 r--/6 G#6/12~ D9
+    order 17: pat 4AA4 transpose +0 : G#6/6 r--/6 G#6/3 r--/3 G#6/3 r--/3 G#6/6 r--/6 G#6/6 r--/6 G#6/12 F#6/12 G#6/6 r--/6 A6/12~ D9
+    order 18: pat 4AC4 transpose +0 : A6/6 r--/6 A6/3 r--/3 A6/3 r--/3 A6/6 r--/6 A6/6 r--/6 A6/12 G#6/6 r--/6 A6/6 r--/6 B6/12 D9
+    order 19: pat 4AE6 transpose +0 : r--/12 B6/6 r--/6 C#7/12 B6/6 r--/6 D7/12 B6/6 r--/6 C#7/12 B6/6 r--/6 D9
+    order 20: pat 4B00 transpose +0 : C#7/3 r--/9 C#7/3 r--/3 C#7/3 r--/3 C#7/6 r--/6 C#7/6 r--/6 C#7/12 B6/6 r--/6 C#7/6 r--/6 E7/12 D9
+    order 21: pat 4B22 transpose +0 : r--/12 E7/3 r--/3 E7/3 r--/3 E7/3 r--/9 E7/6 r--/6 E7/12 C#7/12 E7/6 r--/6 F#7/12 D9
+    order 22: pat 4B40 transpose +0 : r--/12 F#7/3 r--/3 F#7/3 r--/3 F#7/3 r--/9 F#7/6 r--/6 F#7/12 E7/6 r--/6 F#7/6 r--/6 A7/6 r--/6 D9
+    order 23: pat 4B62 transpose +0 : B7/6 F#7/6 E7/6 F#7/6 A7/6 F#7/6 B7/6 F#7/6 E7/6 F#7/6 A7/6 F#7/6 B7/6 F#7/6 E7/6 F#7/6 D9
+    order 24: pat 4B84 transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 25: pat 4BA6 transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 26: pat 4BC8 transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 27: pat 4BEA transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 28: pat 4C0C transpose +0 : B6/6 r--/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D7/6 B6/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D9
+    order 29: pat 4C2E transpose +0 : B6/6 r--/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D7/6 B6/6 B6/6 B6/6 A6/6 B6/6 B6/6 B6/6 D9
+    order 30: pat 4C50 transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 D9
+    order 31: pat 4C72 transpose +0 : F#6/6 r--/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/6 F#6/6 A6/6 F#6/6 F#6/6 F#6/6 E6/6 F#6/6 F#6/12 D9
+    order 32: pat 4C92 transpose +0 : F#6/18 r--/6 F#6/12 C#6/12 E6/12 F#6/18 r--/6 A6/12~ D9
+    order 33: pat 4CA4 transpose +0 : A6/6 r--/6 A6/18 r--/6 A6/6 r--/6 G#6/12 F#6/30 r--/6 D9
+    order 34: pat 4CB8 transpose +0 : F#6/12 r--/48 C#6/12 E6/12 F#6/12 D9
+    order 35: pat 4CC4 transpose +0 : r--/60 C#6/12 E6/12 C#6/6 E6/3 r--/3 D9
+    order 36: pat 4CD2 transpose +0 : F#6/18 r--/6 F#6/24 E6/12 F#6/24 A6/12~ D9
+    order 37: pat 4CE0 transpose +0 : A6/6 r--/6 A6/18 r--/6 A6/12 G#6/12 F#6/12 G#6/24 D9
+    order 38: pat 4CF2 transpose +0 : F#6/12 r--/48 E6/12 F#6/12 F#6/12 D9
+    order 39: pat 4CFE transpose +0 : r--/96 D9
+    order 40: pat 4D02 transpose +0 : F#6/3 r--/9 F#6/3 r--/3 F#6/3 r--/3 F#6/6 r--/6 F#6/6 r--/6 F#6/12 E6/12 F#6/6 r--/6 G#6/12~ D9
+    order 41: pat 4D22 transpose +0 : G#6/6 r--/6 G#6/3 r--/3 G#6/3 r--/3 G#6/6 r--/6 G#6/6 r--/6 G#6/12 F#6/12 G#6/6 r--/6 A6/12~ D9
+    order 42: pat 4D42 transpose +0 : A6/6 r--/6 A6/3 r--/3 A6/3 r--/3 A6/6 r--/6 A6/6 r--/6 A6/12 G#6/6 r--/6 A6/6 r--/6 B6/12 D9
+    order 43: pat 4D64 transpose +0 : r--/12 B6/6 r--/6 C#7/12 B6/6 r--/6 D7/12 B6/6 r--/6 C#7/12 B6/6 r--/6 D9
+    order 44: pat 4D7E transpose +0 : C#7/3 r--/9 C#7/3 r--/3 C#7/3 r--/3 C#7/6 r--/6 C#7/6 r--/6 C#7/12 B6/6 r--/6 C#7/6 r--/6 E7/12 D9
+    order 45: pat 4DA0 transpose +0 : r--/12 E7/3 r--/3 E7/3 r--/3 E7/3 r--/9 E7/6 r--/6 E7/12 C#7/12 E7/6 r--/6 F#7/12 D9
+    order 46: pat 4DBE transpose +0 : r--/12 F#7/3 r--/3 F#7/3 r--/3 F#7/3 r--/9 F#7/6 r--/6 F#7/12 E7/6 r--/6 F#7/6 r--/6 A7/6 r--/6 D9
+    order 47: pat 4DE0 transpose +0 : B7/6 F#7/6 E7/6 F#7/6 A7/6 F#7/6 B7/6 F#7/6 E7/6 F#7/6 A7/6 F#7/6 B7/6 F#7/6 E7/6 F#7/6 D9
+    order 48: pat 2287 transpose +0 : DB
+  ch3 order list 05:409E
+    order  0: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order  1: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order  2: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order  3: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order  4: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order  5: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order  6: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order  7: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order  8: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order  9: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 10: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 11: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 12: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 13: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 14: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 15: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 16: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 17: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 18: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 19: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 20: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 21: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 22: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 23: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 24: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 25: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 26: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 27: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 28: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 29: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 30: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 31: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 32: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 33: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 34: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 35: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 36: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 37: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 38: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 39: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 40: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 41: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 42: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 43: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 44: pat 42EA transpose +0 : E0 0 DC 3 C#4/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 45: pat 4310 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 46: pat 4332 transpose +0 : C3/6 F#3/6 F#3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C3/6 F#3/6 D3/6 F#3/6 C3/6 F#3/6 D9
+    order 47: pat 4354 transpose +0 : C3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 C3/6 F#3/6 F#3/6 F#3/6 C4/6 C4/6 A3/6 F#3/6 F3/6 F3/6 D9
+    order 48: pat 2287 transpose +0 : DB
+
+SONG ENTRY 05:5782 (called from 07:$6208)  instrTable=5796  orderTable=5788  word3=5790
+  ch0 order list 05:5922
+    order  0: pat 600A transpose +6 : DC 1 C5/6 A#5/6 G5/6 C6/6 A#5/6 G5/6 F5/6 D#5/6 F5/6 D#5/6 C5/6 F5/6 D#5/6 C5/6 A#4/6 G4/6 D9
+    order  1: pat 602E transpose +6 : C5/6 A#4/6 G4/6 C5/6 A#4/6 G4/6 F4/6 D#4/6 F4/6 D#4/6 C4/6 F4/6 D#4/6 C4/6 A#3/6 G3/6 D9
+    order  2: pat 6050 transpose +6 : C4/6 C4/6 A#3/6 C4/6 C4/6 C4/6 A#3/6 C4/6 r--/48 D9
+    order  3: pat 6064 transpose +6 : C5/12 C5/6 C5/6 D#5/12 D#5/6 F5/6 r--/6 G4/6 A#4/6 G4/6 C5/6 G4/6 A#4/6 G4/6 D9
+    order  4: pat 6082 transpose +6 : C5/12 C5/6 C5/6 D#5/12 D#5/6 F5/6 r--/6 A#4/6 C5/6 A#4/6 D#5/6 A#4/6 C5/6 A#4/6 D9
+    order  5: pat 60A0 transpose +6 : C5/6 r--/6 C5/6 C5/6 D#5/6 r--/6 D#5/6 F5/6 r--/6 G4/6 A#4/6 G4/6 C5/6 G4/6 A#4/6 G4/6 D9
+    order  6: pat 60C2 transpose +6 : C5/12 C5/6 C5/6 D#5/6 r--/6 D#5/6 F5/6 r--/6 F#5/6 F5/6 D#5/6 F5/6 D#5/6 C5/6 A#4/6 D9
+    order  7: pat 60E2 transpose +6 : D#6/12 D#6/6 D#6/6 F6/12 F6/6 C6/6 r--/6 G4/6 A#4/6 G4/6 C5/6 G4/6 A#4/6 G4/6 D9
+    order  8: pat 6100 transpose +6 : D#6/12 D#6/6 D#6/6 F6/12 F6/6 C6/6 r--/6 A#4/6 C5/6 A#4/6 D#5/6 A#4/6 C5/6 A#4/6 D9
+    order  9: pat 611E transpose +6 : C5/6 r--/6 C5/6 C5/6 D#5/6 r--/6 D#5/6 F5/6 r--/6 G4/6 A#4/6 G4/6 C5/6 G4/6 A#4/6 G4/6 D9
+    order 10: pat 6140 transpose +6 : D#6/12 D#6/6 D#6/6 F6/12 F6/6 C6/6 r--/6 F#5/6 F5/6 D#5/6 F5/6 D#5/6 C5/6 A#4/6 D9
+    order 11: pat 615E transpose +6 : D#5/24 D5/18 C5/6 r--/6 C5/6 A#4/12 G4/12 A#4/6 r--/6 D9
+    order 12: pat 6172 transpose +6 : D#5/24 D5/18 C5/6 r--/6 C5/6 A#4/12 C5/6 r--/18 D9
+    order 13: pat 6184 transpose +6 : D#5/24 D5/18 C5/6 r--/6 C5/6 A#4/12 G4/12 A#4/6 r--/6 D9
+    order 14: pat 6198 transpose +6 : C5/6 C5/6 C5/6 A#4/6 C5/6 C5/6 A#4/6 C5/12 r--/42 D9
+    order 15: pat 61AC transpose +6 : C5/12 C5/6 C5/6 D#5/12 D#5/6 F5/6 r--/6 G4/6 A#4/6 G4/6 C5/6 G4/6 A#4/6 G4/6 D9
+    order 16: pat 61CA transpose +6 : C5/12 C5/6 C5/6 D#5/12 D#5/6 F5/6 r--/6 A#4/6 C5/6 A#4/6 D#5/6 A#4/6 C5/6 A#4/6 D9
+    order 17: pat 61E8 transpose +6 : C5/6 r--/6 C5/6 C5/6 D#5/6 r--/6 D#5/6 F5/6 r--/6 G4/6 A#4/6 G4/6 C5/6 G4/6 A#4/6 G4/6 D9
+    order 18: pat 620A transpose +6 : C5/12 C5/6 C5/6 D#5/6 r--/6 D#5/6 F5/6 r--/6 F#5/6 F5/6 D#5/6 F5/6 D#5/6 C5/6 A#4/6 D9
+    order 19: pat 622A transpose +6 : C5/12 C5/6 C5/6 D#5/12 D#5/6 F5/6 r--/6 G4/6 A#4/6 G4/6 C5/6 G4/6 A#4/6 G4/6 D9
+    order 20: pat 6248 transpose +6 : C5/12 C5/6 C5/6 D#5/12 D#5/6 F5/6 r--/6 A#4/6 C5/6 A#4/6 D#5/6 A#4/6 C5/6 A#4/6 D9
+    order 21: pat 6266 transpose +6 : C5/6 r--/6 C5/6 C5/6 D#5/6 r--/6 D#5/6 F5/6 r--/6 G4/6 A#4/6 G4/6 C5/6 G4/6 A#4/6 G4/6 D9
+    order 22: pat 6288 transpose +6 : C5/12 C5/6 C5/6 D#5/6 r--/6 D#5/6 F5/6 r--/6 F#5/6 F5/6 D#5/6 F5/6 D#5/6 C5/6 A#4/6 D9
+    order 23: pat 62A8 transpose +6 : D#5/24 D5/18 C5/6 r--/6 C5/6 A#4/12 G4/12 A#4/6 r--/6 D9
+    order 24: pat 62BC transpose +6 : D#5/24 D5/18 C5/6 r--/6 C5/6 A#4/12 C5/6 r--/18 D9
+    order 25: pat 62CE transpose +6 : D#5/24 D5/18 C5/6 r--/6 C5/6 A#4/12 G4/12 A#4/6 r--/6 D9
+    order 26: pat 62E2 transpose +6 : G4/6 F4/6 G4/6 A#4/6 C5/6 A#4/6 C5/6 D#5/6 F5/6 D#5/6 F5/6 G5/6 A#5/6 G5/6 A#5/6 C6/6 D9
+    order 27: pat 6304 transpose +6 : D#6/6 C6/6 D#6/6 F6/6 D#6/6 C6/6 A#5/6 G5/6 C6/6 C6/6 A#5/6 C6/6 C6/6 C6/6 G5/6 A#5/6 D9
+    order 28: pat 2287 transpose +0 : DB
+  ch1 order list 05:58CB
+    order  0: pat 5CEC transpose +6 : DC 2 C6/6 A#5/6 G5/6 C6/6 A#5/6 G5/6 F5/6 D#5/6 F5/6 D#5/6 C5/6 F5/6 D#5/6 C5/6 A#4/6 G4/6 D9
+    order  1: pat 5D10 transpose +6 : C5/6 A#4/6 G4/6 C5/6 A#4/6 G4/6 F4/6 D#4/6 F4/6 D#4/6 C4/6 F4/6 D#4/6 C4/6 A#3/6 G4/6 D9
+    order  2: pat 5D32 transpose +6 : C4/6 C4/6 A#3/6 C4/6 C4/6 C4/6 A#3/6 C4/6 r--/48 D9
+    order  3: pat 5D46 transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order  4: pat 5D64 transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 A#5/6 C6/6 A#5/6 D#6/6 A#5/6 C6/6 A#5/6 D9
+    order  5: pat 5D82 transpose +6 : C6/6 r--/6 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order  6: pat 5DA4 transpose +6 : C6/12 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 F#6/6 F6/6 D#6/6 F6/6 D#6/6 C6/6 A#5/6 D9
+    order  7: pat 5DC4 transpose +6 : G6/12 G6/6 G6/6 A#6/12 A#6/6 C7/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order  8: pat 5DE2 transpose +6 : G6/12 G6/6 G6/6 A#6/12 A#6/6 C7/6 r--/6 A#5/6 C6/6 A#5/6 D#6/6 A#5/6 C6/6 A#5/6 D9
+    order  9: pat 5E00 transpose +6 : G6/6 r--/6 G6/6 G6/6 A#6/6 r--/6 A#6/6 C7/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 10: pat 5E22 transpose +6 : C7/12 C7/6 C7/6 A#6/6 r--/6 A#6/6 C7/6 r--/6 F#6/6 F6/6 D#6/6 F6/6 D#6/6 C6/6 A#5/6 D9
+    order 11: pat 5E42 transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 G5/12 A#5/6 r--/6 D9
+    order 12: pat 5E56 transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 C6/6 r--/18 D9
+    order 13: pat 5E68 transpose +6 : G6/24 F6/18 D#6/6 r--/6 D#6/6 D6/12 A#5/12 A#5/6 r--/6 D9
+    order 14: pat 5E7C transpose +6 : C6/6 C6/6 C6/6 A#5/6 C6/6 C6/6 A#5/6 C6/12 r--/42 D9
+    order 15: pat 5E90 transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 16: pat 5EAE transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 A#5/6 C6/6 A#5/6 D#6/6 A#5/6 C6/6 A#5/6 D9
+    order 17: pat 5ECC transpose +6 : C6/6 r--/6 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 18: pat 5EEE transpose +6 : C6/12 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 F#6/6 F6/6 D#6/6 F6/6 D#6/6 C6/6 A#5/6 D9
+    order 19: pat 5F0E transpose +6 : G6/12 G6/6 G6/6 A#6/12 A#6/6 C7/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 20: pat 5F2C transpose +6 : G6/12 G6/6 G6/6 A#6/12 A#6/6 C7/6 r--/6 A#5/6 C6/6 A#5/6 D#6/6 A#5/6 C6/6 A#5/6 D9
+    order 21: pat 5F4A transpose +6 : G6/6 r--/6 G6/6 G6/6 A#6/6 r--/6 A#6/6 C7/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 22: pat 5F6C transpose +6 : C7/12 C7/6 C7/6 A#6/6 r--/6 A#6/6 C7/6 r--/6 F#6/6 F6/6 D#6/6 F6/6 D#6/6 C6/6 A#5/6 D9
+    order 23: pat 5F8C transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 G5/12 A#5/6 r--/6 D9
+    order 24: pat 5FA0 transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 C6/6 r--/18 D9
+    order 25: pat 5FB2 transpose +6 : G6/24 F6/18 D#6/6 r--/6 D#6/6 D6/12 A#5/12 A#5/6 r--/6 D9
+    order 26: pat 5FC6 transpose +6 : G5/6 F5/6 G5/6 A#5/6 C6/6 A#5/6 C6/6 D#6/6 F6/6 D#6/6 F6/6 G6/6 A#6/6 G6/6 A#6/6 C7/6 D9
+    order 27: pat 5FE8 transpose +6 : D#7/6 C7/6 D#7/6 F7/6 D#7/6 C7/6 A#6/6 G6/6 C7/6 C7/6 A#6/6 C7/6 C7/6 C7/6 G6/6 A#6/6 D9
+    order 28: pat 2287 transpose +0 : DB
+  ch2 order list 05:5874
+    order  0: pat 59D0 transpose +6 : DC 3 C7/6 A#6/6 G6/6 C7/6 A#6/6 G6/6 F6/6 D#6/6 F6/6 D#6/6 C6/6 F6/6 D#6/6 C6/6 A#5/6 G5/6 D9
+    order  1: pat 59F4 transpose +6 : C6/6 A#5/6 G5/6 C6/6 A#5/6 G5/6 F5/6 D#5/6 F5/6 D#5/6 C5/6 F5/6 D#5/6 C5/6 A#4/6 G4/6 D9
+    order  2: pat 5A16 transpose +6 : C5/6 C5/6 A#4/6 C5/6 C5/6 C5/6 A#4/6 C5/6 r--/48 D9
+    order  3: pat 5A2A transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order  4: pat 5A48 transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 A#5/6 C6/6 A#5/6 D#6/6 A#5/6 C6/6 A#5/6 D9
+    order  5: pat 5A66 transpose +6 : C6/6 r--/6 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order  6: pat 5A88 transpose +6 : C6/12 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 F#6/6 F6/6 D#6/6 F6/6 D#6/6 C6/6 A#5/6 D9
+    order  7: pat 5AA8 transpose +6 : D#6/12 D#6/6 D#6/6 F6/12 F6/6 C6/6 r--/6 G4/6 A#4/6 G4/6 C5/6 G4/6 A#4/6 G4/6 D9
+    order  8: pat 5AC6 transpose +6 : D#6/12 D#6/6 D#6/6 F6/12 F6/6 C6/6 r--/6 A#4/6 C5/6 A#4/6 D#5/6 A#4/6 C5/6 A#4/6 D9
+    order  9: pat 5AE4 transpose +6 : C6/6 r--/6 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 10: pat 5B06 transpose +6 : D#6/12 D#6/6 D#6/6 F6/12 F6/6 C6/6 r--/6 F#6/6 F6/6 D#6/6 F6/6 D#6/6 C6/6 A#5/6 D9
+    order 11: pat 5B24 transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 G5/12 A#5/6 r--/6 D9
+    order 12: pat 5B38 transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 C6/6 r--/18 D9
+    order 13: pat 5B4A transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 G5/12 A#5/6 r--/6 D9
+    order 14: pat 5B5E transpose +6 : C6/6 C6/6 C6/6 A#5/6 C6/6 C6/6 A#5/6 C6/12 r--/42 D9
+    order 15: pat 5B72 transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 16: pat 5B90 transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 A#5/6 C6/6 A#5/6 D#6/6 A#5/6 C6/6 A#5/6 D9
+    order 17: pat 5BAE transpose +6 : C6/6 r--/6 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 18: pat 5BD0 transpose +6 : C6/12 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 F#6/6 F6/6 D#6/6 F6/6 D#6/6 C6/6 A#5/6 D9
+    order 19: pat 5BF0 transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 20: pat 5C0E transpose +6 : C6/12 C6/6 C6/6 D#6/12 D#6/6 F6/6 r--/6 A#5/6 C6/6 A#5/6 D#6/6 A#5/6 C6/6 A#5/6 D9
+    order 21: pat 5C2C transpose +6 : C6/6 r--/6 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 G5/6 A#5/6 G5/6 C6/6 G5/6 A#5/6 G5/6 D9
+    order 22: pat 5C4E transpose +6 : C6/12 C6/6 C6/6 D#6/6 r--/6 D#6/6 F6/6 r--/6 F#6/6 F6/6 D#6/6 F6/6 D#6/6 C6/6 A#5/6 D9
+    order 23: pat 5C6E transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 G5/12 A#5/6 r--/6 D9
+    order 24: pat 5C82 transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 C6/6 r--/18 D9
+    order 25: pat 5C94 transpose +6 : D#6/24 D6/18 C6/6 r--/6 C6/6 A#5/12 G5/12 A#5/6 r--/6 D9
+    order 26: pat 5CA8 transpose +6 : G5/6 F5/6 G5/6 A#5/6 C6/6 A#5/6 C6/6 D#6/6 F6/6 D#6/6 F6/6 G6/6 A#6/6 G6/6 A#6/6 C7/6 D9
+    order 27: pat 5CCA transpose +6 : D#7/6 C7/6 D#7/6 F7/6 D#7/6 C7/6 A#6/6 G6/6 C7/6 C7/6 A#6/6 C7/6 C7/6 C7/6 G6/6 A#6/6 D9
+    order 28: pat 2287 transpose +0 : DB
+  ch3 order list 05:5979
+    order  0: pat 6326 transpose +6 : DC 4 C4/6 C4/6 C4/6 C4/6 B3/6 B3/6 B3/6 B3/6 A3/6 A3/6 A3/6 A3/6 B3/6 B3/6 B3/6 B3/6 D9
+    order  1: pat 634A transpose +6 : A3/6 A3/6 A3/6 A3/6 G3/6 G3/6 G3/6 G3/6 A3/6 A3/6 A3/6 A3/6 G3/6 G3/6 G3/6 G3/6 D9
+    order  2: pat 636C transpose +6 : F3/6 F3/6 F3/6 F3/6 G3/6 F3/6 F3/6 F3/6 r--/48 D9
+    order  3: pat 6380 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 C3/6 C3/6 D3/6 C3/6 C3/6 C3/6 D9
+    order  4: pat 63A2 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 C3/6 C3/6 D3/6 C3/6 D3/6 D3/6 D9
+    order  5: pat 63C4 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 C3/6 C3/6 C3/6 D3/6 C3/6 D9
+    order  6: pat 63E6 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 C3/6 C3/6 C3/6 D3/6 C3/6 D9
+    order  7: pat 6408 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 C3/6 C3/6 D3/6 C3/6 C3/6 C3/6 D9
+    order  8: pat 642A transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 C3/6 C3/6 D3/6 C3/6 D3/6 D3/6 D9
+    order  9: pat 644C transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 C3/6 C3/6 C3/6 D3/6 C3/6 D9
+    order 10: pat 646E transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 C3/6 C3/6 C3/6 D3/6 C3/5 D3/1 D9
+    order 11: pat 6492 transpose +6 : D3/5 r--/7 D3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 r--/6 C3/6 r--/6 D3/6 r--/6 D9
+    order 12: pat 64B4 transpose +6 : D3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 r--/6 C3/6 D3/6 D3/6 C3/6 D9
+    order 13: pat 64D6 transpose +6 : D3/6 r--/6 D3/6 C3/6 C3/6 r--/6 D3/6 C3/6 r--/6 C3/6 D3/6 C3/6 D3/6 D3/6 D3/6 C3/6 D9
+    order 14: pat 64F8 transpose +6 : D3/6 r--/6 D3/6 D3/6 C3/6 C3/6 D3/6 D3/6 r--/48 D9
+    order 15: pat 650C transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 C3/6 C3/6 D3/6 C3/6 C3/6 C3/6 D9
+    order 16: pat 652E transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 C3/6 C3/6 D3/6 C3/6 D3/6 D3/6 D9
+    order 17: pat 6550 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 C3/6 C3/6 C3/6 D3/6 C3/6 D9
+    order 18: pat 6572 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C4/6 C4/6 C4/6 C4/6 A3/6 A3/6 A3/6 D9
+    order 19: pat 6594 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 C3/6 C3/6 C3/6 D3/6 C3/6 D9
+    order 20: pat 65B6 transpose +6 : C3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 C3/6 C3/6 C3/6 D3/6 C3/6 D9
+    order 21: pat 65D8 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 C3/6 C3/6 C3/6 D3/6 C3/6 D9
+    order 22: pat 65FA transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 C3/6 C3/6 C3/6 D3/6 C3/6 D9
+    order 23: pat 661C transpose +6 : D3/6 r--/6 D3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 r--/6 C3/6 r--/6 D3/6 r--/6 D9
+    order 24: pat 663E transpose +6 : D3/6 r--/6 C3/6 r--/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 D3/6 r--/6 C3/6 D3/6 D3/6 C3/6 D9
+    order 25: pat 6660 transpose +6 : D3/6 r--/6 D3/6 C3/6 C3/6 r--/6 D3/6 C3/6 r--/6 C3/6 D3/6 C3/6 D3/6 D3/6 D3/6 C3/6 D9
+    order 26: pat 6682 transpose +6 : D3/6 r--/6 D3/6 D3/6 C3/6 C3/6 D3/6 D3/6 C4/6 C4/6 A3/6 A3/6 F3/6 F3/6 A3/6 F3/6 D9
+    order 27: pat 66A4 transpose +6 : C3/6 r--/6 C3/6 C3/6 D3/6 r--/6 C3/6 C3/6 r--/6 C3/6 C3/6 C3/6 D3/6 C3/6 C3/6 C3/6 D9
+    order 28: pat 2287 transpose +0 : DB
+
+SONG ENTRY 02:6C7E (bank 2, called from 02:$583F)  instrTable=6C8C  orderTable=6C84  word3=6C92
+  ch0 order list 02:6CF9
+    order  0: pat 6DB9 transpose +0 : DC 0 E0 1 F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 D9
+    order  1: pat 6DDF transpose +0 : F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 D9
+    order  2: pat 6E01 transpose +0 : F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 D9
+    order  3: pat 6E23 transpose +0 : F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 F6/6 F5/6 A#5/6 C6/6 D9
+    order  4: pat 6E45 transpose +0 : F#6/6 F#5/6 B5/6 C#6/6 F#6/6 F#5/6 B5/6 C#6/6 F#6/6 F#5/6 B5/6 C#6/6 F#6/6 F#5/6 B5/6 C#6/6 D9
+    order  5: pat 6E67 transpose +0 : F#6/6 F#5/6 B5/6 C#6/6 F#6/6 F#5/6 B5/6 C#6/6 F#6/6 F#5/6 B5/6 C#6/6 F#6/6 F#5/6 B5/6 C#6/6 D9
+    order  6: pat 6E89 transpose +0 : G6/6 G5/6 C6/6 D6/6 G6/6 G5/6 C6/6 D6/6 G6/6 G5/6 C6/6 D6/6 G6/6 G5/6 C6/6 D6/6 D9
+    order  7: pat 6EAB transpose +0 : G6/6 G5/6 C6/6 D6/6 G6/6 G5/6 C6/6 D6/6 G6/6 G5/6 C6/6 D6/6 G6/6 G5/6 C6/6 D6/6 D9
+    order  8: pat 6ECD transpose +0 : G#6/6 G#5/6 C#6/6 D#6/6 G#6/6 G#5/6 C#6/6 D#6/6 G#6/6 G#5/6 C#6/6 D#6/6 G#6/6 G#5/6 C#6/6 D#6/6 D9
+    order  9: pat 6EEF transpose +0 : G#6/6 G#5/6 C#6/6 D#6/6 G#6/6 G#5/6 C#6/6 D#6/6 G#6/6 G#5/6 C#6/6 D#6/6 G#6/6 G#5/6 C#6/6 D#6/6 D9
+    order 10: pat 6F11 transpose +0 : A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 D9
+    order 11: pat 6F33 transpose +0 : A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 D9
+    order 12: pat 6F55 transpose +0 : A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 D9
+    order 13: pat 6F77 transpose +0 : A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 A6/6 A5/6 D6/6 E6/6 r--/24~ D9
+    order 14: pat 228B transpose +0 : r--/96~ D9
+    order 15: pat 2287 transpose +0 : DB
+  ch1 order list 02:6D89
+    order  0: pat 7251 transpose +0 : DC 1 E0 0 F3/6 F3/6 r--/84~ D9
+    order  1: pat 725D transpose +0 : r--/96 D9
+    order  2: pat 7261 transpose +0 : F3/6 F3/6 r--/84~ D9
+    order  3: pat 7269 transpose +0 : r--/48 F3/6 F3/6 r--/6 F3/6 r--/6 F3/6 r--/6 F3/6 D9
+    order  4: pat 727D transpose +0 : F#3/96~ D9
+    order  5: pat 7281 transpose +0 : F#3/90 r--/6 D9
+    order  6: pat 7287 transpose +0 : G3/6 G3/6 r--/84 D9
+    order  7: pat 728F transpose +0 : G3/6 G3/6 r--/78 G3/6 D9
+    order  8: pat 7299 transpose +0 : G#3/96~ D9
+    order  9: pat 729D transpose +0 : G#3/90 r--/6 D9
+    order 10: pat 72A3 transpose +0 : A3/6 A3/6 r--/84 D9
+    order 11: pat 72AB transpose +0 : A3/6 A3/6 r--/84 D9
+    order 12: pat 72B3 transpose +0 : A3/6 A3/6 r--/6 A3/6 r--/6 A3/6 r--/6 G3/6 A3/6 A3/6 r--/6 A3/6 r--/6 A3/6 r--/6 G3/6 D9
+    order 13: pat 72D5 transpose +0 : A3/6 A3/6 r--/6 A3/6 r--/6 A3/6 r--/6 G3/6 A3/6 A3/6 r--/6 A3/6 r--/6 A3/6 r--/6 G3/6 D9
+    order 14: pat 72F7 transpose +0 : E4/96 D9
+    order 15: pat 2287 transpose +0 : DB
+  ch2 order list 02:6D59
+    order  0: pat 706D transpose +0 : DC 2 E0 0 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 D9
+    order  1: pat 7093 transpose +0 : F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 D9
+    order  2: pat 70B5 transpose +0 : F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 D9
+    order  3: pat 70D7 transpose +0 : F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 F3/6 D9
+    order  4: pat 70F9 transpose +0 : F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 D9
+    order  5: pat 711B transpose +0 : F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 F#3/6 D9
+    order  6: pat 713D transpose +0 : G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 D9
+    order  7: pat 715F transpose +0 : G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 G3/6 D9
+    order  8: pat 7181 transpose +0 : G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 D9
+    order  9: pat 71A3 transpose +0 : G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 G#3/6 D9
+    order 10: pat 71C5 transpose +0 : A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 D9
+    order 11: pat 71E7 transpose +0 : A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 D9
+    order 12: pat 7209 transpose +0 : A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 D9
+    order 13: pat 722B transpose +0 : A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 A3/6 D9
+    order 14: pat 724D transpose +0 : A3/96~ D9
+    order 15: pat 2287 transpose +0 : DB
+  ch3 order list 02:6D29
+    order  0: pat 6F93 transpose +0 : E0 0 D3/6 D3/6 r--/84~ D9
+    order  1: pat 6F9D transpose +0 : r--/48 C4/3 C4/3 A3/6 F3/6 r--/30 D9
+    order  2: pat 6FAB transpose +0 : D3/6 D3/6 r--/84 D9
+    order  3: pat 6FB3 transpose +0 : C4/3 C4/3 C4/3 r--/3 A3/6 r--/6 F3/3 A3/3 A3/3 F3/6 r--/9 D3/6 D3/12 D3/6 r--/6 D3/6 r--/6 D3/3 D3/3 D9
+    order  4: pat 6FDB transpose +0 : C#4/60 r--/36~ D9
+    order  5: pat 6FE1 transpose +0 : r--/96 D9
+    order  6: pat 6FE5 transpose +0 : D3/6 D3/6 r--/72 A3/6 A3/6 D9
+    order  7: pat 6FF1 transpose +0 : D3/6 D3/6 r--/78 D3/6 D9
+    order  8: pat 6FFB transpose +0 : C#4/6 r--/90~ D9
+    order  9: pat 7001 transpose +0 : r--/96 D9
+    order 10: pat 7005 transpose +0 : D3/6 D3/6 r--/84 D9
+    order 11: pat 700D transpose +0 : D3/6 D3/6 r--/84 D9
+    order 12: pat 7015 transpose +0 : C4/3 r--/3 C4/6 r--/6 C4/3 r--/9 C4/6 r--/6 A3/3 r--/3 A3/3 r--/3 A3/3 r--/9 A3/6 r--/6 A3/6 r--/6 F3/3 r--/3 ...(21 rows)
+    order 13: pat 703F transpose +0 : D3/3 r--/3 D3/3 r--/9 D3/3 r--/9 D3/3 r--/9 D3/3 r--/3 D3/3 r--/3 D3/3 r--/9 D3/3 r--/9 D3/3 r--/9 D3/3 r--/3 ...(21 rows)
+    order 14: pat 7069 transpose +0 : C#4/96~ D9
+    order 15: pat 2287 transpose +0 : DB
+
+INSTRUMENTS (34-byte records) referenced by DC
+  fields: +0 duty +2 sweep +3 transp +4 sign +5/6 detune +7 delay +8 atkStep +9 peak +A decStep +B sustain +C relStep +D vib +E vDelay +F vPeriod +10 vStep
+  02:6C93  80 00 08 00 00 00 00 00 30 03 00 03 18 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  02:6CB5  80 00 08 00 00 00 00 00 70 07 10 06 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  02:6CD7  80 00 08 00 00 00 00 00 38 07 10 06 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  05:4016  80 00 08 F4 00 00 00 00 F0 0F 02 0D 10 00 30 00 00 01 00 05 00 05 00 00 00 00 00 00 00 00 00 00 00 00
+  05:4038  80 00 08 00 00 00 00 00 B0 0B 00 0B 10 00 04 00 00 01 00 02 00 02 00 00 04 02 00 F4 00 F4 00 F4 00 F4
+  05:405A  80 00 08 F4 00 00 00 00 30 03 00 03 04 03 1E 00 00 01 00 02 00 02 00 00 00 00 00 00 00 00 00 00 00 00
+  05:407C  00 00 00 00 00 00 00 00 F0 0F 00 0F 78 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  05:57EC  80 00 00 E8 00 00 00 00 F0 0F 10 0D 40 00 18 00 00 01 00 05 00 05 00 00 00 00 00 00 00 00 00 00 00 00
+  05:580E  80 00 00 F4 00 00 00 00 70 07 10 06 30 00 18 00 00 01 00 02 00 02 00 00 00 00 00 00 00 00 00 00 00 00
+  05:5830  80 00 00 F4 00 00 00 00 30 03 00 03 08 00 18 00 00 01 00 03 00 03 00 00 00 00 00 00 00 00 00 00 00 00
+  05:5852  80 00 00 00 00 00 00 00 A0 0A 00 0A A0 00 18 00 00 01 00 03 00 03 00 00 00 00 00 00 00 00 00 00 00 00
+  05:66F2  80 00 08 F4 00 00 00 00 10 02 00 02 04 03 1E 00 00 01 00 02 00 02 00 00 00 00 00 00 00 00 00 00 00 00
+  05:6714  80 00 08 00 00 00 00 00 90 09 00 09 10 00 04 00 00 01 00 02 00 02 00 00 04 02 00 F4 00 F4 00 F4 00 F4
+  05:6736  80 00 00 F4 00 00 00 00 C0 0C 10 0B 08 00 12 00 00 01 00 0A 00 0A 00 00 00 00 00 00 00 00 00 00 00 00
+  05:6758  80 00 00 F4 00 00 00 00 70 07 00 07 08 00 12 00 00 01 00 0A 00 0A 00 00 00 00 00 00 00 00 00 00 00 00
+  05:677A  80 00 00 F4 00 00 00 00 30 03 00 03 02 00 04 00 00 01 00 0A 00 0A 00 00 04 02 00 F4 00 F4 00 F4 00 F4

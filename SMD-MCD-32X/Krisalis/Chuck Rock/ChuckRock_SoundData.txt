@@ -1,0 +1,5295 @@
+Chuck Rock (E) -- Krisalis sound data (driver revision 1)
+==============================================================================
+Music module at ROM $018000:
+  +$000  8 x (offset.w, length.w)  sample table (offset within ROM bank $02 = $010000-$017FFF)
+  +$020  order format flag = $FFFF -> WORD order entries (12 bytes per order row)
+  +$022  pattern pointer table: 384 longs (170 distinct)
+  $018622 order list: 256 rows x 6 columns (FM1..FM6)
+  $019222-$01BD63 pattern data
+  $01BD64 voice bank (64 x 32 bytes uploaded to Z80 $0400)
+
+------------------------------------------------------------------------------
+PCM samples (signed 8-bit; the Z80 adds $80).  Rate byte r from the pattern cell;
+approximate playback rate on the idle loop: r/256 x Fz80/(284+7r/256)
+
+  #  offset  length  ROM range          WAV rate (PAL)        rate bytes used in patterns (count)
+  0  $0000   $14DA   $010000-$0114D9  12142 Hz (r=$FF)    $FF(70)
+  1  $14DA   $0ECC   $0114DA-$0123A5  12142 Hz (r=$FF)    $FF(106)
+  2  $23A6   $199C   $0123A6-$013D41   8443 Hz (r=$B0)    $B0(1)
+  3  $3D42   $0636   $013D42-$014377   9901 Hz (r=$CF)    $80(1), $CF(1)
+  4  $4378   $039E   $014378-$014715  12142 Hz (r=$FF)    $B0(24), $D0(24), $FF(67)
+  5  $4716   $0296   $014716-$0149AB  12142 Hz (r=$FF)    $B0(44), $D0(24), $F0(12), $FF(61)
+  6  $49AC   $1650   $0149AC-$015FFB   3873 Hz (r=$50)    $50(1), $80(1), $BF(1), $FF(1)
+  7  $5FFC   $05A4   $015FFC-$01659F   9948 Hz (r=$D0)    $B0(1), $D0(1)
+
+------------------------------------------------------------------------------
+Voice bank ($01BD64): instrument I in a cell = voice I-1 (I-1+32 after "speed" with bit 7 set).
+Voices never selected by any pattern are marked "(unused)"; the bank is always uploaded as $800 bytes,
+so the last voice can run into the following code.  Upper bank (voices 32-63) selected by any pattern: no
+
+voice  0: ALG 2 FB 7 pan LR AMS 0 FMS 2   raw 08 00 00 00 38 12 2D 00 1F 1E 1E 1F 00 00 00 00 0A 0C 0E 01 00 00 00 00 3A C2
+          op1 DT0 MUL 8 TL 56 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op3 DT0 MUL 0 TL 18 KS0 AR30 AM0 D1R 0 D2R12 D1L 0 RR 0
+          op2 DT0 MUL 0 TL 45 KS0 AR30 AM0 D1R 0 D2R14 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R 1 D1L 0 RR 0
+voice  1: ALG 0 FB 7 pan R AMS 0 FMS 5   raw 00 03 00 02 18 18 06 0C 1F 1F 1E 1F 00 00 00 00 1C 0A 07 00 00 00 00 00 38 45
+          op1 DT0 MUL 0 TL 24 KS0 AR31 AM0 D1R 0 D2R28 D1L 0 RR 0
+          op3 DT0 MUL 3 TL 24 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  6 KS0 AR30 AM0 D1R 0 D2R 7 D1L 0 RR 0
+          op4 DT0 MUL 2 TL 12 KS0 AR31 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice  2: ALG 0 FB 7 pan R AMS 0 FMS 5   raw 00 03 00 02 21 18 06 04 1F 1F 1E 1F 00 00 00 00 16 0D 08 0F 00 00 00 00 38 45
+          op1 DT0 MUL 0 TL 33 KS0 AR31 AM0 D1R 0 D2R22 D1L 0 RR 0
+          op3 DT0 MUL 3 TL 24 KS0 AR31 AM0 D1R 0 D2R13 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  6 KS0 AR30 AM0 D1R 0 D2R 8 D1L 0 RR 0
+          op4 DT0 MUL 2 TL  4 KS0 AR31 AM0 D1R 0 D2R15 D1L 0 RR 0
+voice  3: ALG 3 FB 7 pan LR AMS 0 FMS 3   raw 07 04 00 02 37 32 11 01 12 1F 1F 1F 00 00 00 00 11 01 10 0A 00 00 00 00 3B C3
+          op1 DT0 MUL 7 TL 55 KS0 AR18 AM0 D1R 0 D2R17 D1L 0 RR 0
+          op3 DT0 MUL 4 TL 50 KS0 AR31 AM0 D1R 0 D2R 1 D1L 0 RR 0
+          op2 DT0 MUL 0 TL 17 KS0 AR31 AM0 D1R 0 D2R16 D1L 0 RR 0
+          op4 DT0 MUL 2 TL  1 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+voice  4: ALG 3 FB 7 pan LR AMS 0 FMS 7   raw 06 04 01 02 37 32 11 01 12 1F 1F 1F 00 00 00 00 16 01 10 0A 00 00 00 00 3B C7
+          op1 DT0 MUL 6 TL 55 KS0 AR18 AM0 D1R 0 D2R22 D1L 0 RR 0
+          op3 DT0 MUL 4 TL 50 KS0 AR31 AM0 D1R 0 D2R 1 D1L 0 RR 0
+          op2 DT0 MUL 1 TL 17 KS0 AR31 AM0 D1R 0 D2R16 D1L 0 RR 0
+          op4 DT0 MUL 2 TL  1 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+voice  5: ALG 3 FB 7 pan L AMS 0 FMS 4   raw 06 04 01 02 37 28 14 06 12 1F 1F 1F 00 00 00 00 1F 01 10 0A 00 00 00 00 3B 84
+          op1 DT0 MUL 6 TL 55 KS0 AR18 AM0 D1R 0 D2R31 D1L 0 RR 0
+          op3 DT0 MUL 4 TL 40 KS0 AR31 AM0 D1R 0 D2R 1 D1L 0 RR 0
+          op2 DT0 MUL 1 TL 20 KS0 AR31 AM0 D1R 0 D2R16 D1L 0 RR 0
+          op4 DT0 MUL 2 TL  6 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+voice  6: ALG 3 FB 7 pan LR AMS 0 FMS 7   raw 06 04 01 02 37 28 2A 0F 12 1F 1F 1F 00 00 00 00 16 01 07 0A 00 00 00 00 3B C7
+          op1 DT0 MUL 6 TL 55 KS0 AR18 AM0 D1R 0 D2R22 D1L 0 RR 0
+          op3 DT0 MUL 4 TL 40 KS0 AR31 AM0 D1R 0 D2R 1 D1L 0 RR 0
+          op2 DT0 MUL 1 TL 42 KS0 AR31 AM0 D1R 0 D2R 7 D1L 0 RR 0
+          op4 DT0 MUL 2 TL 15 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+voice  7: ALG 6 FB 0 pan LR AMS 1 FMS 4   raw 03 02 01 00 23 19 0F 05 1F 1F 1F 1F 80 80 80 80 00 00 00 00 00 00 00 00 06 DC
+          op1 DT0 MUL 3 TL 35 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 2 TL 25 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 1 TL 15 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  5 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+voice  8: ALG 6 FB 0 pan L AMS 1 FMS 5   raw 03 02 01 00 2D 23 19 0B 1F 1F 1F 1F 80 80 80 80 00 00 00 00 00 00 00 00 06 9D
+          op1 DT0 MUL 3 TL 45 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 2 TL 35 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 1 TL 25 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL 11 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+voice  9: ALG 1 FB 6 pan L AMS 0 FMS 0   raw 02 00 00 00 10 23 02 01 1F 1E 1F 1E 00 00 02 00 0D 14 12 0E 00 00 00 00 31 80
+          op1 DT0 MUL 2 TL 16 KS0 AR31 AM0 D1R 0 D2R13 D1L 0 RR 0
+          op3 DT0 MUL 0 TL 35 KS0 AR30 AM0 D1R 0 D2R20 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  2 KS0 AR31 AM0 D1R 2 D2R18 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  1 KS0 AR30 AM0 D1R 0 D2R14 D1L 0 RR 0
+voice 10: ALG 4 FB 7 pan R AMS 0 FMS 0   raw 0F 0B 0D 0F 27 07 11 02 1F 1F 1F 1F 00 00 00 00 14 11 15 18 00 00 00 00 3C 40
+          op1 DT0 MUL15 TL 39 KS0 AR31 AM0 D1R 0 D2R20 D1L 0 RR 0
+          op3 DT0 MUL11 TL  7 KS0 AR31 AM0 D1R 0 D2R17 D1L 0 RR 0
+          op2 DT0 MUL13 TL 17 KS0 AR31 AM0 D1R 0 D2R21 D1L 0 RR 0
+          op4 DT0 MUL15 TL  2 KS0 AR31 AM0 D1R 0 D2R24 D1L 0 RR 0
+voice 11: ALG 7 FB 0 pan LR AMS 0 FMS 0   raw 03 04 02 03 00 0B 04 27 12 10 14 11 00 00 00 00 0D 15 0A 0A 00 00 00 00 07 C0
+          op1 DT0 MUL 3 TL  0 KS0 AR18 AM0 D1R 0 D2R13 D1L 0 RR 0
+          op3 DT0 MUL 4 TL 11 KS0 AR16 AM0 D1R 0 D2R21 D1L 0 RR 0
+          op2 DT0 MUL 2 TL  4 KS0 AR20 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op4 DT0 MUL 3 TL 39 KS0 AR17 AM0 D1R 0 D2R10 D1L 0 RR 0
+voice 12: ALG 7 FB 5 pan L AMS 0 FMS 6   raw 72 03 04 70 35 19 40 16 1F 1F 1F 1F 80 80 80 9F 04 04 04 04 00 00 00 0D 2F 86
+          op1 DT7 MUL 2 TL 53 KS0 AR31 AM1 D1R 0 D2R 4 D1L 0 RR 0
+          op3 DT0 MUL 3 TL 25 KS0 AR31 AM1 D1R 0 D2R 4 D1L 0 RR 0
+          op2 DT0 MUL 4 TL 64 KS0 AR31 AM1 D1R 0 D2R 4 D1L 0 RR 0
+          op4 DT7 MUL 0 TL 22 KS0 AR31 AM1 D1R31 D2R 4 D1L 0 RR13
+voice 13: ALG 7 FB 5 pan R AMS 0 FMS 6   raw 72 03 04 70 35 19 40 1E 1F 1F 1F 1F 80 80 80 9F 00 00 00 00 00 00 00 0D 2F 46
+          op1 DT7 MUL 2 TL 53 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 3 TL 25 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 4 TL 64 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT7 MUL 0 TL 30 KS0 AR31 AM1 D1R31 D2R 0 D1L 0 RR13
+voice 14: ALG 7 FB 5 pan L AMS 0 FMS 6   raw 72 03 04 70 3B 22 43 2B 1F 1F 1F 1F 80 80 80 9F 00 00 00 00 00 00 00 0D 2F 86
+          op1 DT7 MUL 2 TL 59 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 3 TL 34 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 4 TL 67 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT7 MUL 0 TL 43 KS0 AR31 AM1 D1R31 D2R 0 D1L 0 RR13
+voice 15: ALG 7 FB 5 pan R AMS 0 FMS 6   raw 72 03 04 70 41 29 40 2C 1F 1F 1F 1F 80 80 80 9F 00 00 00 00 00 00 00 0D 2F 46
+          op1 DT7 MUL 2 TL 65 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 3 TL 41 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 4 TL 64 KS0 AR31 AM1 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT7 MUL 0 TL 44 KS0 AR31 AM1 D1R31 D2R 0 D1L 0 RR13
+voice 16: ALG 3 FB 0 pan LR AMS 0 FMS 5   raw 00 00 03 00 43 0E 0A 03 1F 1F 1F 1F 00 00 00 00 0C 0D 0F 12 00 00 00 00 03 C5
+          op1 DT0 MUL 0 TL 67 KS0 AR31 AM0 D1R 0 D2R12 D1L 0 RR 0
+          op3 DT0 MUL 0 TL 14 KS0 AR31 AM0 D1R 0 D2R13 D1L 0 RR 0
+          op2 DT0 MUL 3 TL 10 KS0 AR31 AM0 D1R 0 D2R15 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  3 KS0 AR31 AM0 D1R 0 D2R18 D1L 0 RR 0
+voice 17: ALG 6 FB 0 pan LR AMS 0 FMS 6   raw 01 01 03 02 02 07 00 02 1F 1F 1F 1F 00 00 00 00 0A 0B 14 11 00 00 00 00 06 C6
+          op1 DT0 MUL 1 TL  2 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op3 DT0 MUL 1 TL  7 KS0 AR31 AM0 D1R 0 D2R11 D1L 0 RR 0
+          op2 DT0 MUL 3 TL  0 KS0 AR31 AM0 D1R 0 D2R20 D1L 0 RR 0
+          op4 DT0 MUL 2 TL  2 KS0 AR31 AM0 D1R 0 D2R17 D1L 0 RR 0
+voice 18: ALG 4 FB 0 pan LR AMS 0 FMS 6   raw 00 00 70 02 62 06 0D 10 1F 08 1F 0D 00 00 00 0D 14 0C 0B 04 00 00 00 40 04 C6
+          op1 DT0 MUL 0 TL 98 KS0 AR31 AM0 D1R 0 D2R20 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  6 KS0 AR 8 AM0 D1R 0 D2R12 D1L 0 RR 0
+          op2 DT7 MUL 0 TL 13 KS0 AR31 AM0 D1R 0 D2R11 D1L 0 RR 0
+          op4 DT0 MUL 2 TL 16 KS0 AR13 AM0 D1R13 D2R 4 D1L 4 RR 0
+voice 19: ALG 1 FB 0 pan LR AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 1F 1F 1F 1F 00 00 00 00 10 0E 11 0C 00 00 00 00 01 C0
+          op1 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R16 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R14 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R17 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R12 D1L 0 RR 0
+voice 20: ALG 2 FB 0 pan LR AMS 0 FMS 0   raw 00 0A 00 00 00 00 00 00 10 0D 1F 1F 00 00 00 00 12 0F 0B 05 00 00 00 00 02 C0
+          op1 DT0 MUL 0 TL  0 KS0 AR16 AM0 D1R 0 D2R18 D1L 0 RR 0
+          op3 DT0 MUL10 TL  0 KS0 AR13 AM0 D1R 0 D2R15 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R11 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R 5 D1L 0 RR 0
+voice 21: ALG 3 FB 2 pan LR AMS 0 FMS 0   raw 00 00 01 00 00 00 00 00 18 1F 1F 1F 00 00 00 00 12 10 10 0B 00 00 00 00 13 C0
+          op1 DT0 MUL 0 TL  0 KS0 AR24 AM0 D1R 0 D2R18 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R16 D1L 0 RR 0
+          op2 DT0 MUL 1 TL  0 KS0 AR31 AM0 D1R 0 D2R16 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R11 D1L 0 RR 0
+voice 22: ALG 4 FB 0 pan LR AMS 0 FMS 0   raw 02 01 03 01 00 00 00 00 1F 1F 1F 1F 00 00 00 00 0A 0E 0F 08 00 00 00 00 04 C0
+          op1 DT0 MUL 2 TL  0 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op3 DT0 MUL 1 TL  0 KS0 AR31 AM0 D1R 0 D2R14 D1L 0 RR 0
+          op2 DT0 MUL 3 TL  0 KS0 AR31 AM0 D1R 0 D2R15 D1L 0 RR 0
+          op4 DT0 MUL 1 TL  0 KS0 AR31 AM0 D1R 0 D2R 8 D1L 0 RR 0
+voice 23: ALG 5 FB 0 pan R AMS 0 FMS 0   raw 05 02 00 00 1E 00 00 00 1F 1F 1F 1F 00 00 00 00 13 0E 19 0A 00 00 00 00 05 40
+          op1 DT0 MUL 5 TL 30 KS0 AR31 AM0 D1R 0 D2R19 D1L 0 RR 0
+          op3 DT0 MUL 2 TL  0 KS0 AR31 AM0 D1R 0 D2R14 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R25 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+voice 24: ALG 5 FB 0 pan L AMS 0 FMS 0   raw 05 02 00 00 1E 00 00 00 1F 1F 1F 1F 00 00 00 00 13 0E 19 0A 00 00 00 00 05 80
+          op1 DT0 MUL 5 TL 30 KS0 AR31 AM0 D1R 0 D2R19 D1L 0 RR 0
+          op3 DT0 MUL 2 TL  0 KS0 AR31 AM0 D1R 0 D2R14 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R25 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+voice 25: ALG 5 FB 0 pan LR AMS 0 FMS 0   raw 00 02 01 03 00 00 00 00 1F 1F 1F 1F 00 00 00 00 0A 0A 0A 0A 00 00 00 00 05 C0
+          op1 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op3 DT0 MUL 2 TL  0 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op2 DT0 MUL 1 TL  0 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op4 DT0 MUL 3 TL  0 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+voice 26: ALG 5 FB 0 pan LR AMS 0 FMS 0   raw 00 02 01 03 04 0A 0E 11 1F 1F 1F 1F 00 00 00 00 0A 0A 0A 0A 00 00 00 00 05 C0
+          op1 DT0 MUL 0 TL  4 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op3 DT0 MUL 2 TL 10 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op2 DT0 MUL 1 TL 14 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op4 DT0 MUL 3 TL 17 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+voice 27: ALG 3 FB 2 pan LR AMS 0 FMS 0   raw 00 05 00 00 01 0F 00 00 1F 11 10 1F 00 00 00 00 03 11 11 0B 00 00 00 00 13 C0
+          op1 DT0 MUL 0 TL  1 KS0 AR31 AM0 D1R 0 D2R 3 D1L 0 RR 0
+          op3 DT0 MUL 5 TL 15 KS0 AR17 AM0 D1R 0 D2R17 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR16 AM0 D1R 0 D2R17 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R11 D1L 0 RR 0
+voice 28: ALG 2 FB 0 pan LR AMS 0 FMS 0   raw 00 08 00 00 0B 12 00 00 1F 1F 1F 1F 00 00 00 09 0F 0A 0D 0A 00 00 00 4F 02 C0
+          op1 DT0 MUL 0 TL 11 KS0 AR31 AM0 D1R 0 D2R15 D1L 0 RR 0
+          op3 DT0 MUL 8 TL 18 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R13 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 9 D2R10 D1L 4 RR15
+voice 29: ALG 0 FB 0 pan LR AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 1F 1F 1F 1F 00 00 00 00 09 0D 0A 0B 00 00 00 00 00 C0
+          op1 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R 9 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R13 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R10 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR31 AM0 D1R 0 D2R11 D1L 0 RR 0
+voice 30: ALG 0 FB 0 pan LR AMS 0 FMS 0   raw 00 00 00 00 7F 7F 7F 7F 1F 1F 1F 1F 00 00 00 00 1F 1F 1F 1F 00 00 00 00 00 C0   (silent: all TL = 127)
+          op1 DT0 MUL 0 TL127 KS0 AR31 AM0 D1R 0 D2R31 D1L 0 RR 0
+          op3 DT0 MUL 0 TL127 KS0 AR31 AM0 D1R 0 D2R31 D1L 0 RR 0
+          op2 DT0 MUL 0 TL127 KS0 AR31 AM0 D1R 0 D2R31 D1L 0 RR 0
+          op4 DT0 MUL 0 TL127 KS0 AR31 AM0 D1R 0 D2R31 D1L 0 RR 0
+voice 31: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (not selectable)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 32: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 33: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 34: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 35: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 36: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 37: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 38: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 39: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 40: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 41: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 42: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 43: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 44: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 45: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 46: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 47: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 48: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 49: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 50: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 51: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 52: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 53: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 54: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 55: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 56: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 57: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 58: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 59: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 60: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 61: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 62: ALG 0 FB 0 pan -- AMS 0 FMS 0   raw 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   (upper bank never selected)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op3 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op2 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+          op4 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L 0 RR 0
+voice 63: ALG 6 FB 1 pan R AMS 3 FMS 5   raw 00 16 00 1F 00 29 00 32 00 39 33 FC 00 01 FF FF 00 10 50 F9 FF FF 00 12 4E 75   (not selectable)
+          op1 DT0 MUL 0 TL  0 KS0 AR 0 AM0 D1R 0 D2R 0 D1L15 RR15
+          op3 DT1 MUL 6 TL 41 KS0 AR25 AM0 D1R 1 D2R16 D1L15 RR15
+          op2 DT0 MUL 0 TL  0 KS0 AR19 AM1 D1R31 D2R16 D1L 0 RR 0
+          op4 DT1 MUL15 TL 50 KS3 AR28 AM1 D1R31 D2R25 D1L 1 RR 2
+
+------------------------------------------------------------------------------
+Order list (pattern numbers for FM1..FM6).  "Song" numbers are order positions.
+
+    0 ($00):    1   2   2   2   2   1   MUSIC
+    1 ($01):   14   0   0   0   0  13   MUSIC
+    2 ($02):    3   0   6   7   0   5   
+    3 ($03):    3   4   6   7   0   5   
+    4 ($04):   11   8   9  10   0   5   
+    5 ($05):   11   8   9  10   0   5   
+    6 ($06):   11   8   9  12  10   5   
+    7 ($07):   11   8   9  12  10   5   
+    8 ($08):   15  16  17  18   7   5   
+    9 ($09):    6  19  20  21   7   5   
+   10 ($0A):   11   8   9  12  10   5   
+   11 ($0B):   11   8   9  12  10   5   
+   12 ($0C):   22   4   6   7  23  24   
+   13 ($0D):   25  26   6   7  27   5   
+   14 ($0E):   29  26   6   7  28   5   
+   15 ($0F):   30  31  32  33  34   5   
+   16 ($10):   30  35  32  36  34   5   
+   17 ($11):   37  38  39  40  41   5   
+   18 ($12):   37  38  39  40  41   5   
+   19 ($13):   30  31  32  33  34   5   
+   20 ($14):   30  35  32  36  34   5   
+   21 ($15):   42  43  44  45  46   5   
+   22 ($16):   47  68   0  50   0  51   MUSIC
+   23 ($17):   47  48  49  50   0  51   
+   24 ($18):   47  52  53  56  50  51   
+   25 ($19):   47  52  53  54  50  55   
+   26 ($1A):   57  58  59  60  50  55   
+   27 ($1B):   61  62  63  64  50  55   
+   28 ($1C):   47  52  53  65  50  55   
+   29 ($1D):   57  58  59  66  50  55   
+   30 ($1E):   61  62  63  67  50  55   
+   31 ($1F):   69  70  71   0  73  74   MUSIC
+   32 ($20):   69  70  71  72  73  74   
+   33 ($21):   75  76  77  78  73  74   
+   34 ($22):   79  80  81  82  73  74   
+   35 ($23):   69  70  71  72  73  74   
+   36 ($24):   69  70  71  72  73  74   
+   37 ($25):   75  76  77  78  73  74   
+   38 ($26):   79  80  81  82  73  74   
+   39 ($27):   83  84  85  86  73  74   
+   40 ($28):   83  84  87  86  88  74   
+   41 ($29):   89   0   0   0  92  91   MUSIC
+   42 ($2A):   93  94  95  96  92  91   
+   43 ($2B):   97  94  95  98  92  91   
+   44 ($2C):   99  94  95  98  92 100   
+   45 ($2D):   97  94  95  98  92 100   
+   46 ($2E):  101  94  95  98  92 100   
+   47 ($2F):  103   2   2 102  92   2   
+   48 ($30):   97   0   0   0   0   0   
+   49 ($31):  101 104   0  92   0   0   
+   50 ($32):  105 106   0 107   0 108   MUSIC
+   51 ($33):  105 110 109 107   0 108   
+   52 ($34):  111 112 113 114   0 108   
+   53 ($35):  115 116 117 118   0 108   
+   54 ($36):  119 110 109 107   0 108   
+   55 ($37):  119 110 120 107   0 108   
+   56 ($38):  119 121 127 128   0 108   
+   57 ($39):  122 123   0   0   0 124   MUSIC
+   58 ($3A):  122 125 126 129   0 124   
+   59 ($3B):  122 131 132 133   0 130   
+   60 ($3C):  122 131 134 133   0 130   
+   61 ($3D):  122 135 136 137   0 130   
+   62 ($3E):  122 138 136 137   0 130   
+   63 ($3F):  122 131 132 133   0 130   
+   64 ($40):  122 131 134 133   0 130   
+   65 ($41):  122 131 139 140   0 130   
+   66 ($42):  141 131 139 140   0 130   
+   67 ($43):    0   0   0   0   0   0   
+   68 ($44):    0   0   0   0   0   0   
+   69 ($45):    0   0   0   0   0   0   
+   70 ($46):    0   0   0   0   0   0   
+   71 ($47):    0   0   0   0   0   0   
+   72 ($48):    0   0   0   0   0   0   
+   73 ($49):    0   0   0   0   0   0   
+   74 ($4A):    0   0   0   0   0   0   
+   75 ($4B):    0   0   0   0   0   0   
+   76 ($4C):    0   0   0   0   0   0   
+   77 ($4D):    0   0   0   0   0   0   
+   78 ($4E):    0   0   0   0   0   0   
+   79 ($4F):    0   0   0   0   0   0   
+   80 ($50):    0   0   0   0   0   0   
+   81 ($51):    0   0   0   0   0   0   
+   82 ($52):    0   0   0   0   0   0   
+   83 ($53):    0   0   0   0   0   0   
+   84 ($54):    0   0   0   0   0   0   
+   85 ($55):    0   0   0   0   0   0   
+   86 ($56):    0   0   0   0   0   0   
+   87 ($57):    0   0   0   0   0   0   
+   88 ($58):    0   0   0   0   0   0   
+   89 ($59):    0   0   0   0   0   0   
+   90 ($5A):    0   0   0   0   0   0   
+   91 ($5B):    0   0   0   0   0   0   
+   92 ($5C):    0   0   0   0   0   0   
+   93 ($5D):    0   0   0   0   0   0   
+   94 ($5E):    0   0   0   0   0   0   
+   95 ($5F):    0   0   0   0   0   0   
+   96 ($60):    0   0   0   0   0   0   
+   97 ($61):    0   0   0   0   0   0   
+   98 ($62):    0   0   0   0   0   0   
+   99 ($63):    0   0   0   0   0   0   
+  100 ($64):    0   0   0   0   0   0   
+  101 ($65):    0   0   0   0   0   0   
+  102 ($66):    0   0   0   0   0   0   
+  103 ($67):    0   0   0   0   0   0   
+  104 ($68):    0   0   0   0   0   0   
+  105 ($69):    0   0   0   0   0   0   
+  106 ($6A):    0   0   0   0   0   0   
+  107 ($6B):    0   0   0   0   0   0   
+  108 ($6C):    0   0   0   0   0   0   
+  109 ($6D):    0   0   0   0   0   0   
+  110 ($6E):    0   0   0   0   0   0   
+  111 ($6F):    0   0   0   0   0   0   
+  112 ($70):    0   0   0   0   0   0   
+  113 ($71):    0   0   0   0   0   0   
+  114 ($72):    0   0   0   0   0   0   
+  115 ($73):    0   0   0   0   0   0   
+  116 ($74):    0   0   0   0   0   0   
+  117 ($75):    0   0   0   0   0   0   
+  118 ($76):    0   0   0   0   0   0   
+  119 ($77):    0   0   0   0   0   0   
+  120 ($78):    0   0   0   0   0   0   
+  121 ($79):    0   0   0   0   0   0   
+  122 ($7A):    0   0   0   0   0   0   
+  123 ($7B):    0   0   0   0   0   0   
+  124 ($7C):    0   0   0   0   0   0   
+  125 ($7D):    0   0   0   0   0   0   
+  126 ($7E):    0   0   0   0   0   0   
+  127 ($7F):    0   0   0   0   0   0   
+  128 ($80):    0   0   0   0   0   0   
+  129 ($81):    0   0   0   0   0   0   
+  130 ($82):    0   0   0   0   0   0   
+  131 ($83):    0   0   0   0   0   0   
+  132 ($84):    0   0   0   0   0   0   
+  133 ($85):    0   0   0   0   0   0   
+  134 ($86):    0   0   0   0   0   0   
+  135 ($87):    0   0   0   0   0   0   
+  136 ($88):    0   0   0   0   0   0   
+  137 ($89):    0   0   0   0   0   0   
+  138 ($8A):    0   0   0   0   0   0   
+  139 ($8B):    0   0   0   0   0   0   
+  140 ($8C):    0   0   0   0   0   0   
+  141 ($8D):    0   0   0   0   0   0   
+  142 ($8E):    0   0   0   0   0   0   
+  143 ($8F):    0   0   0   0   0   0   
+  144 ($90):    0   0   0   0   0   0   
+  145 ($91):    0   0   0   0   0   0   
+  146 ($92):    0   0   0   0   0   0   
+  147 ($93):    0   0   0   0   0   0   
+  148 ($94):    0   0   0   0   0   0   
+  149 ($95):    0   0   0   0   0   0   
+  150 ($96):    0   0   0   0   0   0   
+  151 ($97):    0   0   0   0   0   0   
+  152 ($98):    0   0   0   0   0   0   
+  153 ($99):    0   0   0   0   0   0   
+  154 ($9A):    0   0   0   0   0   0   
+  155 ($9B):    0   0   0   0   0   0   
+  156 ($9C):    0   0   0   0   0   0   
+  157 ($9D):    0   0   0   0   0   0   
+  158 ($9E):    0   0   0   0   0   0   
+  159 ($9F):    0   0   0   0   0   0   
+  160 ($A0):    0   0   0   0   0   0   
+  161 ($A1):    0   0   0   0   0   0   
+  162 ($A2):    0   0   0   0   0   0   
+  163 ($A3):    0   0   0   0   0   0   
+  164 ($A4):    0   0   0   0   0   0   
+  165 ($A5):    0   0   0   0   0   0   
+  166 ($A6):    0   0   0   0   0   0   
+  167 ($A7):    0   0   0   0   0   0   
+  168 ($A8):    0   0   0   0   0   0   
+  169 ($A9):    0   0   0   0   0   0   
+  170 ($AA):    0   0   0   0   0   0   
+  171 ($AB):    0   0   0   0   0   0   
+  172 ($AC):    0   0   0   0   0   0   
+  173 ($AD):    0   0   0   0   0   0   
+  174 ($AE):    0   0   0   0   0   0   
+  175 ($AF):    0   0   0   0   0   0   
+  176 ($B0):    0   0   0   0   0   0   
+  177 ($B1):    0   0   0   0   0   0   
+  178 ($B2):    0   0   0   0   0   0   
+  179 ($B3):    0   0   0   0   0   0   
+  180 ($B4):    0   0   0   0   0   0   
+  181 ($B5):    0   0   0   0   0   0   
+  182 ($B6):    0   0   0   0   0   0   
+  183 ($B7):    0   0   0   0   0   0   
+  184 ($B8):    0   0   0   0   0   0   
+  185 ($B9):    0   0   0   0   0   0   
+  186 ($BA):    0   0   0   0   0   0   
+  187 ($BB):    0   0   0   0   0   0   
+  188 ($BC):    0   0   0   0   0   0   
+  189 ($BD):    0   0   0   0   0   0   
+  190 ($BE):    0   0   0   0   0   0   
+  191 ($BF):    0   0   0   0   0   0   
+  192 ($C0):    0   0   0   0   0   0   
+  193 ($C1):    0   0   0   0   0   0   
+  194 ($C2):    0   0   0   0   0   0   
+  195 ($C3):    0   0   0   0   0   0   
+  196 ($C4):    0   0   0   0   0   0   
+  197 ($C5):    0   0   0   0   0   0   
+  198 ($C6):    0   0   0   0   0   0   
+  199 ($C7):    0   0   0   0   0   0   
+  200 ($C8):    0   0   0   0   0   0   
+  201 ($C9):    0   0   0   0   0   0   
+  202 ($CA):    0   0   0   0   0   0   
+  203 ($CB):    0   0   0   0   0   0   
+  204 ($CC):    0   0   0   0   0   0   
+  205 ($CD):    0   0   0   0   0   0   
+  206 ($CE):    0   0   0   0   0   0   
+  207 ($CF):    0   0   0   0   0   0   
+  208 ($D0):    0   0   0   0   0   0   
+  209 ($D1):    0   0   0   0   0   0   
+  210 ($D2):    0   0   0   0   0   0   
+  211 ($D3):    0   0   0   0   0   0   
+  212 ($D4):    0   0   0   0   0   0   
+  213 ($D5):    0   0   0   0   0   0   
+  214 ($D6):    0   0   0   0   0   0   
+  215 ($D7):    0   0   0   0   0   0   
+  216 ($D8):    0   0   0   0   0   0   
+  217 ($D9):    0   0   0   0   0   0   
+  218 ($DA):    0   0   0   0   0   0   
+  219 ($DB):    0   0   0   0   0   0   
+  220 ($DC):    0   0   0   0   0   0   
+  221 ($DD):    0   0   0   0   0   0   
+  222 ($DE):    0   0   0   0   0   0   
+  223 ($DF):    0   0   0   0   0   0   
+  224 ($E0):    0   0   0   0   0   0   
+  225 ($E1):    0   0   0   0   0   0   
+  226 ($E2):    0   0   0   0   0   0   
+  227 ($E3):    0   0   0   0 355   0   
+  228 ($E4):    0   0   0   0 356   0   JINGLE
+  229 ($E5):    0   0   0   0   0 357   
+  230 ($E6):    0   0   0   0 358   0   JINGLE
+  231 ($E7):    0   0   0   0 359   0   JINGLE
+  232 ($E8):    0   0   0   0 360   0   JINGLE
+  233 ($E9):    0   0   0   0 361   0   JINGLE
+  234 ($EA):    0   0   0   0   0 362   SFXSEQ
+  235 ($EB):    0   0   0   0 363   0   JINGLE
+  236 ($EC):    0   0   0   0   0 364   SFXSEQ
+  237 ($ED):    0   0   0   0 365   0   JINGLE
+  238 ($EE):    0   0   0   0 366   0   JINGLE
+  239 ($EF):    0   0   0   0   0 367   SFXSEQ
+  240 ($F0):    0   0   0   0   0 368   SFXSEQ
+  241 ($F1):    0   0   0   0   0 369   SFXSEQ
+  242 ($F2):    0   0   0   0 370   0   
+  243 ($F3):    0   0   0   0 371   0   JINGLE
+  244 ($F4):    0   0   0   0 372   0   JINGLE
+  245 ($F5):    0   0   0   0 373   0   JINGLE
+  246 ($F6):    0   0   0   0 374   0   JINGLE
+  247 ($F7):    0   0   0   0 375   0   JINGLE
+  248 ($F8):    0   0   0   0 376   0   
+  249 ($F9):    0   0   0   0 377   0   JINGLE
+  250 ($FA):    0   0   0   0 378   0   JINGLE
+  251 ($FB):    0   0   0   0   0 379   
+  252 ($FC):    0   0   0   0 380   0   
+  253 ($FD):    0   0   0   0   0 381   SFXSEQ
+  254 ($FE):    0   0   0   0   0 382   SFXSEQ
+  255 ($FF):    0   0   0   0 383   0   
+
+------------------------------------------------------------------------------
+Playback flow from the known entry points (rows actually played per position;
+length in frames at 50 Hz, speed = frames per row - 1).
+
+MUSIC   0  "music off" (Snd_PlayMusic(0) when music is disabled)
+   positions: 0(9)
+   loops to position 0; one pass = 63 frames (1.3 s at 50 Hz)
+MUSIC   1  title / attract ($1EC68)
+   positions: 1(4) 2(48) 3(48) 4(48) 5(48) 6(48) 7(48) 8(48) 9(48) 10(48) 11(48) 12(48) 13(48) 14(48) 15(48) 16(48) 17(48) 18(48) 19(48) 20(48) 21
+   loops to position 1; one pass = 6343 frames (126.9 s at 50 Hz)
+MUSIC  22  level 1 (LevelMusicTable)
+   positions: 22 23 24 25 26 27 28 29 30
+   loops to position 25; one pass = 3457 frames (69.1 s at 50 Hz)
+MUSIC  31  level 2
+   positions: 31(48) 32(48) 33(48) 34(48) 35(48) 36(48) 37(48) 38(48) 39(48) 40(48)
+   loops to position 31; one pass = 2881 frames (57.6 s at 50 Hz)
+MUSIC  41  level 3
+   positions: 41 42 43 44 45 46 47(16) 48 49
+   loops to position 42; one pass = 3169 frames (63.4 s at 50 Hz)
+MUSIC  50  level 4
+   positions: 50 51 52 53 54 55 56
+   loops to position 50; one pass = 2689 frames (53.8 s at 50 Hz)
+MUSIC  57  level 5
+   positions: 57 58 59 60 61 62 63 64 65 66
+   loops to position 58; one pass = 3841 frames (76.8 s at 50 Hz)
+
+JINGLE 228 (sound 33): positions 228, end, 20 frames
+JINGLE 230 (sound 14 sound 31): positions 230, end, 22 frames
+JINGLE 231 (sound 30): positions 231, end, 54 frames
+JINGLE 232 (sound 28): positions 232, end, 16 frames
+JINGLE 233 (sound 27): positions 233, end, 30 frames
+JINGLE 235 (sound 23): positions 235, end, 54 frames
+JINGLE 237 (sound 21): positions 237, end, 30 frames
+JINGLE 238 (sound 20): positions 238, end, 26 frames
+JINGLE 243 (sound 13): positions 243, end, 14 frames
+JINGLE 244 (sound 8 sound 12): positions 244, end, 35 frames
+JINGLE 245 (sound 11): positions 245, end, 46 frames
+JINGLE 246 (sound 10): positions 246, end, 30 frames
+JINGLE 247 (sound 9 sound 35): positions 247 248, end, 216 frames
+JINGLE 249 (sound 7): positions 249, end, 38 frames
+JINGLE 250 (sound 6): positions 250, end, 18 frames
+JINGLE 242 (no caller found): positions 242, end, 23 frames
+JINGLE 252 (no caller found): positions 252, end, 50 frames
+JINGLE 255 (no caller found): positions 255, end, 22 frames
+SFXSEQ 234 (sound 26): positions 234, end, 22 frames
+SFXSEQ 236 (sound 24 sound 29): positions 236, end, 80 frames
+SFXSEQ 239 (sound 19): positions 239, end, 26 frames
+SFXSEQ 240 (sound 18 sound 22): positions 240, end, 57 frames
+SFXSEQ 241 (sound 15 sound 32): positions 241, end, 22 frames
+SFXSEQ 253 (sound 3 sound 4): positions 253, end, 74 frames
+SFXSEQ 254 (sound 2 sound 5): positions 254, end, 110 frames
+SFXSEQ 229 (no caller found): positions 229, end, 22 frames
+SFXSEQ 251 (no caller found): positions 251, end, 102 frames
+
+------------------------------------------------------------------------------
+Patterns.  Cell = hi:lo; N = hi>>1, I = (hi&1)<<4 | lo>>4, E = lo&15.
+Notes: N=3 is C-0 (block 0); "I" = instrument (voice I-1), "+n/-n" = pitch slide per tick.
+Raw bytes "lo,$FF" = lo+1 empty rows; empty rows and "00 00" cells are not printed.
+Rows after a break/jump are not shown.  Instrument 31 without a note is used as a note cut.
+
+PATTERN 0  $019222  2 bytes  used at order rows: 1, 2, 3, 4, 5, 22, 23, 31, 41, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, ... (217 rows)
+
+PATTERN 1  $019224  8 bytes  used at order rows: 0
+   00  1B F0  A#0 31   
+   08  FC 00  jump 0
+
+PATTERN 2  $01922C  4 bytes  used at order rows: 0, 47
+   00  7B F0  A#4 31   
+
+PATTERN 3  $019230  8 bytes  used at order rows: 2, 3
+   00  FA 05  speed 5 bank0
+   47  FE 00  break
+
+PATTERN 4  $019238  98 bytes  used at order rows: 3, 12
+   00  48 10  A-2 01   
+   02  48 00  A-2 ..   
+   03  48 00  A-2 ..   
+   05  48 00  A-2 ..   
+   06  48 00  A-2 ..   
+   08  48 00  A-2 ..   
+   09  48 00  A-2 ..   
+   11  44 00  G-2 ..   
+   12  48 00  A-2 ..   
+   14  48 00  A-2 ..   
+   15  48 00  A-2 ..   
+   17  48 00  A-2 ..   
+   18  48 00  A-2 ..   
+   20  48 00  A-2 ..   
+   21  44 00  G-2 ..   
+   23  44 00  G-2 ..   
+   24  48 00  A-2 ..   
+   26  48 00  A-2 ..   
+   27  48 00  A-2 ..   
+   29  48 00  A-2 ..   
+   30  48 00  A-2 ..   
+   32  48 00  A-2 ..   
+   33  48 00  A-2 ..   
+   35  44 00  G-2 ..   
+   36  48 00  A-2 ..   
+   38  48 00  A-2 ..   
+   39  48 00  A-2 ..   
+   41  48 00  A-2 ..   
+   42  48 00  A-2 ..   
+   44  48 00  A-2 ..   
+   45  44 00  G-2 ..   
+   47  44 00  G-2 ..   
+
+PATTERN 5  $01929A  82 bytes  used at order rows: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21
+   00  DC FF  smp1  rate $FF
+   03  DA FF  smp0  rate $FF
+   05  DC FF  smp1  rate $FF
+   06  DC FF  smp1  rate $FF
+   09  DA FF  smp0  rate $FF
+   11  DC FF  smp1  rate $FF
+   12  DC FF  smp1  rate $FF
+   15  DA FF  smp0  rate $FF
+   17  DC FF  smp1  rate $FF
+   20  DC FF  smp1  rate $FF
+   21  DA FF  smp0  rate $FF
+   23  DC FF  smp1  rate $FF
+   24  DC FF  smp1  rate $FF
+   27  DA FF  smp0  rate $FF
+   29  DC FF  smp1  rate $FF
+   30  DC FF  smp1  rate $FF
+   33  DA FF  smp0  rate $FF
+   35  DC FF  smp1  rate $FF
+   36  DC FF  smp1  rate $FF
+   39  DA FF  smp0  rate $FF
+   41  DC FF  smp1  rate $FF
+   44  DC FF  smp1  rate $FF
+   45  DA FF  smp0  rate $FF
+   47  DC FF  smp1  rate $FF
+
+PATTERN 6  $0192EC  94 bytes  used at order rows: 2, 3, 9, 12, 13, 14
+   00  60 20  A-3 02   
+   02  60 30  A-3 03   
+   03  60 00  A-3 ..   
+   05  60 00  A-3 ..   
+   06  60 00  A-3 ..   
+   08  60 00  A-3 ..   
+   09  60 00  A-3 ..   
+   11  5C 20  G-3 02   
+   12  60 00  A-3 ..   
+   14  60 30  A-3 03   
+   15  60 00  A-3 ..   
+   17  60 20  A-3 02   
+   20  60 20  A-3 02   
+   21  5C 00  G-3 ..   
+   23  5C 20  G-3 02   
+   24  60 00  A-3 ..   
+   26  60 30  A-3 03   
+   27  60 00  A-3 ..   
+   29  60 00  A-3 ..   
+   30  60 00  A-3 ..   
+   32  60 00  A-3 ..   
+   33  60 00  A-3 ..   
+   35  5C 20  G-3 02   
+   36  60 00  A-3 ..   
+   38  60 30  A-3 03   
+   39  60 00  A-3 ..   
+   41  60 20  A-3 02   
+   44  60 20  A-3 02   
+   45  5C 00  G-3 ..   
+   47  5C 00  G-3 ..   
+
+PATTERN 7  $01934A  94 bytes  used at order rows: 2, 3, 8, 9, 12, 13, 14
+   00  56 20  E-3 02   
+   02  56 30  E-3 03   
+   03  56 00  E-3 ..   
+   05  56 00  E-3 ..   
+   06  56 00  E-3 ..   
+   08  56 00  E-3 ..   
+   09  56 00  E-3 ..   
+   11  52 20  D-3 02   
+   12  56 00  E-3 ..   
+   14  56 30  E-3 03   
+   15  56 00  E-3 ..   
+   17  56 20  E-3 02   
+   20  56 20  E-3 02   
+   21  52 00  D-3 ..   
+   23  52 20  D-3 02   
+   24  56 00  E-3 ..   
+   26  56 30  E-3 03   
+   27  56 00  E-3 ..   
+   29  56 00  E-3 ..   
+   30  56 00  E-3 ..   
+   32  56 00  E-3 ..   
+   33  56 00  E-3 ..   
+   35  52 20  D-3 02   
+   36  56 00  E-3 ..   
+   38  56 30  E-3 03   
+   39  56 00  E-3 ..   
+   41  56 20  E-3 02   
+   44  56 20  E-3 02   
+   45  52 00  D-3 ..   
+   47  52 00  D-3 ..   
+
+PATTERN 8  $0193A8  98 bytes  used at order rows: 4, 5, 6, 7, 10, 11
+   00  48 10  A-2 01   
+   02  48 00  A-2 ..   
+   03  60 00  A-3 ..   
+   05  48 00  A-2 ..   
+   06  5C 00  G-3 ..   
+   08  60 00  A-3 ..   
+   09  52 00  D-3 ..   
+   10  54 00  D#3 ..   
+   11  56 00  E-3 ..   
+   12  48 00  A-2 ..   
+   14  48 00  A-2 ..   
+   15  60 00  A-3 ..   
+   17  48 00  A-2 ..   
+   18  3A 00  D-2 ..   
+   20  3A 00  D-2 ..   
+   21  52 00  D-3 ..   
+   23  3A 00  D-2 ..   
+   24  3E 00  E-2 ..   
+   26  3E 00  E-2 ..   
+   27  56 00  E-3 ..   
+   29  3E 00  E-2 ..   
+   30  52 00  D-3 ..   
+   32  56 00  E-3 ..   
+   33  48 00  A-2 ..   
+   34  4A 00  A#2 ..   
+   35  4C 00  B-2 ..   
+   36  3E 00  E-2 ..   
+   38  56 00  E-3 ..   
+   39  44 00  G-2 ..   
+   41  5C 00  G-3 ..   
+   42  48 00  A-2 ..   
+   44  48 00  A-2 ..   
+   45  44 00  G-2 ..   
+   46  3E 00  E-2 ..   
+   47  3A 00  D-2 ..   
+
+PATTERN 9  $01940A  94 bytes  used at order rows: 4, 5, 6, 7, 10, 11
+   00  8C 45  G-5 04 +5
+   01  00 78  --- 07  0
+   02  90 40  A-5 04   
+   03  90 50  A-5 05   
+   04  8C 40  G-5 04   
+   05  86 00  E-5 ..   
+   06  8C 40  G-5 04   
+   07  00 70  --- 07   
+   08  90 50  A-5 05   
+   10  86 40  E-5 04   
+   11  8C 00  G-5 ..   
+   12  8C 05  G-5 .. +5
+   13  00 78  --- 07  0
+   14  90 40  A-5 04   
+   15  90 50  A-5 05   
+   16  8C 40  G-5 04   
+   17  86 00  E-5 ..   
+   18  82 00  D-5 ..   
+   19  00 50  --- 05   
+   22  86 40  E-5 04   
+   23  8C 00  G-5 ..   
+   24  8C 05  G-5 .. +5
+   25  00 78  --- 07  0
+   26  90 40  A-5 04   
+   27  90 50  A-5 05   
+   28  8C 40  G-5 04   
+   29  86 00  E-5 ..   
+   30  8C 00  G-5 ..   
+   31  00 70  --- 07   
+   32  90 50  A-5 05   
+   34  86 40  E-5 04   
+   35  82 00  D-5 ..   
+   36  86 00  E-5 ..   
+   37  8C 00  G-5 ..   
+   38  86 00  E-5 ..   
+   39  82 00  D-5 ..   
+   40  7E 00  C-5 ..   
+   41  74 00  G-4 ..   
+   42  78 00  A-4 ..   
+   43  00 50  --- 05   
+   46  86 40  E-5 04   
+   47  8C 00  G-5 ..   
+
+PATTERN 10  $019468  90 bytes  used at order rows: 4, 5, 6, 7, 10, 11
+   01  90 60  A-5 06   
+   03  90 00  A-5 ..   
+   04  90 00  A-5 ..   
+   05  8C 00  G-5 ..   
+   06  86 00  E-5 ..   
+   07  8C 00  G-5 ..   
+   09  90 00  A-5 ..   
+   11  86 00  E-5 ..   
+   12  8C 00  G-5 ..   
+   13  90 00  A-5 ..   
+   15  90 00  A-5 ..   
+   16  90 00  A-5 ..   
+   17  8C 00  G-5 ..   
+   18  86 00  E-5 ..   
+   19  82 00  D-5 ..   
+   23  86 00  E-5 ..   
+   24  8C 00  G-5 ..   
+   25  90 00  A-5 ..   
+   27  90 00  A-5 ..   
+   28  90 00  A-5 ..   
+   29  8C 00  G-5 ..   
+   30  86 00  E-5 ..   
+   31  8C 00  G-5 ..   
+   33  90 00  A-5 ..   
+   35  86 00  E-5 ..   
+   36  82 00  D-5 ..   
+   37  86 00  E-5 ..   
+   38  8C 00  G-5 ..   
+   39  86 00  E-5 ..   
+   40  82 00  D-5 ..   
+   41  7E 00  C-5 ..   
+   42  74 00  G-4 ..   
+   43  78 00  A-4 ..   
+   47  FE 00  break
+
+PATTERN 11  $0194C2  94 bytes  used at order rows: 4, 5, 6, 7, 10, 11
+   00  60 20  A-3 02   
+   02  60 30  A-3 03   
+   03  60 00  A-3 ..   
+   05  60 00  A-3 ..   
+   06  60 00  A-3 ..   
+   08  60 00  A-3 ..   
+   09  60 00  A-3 ..   
+   11  5C 20  G-3 02   
+   12  60 00  A-3 ..   
+   14  60 30  A-3 03   
+   15  60 00  A-3 ..   
+   17  66 20  C-4 02   
+   20  66 20  C-4 02   
+   21  66 00  C-4 ..   
+   23  66 20  C-4 02   
+   24  6A 00  D-4 ..   
+   26  6A 30  D-4 03   
+   27  6A 00  D-4 ..   
+   29  6A 00  D-4 ..   
+   30  6A 00  D-4 ..   
+   32  6A 00  D-4 ..   
+   33  6A 00  D-4 ..   
+   35  66 20  C-4 02   
+   36  6A 00  D-4 ..   
+   38  6A 30  D-4 03   
+   39  5C 00  G-3 ..   
+   41  60 20  A-3 02   
+   44  60 20  A-3 02   
+   45  5C 00  G-3 ..   
+   47  56 00  E-3 ..   
+
+PATTERN 12  $019520  94 bytes  used at order rows: 6, 7, 10, 11
+   00  94 41  B-5 04 +1
+   01  00 78  --- 07  0
+   02  96 40  C-6 04   
+   03  96 50  C-6 05   
+   04  94 40  B-5 04   
+   05  8C 00  G-5 ..   
+   06  94 40  B-5 04   
+   07  00 70  --- 07   
+   08  96 50  C-6 05   
+   10  8C 40  G-5 04   
+   11  94 00  B-5 ..   
+   12  94 01  B-5 .. +1
+   13  00 78  --- 07  0
+   14  96 40  C-6 04   
+   15  96 50  C-6 05   
+   16  94 40  B-5 04   
+   17  8C 00  G-5 ..   
+   18  8A 00  F#5 ..   
+   19  00 50  --- 05   
+   22  90 40  A-5 04   
+   23  94 00  B-5 ..   
+   24  94 01  B-5 .. +1
+   25  00 78  --- 07  0
+   26  96 40  C-6 04   
+   27  96 50  C-6 05   
+   28  94 40  B-5 04   
+   29  8C 00  G-5 ..   
+   30  94 00  B-5 ..   
+   31  00 70  --- 07   
+   32  96 50  C-6 05   
+   34  6E 40  E-4 04   
+   35  6A 00  D-4 ..   
+   36  6E 00  E-4 ..   
+   37  74 00  G-4 ..   
+   38  6E 00  E-4 ..   
+   39  6A 00  D-4 ..   
+   40  66 00  C-4 ..   
+   41  5C 00  G-3 ..   
+   42  60 00  A-3 ..   
+   43  00 50  --- 05   
+   46  8C 40  G-5 04   
+   47  94 00  B-5 ..   
+
+PATTERN 13  $01957E  10 bytes  used at order rows: 1
+   00  DC FF  smp1  rate $FF
+   01  DA FF  smp0  rate $FF
+   03  DA FF  smp0  rate $FF
+
+PATTERN 14  $019588  8 bytes  used at order rows: 1
+   00  FA 05  speed 5 bank0
+   03  FE 00  break
+
+PATTERN 15  $019590  94 bytes  used at order rows: 8
+   00  60 20  A-3 02   
+   02  60 30  A-3 03   
+   03  60 00  A-3 ..   
+   05  60 00  A-3 ..   
+   06  60 00  A-3 ..   
+   08  60 00  A-3 ..   
+   09  60 00  A-3 ..   
+   11  5C 20  G-3 02   
+   12  60 00  A-3 ..   
+   14  60 30  A-3 03   
+   15  60 00  A-3 ..   
+   17  60 20  A-3 02   
+   20  60 20  A-3 02   
+   21  5C 00  G-3 ..   
+   23  5C 20  G-3 02   
+   24  60 00  A-3 ..   
+   26  60 30  A-3 03   
+   27  68 00  C#4 ..   
+   29  68 00  C#4 ..   
+   30  6A 00  D-4 ..   
+   32  6A 00  D-4 ..   
+   33  6C 00  D#4 ..   
+   35  6E 20  E-4 02   
+   36  60 00  A-3 ..   
+   38  60 30  A-3 03   
+   39  68 00  C#4 ..   
+   41  68 20  C#4 02   
+   44  6A 20  D-4 02   
+   45  6C 00  D#4 ..   
+   47  6E 00  E-4 ..   
+
+PATTERN 16  $0195EE  60 bytes  used at order rows: 8
+   00  96 40  C-6 04   
+   01  90 50  A-5 05   
+   02  86 40  E-5 04   
+   03  9A 00  D-6 ..   
+   04  90 00  A-5 ..   
+   05  86 50  E-5 05   
+   06  9C 40  D#6 04   
+   07  90 00  A-5 ..   
+   08  86 00  E-5 ..   
+   09  9E 00  E-6 ..   
+   10  90 00  A-5 ..   
+   11  86 00  E-5 ..   
+   12  A2 42  F#6 04 +2
+   13  00 78  --- 07  0
+   14  9E 40  E-6 04   
+   15  00 50  --- 05   
+   16  9A 40  D-6 04   
+   17  00 50  --- 05   
+   18  9E 40  E-6 04   
+   19  9C 00  D#6 ..   
+   20  9A 00  D-6 ..   
+   21  96 00  C-6 ..   
+   22  8C 00  G-5 ..   
+   23  8E 00  G#5 ..   
+   24  90 00  A-5 ..   
+   27  00 50  --- 05   
+   47  FE 00  break
+
+PATTERN 17  $01962A  98 bytes  used at order rows: 8
+   00  48 10  A-2 01   
+   02  48 00  A-2 ..   
+   03  48 00  A-2 ..   
+   05  48 00  A-2 ..   
+   06  48 00  A-2 ..   
+   08  48 00  A-2 ..   
+   09  48 00  A-2 ..   
+   11  44 00  G-2 ..   
+   12  48 00  A-2 ..   
+   14  48 00  A-2 ..   
+   15  48 00  A-2 ..   
+   17  48 00  A-2 ..   
+   18  48 00  A-2 ..   
+   20  48 00  A-2 ..   
+   21  44 00  G-2 ..   
+   23  44 00  G-2 ..   
+   24  48 00  A-2 ..   
+   26  48 00  A-2 ..   
+   27  50 00  C#3 ..   
+   29  50 00  C#3 ..   
+   30  52 00  D-3 ..   
+   32  52 00  D-3 ..   
+   33  54 00  D#3 ..   
+   35  56 00  E-3 ..   
+   36  48 00  A-2 ..   
+   38  48 00  A-2 ..   
+   39  50 00  C#3 ..   
+   41  50 00  C#3 ..   
+   42  52 00  D-3 ..   
+   44  52 00  D-3 ..   
+   45  54 00  D#3 ..   
+   47  56 00  E-3 ..   
+
+PATTERN 18  $01968C  98 bytes  used at order rows: 8
+   00  7B F0  A#4 31   
+   01  96 60  C-6 06   
+   02  90 00  A-5 ..   
+   03  86 00  E-5 ..   
+   04  9A 00  D-6 ..   
+   05  90 00  A-5 ..   
+   06  86 00  E-5 ..   
+   07  9C 00  D#6 ..   
+   08  90 00  A-5 ..   
+   09  86 00  E-5 ..   
+   10  9E 00  E-6 ..   
+   11  90 00  A-5 ..   
+   12  86 00  E-5 ..   
+   13  A2 02  F#6 .. +2
+   14  00 08  --- ..  0
+   15  9E 00  E-6 ..   
+   17  9A 00  D-6 ..   
+   19  9E 00  E-6 ..   
+   20  9C 00  D#6 ..   
+   21  9A 00  D-6 ..   
+   22  96 00  C-6 ..   
+   23  8C 00  G-5 ..   
+   24  8E 00  G#5 ..   
+   25  90 00  A-5 ..   
+   26  90 00  A-5 ..   
+   27  96 00  C-6 ..   
+   28  90 00  A-5 ..   
+   29  96 00  C-6 ..   
+   30  90 00  A-5 ..   
+   31  96 00  C-6 ..   
+   32  90 00  A-5 ..   
+   33  96 00  C-6 ..   
+   34  90 00  A-5 ..   
+   35  96 00  C-6 ..   
+   36  90 00  A-5 ..   
+   37  96 00  C-6 ..   
+   38  90 00  A-5 ..   
+   39  8E 00  G#5 ..   
+   40  94 00  B-5 ..   
+   41  8E 00  G#5 ..   
+   42  8C 00  G-5 ..   
+   43  92 00  A#5 ..   
+   44  8C 00  G-5 ..   
+   45  8A 00  F#5 ..   
+   46  90 00  A-5 ..   
+   47  8A 00  F#5 ..   
+
+PATTERN 19  $0196EE  98 bytes  used at order rows: 9
+   00  44 10  G-2 01   
+   02  44 00  G-2 ..   
+   03  5C 00  G-3 ..   
+   04  58 00  F-3 ..   
+   05  5C 00  G-3 ..   
+   06  44 00  G-2 ..   
+   07  5C 00  G-3 ..   
+   08  52 00  D-3 ..   
+   09  4E 00  C-3 ..   
+   10  4A 00  A#2 ..   
+   11  40 00  F-2 ..   
+   12  48 00  A-2 ..   
+   14  48 00  A-2 ..   
+   15  60 00  A-3 ..   
+   16  5C 00  G-3 ..   
+   17  60 00  A-3 ..   
+   18  56 00  E-3 ..   
+   19  5C 00  G-3 ..   
+   20  56 00  E-3 ..   
+   21  52 00  D-3 ..   
+   22  4E 00  C-3 ..   
+   23  40 00  F-2 ..   
+   24  44 00  G-2 ..   
+   26  44 00  G-2 ..   
+   27  5C 00  G-3 ..   
+   28  58 00  F-3 ..   
+   29  5C 00  G-3 ..   
+   30  44 00  G-2 ..   
+   31  5C 00  G-3 ..   
+   32  58 00  F-3 ..   
+   33  5C 00  G-3 ..   
+   34  52 00  D-3 ..   
+   35  58 00  F-3 ..   
+   36  48 00  A-2 ..   
+   38  48 00  A-2 ..   
+   39  60 00  A-3 ..   
+   40  5C 00  G-3 ..   
+   41  56 00  E-3 ..   
+   42  52 00  D-3 ..   
+   43  56 00  E-3 ..   
+   44  5C 00  G-3 ..   
+   45  3A 00  D-2 ..   
+   46  3E 00  E-2 ..   
+   47  44 00  G-2 ..   
+
+PATTERN 20  $019750  76 bytes  used at order rows: 9
+   00  8C 40  G-5 04   
+   01  86 00  E-5 ..   
+   02  8C 00  G-5 ..   
+   03  90 00  A-5 ..   
+   04  8C 00  G-5 ..   
+   05  90 00  A-5 ..   
+   06  96 00  C-6 ..   
+   07  90 00  A-5 ..   
+   08  96 00  C-6 ..   
+   09  9A 00  D-6 ..   
+   10  96 00  C-6 ..   
+   11  9A 00  D-6 ..   
+   12  96 00  C-6 ..   
+   13  00 70  --- 07   
+   14  90 40  A-5 04   
+   15  8C 00  G-5 ..   
+   16  8E 00  G#5 ..   
+   17  90 00  A-5 ..   
+   20  00 50  --- 05   
+   24  8C 40  G-5 04   
+   25  00 70  --- 07   
+   26  86 40  E-5 04   
+   27  00 50  --- 05   
+   32  94 40  B-5 04   
+   33  90 00  A-5 ..   
+   34  00 70  --- 07   
+   35  8C 40  G-5 04   
+   36  90 00  A-5 ..   
+   37  8C 00  G-5 ..   
+   38  90 00  A-5 ..   
+   41  00 50  --- 05   
+   47  FE 00  break
+
+PATTERN 21  $01979C  64 bytes  used at order rows: 9
+   00  7B F0  A#4 31   
+   01  8C 60  G-5 06   
+   02  86 00  E-5 ..   
+   03  8C 00  G-5 ..   
+   04  90 00  A-5 ..   
+   05  8C 00  G-5 ..   
+   06  90 00  A-5 ..   
+   07  96 00  C-6 ..   
+   08  90 00  A-5 ..   
+   09  96 00  C-6 ..   
+   10  9A 00  D-6 ..   
+   11  96 00  C-6 ..   
+   12  9A 00  D-6 ..   
+   13  96 00  C-6 ..   
+   15  90 00  A-5 ..   
+   16  8C 00  G-5 ..   
+   17  8E 00  G#5 ..   
+   18  90 00  A-5 ..   
+   25  8C 00  G-5 ..   
+   27  86 00  E-5 ..   
+   33  94 00  B-5 ..   
+   34  90 00  A-5 ..   
+   36  90 00  A-5 ..   
+   37  90 00  A-5 ..   
+   38  8C 00  G-5 ..   
+   39  90 00  A-5 ..   
+
+PATTERN 22  $0197DC  60 bytes  used at order rows: 12
+   00  9C 43  D#6 04 +3
+   01  00 58  --- 05  0
+   02  9C 43  D#6 04 +3
+   03  00 58  --- 05  0
+   04  9C 43  D#6 04 +3
+   05  00 58  --- 05  0
+   06  9C 43  D#6 04 +3
+   07  00 58  --- 05  0
+   08  9C 43  D#6 04 +3
+   09  00 58  --- 05  0
+   10  9C 43  D#6 04 +3
+   11  00 58  --- 05  0
+   12  A4 40  G-6 04   
+   13  9E 00  E-6 ..   
+   14  9A 00  D-6 ..   
+   15  9E 00  E-6 ..   
+   16  9A 00  D-6 ..   
+   17  96 00  C-6 ..   
+   18  9A 00  D-6 ..   
+   19  96 00  C-6 ..   
+   20  90 00  A-5 ..   
+   21  96 00  C-6 ..   
+   22  90 00  A-5 ..   
+   23  8C 00  G-5 ..   
+   24  90 50  A-5 05   
+   45  82 40  D-5 04   
+   46  86 00  E-5 ..   
+   47  8C 00  G-5 ..   
+
+PATTERN 23  $019818  58 bytes  used at order rows: 12
+   00  93 F0  A#5 31   
+   01  9C 63  D#6 06 +3
+   02  00 08  --- ..  0
+   03  9C 03  D#6 .. +3
+   04  00 08  --- ..  0
+   05  9C 03  D#6 .. +3
+   06  00 08  --- ..  0
+   07  9C 03  D#6 .. +3
+   08  00 08  --- ..  0
+   09  9C 03  D#6 .. +3
+   10  00 08  --- ..  0
+   11  9C 03  D#6 .. +3
+   12  00 08  --- ..  0
+   13  A4 00  G-6 ..   
+   14  9E 00  E-6 ..   
+   15  9A 00  D-6 ..   
+   16  9E 00  E-6 ..   
+   17  9A 00  D-6 ..   
+   18  96 00  C-6 ..   
+   19  9A 00  D-6 ..   
+   20  96 00  C-6 ..   
+   21  90 00  A-5 ..   
+   22  96 00  C-6 ..   
+   23  90 00  A-5 ..   
+   24  8C 00  G-5 ..   
+   25  90 00  A-5 ..   
+   47  FE 00  break
+
+PATTERN 24  $019852  98 bytes  used at order rows: 12
+   00  DA FF  smp0  rate $FF
+   01  DA FF  smp0  rate $FF
+   02  DC FF  smp1  rate $FF
+   03  DA FF  smp0  rate $FF
+   04  DA FF  smp0  rate $FF
+   05  DC FF  smp1  rate $FF
+   06  DA FF  smp0  rate $FF
+   08  DA FF  smp0  rate $FF
+   10  DA FF  smp0  rate $FF
+   11  DA FF  smp0  rate $FF
+   12  DC FF  smp1  rate $FF
+   14  DC FF  smp1  rate $FF
+   15  DA FF  smp0  rate $FF
+   17  DC FF  smp1  rate $FF
+   18  DC FF  smp1  rate $FF
+   20  DC FF  smp1  rate $FF
+   21  DA FF  smp0  rate $FF
+   22  DA FF  smp0  rate $FF
+   23  DA FF  smp0  rate $FF
+   24  DC FF  smp1  rate $FF
+   26  DC FF  smp1  rate $FF
+   27  DC FF  smp1  rate $FF
+   29  DC FF  smp1  rate $FF
+   30  DC FF  smp1  rate $FF
+   32  DC FF  smp1  rate $FF
+   33  DC FF  smp1  rate $FF
+   35  DC FF  smp1  rate $FF
+   36  DC FF  smp1  rate $FF
+   37  DA FF  smp0  rate $FF
+   38  DA FF  smp0  rate $FF
+   39  DC FF  smp1  rate $FF
+   40  DA FF  smp0  rate $FF
+   41  DA FF  smp0  rate $FF
+   42  DC FF  smp1  rate $FF
+   43  DA FF  smp0  rate $FF
+   44  DA FF  smp0  rate $FF
+   45  DA FF  smp0  rate $FF
+   46  DA FF  smp0  rate $FF
+   47  DA FF  smp0  rate $FF
+
+PATTERN 25  $0198B4  98 bytes  used at order rows: 13
+   00  90 40  A-5 04   
+   01  00 70  --- 07   
+   02  90 40  A-5 04   
+   03  96 00  C-6 ..   
+   04  94 00  B-5 ..   
+   05  8C 00  G-5 ..   
+   06  90 00  A-5 ..   
+   07  00 70  --- 07   
+   08  90 40  A-5 04   
+   09  8C 00  G-5 ..   
+   10  86 00  E-5 ..   
+   11  8C 00  G-5 ..   
+   12  90 00  A-5 ..   
+   13  00 70  --- 07   
+   14  90 40  A-5 04   
+   15  96 00  C-6 ..   
+   16  94 00  B-5 ..   
+   17  8C 00  G-5 ..   
+   18  90 00  A-5 ..   
+   19  00 70  --- 07   
+   20  90 40  A-5 04   
+   21  8C 00  G-5 ..   
+   22  86 00  E-5 ..   
+   23  8C 00  G-5 ..   
+   24  90 00  A-5 ..   
+   25  00 70  --- 07   
+   26  90 40  A-5 04   
+   27  96 00  C-6 ..   
+   28  94 00  B-5 ..   
+   29  8C 00  G-5 ..   
+   30  90 00  A-5 ..   
+   31  00 70  --- 07   
+   32  90 40  A-5 04   
+   33  8C 00  G-5 ..   
+   34  86 00  E-5 ..   
+   35  8C 00  G-5 ..   
+   36  90 00  A-5 ..   
+   37  00 70  --- 07   
+   38  90 40  A-5 04   
+   39  96 00  C-6 ..   
+   40  94 00  B-5 ..   
+   41  8C 00  G-5 ..   
+   42  90 00  A-5 ..   
+   43  00 70  --- 07   
+   44  90 40  A-5 04   
+   45  8C 00  G-5 ..   
+   46  86 00  E-5 ..   
+   47  8C 00  G-5 ..   
+
+PATTERN 26  $019916  98 bytes  used at order rows: 13, 14
+   00  93 F0  A#5 31   
+   01  90 60  A-5 06   
+   03  90 00  A-5 ..   
+   04  96 00  C-6 ..   
+   05  94 00  B-5 ..   
+   06  8C 00  G-5 ..   
+   07  90 00  A-5 ..   
+   09  90 00  A-5 ..   
+   10  8C 00  G-5 ..   
+   11  86 00  E-5 ..   
+   12  8C 00  G-5 ..   
+   13  90 00  A-5 ..   
+   15  90 00  A-5 ..   
+   16  96 00  C-6 ..   
+   17  94 00  B-5 ..   
+   18  8C 00  G-5 ..   
+   19  90 00  A-5 ..   
+   21  90 00  A-5 ..   
+   22  8C 00  G-5 ..   
+   23  86 00  E-5 ..   
+   24  96 40  C-6 04   
+   25  00 70  --- 07   
+   26  96 40  C-6 04   
+   27  9E 00  E-6 ..   
+   28  9A 00  D-6 ..   
+   29  94 00  B-5 ..   
+   30  96 00  C-6 ..   
+   31  00 70  --- 07   
+   32  96 40  C-6 04   
+   33  94 00  B-5 ..   
+   34  90 00  A-5 ..   
+   35  94 00  B-5 ..   
+   36  96 00  C-6 ..   
+   37  00 70  --- 07   
+   38  96 40  C-6 04   
+   39  9E 00  E-6 ..   
+   40  9A 00  D-6 ..   
+   41  94 00  B-5 ..   
+   42  96 00  C-6 ..   
+   43  00 70  --- 07   
+   44  96 40  C-6 04   
+   45  94 00  B-5 ..   
+   46  90 00  A-5 ..   
+   47  94 00  B-5 ..   
+
+PATTERN 27  $019978  8 bytes  used at order rows: 13
+   00  93 F0  A#5 31   
+   47  FE 00  break
+
+PATTERN 28  $019980  98 bytes  used at order rows: 14
+   00  9E 40  E-6 04   
+   01  00 70  --- 07   
+   02  9E 40  E-6 04   
+   03  A4 00  G-6 ..   
+   04  A2 00  F#6 ..   
+   05  9A 00  D-6 ..   
+   06  9E 00  E-6 ..   
+   07  00 70  --- 07   
+   08  9E 40  E-6 04   
+   09  9A 00  D-6 ..   
+   10  94 00  B-5 ..   
+   11  9A 00  D-6 ..   
+   12  9E 00  E-6 ..   
+   13  00 70  --- 07   
+   14  9E 40  E-6 04   
+   15  A4 00  G-6 ..   
+   16  A2 00  F#6 ..   
+   17  9A 00  D-6 ..   
+   18  9E 00  E-6 ..   
+   19  00 70  --- 07   
+   20  9E 40  E-6 04   
+   21  9A 00  D-6 ..   
+   22  94 00  B-5 ..   
+   23  9A 00  D-6 ..   
+   24  48 10  A-2 01   
+   26  48 00  A-2 ..   
+   27  48 00  A-2 ..   
+   29  48 00  A-2 ..   
+   30  48 00  A-2 ..   
+   32  48 00  A-2 ..   
+   33  48 00  A-2 ..   
+   35  44 00  G-2 ..   
+   36  48 00  A-2 ..   
+   38  48 00  A-2 ..   
+   39  48 00  A-2 ..   
+   41  48 00  A-2 ..   
+   42  44 00  G-2 ..   
+   43  5C 00  G-3 ..   
+   45  46 00  G#2 ..   
+   46  5E 00  G#3 ..   
+   47  FE 00  break
+
+PATTERN 29  $0199E2  98 bytes  used at order rows: 14
+   00  90 40  A-5 04   
+   01  00 70  --- 07   
+   02  90 40  A-5 04   
+   03  96 00  C-6 ..   
+   04  94 00  B-5 ..   
+   05  8C 00  G-5 ..   
+   06  90 00  A-5 ..   
+   07  00 70  --- 07   
+   08  90 40  A-5 04   
+   09  8C 00  G-5 ..   
+   10  86 00  E-5 ..   
+   11  8C 00  G-5 ..   
+   12  90 00  A-5 ..   
+   13  00 70  --- 07   
+   14  90 40  A-5 04   
+   15  96 00  C-6 ..   
+   16  94 00  B-5 ..   
+   17  8C 00  G-5 ..   
+   18  90 00  A-5 ..   
+   19  00 70  --- 07   
+   20  90 40  A-5 04   
+   21  8C 00  G-5 ..   
+   22  86 00  E-5 ..   
+   23  8C 00  G-5 ..   
+   24  A8 00  A-6 ..   
+   25  00 70  --- 07   
+   26  A8 40  A-6 04   
+   27  AE 00  C-7 ..   
+   28  AC 00  B-6 ..   
+   29  A4 00  G-6 ..   
+   30  A8 00  A-6 ..   
+   31  00 70  --- 07   
+   32  A8 40  A-6 04   
+   33  A4 00  G-6 ..   
+   34  9E 00  E-6 ..   
+   35  A4 00  G-6 ..   
+   36  A8 00  A-6 ..   
+   37  00 70  --- 07   
+   38  A8 40  A-6 04   
+   39  AE 00  C-7 ..   
+   40  AC 00  B-6 ..   
+   41  A4 00  G-6 ..   
+   42  A8 00  A-6 ..   
+   43  00 70  --- 07   
+   44  A8 40  A-6 04   
+   45  A4 00  G-6 ..   
+   46  9E 00  E-6 ..   
+   47  A4 00  G-6 ..   
+
+PATTERN 30  $019A44  98 bytes  used at order rows: 15, 16, 19, 20
+   00  48 10  A-2 01   
+   02  48 00  A-2 ..   
+   03  48 00  A-2 ..   
+   05  4C 00  B-2 ..   
+   06  44 00  G-2 ..   
+   08  44 00  G-2 ..   
+   09  44 00  G-2 ..   
+   10  48 00  A-2 ..   
+   11  4E 00  C-3 ..   
+   12  52 00  D-3 ..   
+   14  52 00  D-3 ..   
+   15  52 00  D-3 ..   
+   17  4E 00  C-3 ..   
+   18  52 00  D-3 ..   
+   20  52 00  D-3 ..   
+   21  4E 00  C-3 ..   
+   22  48 00  A-2 ..   
+   23  4E 00  C-3 ..   
+   24  48 00  A-2 ..   
+   26  48 00  A-2 ..   
+   27  48 00  A-2 ..   
+   29  4C 00  B-2 ..   
+   30  44 00  G-2 ..   
+   32  44 00  G-2 ..   
+   33  44 00  G-2 ..   
+   35  3E 00  E-2 ..   
+   36  3A 00  D-2 ..   
+   38  3A 00  D-2 ..   
+   39  3A 00  D-2 ..   
+   41  36 00  C-2 ..   
+   42  42 00  F#2 ..   
+   44  42 00  F#2 ..   
+   45  44 00  G-2 ..   
+   47  46 00  G#2 ..   
+
+PATTERN 31  $019AA6  74 bytes  used at order rows: 15, 19
+   00  B6 80  E-7 08   
+   02  B2 00  D-7 ..   
+   04  AE 00  C-7 ..   
+   06  B2 00  D-7 ..   
+   08  AE 00  C-7 ..   
+   09  A4 00  G-6 ..   
+   10  A6 00  G#6 ..   
+   11  A8 00  A-6 ..   
+   18  9E 00  E-6 ..   
+   19  A4 00  G-6 ..   
+   20  A8 00  A-6 ..   
+   21  AE 00  C-7 ..   
+   22  AC 00  B-6 ..   
+   23  A4 00  G-6 ..   
+   24  9A 00  D-6 ..   
+   25  9E 00  E-6 ..   
+   26  A4 00  G-6 ..   
+   27  9A 00  D-6 ..   
+   28  9E 00  E-6 ..   
+   29  A4 00  G-6 ..   
+   30  9A 00  D-6 ..   
+   31  9E 00  E-6 ..   
+   32  A4 00  G-6 ..   
+   33  9A 00  D-6 ..   
+   34  96 00  C-6 ..   
+   35  8C 00  G-5 ..   
+   36  90 00  A-5 ..   
+   45  9A 80  D-6 08   
+   46  9E 00  E-6 ..   
+   47  A4 00  G-6 ..   
+
+PATTERN 32  $019AF0  94 bytes  used at order rows: 15, 16, 19, 20
+   00  60 20  A-3 02   
+   02  60 30  A-3 03   
+   03  78 00  A-4 ..   
+   05  60 00  A-3 ..   
+   06  5C 00  G-3 ..   
+   08  5C 00  G-3 ..   
+   09  74 00  G-4 ..   
+   11  5C 20  G-3 02   
+   12  6A 00  D-4 ..   
+   14  6A 30  D-4 03   
+   15  82 00  D-5 ..   
+   17  66 20  C-4 02   
+   20  6A 20  D-4 02   
+   21  82 00  D-5 ..   
+   23  6A 20  D-4 02   
+   24  60 00  A-3 ..   
+   26  60 30  A-3 03   
+   27  78 00  A-4 ..   
+   29  60 00  A-3 ..   
+   30  5C 00  G-3 ..   
+   32  5C 00  G-3 ..   
+   33  74 00  G-4 ..   
+   35  5C 20  G-3 02   
+   36  6A 00  D-4 ..   
+   38  6A 30  D-4 03   
+   39  82 00  D-5 ..   
+   41  6A 20  D-4 02   
+   44  6A 20  D-4 02   
+   45  82 00  D-5 ..   
+   47  6E 00  E-4 ..   
+
+PATTERN 33  $019B4E  72 bytes  used at order rows: 15, 19
+   00  63 F0  A#3 31   
+   01  B6 90  E-7 09   
+   03  B2 00  D-7 ..   
+   05  AE 00  C-7 ..   
+   07  B2 00  D-7 ..   
+   09  AE 00  C-7 ..   
+   10  A4 00  G-6 ..   
+   11  A6 00  G#6 ..   
+   12  A8 00  A-6 ..   
+   19  9E 00  E-6 ..   
+   20  A4 00  G-6 ..   
+   21  A8 00  A-6 ..   
+   22  AE 00  C-7 ..   
+   23  AC 00  B-6 ..   
+   24  A4 00  G-6 ..   
+   25  9A 00  D-6 ..   
+   26  9E 00  E-6 ..   
+   27  A4 00  G-6 ..   
+   28  9A 00  D-6 ..   
+   29  9E 00  E-6 ..   
+   30  A4 00  G-6 ..   
+   31  9A 00  D-6 ..   
+   32  9E 00  E-6 ..   
+   33  A4 00  G-6 ..   
+   34  9A 00  D-6 ..   
+   35  96 00  C-6 ..   
+   36  8C 00  G-5 ..   
+   37  90 00  A-5 ..   
+   45  AB F0  A#6 31   
+
+PATTERN 34  $019B96  36 bytes  used at order rows: 15, 16, 19, 20
+   00  60 70  A-3 07   
+   06  66 00  C-4 ..   
+   12  6A 00  D-4 ..   
+   18  6E 00  E-4 ..   
+   24  78 00  A-4 ..   
+   30  7E 00  C-5 ..   
+   36  82 00  D-5 ..   
+   42  74 00  G-4 ..   
+   47  FE 00  break
+
+PATTERN 35  $019BBA  98 bytes  used at order rows: 16, 20
+   00  A8 80  A-6 08   
+   01  A4 00  G-6 ..   
+   02  9E 00  E-6 ..   
+   03  A8 00  A-6 ..   
+   04  A4 00  G-6 ..   
+   05  9E 00  E-6 ..   
+   06  A8 00  A-6 ..   
+   07  A4 00  G-6 ..   
+   08  9E 00  E-6 ..   
+   09  A8 00  A-6 ..   
+   10  A4 00  G-6 ..   
+   11  9E 00  E-6 ..   
+   12  B2 00  D-7 ..   
+   13  AE 00  C-7 ..   
+   14  A8 00  A-6 ..   
+   15  B2 00  D-7 ..   
+   16  AE 00  C-7 ..   
+   17  A8 00  A-6 ..   
+   18  B2 00  D-7 ..   
+   19  AE 00  C-7 ..   
+   20  A8 00  A-6 ..   
+   21  B2 00  D-7 ..   
+   22  AE 00  C-7 ..   
+   23  A8 00  A-6 ..   
+   24  BC 00  G-7 ..   
+   25  C0 00  A-7 ..   
+   27  BC 00  G-7 ..   
+   28  C0 00  A-7 ..   
+   30  BC 00  G-7 ..   
+   31  C0 00  A-7 ..   
+   33  BC 00  G-7 ..   
+   34  B6 00  E-7 ..   
+   35  B4 00  D#7 ..   
+   36  B2 00  D-7 ..   
+   37  AE 00  C-7 ..   
+   38  A8 00  A-6 ..   
+   39  9A 00  D-6 ..   
+   40  96 00  C-6 ..   
+   41  90 00  A-5 ..   
+   42  82 00  D-5 ..   
+   43  7E 00  C-5 ..   
+   44  78 00  A-4 ..   
+   45  5C 00  G-3 ..   
+   46  5E 00  G#3 ..   
+   47  60 00  A-3 ..   
+
+PATTERN 36  $019C1C  98 bytes  used at order rows: 16, 20
+   01  A8 90  A-6 09   
+   02  A4 00  G-6 ..   
+   03  9E 00  E-6 ..   
+   04  A8 00  A-6 ..   
+   05  A4 00  G-6 ..   
+   06  9E 00  E-6 ..   
+   07  A8 00  A-6 ..   
+   08  A4 00  G-6 ..   
+   09  9E 00  E-6 ..   
+   10  A8 00  A-6 ..   
+   11  A4 00  G-6 ..   
+   12  9E 00  E-6 ..   
+   13  B2 00  D-7 ..   
+   14  AE 00  C-7 ..   
+   15  A8 00  A-6 ..   
+   16  B2 00  D-7 ..   
+   17  AE 00  C-7 ..   
+   18  A8 00  A-6 ..   
+   19  B2 00  D-7 ..   
+   20  AE 00  C-7 ..   
+   21  A8 00  A-6 ..   
+   22  B2 00  D-7 ..   
+   23  AE 00  C-7 ..   
+   24  A8 00  A-6 ..   
+   25  A4 00  G-6 ..   
+   26  A8 00  A-6 ..   
+   28  A4 00  G-6 ..   
+   29  A8 00  A-6 ..   
+   31  A4 00  G-6 ..   
+   32  A8 00  A-6 ..   
+   34  A4 00  G-6 ..   
+   35  9E 00  E-6 ..   
+   36  9C 00  D#6 ..   
+   37  B2 00  D-7 ..   
+   38  AE 00  C-7 ..   
+   39  A8 00  A-6 ..   
+   40  9A 00  D-6 ..   
+   41  96 00  C-6 ..   
+   42  90 00  A-5 ..   
+   43  82 00  D-5 ..   
+   44  7E 00  C-5 ..   
+   45  78 00  A-4 ..   
+   46  5C 00  G-3 ..   
+   47  5E 00  G#3 ..   
+
+PATTERN 37  $019C7E  74 bytes  used at order rows: 17, 18
+   00  48 10  A-2 01   
+   03  60 00  A-3 ..   
+   06  44 00  G-2 ..   
+   09  5C 00  G-3 ..   
+   12  3A 00  D-2 ..   
+   15  52 00  D-3 ..   
+   18  3A 00  D-2 ..   
+   19  3C 00  D#2 ..   
+   20  3E 00  E-2 ..   
+   21  44 00  G-2 ..   
+   22  3E 00  E-2 ..   
+   23  44 00  G-2 ..   
+   24  48 00  A-2 ..   
+   27  60 00  A-3 ..   
+   30  44 00  G-2 ..   
+   33  5C 00  G-3 ..   
+   36  52 00  D-3 ..   
+   39  6A 00  D-4 ..   
+   42  52 00  D-3 ..   
+   43  4E 00  C-3 ..   
+   44  48 00  A-2 ..   
+   45  3A 00  D-2 ..   
+   46  36 00  C-2 ..   
+   47  44 00  G-2 ..   
+
+PATTERN 38  $019CC8  84 bytes  used at order rows: 17, 18
+   00  60 30  A-3 03   
+   02  60 00  A-3 ..   
+   03  60 20  A-3 02   
+   06  5C 30  G-3 03   
+   08  5C 00  G-3 ..   
+   09  5C 20  G-3 02   
+   12  52 30  D-3 03   
+   14  52 00  D-3 ..   
+   15  52 20  D-3 02   
+   18  56 30  E-3 03   
+   20  56 00  E-3 ..   
+   21  56 20  E-3 02   
+   24  60 30  A-3 03   
+   26  60 00  A-3 ..   
+   27  60 20  A-3 02   
+   30  5C 30  G-3 03   
+   32  5C 00  G-3 ..   
+   33  5C 20  G-3 02   
+   36  52 30  D-3 03   
+   38  52 00  D-3 ..   
+   39  52 20  D-3 02   
+   42  56 30  E-3 03   
+   44  56 00  E-3 ..   
+   45  56 20  E-3 02   
+   47  FE 00  break
+
+PATTERN 39  $019D1C  74 bytes  used at order rows: 17, 18
+   00  60 80  A-3 08   
+   03  78 50  A-4 05   
+   06  5C 80  G-3 08   
+   09  74 50  G-4 05   
+   12  52 80  D-3 08   
+   15  6A 50  D-4 05   
+   18  8C 40  G-5 04   
+   19  00 50  --- 05   
+   20  82 40  D-5 04   
+   21  00 50  --- 05   
+   22  86 40  E-5 04   
+   23  00 50  --- 05   
+   24  60 80  A-3 08   
+   27  86 50  E-5 05   
+   30  5C 80  G-3 08   
+   33  82 50  D-5 05   
+   36  52 80  D-3 08   
+   39  7E 50  C-5 05   
+   42  86 40  E-5 04   
+   43  00 50  --- 05   
+   44  90 40  A-5 04   
+   45  00 50  --- 05   
+   46  A4 40  G-6 04   
+   47  00 50  --- 05   
+
+PATTERN 40  $019D66  74 bytes  used at order rows: 17, 18
+   00  78 80  A-4 08   
+   03  7E 50  C-5 05   
+   06  74 80  G-4 08   
+   09  7C 50  B-4 05   
+   12  6A 80  D-4 08   
+   15  78 50  A-4 05   
+   18  7B F0  A#4 31   
+   19  86 40  E-5 04   
+   20  00 50  --- 05   
+   21  8C 40  G-5 04   
+   22  00 50  --- 05   
+   23  82 40  D-5 04   
+   24  78 80  A-4 08   
+   27  7E 50  C-5 05   
+   30  74 80  G-4 08   
+   33  7C 50  B-4 05   
+   36  6A 80  D-4 08   
+   39  78 50  A-4 05   
+   42  7B F0  A#4 31   
+   43  8C 40  G-5 04   
+   44  00 50  --- 05   
+   45  9E 40  E-6 04   
+   46  00 50  --- 05   
+   47  A8 40  A-6 04   
+
+PATTERN 41  $019DB0  24 bytes  used at order rows: 17, 18
+   00  48 20  A-2 02   
+   06  44 00  G-2 ..   
+   12  3A 00  D-2 ..   
+   24  48 00  A-2 ..   
+   30  44 00  G-2 ..   
+   36  52 00  D-3 ..   
+
+PATTERN 42  $019DC8  92 bytes  used at order rows: 21
+   00  44 10  G-2 01   
+   02  44 00  G-2 ..   
+   03  5C 00  G-3 ..   
+   04  58 00  F-3 ..   
+   05  5C 00  G-3 ..   
+   06  44 00  G-2 ..   
+   08  44 00  G-2 ..   
+   09  5C 00  G-3 ..   
+   10  58 00  F-3 ..   
+   11  5C 00  G-3 ..   
+   12  48 00  A-2 ..   
+   14  48 00  A-2 ..   
+   15  60 00  A-3 ..   
+   16  5C 00  G-3 ..   
+   17  60 00  A-3 ..   
+   18  48 00  A-2 ..   
+   20  48 00  A-2 ..   
+   21  60 00  A-3 ..   
+   22  5C 00  G-3 ..   
+   23  60 00  A-3 ..   
+   24  5C 00  G-3 ..   
+   26  56 00  E-3 ..   
+   28  52 00  D-3 ..   
+   30  44 00  G-2 ..   
+   32  3E 00  E-2 ..   
+   34  3A 00  D-2 ..   
+   36  48 00  A-2 ..   
+   42  00 0F  --- .. -7
+   45  60 10  A-3 01   
+   48  4B F0  A#2 31   
+   49  FA 26  speed 38 bank0
+   63  FC 01  jump 1
+
+PATTERN 43  $019E24  88 bytes  used at order rows: 21
+   00  A4 80  G-6 08   
+   01  9E 00  E-6 ..   
+   02  9A 00  D-6 ..   
+   03  A4 00  G-6 ..   
+   04  9E 00  E-6 ..   
+   05  9A 00  D-6 ..   
+   06  A4 00  G-6 ..   
+   07  9E 00  E-6 ..   
+   08  9A 00  D-6 ..   
+   09  A4 00  G-6 ..   
+   10  9E 00  E-6 ..   
+   11  9A 00  D-6 ..   
+   12  A8 00  A-6 ..   
+   13  A4 00  G-6 ..   
+   14  9E 00  E-6 ..   
+   15  A8 00  A-6 ..   
+   16  A4 00  G-6 ..   
+   17  9E 00  E-6 ..   
+   18  A8 00  A-6 ..   
+   19  A4 00  G-6 ..   
+   20  9E 00  E-6 ..   
+   21  A8 00  A-6 ..   
+   22  A4 00  G-6 ..   
+   23  9E 00  E-6 ..   
+   24  A4 00  G-6 ..   
+   25  9E 00  E-6 ..   
+   26  9A 00  D-6 ..   
+   27  8C 00  G-5 ..   
+   28  86 00  E-5 ..   
+   29  82 00  D-5 ..   
+   30  74 00  G-4 ..   
+   31  6E 00  E-4 ..   
+   32  6A 00  D-4 ..   
+   33  74 00  G-4 ..   
+   34  8C 00  G-5 ..   
+   35  76 00  G#4 ..   
+   36  78 00  A-4 ..   
+   42  00 0F  --- .. -7
+   45  48 10  A-2 01   
+   48  4B F0  A#2 31   
+
+PATTERN 44  $019E7C  86 bytes  used at order rows: 21
+   00  78 40  A-4 04   
+   01  00 50  --- 05   
+   02  78 40  A-4 04   
+   03  90 00  A-5 ..   
+   04  8C 00  G-5 ..   
+   05  86 00  E-5 ..   
+   06  8C 00  G-5 ..   
+   07  00 70  --- 07   
+   08  90 40  A-5 04   
+   09  00 50  --- 05   
+   10  86 40  E-5 04   
+   11  8C 00  G-5 ..   
+   12  86 00  E-5 ..   
+   13  8C 00  G-5 ..   
+   14  90 00  A-5 ..   
+   15  9A 00  D-6 ..   
+   16  96 00  C-6 ..   
+   17  8C 00  G-5 ..   
+   18  90 00  A-5 ..   
+   19  00 50  --- 05   
+   21  86 40  E-5 04   
+   22  8C 00  G-5 ..   
+   23  90 00  A-5 ..   
+   24  9A 40  D-6 04   
+   25  00 70  --- 07   
+   26  96 40  C-6 04   
+   27  00 70  --- 07   
+   28  90 40  A-5 04   
+   29  00 70  --- 07   
+   30  86 40  E-5 04   
+   31  00 70  --- 07   
+   32  8C 40  G-5 04   
+   33  00 70  --- 07   
+   34  8E 40  G#5 04   
+   35  00 70  --- 07   
+   36  90 40  A-5 04   
+   37  00 50  --- 05   
+   42  00 0F  --- .. -7
+   45  48 30  A-2 03   
+
+PATTERN 45  $019ED2  76 bytes  used at order rows: 21
+   00  6E 40  E-4 04   
+   01  00 50  --- 05   
+   02  6E 40  E-4 04   
+   03  86 00  E-5 ..   
+   04  82 00  D-5 ..   
+   05  7E 00  C-5 ..   
+   06  82 00  D-5 ..   
+   07  00 70  --- 07   
+   08  86 40  E-5 04   
+   09  00 50  --- 05   
+   10  74 40  G-4 04   
+   11  7E 00  C-5 ..   
+   12  60 20  A-3 02   
+   14  66 00  C-4 ..   
+   16  6A 00  D-4 ..   
+   18  6E 00  E-4 ..   
+   20  74 00  G-4 ..   
+   22  78 00  A-4 ..   
+   24  6A 00  D-4 ..   
+   27  6E 00  E-4 ..   
+   30  74 00  G-4 ..   
+   33  76 00  G#4 ..   
+   36  78 00  A-4 ..   
+   42  00 0F  --- .. -7
+   45  60 30  A-3 03   
+
+PATTERN 46  $019F1E  84 bytes  used at order rows: 21
+   00  FA 05  speed 5 bank0
+   01  78 60  A-4 06   
+   03  78 00  A-4 ..   
+   04  90 00  A-5 ..   
+   05  8C 00  G-5 ..   
+   06  86 00  E-5 ..   
+   07  8C 00  G-5 ..   
+   09  90 00  A-5 ..   
+   11  86 00  E-5 ..   
+   12  8C 00  G-5 ..   
+   13  86 00  E-5 ..   
+   14  8C 00  G-5 ..   
+   15  90 00  A-5 ..   
+   16  82 00  D-5 ..   
+   17  7E 00  C-5 ..   
+   18  74 00  G-4 ..   
+   19  78 00  A-4 ..   
+   22  86 00  E-5 ..   
+   23  8C 00  G-5 ..   
+   24  90 00  A-5 ..   
+   25  9A 00  D-6 ..   
+   27  96 00  C-6 ..   
+   29  90 00  A-5 ..   
+   31  86 00  E-5 ..   
+   33  8C 00  G-5 ..   
+   35  8E 00  G#5 ..   
+   37  90 00  A-5 ..   
+   43  00 0F  --- .. -7
+   45  56 30  E-3 03   
+
+PATTERN 47  $019F72  80 bytes  used at order rows: 22, 23, 24, 25, 28
+   00  32 C0  A#1 12   
+   03  32 00  A#1 ..   
+   06  2E 00  G#1 ..   
+   10  2E 00  G#1 ..   
+   13  30 00  A-1 ..   
+   16  32 00  A#1 ..   
+   19  32 00  A#1 ..   
+   22  2E 00  G#1 ..   
+   26  2E 00  G#1 ..   
+   29  30 00  A-1 ..   
+   32  32 00  A#1 ..   
+   35  32 00  A#1 ..   
+   38  2E 00  G#1 ..   
+   42  2E 00  G#1 ..   
+   45  30 00  A-1 ..   
+   48  32 00  A#1 ..   
+   51  32 00  A#1 ..   
+   54  2E 00  G#1 ..   
+   58  2E 00  G#1 ..   
+   61  30 00  A-1 ..   
+
+PATTERN 48  $019FC2  58 bytes  used at order rows: 23
+   00  92 D0  A#5 13   
+   20  90 00  A-5 ..   
+   21  00 F0  --- 15   
+   22  92 D0  A#5 13   
+   23  00 F0  --- 15   
+   24  96 D0  C-6 13   
+   25  00 F0  --- 15   
+   26  92 D0  A#5 13   
+   27  00 F0  --- 15   
+   28  88 D0  F-5 13   
+   29  8A 00  F#5 ..   
+   31  00 F0  --- 15   
+   32  8C D0  G-5 13   
+   33  8A 00  F#5 ..   
+   34  88 00  F-5 ..   
+   35  7A 00  A#4 ..   
+   54  86 00  E-5 ..   
+   56  88 00  F-5 ..   
+   58  8C 00  G-5 ..   
+   60  8E 00  G#5 ..   
+   62  90 00  A-5 ..   
+
+PATTERN 49  $019FFC  58 bytes  used at order rows: 23
+   01  92 E0  A#5 14   
+   21  90 00  A-5 ..   
+   22  01 00  --- 16   
+   23  92 E0  A#5 14   
+   24  01 00  --- 16   
+   25  96 E0  C-6 14   
+   26  01 00  --- 16   
+   27  92 E0  A#5 14   
+   28  01 00  --- 16   
+   29  88 E0  F-5 14   
+   30  8A 00  F#5 ..   
+   32  01 00  --- 16   
+   33  8C E0  G-5 14   
+   34  8A 00  F#5 ..   
+   35  88 00  F-5 ..   
+   36  7A 00  A#4 ..   
+   55  86 00  E-5 ..   
+   57  88 00  F-5 ..   
+   59  8C 00  G-5 ..   
+   61  8E 00  G#5 ..   
+   63  90 00  A-5 ..   
+
+PATTERN 50  $01A036  128 bytes  used at order rows: 22, 23, 24, 25, 26, 27, 28, 29, 30
+   00  7A B0  A#4 11   
+   01  7A 00  A#4 ..   
+   03  7A 00  A#4 ..   
+   05  7A 00  A#4 ..   
+   06  62 00  A#3 ..   
+   07  7A 00  A#4 ..   
+   09  7A 00  A#4 ..   
+   11  7A 00  A#4 ..   
+   12  7A 00  A#4 ..   
+   13  7A 00  A#4 ..   
+   14  62 00  A#3 ..   
+   16  7A 00  A#4 ..   
+   17  7A 00  A#4 ..   
+   19  7A 00  A#4 ..   
+   21  7A 00  A#4 ..   
+   22  62 00  A#3 ..   
+   23  7A 00  A#4 ..   
+   25  7A 00  A#4 ..   
+   27  7A 00  A#4 ..   
+   28  7A 00  A#4 ..   
+   29  7A 00  A#4 ..   
+   30  62 00  A#3 ..   
+   32  7A 00  A#4 ..   
+   33  7A 00  A#4 ..   
+   35  7A 00  A#4 ..   
+   37  7A 00  A#4 ..   
+   38  62 00  A#3 ..   
+   39  7A 00  A#4 ..   
+   41  7A 00  A#4 ..   
+   43  7A 00  A#4 ..   
+   44  7A 00  A#4 ..   
+   45  7A 00  A#4 ..   
+   46  62 00  A#3 ..   
+   48  7A 00  A#4 ..   
+   49  7A 00  A#4 ..   
+   51  7A 00  A#4 ..   
+   53  7A 00  A#4 ..   
+   54  62 00  A#3 ..   
+   55  7A 00  A#4 ..   
+   57  7A 00  A#4 ..   
+   59  7A 00  A#4 ..   
+   60  7A 00  A#4 ..   
+   61  7A 00  A#4 ..   
+   62  62 00  A#3 ..   
+
+PATTERN 51  $01A0B6  128 bytes  used at order rows: 22, 23, 24
+   00  E4 B0  smp5  rate $B0
+   02  E4 B0  smp5  rate $B0
+   03  E4 F0  smp5  rate $F0
+   04  62 AF  A#3 10 -7
+   06  E2 B0  smp4  rate $B0
+   08  7A 0F  A#4 .. -7
+   10  E4 B0  smp5  rate $B0
+   12  E4 F0  smp5  rate $F0
+   13  E2 B0  smp4  rate $B0
+   14  70 0F  F-4 .. -7
+   16  E4 B0  smp5  rate $B0
+   18  E4 B0  smp5  rate $B0
+   19  E4 F0  smp5  rate $F0
+   20  62 0F  A#3 .. -7
+   22  E2 B0  smp4  rate $B0
+   24  7A 0F  A#4 .. -7
+   26  E4 B0  smp5  rate $B0
+   28  E4 F0  smp5  rate $F0
+   29  E2 B0  smp4  rate $B0
+   30  70 0F  F-4 .. -7
+   32  E4 B0  smp5  rate $B0
+   34  E4 B0  smp5  rate $B0
+   35  E4 F0  smp5  rate $F0
+   36  62 0F  A#3 .. -7
+   38  E2 B0  smp4  rate $B0
+   40  7A 0F  A#4 .. -7
+   42  E4 B0  smp5  rate $B0
+   44  E4 F0  smp5  rate $F0
+   45  E2 B0  smp4  rate $B0
+   46  70 0F  F-4 .. -7
+   48  E4 B0  smp5  rate $B0
+   50  E4 B0  smp5  rate $B0
+   51  E4 F0  smp5  rate $F0
+   52  62 0F  A#3 .. -7
+   54  E2 B0  smp4  rate $B0
+   56  7A 0F  A#4 .. -7
+   58  E4 B0  smp5  rate $B0
+   60  E4 F0  smp5  rate $F0
+   61  E2 B0  smp4  rate $B0
+   62  70 0F  F-4 .. -7
+   63  70 0F  F-4 .. -7
+
+PATTERN 52  $01A136  100 bytes  used at order rows: 24, 25, 28
+   00  93 F0  A#5 31   
+   02  93 10  A#5 17   
+   03  92 00  A#5 ..   
+   06  92 00  A#5 ..   
+   07  92 00  A#5 ..   
+   10  92 00  A#5 ..   
+   11  92 00  A#5 ..   
+   14  92 00  A#5 ..   
+   15  92 00  A#5 ..   
+   18  92 00  A#5 ..   
+   19  92 00  A#5 ..   
+   22  92 00  A#5 ..   
+   23  92 00  A#5 ..   
+   26  92 00  A#5 ..   
+   27  92 00  A#5 ..   
+   30  98 00  C#6 ..   
+   31  9A 00  D-6 ..   
+   34  92 00  A#5 ..   
+   35  92 00  A#5 ..   
+   38  92 00  A#5 ..   
+   39  92 00  A#5 ..   
+   42  92 00  A#5 ..   
+   43  92 00  A#5 ..   
+   46  92 00  A#5 ..   
+   47  92 00  A#5 ..   
+   50  92 00  A#5 ..   
+   51  92 00  A#5 ..   
+   54  92 00  A#5 ..   
+   55  92 00  A#5 ..   
+   58  88 00  F-5 ..   
+   60  8E 00  G#5 ..   
+   62  90 00  A-5 ..   
+
+PATTERN 53  $01A19A  100 bytes  used at order rows: 24, 25, 28
+   00  93 F0  A#5 31   
+   02  9B 10  D-6 17   
+   03  9A 00  D-6 ..   
+   06  9A 00  D-6 ..   
+   07  9A 00  D-6 ..   
+   10  9A 00  D-6 ..   
+   11  9A 00  D-6 ..   
+   14  9A 00  D-6 ..   
+   15  9A 00  D-6 ..   
+   18  9A 00  D-6 ..   
+   19  9A 00  D-6 ..   
+   22  9A 00  D-6 ..   
+   23  9A 00  D-6 ..   
+   26  9A 00  D-6 ..   
+   27  9A 00  D-6 ..   
+   30  9E 00  E-6 ..   
+   31  A0 00  F-6 ..   
+   34  9A 00  D-6 ..   
+   35  9A 00  D-6 ..   
+   38  9A 00  D-6 ..   
+   39  9A 00  D-6 ..   
+   42  9A 00  D-6 ..   
+   43  9A 00  D-6 ..   
+   46  9A 00  D-6 ..   
+   47  9A 00  D-6 ..   
+   50  9A 00  D-6 ..   
+   51  9A 00  D-6 ..   
+   54  9A 00  D-6 ..   
+   55  9A 00  D-6 ..   
+   58  90 00  A-5 ..   
+   60  92 00  A#5 ..   
+   62  98 00  C#6 ..   
+
+PATTERN 54  $01A1FE  70 bytes  used at order rows: 25
+   00  7B 20  A#4 18   
+   04  76 00  G#4 ..   
+   06  70 00  F-4 ..   
+   07  76 00  G#4 ..   
+   09  78 00  A-4 ..   
+   10  7A 00  A#4 ..   
+   18  7A 00  A#4 ..   
+   20  80 00  C#5 ..   
+   22  7A 00  A#4 ..   
+   24  88 00  F-5 ..   
+   26  86 00  E-5 ..   
+   28  84 00  D#5 ..   
+   29  80 00  C#5 ..   
+   30  76 00  G#4 ..   
+   31  7A 00  A#4 ..   
+   50  70 00  F-4 ..   
+   54  76 00  G#4 ..   
+   58  78 00  A-4 ..   
+   60  7A 00  A#4 ..   
+   62  80 00  C#5 ..   
+
+PATTERN 55  $01A244  128 bytes  used at order rows: 25, 26, 27, 28, 29, 30
+   00  DC FF  smp1  rate $FF
+   02  E4 B0  smp5  rate $B0
+   03  E4 F0  smp5  rate $F0
+   04  DA FF  smp0  rate $FF
+   06  E2 B0  smp4  rate $B0
+   08  DC FF  smp1  rate $FF
+   10  E4 B0  smp5  rate $B0
+   12  DA FF  smp0  rate $FF
+   13  E2 B0  smp4  rate $B0
+   14  70 0F  F-4 .. -7
+   16  DC FF  smp1  rate $FF
+   18  E4 B0  smp5  rate $B0
+   19  E4 F0  smp5  rate $F0
+   20  DA FF  smp0  rate $FF
+   22  E2 B0  smp4  rate $B0
+   24  DC FF  smp1  rate $FF
+   26  E4 B0  smp5  rate $B0
+   28  DA FF  smp0  rate $FF
+   29  E2 B0  smp4  rate $B0
+   30  70 0F  F-4 .. -7
+   32  DC FF  smp1  rate $FF
+   34  E4 B0  smp5  rate $B0
+   35  E4 F0  smp5  rate $F0
+   36  DA FF  smp0  rate $FF
+   38  E2 B0  smp4  rate $B0
+   40  DC FF  smp1  rate $FF
+   42  E4 B0  smp5  rate $B0
+   44  DA FF  smp0  rate $FF
+   45  E2 B0  smp4  rate $B0
+   46  70 0F  F-4 .. -7
+   48  DC FF  smp1  rate $FF
+   50  E4 B0  smp5  rate $B0
+   51  E4 F0  smp5  rate $F0
+   52  DA FF  smp0  rate $FF
+   54  E2 B0  smp4  rate $B0
+   56  DC FF  smp1  rate $FF
+   58  E4 B0  smp5  rate $B0
+   60  DA FF  smp0  rate $FF
+   61  E2 B0  smp4  rate $B0
+   62  70 0F  F-4 .. -7
+   63  70 0F  F-4 .. -7
+
+PATTERN 56  $01A2C4  4 bytes  used at order rows: 24
+   00  92 D0  A#5 13   
+
+PATTERN 57  $01A2C8  96 bytes  used at order rows: 26, 29
+   00  24 C0  D#1 12   
+   03  3C 00  D#2 ..   
+   06  38 00  C#2 ..   
+   09  32 00  A#1 ..   
+   12  38 00  C#2 ..   
+   14  3C 00  D#2 ..   
+   16  24 00  D#1 ..   
+   19  3C 00  D#2 ..   
+   22  38 00  C#2 ..   
+   25  32 00  A#1 ..   
+   28  38 00  C#2 ..   
+   30  3C 00  D#2 ..   
+   32  32 00  A#1 ..   
+   35  32 00  A#1 ..   
+   38  2E 00  G#1 ..   
+   42  2E 00  G#1 ..   
+   45  30 00  A-1 ..   
+   48  32 00  A#1 ..   
+   51  32 00  A#1 ..   
+   54  2E 00  G#1 ..   
+   56  30 00  A-1 ..   
+   58  32 00  A#1 ..   
+   60  38 00  C#2 ..   
+   62  3C 00  D#2 ..   
+
+PATTERN 58  $01A328  96 bytes  used at order rows: 26, 29
+   02  8D 10  G-5 17   
+   03  8C 00  G-5 ..   
+   06  8C 00  G-5 ..   
+   07  8C 00  G-5 ..   
+   10  8C 00  G-5 ..   
+   11  8C 00  G-5 ..   
+   14  8C 00  G-5 ..   
+   15  8C 00  G-5 ..   
+   18  8C 00  G-5 ..   
+   19  8C 00  G-5 ..   
+   22  8C 00  G-5 ..   
+   23  8C 00  G-5 ..   
+   26  8C 00  G-5 ..   
+   27  8C 00  G-5 ..   
+   30  8C 00  G-5 ..   
+   31  8C 00  G-5 ..   
+   34  82 00  D-5 ..   
+   35  82 00  D-5 ..   
+   38  82 00  D-5 ..   
+   39  82 00  D-5 ..   
+   42  82 00  D-5 ..   
+   43  82 00  D-5 ..   
+   46  82 00  D-5 ..   
+   47  82 00  D-5 ..   
+   50  82 00  D-5 ..   
+   51  82 00  D-5 ..   
+   54  82 00  D-5 ..   
+   55  82 00  D-5 ..   
+   58  82 00  D-5 ..   
+   59  82 00  D-5 ..   
+   62  82 00  D-5 ..   
+   63  82 00  D-5 ..   
+
+PATTERN 59  $01A388  96 bytes  used at order rows: 26, 29
+   02  93 10  A#5 17   
+   03  92 00  A#5 ..   
+   06  92 00  A#5 ..   
+   07  92 00  A#5 ..   
+   10  92 00  A#5 ..   
+   11  92 00  A#5 ..   
+   14  90 00  A-5 ..   
+   15  92 00  A#5 ..   
+   18  92 00  A#5 ..   
+   19  92 00  A#5 ..   
+   22  92 00  A#5 ..   
+   23  92 00  A#5 ..   
+   26  92 00  A#5 ..   
+   27  92 00  A#5 ..   
+   30  92 00  A#5 ..   
+   31  92 00  A#5 ..   
+   34  88 00  F-5 ..   
+   35  88 00  F-5 ..   
+   38  88 00  F-5 ..   
+   39  88 00  F-5 ..   
+   42  88 00  F-5 ..   
+   43  88 00  F-5 ..   
+   46  88 00  F-5 ..   
+   47  88 00  F-5 ..   
+   50  88 00  F-5 ..   
+   51  88 00  F-5 ..   
+   54  88 00  F-5 ..   
+   55  88 00  F-5 ..   
+   58  88 00  F-5 ..   
+   59  88 00  F-5 ..   
+   62  86 00  E-5 ..   
+   63  88 00  F-5 ..   
+
+PATTERN 60  $01A3E8  52 bytes  used at order rows: 26
+   00  85 20  D#5 18   
+   04  80 00  C#5 ..   
+   06  7A 00  A#4 ..   
+   07  80 00  C#5 ..   
+   09  82 00  D-5 ..   
+   10  84 00  D#5 ..   
+   18  7A 00  A#4 ..   
+   19  80 00  C#5 ..   
+   21  84 00  D#5 ..   
+   23  8A 00  F#5 ..   
+   25  84 00  D#5 ..   
+   27  80 00  C#5 ..   
+   29  82 00  D-5 ..   
+   30  84 00  D#5 ..   
+   31  8A 00  F#5 ..   
+   32  7A 00  A#4 ..   
+
+PATTERN 61  $01A41C  84 bytes  used at order rows: 27, 30
+   00  40 C0  F-2 12   
+   04  28 00  F-1 ..   
+   08  40 00  F-2 ..   
+   10  28 00  F-1 ..   
+   12  3E 00  E-2 ..   
+   14  3C 00  D#2 ..   
+   18  38 00  C#2 ..   
+   22  32 00  A#1 ..   
+   26  2E 00  G#1 ..   
+   28  30 00  A-1 ..   
+   30  32 00  A#1 ..   
+   32  32 00  A#1 ..   
+   35  32 00  A#1 ..   
+   38  2E 00  G#1 ..   
+   42  2E 00  G#1 ..   
+   45  30 00  A-1 ..   
+   48  32 00  A#1 ..   
+   51  32 00  A#1 ..   
+   54  2E 00  G#1 ..   
+   58  2E 00  G#1 ..   
+   61  30 00  A-1 ..   
+
+PATTERN 62  $01A470  96 bytes  used at order rows: 27, 30
+   02  91 10  A-5 17   
+   03  90 00  A-5 ..   
+   06  90 00  A-5 ..   
+   07  90 00  A-5 ..   
+   10  90 00  A-5 ..   
+   11  90 00  A-5 ..   
+   14  8E 00  G#5 ..   
+   15  8E 00  G#5 ..   
+   18  8C 00  G-5 ..   
+   19  8C 00  G-5 ..   
+   22  8C 00  G-5 ..   
+   23  8C 00  G-5 ..   
+   26  8C 00  G-5 ..   
+   27  8C 00  G-5 ..   
+   30  8C 00  G-5 ..   
+   31  8C 00  G-5 ..   
+   34  88 00  F-5 ..   
+   35  88 00  F-5 ..   
+   38  88 00  F-5 ..   
+   39  88 00  F-5 ..   
+   42  88 00  F-5 ..   
+   43  88 00  F-5 ..   
+   46  88 00  F-5 ..   
+   47  88 00  F-5 ..   
+   50  88 00  F-5 ..   
+   51  88 00  F-5 ..   
+   54  88 00  F-5 ..   
+   55  88 00  F-5 ..   
+   58  88 00  F-5 ..   
+   59  88 00  F-5 ..   
+   62  86 00  E-5 ..   
+   63  88 00  F-5 ..   
+
+PATTERN 63  $01A4D0  96 bytes  used at order rows: 27, 30
+   02  97 10  C-6 17   
+   03  96 00  C-6 ..   
+   06  96 00  C-6 ..   
+   07  96 00  C-6 ..   
+   10  96 00  C-6 ..   
+   11  96 00  C-6 ..   
+   14  94 00  B-5 ..   
+   15  94 00  B-5 ..   
+   18  92 00  A#5 ..   
+   19  92 00  A#5 ..   
+   22  92 00  A#5 ..   
+   23  92 00  A#5 ..   
+   26  92 00  A#5 ..   
+   27  92 00  A#5 ..   
+   30  92 00  A#5 ..   
+   31  92 00  A#5 ..   
+   34  82 00  D-5 ..   
+   35  82 00  D-5 ..   
+   38  82 00  D-5 ..   
+   39  82 00  D-5 ..   
+   42  82 00  D-5 ..   
+   43  82 00  D-5 ..   
+   46  82 00  D-5 ..   
+   47  82 00  D-5 ..   
+   50  92 00  A#5 ..   
+   51  92 00  A#5 ..   
+   54  92 00  A#5 ..   
+   55  92 00  A#5 ..   
+   58  92 00  A#5 ..   
+   59  92 00  A#5 ..   
+   62  92 00  A#5 ..   
+   63  92 00  A#5 ..   
+
+PATTERN 64  $01A530  70 bytes  used at order rows: 27
+   00  71 20  F-4 18   
+   04  88 00  F-5 ..   
+   08  88 00  F-5 ..   
+   10  8E 00  G#5 ..   
+   12  88 00  F-5 ..   
+   13  86 00  E-5 ..   
+   15  84 00  D#5 ..   
+   18  80 00  C#5 ..   
+   21  7A 00  A#4 ..   
+   24  76 00  G#4 ..   
+   25  78 00  A-4 ..   
+   27  7A 00  A#4 ..   
+   29  80 00  C#5 ..   
+   30  84 00  D#5 ..   
+   31  88 00  F-5 ..   
+   32  7A 00  A#4 ..   
+   56  74 AF  G-4 10 -7
+   57  74 0F  G-4 .. -7
+   58  74 0F  G-4 .. -7
+   59  6C 0F  D#4 .. -7
+   61  6C 0F  D#4 .. -7
+   62  6C 0F  D#4 .. -7
+   63  6C 0F  D#4 .. -7
+
+PATTERN 65  $01A576  86 bytes  used at order rows: 28
+   00  AB 30  A#6 19   
+   04  00 0A  --- .. -2
+   06  A6 00  G#6 ..   
+   09  00 0D  --- .. -5
+   10  A0 00  F-6 ..   
+   12  A6 00  G#6 ..   
+   13  AA 00  A#6 ..   
+   16  B0 00  C#7 ..   
+   18  AE 00  C-7 ..   
+   20  A6 00  G#6 ..   
+   21  A8 00  A-6 ..   
+   22  AA 00  A#6 ..   
+   23  92 00  A#5 ..   
+   34  8E 00  G#5 ..   
+   35  90 00  A-5 ..   
+   36  92 00  A#5 ..   
+   38  98 00  C#6 ..   
+   40  A0 00  F-6 ..   
+   41  9E 00  E-6 ..   
+   42  9C 00  D#6 ..   
+   43  A0 00  F-6 ..   
+   44  9E 00  E-6 ..   
+   45  9C 00  D#6 ..   
+   46  98 00  C#6 ..   
+   47  8E 00  G#5 ..   
+   48  92 00  A#5 ..   
+   58  A6 00  G#6 ..   
+   59  A0 00  F-6 ..   
+   60  9C 00  D#6 ..   
+   61  A0 00  F-6 ..   
+   62  98 00  C#6 ..   
+   63  9C 00  D#6 ..   
+
+PATTERN 66  $01A5CC  56 bytes  used at order rows: 29
+   00  9D 30  D#6 19   
+   04  A2 00  F#6 ..   
+   06  9C 00  D#6 ..   
+   08  A6 00  G#6 ..   
+   11  A8 00  A-6 ..   
+   14  AA 00  A#6 ..   
+   24  AA 00  A#6 ..   
+   25  A6 00  G#6 ..   
+   27  A0 00  F-6 ..   
+   29  9C 00  D#6 ..   
+   30  98 00  C#6 ..   
+   31  9C 00  D#6 ..   
+   32  92 00  A#5 ..   
+   58  88 00  F-5 ..   
+   60  8E 00  G#5 ..   
+   62  88 00  F-5 ..   
+
+PATTERN 67  $01A604  62 bytes  used at order rows: 30
+   00  A1 30  F-6 19   
+   04  A6 00  G#6 ..   
+   06  A0 00  F-6 ..   
+   08  A6 00  G#6 ..   
+   11  A8 00  A-6 ..   
+   14  AA 00  A#6 ..   
+   16  B4 00  D#7 ..   
+   17  B6 00  E-7 ..   
+   19  B4 00  D#7 ..   
+   20  B6 00  E-7 ..   
+   22  B4 00  D#7 ..   
+   23  B6 00  E-7 ..   
+   25  B4 00  D#7 ..   
+   26  B6 00  E-7 ..   
+   28  B4 00  D#7 ..   
+   29  B0 00  C#7 ..   
+   30  AA 00  A#6 ..   
+   31  A6 00  G#6 ..   
+   32  AA 00  A#6 ..   
+   63  FC 19  jump 25
+
+PATTERN 68  $01A642  4 bytes  used at order rows: 22
+   00  FA 05  speed 5 bank0
+
+PATTERN 69  $01A646  98 bytes  used at order rows: 31, 32, 35, 36
+   00  32 10  A#1 01   
+   02  4A 00  A#2 ..   
+   03  3A 00  D-2 ..   
+   05  52 00  D-3 ..   
+   06  3C 00  D#2 ..   
+   08  54 00  D#3 ..   
+   09  3E 00  E-2 ..   
+   11  56 00  E-3 ..   
+   12  40 00  F-2 ..   
+   14  58 00  F-3 ..   
+   15  44 00  G-2 ..   
+   17  5C 00  G-3 ..   
+   18  46 00  G#2 ..   
+   20  5E 00  G#3 ..   
+   21  48 00  A-2 ..   
+   23  60 00  A-3 ..   
+   24  4A 00  A#2 ..   
+   26  62 00  A#3 ..   
+   27  46 00  G#2 ..   
+   29  5E 00  G#3 ..   
+   30  44 00  G-2 ..   
+   32  5C 00  G-3 ..   
+   33  42 00  F#2 ..   
+   35  5A 00  F#3 ..   
+   36  40 00  F-2 ..   
+   38  58 00  F-3 ..   
+   39  3C 00  D#2 ..   
+   41  54 00  D#3 ..   
+   42  38 00  C#2 ..   
+   44  50 00  C#3 ..   
+   45  36 00  C-2 ..   
+   47  4E 00  C-3 ..   
+
+PATTERN 70  $01A6A8  98 bytes  used at order rows: 31, 32, 35, 36
+   00  92 80  A#5 08   
+   02  00 90  --- 09   
+   03  92 80  A#5 08   
+   05  00 90  --- 09   
+   06  90 80  A-5 08   
+   08  92 80  A#5 08   
+   10  00 90  --- 09   
+   11  86 80  E-5 08   
+   12  88 00  F-5 ..   
+   14  00 90  --- 09   
+   15  88 80  F-5 08   
+   17  00 90  --- 09   
+   18  86 80  E-5 08   
+   20  88 80  F-5 08   
+   22  00 90  --- 09   
+   23  80 80  C#5 08   
+   24  82 00  D-5 ..   
+   26  00 90  --- 09   
+   27  82 80  D-5 08   
+   29  00 90  --- 09   
+   30  80 80  C#5 08   
+   32  82 80  D-5 08   
+   34  00 90  --- 09   
+   35  7A 80  A#4 08   
+   37  00 90  --- 09   
+   38  7A 80  A#4 08   
+   39  82 00  D-5 ..   
+   41  84 00  D#5 ..   
+   42  86 00  E-5 ..   
+   43  00 90  --- 09   
+   44  88 80  F-5 08   
+   45  8E 00  G#5 ..   
+   47  90 00  A-5 ..   
+
+PATTERN 71  $01A70A  98 bytes  used at order rows: 31, 32, 35, 36
+   00  9A 80  D-6 08   
+   02  00 90  --- 09   
+   03  9A 80  D-6 08   
+   05  00 90  --- 09   
+   06  98 80  C#6 08   
+   08  9A 80  D-6 08   
+   10  00 90  --- 09   
+   11  90 80  A-5 08   
+   12  92 00  A#5 ..   
+   14  00 90  --- 09   
+   15  92 80  A#5 08   
+   17  00 90  --- 09   
+   18  90 80  A-5 08   
+   20  92 80  A#5 08   
+   22  00 90  --- 09   
+   23  86 80  E-5 08   
+   24  88 00  F-5 ..   
+   26  00 90  --- 09   
+   27  88 80  F-5 08   
+   29  00 90  --- 09   
+   30  86 80  E-5 08   
+   32  88 80  F-5 08   
+   34  00 90  --- 09   
+   35  80 80  C#5 08   
+   37  00 90  --- 09   
+   38  92 80  A#5 08   
+   39  8E 00  G#5 ..   
+   41  88 00  F-5 ..   
+   42  86 00  E-5 ..   
+   43  00 90  --- 09   
+   44  84 80  D#5 08   
+   45  80 00  C#5 ..   
+   47  76 00  G#4 ..   
+
+PATTERN 72  $01A76C  98 bytes  used at order rows: 32, 35, 36
+   00  93 20  A#5 18   
+   01  8E 00  G#5 ..   
+   02  90 00  A-5 ..   
+   03  92 00  A#5 ..   
+   04  8E 00  G#5 ..   
+   05  88 00  F-5 ..   
+   06  86 00  E-5 ..   
+   07  84 00  D#5 ..   
+   08  80 00  C#5 ..   
+   09  7A 00  A#4 ..   
+   10  76 00  G#4 ..   
+   11  78 00  A-4 ..   
+   12  7A 00  A#4 ..   
+   13  80 00  C#5 ..   
+   14  7A 00  A#4 ..   
+   15  84 00  D#5 ..   
+   16  7A 00  A#4 ..   
+   17  86 00  E-5 ..   
+   18  7A 00  A#4 ..   
+   19  88 00  F-5 ..   
+   20  7A 00  A#4 ..   
+   21  8E 00  G#5 ..   
+   22  90 00  A-5 ..   
+   23  92 00  A#5 ..   
+   24  A0 00  F-6 ..   
+   25  9E 00  E-6 ..   
+   26  9C 00  D#6 ..   
+   27  98 00  C#6 ..   
+   28  92 00  A#5 ..   
+   29  8E 00  G#5 ..   
+   30  88 00  F-5 ..   
+   31  86 00  E-5 ..   
+   32  84 00  D#5 ..   
+   33  80 00  C#5 ..   
+   34  7A 00  A#4 ..   
+   35  76 00  G#4 ..   
+   36  7A 00  A#4 ..   
+   37  80 00  C#5 ..   
+   38  7A 00  A#4 ..   
+   39  84 00  D#5 ..   
+   40  94 80  B-5 08   
+   41  96 00  C-6 ..   
+   42  98 00  C#6 ..   
+   43  9A 00  D-6 ..   
+   44  9C 00  D#6 ..   
+   45  9E 00  E-6 ..   
+   46  A0 00  F-6 ..   
+   47  A2 00  F#6 ..   
+
+PATTERN 73  $01A7CE  8 bytes  used at order rows: 31, 32, 33, 34, 35, 36, 37, 38, 39
+   00  FA 05  speed 5 bank0
+   47  FE 00  break
+
+PATTERN 74  $01A7D6  82 bytes  used at order rows: 31, 32, 33, 34, 35, 36, 37, 38, 39, 40
+   00  DC FF  smp1  rate $FF
+   03  DA FF  smp0  rate $FF
+   06  DC FF  smp1  rate $FF
+   08  DC FF  smp1  rate $FF
+   09  DA FF  smp0  rate $FF
+   11  DC FF  smp1  rate $FF
+   14  DC FF  smp1  rate $FF
+   15  DA FF  smp0  rate $FF
+   17  DC FF  smp1  rate $FF
+   20  DC FF  smp1  rate $FF
+   21  DA FF  smp0  rate $FF
+   22  DC FF  smp1  rate $FF
+   23  DA FF  smp0  rate $FF
+   24  DC FF  smp1  rate $FF
+   27  DA FF  smp0  rate $FF
+   30  DC FF  smp1  rate $FF
+   32  DC FF  smp1  rate $FF
+   33  DA FF  smp0  rate $FF
+   35  DC FF  smp1  rate $FF
+   38  DC FF  smp1  rate $FF
+   39  DA FF  smp0  rate $FF
+   41  DC FF  smp1  rate $FF
+   44  DC FF  smp1  rate $FF
+   45  DA FF  smp0  rate $FF
+   46  DA FF  smp0  rate $FF
+   47  DA FF  smp0  rate $FF
+
+PATTERN 75  $01A828  74 bytes  used at order rows: 33, 37
+   00  3C 10  D#2 01   
+   03  54 00  D#3 ..   
+   06  3C 00  D#2 ..   
+   09  54 00  D#3 ..   
+   10  3C 00  D#2 ..   
+   11  54 00  D#3 ..   
+   12  3C 00  D#2 ..   
+   15  54 00  D#3 ..   
+   18  3C 00  D#2 ..   
+   21  54 00  D#3 ..   
+   22  3C 00  D#2 ..   
+   23  54 00  D#3 ..   
+   24  3C 00  D#2 ..   
+   27  54 00  D#3 ..   
+   30  3C 00  D#2 ..   
+   33  54 00  D#3 ..   
+   34  3C 00  D#2 ..   
+   35  54 00  D#3 ..   
+   36  3C 00  D#2 ..   
+   39  54 00  D#3 ..   
+   42  3C 00  D#2 ..   
+   45  54 00  D#3 ..   
+   46  3C 00  D#2 ..   
+   47  54 00  D#3 ..   
+
+PATTERN 76  $01A872  82 bytes  used at order rows: 33, 37
+   00  8C 30  G-5 03   
+   02  8C 00  G-5 ..   
+   05  8C 00  G-5 ..   
+   06  8C 00  G-5 ..   
+   08  8C 00  G-5 ..   
+   11  8C 00  G-5 ..   
+   12  8C 00  G-5 ..   
+   14  8C 00  G-5 ..   
+   17  8C 00  G-5 ..   
+   18  8C 00  G-5 ..   
+   20  8C 00  G-5 ..   
+   23  8C 00  G-5 ..   
+   24  8A 00  F#5 ..   
+   26  8A 00  F#5 ..   
+   29  8A 00  F#5 ..   
+   30  8A 00  F#5 ..   
+   32  8A 00  F#5 ..   
+   35  8A 00  F#5 ..   
+   36  8A 00  F#5 ..   
+   38  8A 00  F#5 ..   
+   41  8A 00  F#5 ..   
+   42  8A 00  F#5 ..   
+   44  88 00  F-5 ..   
+   47  84 00  D#5 ..   
+
+PATTERN 77  $01A8C4  82 bytes  used at order rows: 33, 37
+   00  92 30  A#5 03   
+   02  92 00  A#5 ..   
+   05  92 00  A#5 ..   
+   06  92 00  A#5 ..   
+   08  92 00  A#5 ..   
+   11  92 00  A#5 ..   
+   12  92 00  A#5 ..   
+   14  92 00  A#5 ..   
+   17  92 00  A#5 ..   
+   18  92 00  A#5 ..   
+   20  92 00  A#5 ..   
+   23  92 00  A#5 ..   
+   24  92 00  A#5 ..   
+   26  92 00  A#5 ..   
+   29  92 00  A#5 ..   
+   30  92 00  A#5 ..   
+   32  92 00  A#5 ..   
+   35  92 00  A#5 ..   
+   36  92 00  A#5 ..   
+   38  92 00  A#5 ..   
+   41  92 00  A#5 ..   
+   42  92 00  A#5 ..   
+   44  92 00  A#5 ..   
+   47  92 00  A#5 ..   
+
+PATTERN 78  $01A916  78 bytes  used at order rows: 33, 37
+   00  A4 80  G-6 08   
+   05  00 90  --- 09   
+   06  A8 80  A-6 08   
+   07  00 90  --- 09   
+   08  AA 80  A#6 08   
+   10  00 90  --- 09   
+   11  9C 80  D#6 08   
+   14  00 90  --- 09   
+   15  9C 80  D#6 08   
+   17  00 90  --- 09   
+   18  A0 80  F-6 08   
+   19  00 90  --- 09   
+   20  A4 80  G-6 08   
+   23  00 90  --- 09   
+   24  A2 80  F#6 08   
+   29  00 90  --- 09   
+   30  A6 80  G#6 08   
+   31  00 90  --- 09   
+   32  AA 80  A#6 08   
+   34  00 90  --- 09   
+   35  9C 80  D#6 08   
+   38  00 90  --- 09   
+   39  9C 80  D#6 08   
+   41  00 90  --- 09   
+   42  A0 80  F-6 08   
+   43  00 90  --- 09   
+   44  A2 80  F#6 08   
+   47  00 90  --- 09   
+
+PATTERN 79  $01A964  68 bytes  used at order rows: 34, 38
+   00  4A 10  A#2 01   
+   03  62 00  A#3 ..   
+   06  5E 00  G#3 ..   
+   09  58 00  F-3 ..   
+   12  54 00  D#3 ..   
+   15  58 00  F-3 ..   
+   18  5E 00  G#3 ..   
+   20  62 00  A#3 ..   
+   21  54 00  D#3 ..   
+   22  56 00  E-3 ..   
+   23  58 00  F-3 ..   
+   24  4A 00  A#2 ..   
+   27  52 00  D-3 ..   
+   30  54 00  D#3 ..   
+   33  56 00  E-3 ..   
+   36  58 00  F-3 ..   
+   39  5C 00  G-3 ..   
+   42  5E 00  G#3 ..   
+   45  60 00  A-3 ..   
+
+PATTERN 80  $01A9A8  66 bytes  used at order rows: 34, 38
+   00  89 20  F-5 18   
+   03  82 00  D-5 ..   
+   06  7A 00  A#4 ..   
+   09  70 00  F-4 ..   
+   11  6A 00  D-4 ..   
+   24  7A 40  A#4 04   
+   25  00 50  --- 05   
+   26  70 40  F-4 04   
+   27  76 00  G#4 ..   
+   28  00 60  --- 06   
+   29  7A 40  A#4 04   
+   30  88 00  F-5 ..   
+   31  00 50  --- 05   
+   32  86 40  E-5 04   
+   33  84 00  D#5 ..   
+   34  80 00  C#5 ..   
+   35  76 00  G#4 ..   
+   36  7A 00  A#4 ..   
+   37  00 50  --- 05   
+   38  00 60  --- 06   
+   42  87 20  E-5 18   
+   43  88 00  F-5 ..   
+   44  8A 00  F#5 ..   
+   45  8C 00  G-5 ..   
+   46  8E 00  G#5 ..   
+   47  90 00  A-5 ..   
+
+PATTERN 81  $01A9EA  70 bytes  used at order rows: 34, 38
+   00  A0 80  F-6 08   
+   05  00 90  --- 09   
+   06  A0 80  F-6 08   
+   07  00 90  --- 09   
+   08  9C 80  D#6 08   
+   09  9A 00  D-6 ..   
+   10  00 90  --- 09   
+   11  92 80  A#5 08   
+   14  00 90  --- 09   
+   15  92 80  A#5 08   
+   17  00 90  --- 09   
+   18  96 80  C-6 08   
+   19  00 90  --- 09   
+   20  9A 80  D-6 08   
+   23  00 90  --- 09   
+   24  92 80  A#5 08   
+   25  00 90  --- 09   
+   26  8C 80  G-5 08   
+   27  88 00  F-5 ..   
+   28  00 90  --- 09   
+   29  92 80  A#5 08   
+   36  00 90  --- 09   
+   42  74 AF  G-4 10 -7
+   43  74 0F  G-4 .. -7
+   44  74 0F  G-4 .. -7
+   45  6C 0F  D#4 .. -7
+   46  6C 0F  D#4 .. -7
+   47  6C 0F  D#4 .. -7
+
+PATTERN 82  $01AA30  34 bytes  used at order rows: 34, 38
+   00  83 20  D-5 18   
+   03  7A 00  A#4 ..   
+   06  70 00  F-4 ..   
+   09  6A 00  D-4 ..   
+   11  62 00  A#3 ..   
+   42  7A AF  A#4 10 -7
+   43  7A 0F  A#4 .. -7
+   44  7A 0F  A#4 .. -7
+   45  70 0F  F-4 .. -7
+   46  70 0F  F-4 .. -7
+   47  70 0F  F-4 .. -7
+
+PATTERN 83  $01AA52  84 bytes  used at order rows: 39, 40
+   00  4A 10  A#2 01   
+   02  4A 00  A#2 ..   
+   03  46 00  G#2 ..   
+   06  44 00  G-2 ..   
+   08  44 00  G-2 ..   
+   09  42 00  F#2 ..   
+   11  40 00  F-2 ..   
+   14  40 00  F-2 ..   
+   15  44 00  G-2 ..   
+   17  40 00  F-2 ..   
+   18  46 00  G#2 ..   
+   20  40 00  F-2 ..   
+   21  48 00  A-2 ..   
+   23  40 00  F-2 ..   
+   24  4A 00  A#2 ..   
+   27  50 00  C#3 ..   
+   30  54 00  D#3 ..   
+   33  56 00  E-3 ..   
+   36  58 00  F-3 ..   
+   38  56 00  E-3 ..   
+   40  54 00  D#3 ..   
+   42  50 00  C#3 ..   
+   44  46 00  G#2 ..   
+   46  48 00  A-2 ..   
+
+PATTERN 84  $01AAA6  34 bytes  used at order rows: 39, 40
+   00  7A 20  A#4 02   
+   18  76 00  G#4 ..   
+   19  70 00  F-4 ..   
+   20  6E 00  E-4 ..   
+   21  6C 00  D#4 ..   
+   22  68 00  C#4 ..   
+   23  6C 00  D#4 ..   
+   24  62 00  A#3 ..   
+   42  70 00  F-4 ..   
+   43  76 00  G#4 ..   
+   44  7A 00  A#4 ..   
+   45  86 00  E-5 ..   
+   46  84 00  D#5 ..   
+   47  80 00  C#5 ..   
+
+PATTERN 85  $01AAC8  90 bytes  used at order rows: 39
+   00  93 20  A#5 18   
+   03  8E 00  G#5 ..   
+   06  88 00  F-5 ..   
+   08  86 00  E-5 ..   
+   09  84 00  D#5 ..   
+   10  80 00  C#5 ..   
+   11  7A 00  A#4 ..   
+   12  80 00  C#5 ..   
+   14  84 00  D#5 ..   
+   17  86 00  E-5 ..   
+   20  88 00  F-5 ..   
+   21  8E 00  G#5 ..   
+   22  92 00  A#5 ..   
+   23  98 00  C#6 ..   
+   24  9E 00  E-6 ..   
+   26  9C 00  D#6 ..   
+   28  98 00  C#6 ..   
+   30  92 00  A#5 ..   
+   32  8E 00  G#5 ..   
+   34  88 00  F-5 ..   
+   36  86 00  E-5 ..   
+   37  84 00  D#5 ..   
+   38  80 00  C#5 ..   
+   39  7A 00  A#4 ..   
+   40  76 00  G#4 ..   
+   41  78 00  A-4 ..   
+   42  7A 00  A#4 ..   
+   43  80 00  C#5 ..   
+   44  7A 00  A#4 ..   
+   45  84 00  D#5 ..   
+   46  7A 00  A#4 ..   
+   47  86 00  E-5 ..   
+
+PATTERN 86  $01AB22  90 bytes  used at order rows: 39, 40
+   00  92 D0  A#5 13   
+   03  8E 00  G#5 ..   
+   05  88 00  F-5 ..   
+   06  8E 00  G#5 ..   
+   08  90 00  A-5 ..   
+   09  92 00  A#5 ..   
+   11  98 00  C#6 ..   
+   14  92 00  A#5 ..   
+   15  9C 00  D#6 ..   
+   17  92 00  A#5 ..   
+   18  9E 00  E-6 ..   
+   20  9C 00  D#6 ..   
+   21  98 00  C#6 ..   
+   22  8E 00  G#5 ..   
+   23  90 00  A-5 ..   
+   24  92 00  A#5 ..   
+   27  8E 00  G#5 ..   
+   30  88 00  F-5 ..   
+   32  84 00  D#5 ..   
+   33  88 00  F-5 ..   
+   34  8E 00  G#5 ..   
+   35  92 00  A#5 ..   
+   36  98 00  C#6 ..   
+   38  9C 00  D#6 ..   
+   40  9E 00  E-6 ..   
+   42  A0 00  F-6 ..   
+   43  9E 00  E-6 ..   
+   44  9C 00  D#6 ..   
+   45  98 00  C#6 ..   
+   46  8E 00  G#5 ..   
+   47  91 F0  A-5 31   
+
+PATTERN 87  $01AB7C  54 bytes  used at order rows: 40
+   00  7B 20  A#4 18   
+   14  58 30  F-3 03   
+   15  5E 00  G#3 ..   
+   17  58 00  F-3 ..   
+   18  5E 00  G#3 ..   
+   20  58 00  F-3 ..   
+   21  5E 00  G#3 ..   
+   22  60 00  A-3 ..   
+   23  62 00  A#3 ..   
+   24  4A 00  A#2 ..   
+   36  82 80  D-5 08   
+   37  84 00  D#5 ..   
+   38  86 00  E-5 ..   
+   39  88 00  F-5 ..   
+   40  8A 00  F#5 ..   
+   41  8C 00  G-5 ..   
+   42  8E 00  G#5 ..   
+   43  90 00  A-5 ..   
+   44  92 00  A#5 ..   
+   45  94 00  B-5 ..   
+   46  96 00  C-6 ..   
+   47  98 00  C#6 ..   
+
+PATTERN 88  $01ABB2  6 bytes  used at order rows: 40
+   47  FC 1F  jump 31
+
+PATTERN 89  $01ABB8  4 bytes  used at order rows: 41
+   00  FA 05  speed 5 bank0
+
+PATTERN 90  $019222  2 bytes  (same data as pattern 0)
+PATTERN 91  $01ABBC  120 bytes  used at order rows: 41, 42, 43
+   00  E4 D0  smp5  rate $D0
+   02  E4 B0  smp5  rate $B0
+   03  E2 D0  smp4  rate $D0
+   05  E2 B0  smp4  rate $B0
+   06  E4 B0  smp5  rate $B0
+   09  E4 D0  smp5  rate $D0
+   11  E4 B0  smp5  rate $B0
+   12  E2 D0  smp4  rate $D0
+   13  E2 D0  smp4  rate $D0
+   14  E4 D0  smp5  rate $D0
+   16  E4 D0  smp5  rate $D0
+   18  E4 B0  smp5  rate $B0
+   19  E2 D0  smp4  rate $D0
+   21  E2 B0  smp4  rate $B0
+   22  E4 B0  smp5  rate $B0
+   25  E4 D0  smp5  rate $D0
+   27  E4 B0  smp5  rate $B0
+   28  E2 D0  smp4  rate $D0
+   29  E2 D0  smp4  rate $D0
+   30  E4 D0  smp5  rate $D0
+   32  E4 D0  smp5  rate $D0
+   34  E4 B0  smp5  rate $B0
+   35  E2 D0  smp4  rate $D0
+   37  E2 B0  smp4  rate $B0
+   38  E4 B0  smp5  rate $B0
+   41  E4 D0  smp5  rate $D0
+   43  E4 B0  smp5  rate $B0
+   44  E2 D0  smp4  rate $D0
+   45  E2 D0  smp4  rate $D0
+   46  E4 D0  smp5  rate $D0
+   48  E4 D0  smp5  rate $D0
+   50  E4 B0  smp5  rate $B0
+   51  E2 D0  smp4  rate $D0
+   53  E2 B0  smp4  rate $B0
+   54  E4 B0  smp5  rate $B0
+   57  E4 D0  smp5  rate $D0
+   59  E4 B0  smp5  rate $B0
+   60  E2 D0  smp4  rate $D0
+   61  E2 D0  smp4  rate $D0
+   62  E4 D0  smp5  rate $D0
+
+PATTERN 92  $01AC34  128 bytes  used at order rows: 41, 42, 43, 44, 45, 46, 47, 49
+   00  1A B0  A#0 11   
+   01  1A 00  A#0 ..   
+   02  32 00  A#1 ..   
+   04  32 00  A#1 ..   
+   05  1A 00  A#0 ..   
+   06  32 00  A#1 ..   
+   07  1A 00  A#0 ..   
+   09  1A 00  A#0 ..   
+   10  32 00  A#1 ..   
+   11  1A 00  A#0 ..   
+   12  32 00  A#1 ..   
+   13  32 00  A#1 ..   
+   14  1A 00  A#0 ..   
+   15  32 00  A#1 ..   
+   16  1A 00  A#0 ..   
+   17  1A 00  A#0 ..   
+   18  32 00  A#1 ..   
+   20  32 00  A#1 ..   
+   21  1A 00  A#0 ..   
+   22  32 00  A#1 ..   
+   23  1A 00  A#0 ..   
+   25  1A 00  A#0 ..   
+   26  32 00  A#1 ..   
+   27  1A 00  A#0 ..   
+   28  32 00  A#1 ..   
+   29  32 00  A#1 ..   
+   30  1A 00  A#0 ..   
+   31  32 00  A#1 ..   
+   32  1A 00  A#0 ..   
+   33  1A 00  A#0 ..   
+   34  32 00  A#1 ..   
+   36  32 00  A#1 ..   
+   37  1A 00  A#0 ..   
+   38  32 00  A#1 ..   
+   39  1A 00  A#0 ..   
+   41  1A 00  A#0 ..   
+   42  32 00  A#1 ..   
+   43  1A 00  A#0 ..   
+   44  32 00  A#1 ..   
+   45  32 00  A#1 ..   
+   46  1A 00  A#0 ..   
+   47  32 00  A#1 ..   
+   48  1A 00  A#0 ..   
+   49  1A 00  A#0 ..   
+   50  32 00  A#1 ..   
+   52  32 00  A#1 ..   
+   53  1A 00  A#0 ..   
+   54  32 00  A#1 ..   
+   55  1A 00  A#0 ..   
+   57  1A 00  A#0 ..   
+   58  32 00  A#1 ..   
+   59  1A 00  A#0 ..   
+   60  32 00  A#1 ..   
+   61  32 00  A#1 ..   
+   62  1A 00  A#0 ..   
+   63  32 00  A#1 ..   
+
+PATTERN 93  $01ACB4  128 bytes  used at order rows: 42
+   00  92 D0  A#5 13   
+   01  01 00  --- 16   
+   02  92 D0  A#5 13   
+   03  01 F0  --- 31    note cut (voice 30/62 is silent)
+   05  92 D0  A#5 13   
+   06  01 F0  --- 31    note cut (voice 30/62 is silent)
+   08  92 D0  A#5 13   
+   09  01 F0  --- 31    note cut (voice 30/62 is silent)
+   11  92 D0  A#5 13   
+   12  01 F0  --- 31    note cut (voice 30/62 is silent)
+   14  92 D0  A#5 13   
+   15  01 F0  --- 31    note cut (voice 30/62 is silent)
+   16  98 D0  C#6 13   
+   17  01 00  --- 16   
+   18  98 D0  C#6 13   
+   19  01 F0  --- 31    note cut (voice 30/62 is silent)
+   21  98 D0  C#6 13   
+   22  01 F0  --- 31    note cut (voice 30/62 is silent)
+   24  98 D0  C#6 13   
+   25  01 F0  --- 31    note cut (voice 30/62 is silent)
+   27  98 D0  C#6 13   
+   28  01 F0  --- 31    note cut (voice 30/62 is silent)
+   30  98 D0  C#6 13   
+   31  01 F0  --- 31    note cut (voice 30/62 is silent)
+   32  92 D0  A#5 13   
+   33  01 00  --- 16   
+   34  92 D0  A#5 13   
+   35  01 F0  --- 31    note cut (voice 30/62 is silent)
+   37  92 D0  A#5 13   
+   38  01 F0  --- 31    note cut (voice 30/62 is silent)
+   40  92 D0  A#5 13   
+   41  01 F0  --- 31    note cut (voice 30/62 is silent)
+   43  92 D0  A#5 13   
+   44  01 F0  --- 31    note cut (voice 30/62 is silent)
+   46  92 D0  A#5 13   
+   47  01 F0  --- 31    note cut (voice 30/62 is silent)
+   48  98 D0  C#6 13   
+   49  01 00  --- 16   
+   50  98 D0  C#6 13   
+   51  01 F0  --- 31    note cut (voice 30/62 is silent)
+   53  98 D0  C#6 13   
+   54  01 F0  --- 31    note cut (voice 30/62 is silent)
+   56  98 E0  C#6 14   
+   57  2E C0  G#1 12   
+   59  2E 00  G#1 ..   
+   60  46 00  G#2 ..   
+   61  2E 00  G#1 ..   
+   62  30 00  A-1 ..   
+   63  48 00  A-2 ..   
+
+PATTERN 94  $01AD34  128 bytes  used at order rows: 42, 43, 44, 45, 46
+   00  8E E0  G#5 14   
+   01  00 F0  --- 15   
+   02  8E E0  G#5 14   
+   03  01 F0  --- 31    note cut (voice 30/62 is silent)
+   05  8E E0  G#5 14   
+   06  01 F0  --- 31    note cut (voice 30/62 is silent)
+   08  8E E0  G#5 14   
+   09  01 F0  --- 31    note cut (voice 30/62 is silent)
+   11  8E E0  G#5 14   
+   12  01 F0  --- 31    note cut (voice 30/62 is silent)
+   14  8E E0  G#5 14   
+   15  01 F0  --- 31    note cut (voice 30/62 is silent)
+   16  92 E0  A#5 14   
+   17  00 F0  --- 15   
+   18  92 E0  A#5 14   
+   19  01 F0  --- 31    note cut (voice 30/62 is silent)
+   21  92 E0  A#5 14   
+   22  01 F0  --- 31    note cut (voice 30/62 is silent)
+   24  92 E0  A#5 14   
+   25  01 F0  --- 31    note cut (voice 30/62 is silent)
+   27  92 E0  A#5 14   
+   28  01 F0  --- 31    note cut (voice 30/62 is silent)
+   30  92 E0  A#5 14   
+   31  01 F0  --- 31    note cut (voice 30/62 is silent)
+   32  8E E0  G#5 14   
+   33  00 F0  --- 15   
+   34  8E E0  G#5 14   
+   35  01 F0  --- 31    note cut (voice 30/62 is silent)
+   37  8E E0  G#5 14   
+   38  01 F0  --- 31    note cut (voice 30/62 is silent)
+   40  8E E0  G#5 14   
+   41  01 F0  --- 31    note cut (voice 30/62 is silent)
+   43  8E E0  G#5 14   
+   44  01 F0  --- 31    note cut (voice 30/62 is silent)
+   46  8E E0  G#5 14   
+   47  01 F0  --- 31    note cut (voice 30/62 is silent)
+   48  92 E0  A#5 14   
+   49  00 F0  --- 15   
+   50  92 E0  A#5 14   
+   51  01 F0  --- 31    note cut (voice 30/62 is silent)
+   53  98 E0  C#6 14   
+   54  01 F0  --- 31    note cut (voice 30/62 is silent)
+   56  92 E0  A#5 14   
+   58  01 F0  --- 31    note cut (voice 30/62 is silent)
+   59  92 E0  A#5 14   
+   60  01 F0  --- 31    note cut (voice 30/62 is silent)
+   62  92 E0  A#5 14   
+   63  01 F0  --- 31    note cut (voice 30/62 is silent)
+
+PATTERN 95  $01ADB4  128 bytes  used at order rows: 42, 43, 44, 45, 46
+   00  88 D0  F-5 13   
+   01  01 00  --- 16   
+   02  88 D0  F-5 13   
+   03  01 F0  --- 31    note cut (voice 30/62 is silent)
+   05  88 D0  F-5 13   
+   06  01 F0  --- 31    note cut (voice 30/62 is silent)
+   08  88 D0  F-5 13   
+   09  01 F0  --- 31    note cut (voice 30/62 is silent)
+   11  88 D0  F-5 13   
+   12  01 F0  --- 31    note cut (voice 30/62 is silent)
+   14  88 D0  F-5 13   
+   15  01 F0  --- 31    note cut (voice 30/62 is silent)
+   16  8C D0  G-5 13   
+   17  01 00  --- 16   
+   18  8C D0  G-5 13   
+   19  01 F0  --- 31    note cut (voice 30/62 is silent)
+   21  8C D0  G-5 13   
+   22  01 F0  --- 31    note cut (voice 30/62 is silent)
+   24  8C D0  G-5 13   
+   25  01 F0  --- 31    note cut (voice 30/62 is silent)
+   27  8C D0  G-5 13   
+   28  01 F0  --- 31    note cut (voice 30/62 is silent)
+   30  8C D0  G-5 13   
+   31  01 F0  --- 31    note cut (voice 30/62 is silent)
+   32  88 D0  F-5 13   
+   33  01 00  --- 16   
+   34  88 D0  F-5 13   
+   35  01 F0  --- 31    note cut (voice 30/62 is silent)
+   37  88 D0  F-5 13   
+   38  01 F0  --- 31    note cut (voice 30/62 is silent)
+   40  88 D0  F-5 13   
+   41  01 F0  --- 31    note cut (voice 30/62 is silent)
+   43  88 D0  F-5 13   
+   44  01 F0  --- 31    note cut (voice 30/62 is silent)
+   46  88 D0  F-5 13   
+   47  01 F0  --- 31    note cut (voice 30/62 is silent)
+   48  8C D0  G-5 13   
+   49  01 00  --- 16   
+   50  8C D0  G-5 13   
+   51  01 F0  --- 31    note cut (voice 30/62 is silent)
+   53  8C D0  G-5 13   
+   54  01 F0  --- 31    note cut (voice 30/62 is silent)
+   56  8C D0  G-5 13   
+   58  01 F0  --- 31    note cut (voice 30/62 is silent)
+   59  8C D0  G-5 13   
+   60  01 F0  --- 31    note cut (voice 30/62 is silent)
+   62  8C D0  G-5 13   
+   63  01 F0  --- 31    note cut (voice 30/62 is silent)
+
+PATTERN 96  $01AE34  128 bytes  used at order rows: 42
+   00  80 E0  C#5 14   
+   01  00 F0  --- 15   
+   02  80 E0  C#5 14   
+   03  01 F0  --- 31    note cut (voice 30/62 is silent)
+   05  80 E0  C#5 14   
+   06  01 F0  --- 31    note cut (voice 30/62 is silent)
+   08  80 E0  C#5 14   
+   09  01 F0  --- 31    note cut (voice 30/62 is silent)
+   11  80 E0  C#5 14   
+   12  01 F0  --- 31    note cut (voice 30/62 is silent)
+   14  80 E0  C#5 14   
+   15  01 F0  --- 31    note cut (voice 30/62 is silent)
+   16  84 E0  D#5 14   
+   17  00 F0  --- 15   
+   18  84 E0  D#5 14   
+   19  01 F0  --- 31    note cut (voice 30/62 is silent)
+   21  84 E0  D#5 14   
+   22  01 F0  --- 31    note cut (voice 30/62 is silent)
+   24  84 E0  D#5 14   
+   25  01 F0  --- 31    note cut (voice 30/62 is silent)
+   27  84 E0  D#5 14   
+   28  01 F0  --- 31    note cut (voice 30/62 is silent)
+   30  84 E0  D#5 14   
+   31  01 F0  --- 31    note cut (voice 30/62 is silent)
+   32  80 E0  C#5 14   
+   33  00 F0  --- 15   
+   34  80 E0  C#5 14   
+   35  01 F0  --- 31    note cut (voice 30/62 is silent)
+   37  80 E0  C#5 14   
+   38  01 F0  --- 31    note cut (voice 30/62 is silent)
+   40  80 E0  C#5 14   
+   41  01 F0  --- 31    note cut (voice 30/62 is silent)
+   43  80 E0  C#5 14   
+   44  01 F0  --- 31    note cut (voice 30/62 is silent)
+   46  80 E0  C#5 14   
+   47  01 F0  --- 31    note cut (voice 30/62 is silent)
+   48  84 E0  D#5 14   
+   49  00 F0  --- 15   
+   50  84 E0  D#5 14   
+   51  01 F0  --- 31    note cut (voice 30/62 is silent)
+   53  84 E0  D#5 14   
+   54  01 F0  --- 31    note cut (voice 30/62 is silent)
+   56  84 E0  D#5 14   
+   58  01 F0  --- 31    note cut (voice 30/62 is silent)
+   59  84 E0  D#5 14   
+   60  01 F0  --- 31    note cut (voice 30/62 is silent)
+   62  84 E0  D#5 14   
+   63  01 F0  --- 31    note cut (voice 30/62 is silent)
+
+PATTERN 97  $01AEB4  128 bytes  used at order rows: 43, 45, 48
+   00  32 C0  A#1 12   
+   02  32 00  A#1 ..   
+   03  4A 00  A#2 ..   
+   04  00 0F  --- .. -7
+   05  46 00  G#2 ..   
+   07  40 00  F-2 ..   
+   08  32 00  A#1 ..   
+   09  28 00  F-1 ..   
+   10  2E 00  G#1 ..   
+   12  32 00  A#1 ..   
+   13  00 0F  --- .. -7
+   14  38 00  C#2 ..   
+   16  32 00  A#1 ..   
+   18  32 00  A#1 ..   
+   19  4A 00  A#2 ..   
+   20  00 0F  --- .. -7
+   21  46 00  G#2 ..   
+   23  40 00  F-2 ..   
+   24  32 00  A#1 ..   
+   25  28 00  F-1 ..   
+   26  2E 00  G#1 ..   
+   28  32 00  A#1 ..   
+   29  00 0F  --- .. -7
+   30  38 00  C#2 ..   
+   31  00 03  --- .. +3
+   32  32 00  A#1 ..   
+   34  32 00  A#1 ..   
+   35  4A 00  A#2 ..   
+   36  00 0F  --- .. -7
+   37  46 00  G#2 ..   
+   39  40 00  F-2 ..   
+   40  32 00  A#1 ..   
+   41  28 00  F-1 ..   
+   42  2E 00  G#1 ..   
+   44  32 00  A#1 ..   
+   45  00 0F  --- .. -7
+   46  38 00  C#2 ..   
+   48  32 00  A#1 ..   
+   50  32 00  A#1 ..   
+   51  4A 00  A#2 ..   
+   52  00 0F  --- .. -7
+   53  46 00  G#2 ..   
+   55  40 00  F-2 ..   
+   56  32 00  A#1 ..   
+   57  28 00  F-1 ..   
+   58  2E 00  G#1 ..   
+   59  00 0F  --- .. -7
+   60  32 00  A#1 ..   
+   61  00 03  --- .. +3
+   62  38 00  C#2 ..   
+   63  00 07  --- .. +7
+
+PATTERN 98  $01AF34  128 bytes  used at order rows: 43, 44, 45, 46
+   00  92 D0  A#5 13   
+   01  00 F0  --- 15   
+   02  92 E0  A#5 14   
+   03  01 F0  --- 31    note cut (voice 30/62 is silent)
+   05  92 D0  A#5 13   
+   06  01 F0  --- 31    note cut (voice 30/62 is silent)
+   08  92 E0  A#5 14   
+   09  01 F0  --- 31    note cut (voice 30/62 is silent)
+   11  92 D0  A#5 13   
+   12  01 F0  --- 31    note cut (voice 30/62 is silent)
+   14  92 E0  A#5 14   
+   15  01 F0  --- 31    note cut (voice 30/62 is silent)
+   16  98 D0  C#6 13   
+   17  00 F0  --- 15   
+   18  98 E0  C#6 14   
+   19  01 F0  --- 31    note cut (voice 30/62 is silent)
+   21  98 D0  C#6 13   
+   22  01 F0  --- 31    note cut (voice 30/62 is silent)
+   24  98 E0  C#6 14   
+   25  01 F0  --- 31    note cut (voice 30/62 is silent)
+   27  98 D0  C#6 13   
+   28  01 F0  --- 31    note cut (voice 30/62 is silent)
+   30  98 E0  C#6 14   
+   31  01 F0  --- 31    note cut (voice 30/62 is silent)
+   32  92 D0  A#5 13   
+   33  00 F0  --- 15   
+   34  92 E0  A#5 14   
+   35  01 F0  --- 31    note cut (voice 30/62 is silent)
+   37  92 D0  A#5 13   
+   38  01 F0  --- 31    note cut (voice 30/62 is silent)
+   40  92 E0  A#5 14   
+   41  01 F0  --- 31    note cut (voice 30/62 is silent)
+   43  92 D0  A#5 13   
+   44  01 F0  --- 31    note cut (voice 30/62 is silent)
+   46  92 E0  A#5 14   
+   47  01 F0  --- 31    note cut (voice 30/62 is silent)
+   48  98 D0  C#6 13   
+   49  00 F0  --- 15   
+   50  98 E0  C#6 14   
+   51  01 F0  --- 31    note cut (voice 30/62 is silent)
+   53  98 D0  C#6 13   
+   54  01 F0  --- 31    note cut (voice 30/62 is silent)
+   56  98 E0  C#6 14   
+   58  01 F0  --- 31    note cut (voice 30/62 is silent)
+   59  98 D0  C#6 13   
+   60  01 F0  --- 31    note cut (voice 30/62 is silent)
+   62  98 E0  C#6 14   
+   63  01 F0  --- 31    note cut (voice 30/62 is silent)
+
+PATTERN 99  $01AFB4  128 bytes  used at order rows: 44
+   00  24 C0  D#1 12   
+   02  24 00  D#1 ..   
+   03  3C 00  D#2 ..   
+   04  00 0F  --- .. -7
+   05  38 00  C#2 ..   
+   07  40 00  F-2 ..   
+   08  3C 00  D#2 ..   
+   09  32 00  A#1 ..   
+   10  38 00  C#2 ..   
+   12  3C 00  D#2 ..   
+   13  00 0F  --- .. -7
+   14  42 00  F#2 ..   
+   16  24 00  D#1 ..   
+   18  24 00  D#1 ..   
+   19  3C 00  D#2 ..   
+   20  00 0F  --- .. -7
+   21  38 00  C#2 ..   
+   23  40 00  F-2 ..   
+   24  3C 00  D#2 ..   
+   25  32 00  A#1 ..   
+   26  38 00  C#2 ..   
+   28  3C 00  D#2 ..   
+   29  00 0F  --- .. -7
+   30  42 00  F#2 ..   
+   31  00 03  --- .. +3
+   32  2E 00  G#1 ..   
+   34  2E 00  G#1 ..   
+   35  46 00  G#2 ..   
+   36  00 0F  --- .. -7
+   37  42 00  F#2 ..   
+   39  3C 00  D#2 ..   
+   40  2E 00  G#1 ..   
+   41  24 00  D#1 ..   
+   42  2A 00  F#1 ..   
+   44  2E 00  G#1 ..   
+   45  00 0F  --- .. -7
+   46  34 00  B-1 ..   
+   48  2E 00  G#1 ..   
+   50  2E 00  G#1 ..   
+   51  46 00  G#2 ..   
+   52  00 0F  --- .. -7
+   53  42 00  F#2 ..   
+   55  3C 00  D#2 ..   
+   56  2E 00  G#1 ..   
+   58  30 00  A-1 ..   
+   60  32 00  A#1 ..   
+   62  34 00  B-1 ..   
+
+PATTERN 100  $01B034  128 bytes  used at order rows: 44, 45, 46
+   00  E4 D0  smp5  rate $D0
+   01  E4 FF  smp5  rate $FF
+   02  E4 B0  smp5  rate $B0
+   03  E2 D0  smp4  rate $D0
+   04  E2 FF  smp4  rate $FF
+   05  E2 B0  smp4  rate $B0
+   06  E4 B0  smp5  rate $B0
+   08  E4 FF  smp5  rate $FF
+   09  E4 D0  smp5  rate $D0
+   10  E2 FF  smp4  rate $FF
+   11  E4 B0  smp5  rate $B0
+   12  E2 D0  smp4  rate $D0
+   13  E2 D0  smp4  rate $D0
+   14  E4 D0  smp5  rate $D0
+   16  E4 D0  smp5  rate $D0
+   17  E4 FF  smp5  rate $FF
+   18  E4 B0  smp5  rate $B0
+   19  E2 D0  smp4  rate $D0
+   20  E2 FF  smp4  rate $FF
+   21  E2 B0  smp4  rate $B0
+   22  E4 B0  smp5  rate $B0
+   24  E4 FF  smp5  rate $FF
+   25  E4 D0  smp5  rate $D0
+   26  E2 FF  smp4  rate $FF
+   27  E4 B0  smp5  rate $B0
+   28  E2 D0  smp4  rate $D0
+   29  E2 D0  smp4  rate $D0
+   30  E4 D0  smp5  rate $D0
+   32  E4 D0  smp5  rate $D0
+   33  E4 FF  smp5  rate $FF
+   34  E4 B0  smp5  rate $B0
+   35  E2 D0  smp4  rate $D0
+   36  E2 FF  smp4  rate $FF
+   37  E2 B0  smp4  rate $B0
+   38  E4 B0  smp5  rate $B0
+   40  E4 FF  smp5  rate $FF
+   41  E4 D0  smp5  rate $D0
+   42  E2 FF  smp4  rate $FF
+   43  E4 B0  smp5  rate $B0
+   44  E2 D0  smp4  rate $D0
+   45  E2 D0  smp4  rate $D0
+   46  E4 D0  smp5  rate $D0
+   48  E4 D0  smp5  rate $D0
+   49  E4 FF  smp5  rate $FF
+   50  E4 B0  smp5  rate $B0
+   51  E2 D0  smp4  rate $D0
+   52  E2 FF  smp4  rate $FF
+   53  E2 B0  smp4  rate $B0
+   54  E4 B0  smp5  rate $B0
+   56  E4 FF  smp5  rate $FF
+   57  E4 D0  smp5  rate $D0
+   58  E2 FF  smp4  rate $FF
+   59  E4 B0  smp5  rate $B0
+   60  E2 D0  smp4  rate $D0
+   61  E2 D0  smp4  rate $D0
+   62  E4 D0  smp5  rate $D0
+
+PATTERN 101  $01B0B4  124 bytes  used at order rows: 46, 49
+   00  24 C0  D#1 12   
+   02  24 00  D#1 ..   
+   03  3C 00  D#2 ..   
+   04  00 0F  --- .. -7
+   05  38 00  C#2 ..   
+   07  40 00  F-2 ..   
+   08  3C 00  D#2 ..   
+   09  32 00  A#1 ..   
+   10  38 00  C#2 ..   
+   12  3C 00  D#2 ..   
+   13  00 0F  --- .. -7
+   14  42 00  F#2 ..   
+   16  24 00  D#1 ..   
+   18  24 00  D#1 ..   
+   19  3C 00  D#2 ..   
+   20  00 0F  --- .. -7
+   21  38 00  C#2 ..   
+   23  40 00  F-2 ..   
+   24  3C 00  D#2 ..   
+   25  32 00  A#1 ..   
+   26  38 00  C#2 ..   
+   28  3C 00  D#2 ..   
+   29  00 0F  --- .. -7
+   30  42 00  F#2 ..   
+   31  00 03  --- .. +3
+   32  2E 00  G#1 ..   
+   34  2E 00  G#1 ..   
+   35  46 00  G#2 ..   
+   36  00 0F  --- .. -7
+   37  42 00  F#2 ..   
+   39  3C 00  D#2 ..   
+   40  2E 00  G#1 ..   
+   41  24 00  D#1 ..   
+   42  2A 00  F#1 ..   
+   44  2E 00  G#1 ..   
+   45  00 0F  --- .. -7
+   46  34 00  B-1 ..   
+   48  2E 00  G#1 ..   
+   50  2E 00  G#1 ..   
+   51  46 00  G#2 ..   
+   52  00 0F  --- .. -7
+   53  42 00  F#2 ..   
+   55  3C 00  D#2 ..   
+   56  2E 00  G#1 ..   
+   58  28 07  F-1 .. +7
+   61  00 0F  --- .. -7
+
+PATTERN 102  $01B130  32 bytes  used at order rows: 47
+   00  7A AF  A#4 10 -7
+   01  7A 0F  A#4 .. -7
+   02  7A 0F  A#4 .. -7
+   03  74 0F  G-4 .. -7
+   06  74 0F  G-4 .. -7
+   07  74 0F  G-4 .. -7
+   08  74 0F  G-4 .. -7
+   09  6C 0F  D#4 .. -7
+   11  6C 0F  D#4 .. -7
+   12  6C 0F  D#4 .. -7
+   13  6C 0F  D#4 .. -7
+   14  66 0F  C-4 .. -7
+   15  FE 00  break
+
+PATTERN 103  $01B150  4 bytes  used at order rows: 47
+   00  28 C0  F-1 12   
+
+PATTERN 104  $01B154  4 bytes  used at order rows: 49
+   63  FC 2A  jump 42
+
+PATTERN 105  $01B158  112 bytes  used at order rows: 50, 51
+   00  93 B0  A#5 27   
+   04  00 0F  --- .. -7
+   05  8E 00  G#5 ..   
+   06  90 00  A-5 ..   
+   07  92 00  A#5 ..   
+   09  00 0F  --- .. -7
+   10  8E 00  G#5 ..   
+   11  00 0F  --- .. -7
+   12  86 00  E-5 ..   
+   13  84 00  D#5 ..   
+   14  80 00  C#5 ..   
+   15  7A 00  A#4 ..   
+   20  00 0F  --- .. -7
+   21  80 00  C#5 ..   
+   22  84 00  D#5 ..   
+   23  86 00  E-5 ..   
+   25  00 0F  --- .. -7
+   26  88 00  F-5 ..   
+   28  00 0F  --- .. -7
+   29  8E 00  G#5 ..   
+   30  88 00  F-5 ..   
+   31  8E 00  G#5 ..   
+   32  92 00  A#5 ..   
+   37  00 0F  --- .. -7
+   38  98 00  C#6 ..   
+   39  9C 00  D#6 ..   
+   40  00 0F  --- .. -7
+   41  9E 00  E-6 ..   
+   42  00 0F  --- .. -7
+   43  9C 00  D#6 ..   
+   44  00 0F  --- .. -7
+   45  98 00  C#6 ..   
+   46  8E 00  G#5 ..   
+   47  90 00  A-5 ..   
+   48  92 00  A#5 ..   
+   50  00 0F  --- .. -7
+   51  8E 00  G#5 ..   
+   52  00 0F  --- .. -7
+   54  86 00  E-5 ..   
+   55  00 0F  --- .. -7
+   57  84 00  D#5 ..   
+   58  00 0F  --- .. -7
+   59  80 00  C#5 ..   
+   60  00 0F  --- .. -7
+   61  88 00  F-5 ..   
+   62  00 0F  --- .. -7
+
+PATTERN 106  $01B1C8  112 bytes  used at order rows: 50
+   00  FA 05  speed 5 bank0
+   01  93 B0  A#5 27   
+   05  00 0F  --- .. -7
+   06  8E 00  G#5 ..   
+   07  90 00  A-5 ..   
+   08  92 00  A#5 ..   
+   10  00 0F  --- .. -7
+   11  8E 00  G#5 ..   
+   12  00 0F  --- .. -7
+   13  86 00  E-5 ..   
+   14  84 00  D#5 ..   
+   15  80 00  C#5 ..   
+   16  7A 00  A#4 ..   
+   21  00 0F  --- .. -7
+   22  80 00  C#5 ..   
+   23  84 00  D#5 ..   
+   24  86 00  E-5 ..   
+   26  00 0F  --- .. -7
+   27  88 00  F-5 ..   
+   29  00 0F  --- .. -7
+   30  8E 00  G#5 ..   
+   31  88 00  F-5 ..   
+   32  8E 00  G#5 ..   
+   33  92 00  A#5 ..   
+   38  00 0F  --- .. -7
+   39  98 00  C#6 ..   
+   40  9C 00  D#6 ..   
+   41  00 0F  --- .. -7
+   42  9E 00  E-6 ..   
+   43  00 0F  --- .. -7
+   44  9C 00  D#6 ..   
+   45  00 0F  --- .. -7
+   46  98 00  C#6 ..   
+   47  8E 00  G#5 ..   
+   48  90 00  A-5 ..   
+   49  92 00  A#5 ..   
+   51  00 0F  --- .. -7
+   52  8E 00  G#5 ..   
+   54  00 0F  --- .. -7
+   55  86 00  E-5 ..   
+   57  00 0F  --- .. -7
+   58  84 00  D#5 ..   
+   59  00 0F  --- .. -7
+   60  80 00  C#5 ..   
+   61  00 0F  --- .. -7
+   62  88 00  F-5 ..   
+   63  00 0F  --- .. -7
+
+PATTERN 107  $01B238  128 bytes  used at order rows: 50, 51, 54, 55
+   00  4A 10  A#2 01   
+   02  4A 00  A#2 ..   
+   03  62 00  A#3 ..   
+   05  5E 00  G#3 ..   
+   07  58 00  F-3 ..   
+   08  4A 00  A#2 ..   
+   10  4A 00  A#2 ..   
+   11  62 00  A#3 ..   
+   13  5E 00  G#3 ..   
+   15  58 00  F-3 ..   
+   16  4A 00  A#2 ..   
+   18  4A 00  A#2 ..   
+   19  62 00  A#3 ..   
+   21  5E 00  G#3 ..   
+   23  58 00  F-3 ..   
+   24  4A 00  A#2 ..   
+   26  4A 00  A#2 ..   
+   27  62 00  A#3 ..   
+   29  5E 00  G#3 ..   
+   31  58 00  F-3 ..   
+   32  50 00  C#3 ..   
+   34  50 00  C#3 ..   
+   35  68 00  C#4 ..   
+   37  64 00  B-3 ..   
+   39  5E 00  G#3 ..   
+   40  50 00  C#3 ..   
+   42  50 00  C#3 ..   
+   43  68 00  C#4 ..   
+   45  64 00  B-3 ..   
+   47  68 00  C#4 ..   
+   48  54 00  D#3 ..   
+   50  54 00  D#3 ..   
+   51  6C 00  D#4 ..   
+   53  68 00  C#4 ..   
+   55  62 00  A#3 ..   
+   56  54 00  D#3 ..   
+   58  5A 00  F#3 ..   
+   60  50 00  C#3 ..   
+   62  54 00  D#3 ..   
+
+PATTERN 108  $01B2B8  128 bytes  used at order rows: 50, 51, 52, 53, 54, 55, 56
+   00  DC FF  smp1  rate $FF
+   01  E4 FF  smp5  rate $FF
+   02  E4 FF  smp5  rate $FF
+   03  DC FF  smp1  rate $FF
+   04  DA FF  smp0  rate $FF
+   05  E4 FF  smp5  rate $FF
+   06  DC FF  smp1  rate $FF
+   08  E4 FF  smp5  rate $FF
+   09  DC FF  smp1  rate $FF
+   11  DC FF  smp1  rate $FF
+   12  DA FF  smp0  rate $FF
+   13  E4 FF  smp5  rate $FF
+   14  DC FF  smp1  rate $FF
+   16  DC FF  smp1  rate $FF
+   17  E4 FF  smp5  rate $FF
+   18  E4 FF  smp5  rate $FF
+   19  DC FF  smp1  rate $FF
+   20  DA FF  smp0  rate $FF
+   21  E4 FF  smp5  rate $FF
+   22  DC FF  smp1  rate $FF
+   24  E4 FF  smp5  rate $FF
+   25  DC FF  smp1  rate $FF
+   27  DC FF  smp1  rate $FF
+   28  DA FF  smp0  rate $FF
+   29  DA FF  smp0  rate $FF
+   30  DC FF  smp1  rate $FF
+   32  DC FF  smp1  rate $FF
+   33  E4 FF  smp5  rate $FF
+   34  E4 FF  smp5  rate $FF
+   35  DC FF  smp1  rate $FF
+   36  DA FF  smp0  rate $FF
+   37  E4 FF  smp5  rate $FF
+   38  DC FF  smp1  rate $FF
+   40  E4 FF  smp5  rate $FF
+   41  DC FF  smp1  rate $FF
+   43  DC FF  smp1  rate $FF
+   44  DA FF  smp0  rate $FF
+   45  E4 FF  smp5  rate $FF
+   46  DC FF  smp1  rate $FF
+   48  DC FF  smp1  rate $FF
+   49  E4 FF  smp5  rate $FF
+   50  E4 FF  smp5  rate $FF
+   51  DC FF  smp1  rate $FF
+   52  DA FF  smp0  rate $FF
+   53  E4 FF  smp5  rate $FF
+   54  DC FF  smp1  rate $FF
+   56  DA FF  smp0  rate $FF
+   57  DC FF  smp1  rate $FF
+   59  DA FF  smp0  rate $FF
+   60  DC FF  smp1  rate $FF
+   62  DA FF  smp0  rate $FF
+   63  DC FF  smp1  rate $FF
+
+PATTERN 109  $01B338  128 bytes  used at order rows: 51, 54
+   00  92 80  A#5 08   
+   02  98 00  C#6 ..   
+   03  92 00  A#5 ..   
+   04  9C 00  D#6 ..   
+   06  98 00  C#6 ..   
+   07  92 00  A#5 ..   
+   08  9E 00  E-6 ..   
+   10  9C 00  D#6 ..   
+   11  98 00  C#6 ..   
+   12  9C 00  D#6 ..   
+   13  98 00  C#6 ..   
+   14  8E 00  G#5 ..   
+   15  90 00  A-5 ..   
+   16  92 00  A#5 ..   
+   17  98 00  C#6 ..   
+   19  9C 00  D#6 ..   
+   21  9E 00  E-6 ..   
+   22  A0 00  F-6 ..   
+   23  A6 00  G#6 ..   
+   25  AA 00  A#6 ..   
+   26  B0 00  C#7 ..   
+   27  B4 00  D#7 ..   
+   28  B6 00  E-7 ..   
+   29  B4 00  D#7 ..   
+   30  B0 00  C#7 ..   
+   31  AA 00  A#6 ..   
+   32  B4 00  D#7 ..   
+   33  B0 00  C#7 ..   
+   34  AA 00  A#6 ..   
+   35  B4 00  D#7 ..   
+   37  AA 00  A#6 ..   
+   38  B0 00  C#7 ..   
+   39  A6 00  G#6 ..   
+   40  AA 00  A#6 ..   
+   41  A6 00  G#6 ..   
+   42  A0 00  F-6 ..   
+   43  AA 00  A#6 ..   
+   45  A0 00  F-6 ..   
+   46  A6 00  G#6 ..   
+   47  AA 00  A#6 ..   
+   48  B4 00  D#7 ..   
+   49  B0 00  C#7 ..   
+   50  AA 00  A#6 ..   
+   51  9C 00  D#6 ..   
+   53  98 00  C#6 ..   
+   54  9A 00  D-6 ..   
+   55  9C 00  D#6 ..   
+   57  92 00  A#5 ..   
+   58  98 00  C#6 ..   
+   59  9C 00  D#6 ..   
+   61  9E 00  E-6 ..   
+   62  A0 00  F-6 ..   
+   63  A6 00  G#6 ..   
+
+PATTERN 110  $01B3B8  40 bytes  used at order rows: 51, 54, 55
+   00  62 C0  A#3 12   
+   01  6C 00  D#4 ..   
+   02  70 00  F-4 ..   
+   03  7A 00  A#4 ..   
+   16  80 00  C#5 ..   
+   17  76 00  G#4 ..   
+   18  78 00  A-4 ..   
+   19  7A 00  A#4 ..   
+   32  86 00  E-5 ..   
+   33  84 00  D#5 ..   
+   34  80 00  C#5 ..   
+   35  7A 00  A#4 ..   
+   48  6C 00  D#4 ..   
+   49  70 00  F-4 ..   
+   50  7A 00  A#4 ..   
+   51  88 00  F-5 ..   
+
+PATTERN 111  $01B3E0  82 bytes  used at order rows: 52
+   00  8E 40  G#5 04   
+   01  90 00  A-5 ..   
+   02  92 00  A#5 ..   
+   03  00 50  --- 05   
+   06  00 70  --- 07   
+   08  00 0F  --- .. -7
+   09  8C 43  G-5 04 +3
+   10  8E 70  G#5 07   
+   11  88 40  F-5 04   
+   12  86 00  E-5 ..   
+   13  84 00  D#5 ..   
+   14  80 00  C#5 ..   
+   15  7A 00  A#4 ..   
+   16  00 50  --- 05   
+   22  00 70  --- 07   
+   25  88 40  F-5 04   
+   26  00 73  --- 07 +3
+   27  98 40  C#6 04   
+   28  96 00  C-6 ..   
+   29  8E 00  G#5 ..   
+   30  90 00  A-5 ..   
+   31  92 00  A#5 ..   
+   32  00 50  --- 05   
+   36  00 70  --- 07   
+   48  84 40  D#5 04   
+   49  80 00  C#5 ..   
+   50  00 70  --- 07   
+   51  84 40  D#5 04   
+   52  00 70  --- 07   
+   53  86 40  E-5 04   
+   54  88 00  F-5 ..   
+   55  00 50  --- 05   
+   60  00 70  --- 07   
+
+PATTERN 112  $01B432  88 bytes  used at order rows: 52
+   00  32 C0  A#1 12   
+   03  28 00  F-1 ..   
+   06  2E 00  G#1 ..   
+   08  32 00  A#1 ..   
+   11  28 00  F-1 ..   
+   14  2E 00  G#1 ..   
+   16  24 00  D#1 ..   
+   19  26 00  E-1 ..   
+   22  28 00  F-1 ..   
+   25  2E 00  G#1 ..   
+   28  30 00  A-1 ..   
+   30  28 00  F-1 ..   
+   32  32 00  A#1 ..   
+   35  2E 00  G#1 ..   
+   38  30 00  A-1 ..   
+   40  32 00  A#1 ..   
+   43  2E 00  G#1 ..   
+   46  28 00  F-1 ..   
+   48  24 00  D#1 ..   
+   50  3C 00  D#2 ..   
+   52  26 00  E-1 ..   
+   54  28 00  F-1 ..   
+
+PATTERN 113  $01B48A  92 bytes  used at order rows: 52
+   00  9C 80  D#6 08   
+   01  01 F0  --- 31    note cut (voice 30/62 is silent)
+   02  9C 80  D#6 08   
+   03  01 F0  --- 31    note cut (voice 30/62 is silent)
+   05  9C 80  D#6 08   
+   06  01 F0  --- 31    note cut (voice 30/62 is silent)
+   08  9C 80  D#6 08   
+   09  01 F0  --- 31    note cut (voice 30/62 is silent)
+   11  9C 80  D#6 08   
+   12  01 F0  --- 31    note cut (voice 30/62 is silent)
+   13  9C 80  D#6 08   
+   14  01 F0  --- 31    note cut (voice 30/62 is silent)
+   16  A4 90  G-6 09   
+   20  9C 00  D#6 ..   
+   24  98 00  C#6 ..   
+   26  9C 00  D#6 ..   
+   28  96 00  C-6 ..   
+   30  98 00  C#6 ..   
+   32  92 20  A#5 02   
+   48  3C 30  D#2 03   
+   49  54 00  D#3 ..   
+   50  3C 00  D#2 ..   
+   52  3E 00  E-2 ..   
+   53  56 00  E-3 ..   
+   54  3E 00  E-2 ..   
+   56  40 00  F-2 ..   
+   57  58 00  F-3 ..   
+   58  40 00  F-2 ..   
+   60  46 00  G#2 ..   
+   61  5E 00  G#3 ..   
+   62  46 00  G#2 ..   
+
+PATTERN 114  $01B4E6  76 bytes  used at order rows: 52
+   00  A0 80  F-6 08   
+   01  01 F0  --- 31    note cut (voice 30/62 is silent)
+   02  A0 80  F-6 08   
+   03  01 F0  --- 31    note cut (voice 30/62 is silent)
+   05  A0 80  F-6 08   
+   06  01 F0  --- 31    note cut (voice 30/62 is silent)
+   08  A0 80  F-6 08   
+   09  01 F0  --- 31    note cut (voice 30/62 is silent)
+   11  A0 80  F-6 08   
+   12  01 F0  --- 31    note cut (voice 30/62 is silent)
+   13  A0 80  F-6 08   
+   14  01 F0  --- 31    note cut (voice 30/62 is silent)
+   16  92 90  A#5 09   
+   20  88 00  F-5 ..   
+   24  84 00  D#5 ..   
+   26  88 00  F-5 ..   
+   28  8E 00  G#5 ..   
+   30  92 00  A#5 ..   
+   32  7A 00  A#4 ..   
+   56  7A AF  A#4 10 -7
+   58  7A 0F  A#4 .. -7
+   59  7A 0F  A#4 .. -7
+   60  70 0F  F-4 .. -7
+   62  70 0F  F-4 .. -7
+   63  70 0F  F-4 .. -7
+
+PATTERN 115  $01B532  128 bytes  used at order rows: 53
+   00  3C 10  D#2 01   
+   02  54 00  D#3 ..   
+   03  50 00  C#3 ..   
+   05  4A 00  A#2 ..   
+   06  50 00  C#3 ..   
+   07  54 00  D#3 ..   
+   08  3C 00  D#2 ..   
+   10  54 00  D#3 ..   
+   11  50 00  C#3 ..   
+   13  4A 00  A#2 ..   
+   14  50 00  C#3 ..   
+   15  54 00  D#3 ..   
+   16  40 00  F-2 ..   
+   18  58 00  F-3 ..   
+   19  54 00  D#3 ..   
+   21  4E 00  C-3 ..   
+   22  54 00  D#3 ..   
+   23  58 00  F-3 ..   
+   24  40 00  F-2 ..   
+   26  58 00  F-3 ..   
+   27  54 00  D#3 ..   
+   29  4E 00  C-3 ..   
+   30  54 00  D#3 ..   
+   31  58 00  F-3 ..   
+   32  42 00  F#2 ..   
+   34  5A 00  F#3 ..   
+   35  56 00  E-3 ..   
+   37  50 00  C#3 ..   
+   38  56 00  E-3 ..   
+   39  5A 00  F#3 ..   
+   40  42 00  F#2 ..   
+   42  5A 00  F#3 ..   
+   43  56 00  E-3 ..   
+   45  50 00  C#3 ..   
+   46  56 00  E-3 ..   
+   47  5A 00  F#3 ..   
+   48  46 00  G#2 ..   
+   50  5E 00  G#3 ..   
+   51  5A 00  F#3 ..   
+   53  54 00  D#3 ..   
+   54  5A 00  F#3 ..   
+   55  5E 00  G#3 ..   
+   56  46 00  G#2 ..   
+   57  5E 00  G#3 ..   
+   58  48 00  A-2 ..   
+   59  60 00  A-3 ..   
+   60  4A 00  A#2 ..   
+   61  62 00  A#3 ..   
+   62  4C 00  B-2 ..   
+   63  64 00  B-3 ..   
+
+PATTERN 116  $01B5B2  40 bytes  used at order rows: 53
+   00  84 80  D#5 08   
+   01  80 00  C#5 ..   
+   02  7A 00  A#4 ..   
+   03  6C 00  D#4 ..   
+   16  88 00  F-5 ..   
+   17  84 00  D#5 ..   
+   18  7E 00  C-5 ..   
+   19  70 00  F-4 ..   
+   32  8A 00  F#5 ..   
+   33  86 00  E-5 ..   
+   34  80 00  C#5 ..   
+   35  72 00  F#4 ..   
+   48  8E 00  G#5 ..   
+   49  8A 00  F#5 ..   
+   50  84 00  D#5 ..   
+   51  76 00  G#4 ..   
+
+PATTERN 117  $01B5DA  74 bytes  used at order rows: 53
+   00  92 60  A#5 06   
+   04  00 70  --- 07   
+   08  8A 60  F#5 06   
+   12  00 70  --- 07   
+   14  84 60  D#5 06   
+   16  8E 00  G#5 ..   
+   20  00 70  --- 07   
+   24  88 60  F-5 06   
+   28  00 70  --- 07   
+   30  80 60  C#5 06   
+   32  8A 00  F#5 ..   
+   36  00 70  --- 07   
+   40  80 60  C#5 06   
+   44  00 70  --- 07   
+   46  7A 60  A#4 06   
+   48  7E 00  C-5 ..   
+   49  80 00  C#5 ..   
+   50  84 00  D#5 ..   
+   51  8E 00  G#5 ..   
+   55  00 70  --- 07   
+
+PATTERN 118  $01B624  110 bytes  used at order rows: 53
+   00  84 A0  D#5 10   
+   04  9C 00  D#6 ..   
+   05  84 00  D#5 ..   
+   06  92 00  A#5 ..   
+   07  98 00  C#6 ..   
+   08  A2 00  F#6 ..   
+   09  A0 00  F-6 ..   
+   11  9C 00  D#6 ..   
+   13  98 00  C#6 ..   
+   14  92 00  A#5 ..   
+   16  88 00  F-5 ..   
+   20  A0 00  F-6 ..   
+   21  96 00  C-6 ..   
+   22  9C 00  D#6 ..   
+   23  A0 00  F-6 ..   
+   24  A6 00  G#6 ..   
+   25  A4 00  G-6 ..   
+   27  9C 00  D#6 ..   
+   29  96 00  C-6 ..   
+   30  92 00  A#5 ..   
+   32  8A 00  F#5 ..   
+   36  A2 00  F#6 ..   
+   37  98 00  C#6 ..   
+   38  9E 00  E-6 ..   
+   39  A2 00  F#6 ..   
+   40  A8 00  A-6 ..   
+   41  A6 00  G#6 ..   
+   43  9E 00  E-6 ..   
+   45  98 00  C#6 ..   
+   46  94 00  B-5 ..   
+   48  AE 00  C-7 ..   
+   49  AA 00  A#6 ..   
+   50  A6 00  G#6 ..   
+   51  9C 00  D#6 ..   
+   53  98 00  C#6 ..   
+   54  96 00  C-6 ..   
+   55  8E 00  G#5 ..   
+   57  84 00  D#5 ..   
+   58  80 00  C#5 ..   
+   59  7E 00  C-5 ..   
+
+PATTERN 119  $01B692  128 bytes  used at order rows: 54, 55, 56
+   00  7A A0  A#4 10   
+   01  84 00  D#5 ..   
+   02  88 00  F-5 ..   
+   03  92 00  A#5 ..   
+   04  7A 00  A#4 ..   
+   05  84 00  D#5 ..   
+   06  88 00  F-5 ..   
+   07  92 00  A#5 ..   
+   08  7A 00  A#4 ..   
+   09  84 00  D#5 ..   
+   10  88 00  F-5 ..   
+   11  92 00  A#5 ..   
+   12  7A 00  A#4 ..   
+   13  84 00  D#5 ..   
+   14  88 00  F-5 ..   
+   15  92 00  A#5 ..   
+   16  7A 00  A#4 ..   
+   17  84 00  D#5 ..   
+   18  88 00  F-5 ..   
+   19  92 00  A#5 ..   
+   20  7A 00  A#4 ..   
+   21  84 00  D#5 ..   
+   22  88 00  F-5 ..   
+   23  92 00  A#5 ..   
+   24  7A 00  A#4 ..   
+   25  84 00  D#5 ..   
+   26  88 00  F-5 ..   
+   27  92 00  A#5 ..   
+   28  7A 00  A#4 ..   
+   29  84 00  D#5 ..   
+   30  88 00  F-5 ..   
+   31  92 00  A#5 ..   
+   32  80 00  C#5 ..   
+   33  8A 00  F#5 ..   
+   34  8E 00  G#5 ..   
+   35  98 00  C#6 ..   
+   36  80 00  C#5 ..   
+   37  8A 00  F#5 ..   
+   38  8E 00  G#5 ..   
+   39  98 00  C#6 ..   
+   40  80 00  C#5 ..   
+   41  8A 00  F#5 ..   
+   42  8E 00  G#5 ..   
+   43  98 00  C#6 ..   
+   44  80 00  C#5 ..   
+   45  8A 00  F#5 ..   
+   46  8E 00  G#5 ..   
+   47  98 00  C#6 ..   
+   48  84 00  D#5 ..   
+   49  8E 00  G#5 ..   
+   50  92 00  A#5 ..   
+   51  9C 00  D#6 ..   
+   52  84 00  D#5 ..   
+   53  8E 00  G#5 ..   
+   54  92 00  A#5 ..   
+   55  9C 00  D#6 ..   
+   56  84 00  D#5 ..   
+   57  8E 00  G#5 ..   
+   58  92 00  A#5 ..   
+   59  9C 00  D#6 ..   
+   60  84 00  D#5 ..   
+   61  8E 00  G#5 ..   
+   62  92 00  A#5 ..   
+   63  9C 00  D#6 ..   
+
+PATTERN 120  $01B712  106 bytes  used at order rows: 55
+   00  98 80  C#6 08   
+   01  96 00  C-6 ..   
+   02  94 00  B-5 ..   
+   03  92 00  A#5 ..   
+   05  84 00  D#5 ..   
+   06  88 00  F-5 ..   
+   07  8E 00  G#5 ..   
+   09  92 00  A#5 ..   
+   10  98 00  C#6 ..   
+   11  9C 00  D#6 ..   
+   13  A0 00  F-6 ..   
+   14  A6 00  G#6 ..   
+   15  AA 00  A#6 ..   
+   16  B0 00  C#7 ..   
+   17  AE 00  C-7 ..   
+   18  B0 00  C#7 ..   
+   19  AA 00  A#6 ..   
+   22  9C 00  D#6 ..   
+   23  A0 00  F-6 ..   
+   25  A6 00  G#6 ..   
+   26  A4 00  G-6 ..   
+   27  A6 00  G#6 ..   
+   28  A0 00  F-6 ..   
+   30  98 00  C#6 ..   
+   31  9C 00  D#6 ..   
+   32  9E 00  E-6 ..   
+   35  98 00  C#6 ..   
+   38  92 00  A#5 ..   
+   39  98 00  C#6 ..   
+   45  92 00  A#5 ..   
+   46  98 00  C#6 ..   
+   47  92 00  A#5 ..   
+   48  9C 00  D#6 ..   
+   49  98 00  C#6 ..   
+   50  9C 00  D#6 ..   
+   54  9E 00  E-6 ..   
+   55  9C 00  D#6 ..   
+   56  9E 00  E-6 ..   
+   60  A0 00  F-6 ..   
+   61  9E 00  E-6 ..   
+   62  A0 00  F-6 ..   
+
+PATTERN 121  $01B77C  22 bytes  used at order rows: 56
+   00  62 10  A#3 01   
+   02  00 0F  --- .. -7
+   06  4A 00  A#2 ..   
+   32  8E 90  G#5 09   
+   48  8C 00  G-5 ..   
+   63  FC 32  jump 50
+
+PATTERN 122  $01B792  128 bytes  used at order rows: 57, 58, 59, 60, 61, 62, 63, 64, 65
+   00  40 C0  F-2 12   
+   02  58 00  F-3 ..   
+   03  40 00  F-2 ..   
+   04  54 00  D#3 ..   
+   05  58 00  F-3 ..   
+   06  00 0F  --- .. -7
+   07  40 00  F-2 ..   
+   09  40 00  F-2 ..   
+   10  58 00  F-3 ..   
+   11  40 00  F-2 ..   
+   12  54 00  D#3 ..   
+   13  58 00  F-3 ..   
+   14  40 00  F-2 ..   
+   15  3E 00  E-2 ..   
+   16  3C 00  D#2 ..   
+   18  54 00  D#3 ..   
+   19  3C 00  D#2 ..   
+   20  50 00  C#3 ..   
+   21  54 00  D#3 ..   
+   22  00 0F  --- .. -7
+   23  3C 00  D#2 ..   
+   25  3C 00  D#2 ..   
+   26  54 00  D#3 ..   
+   27  3C 00  D#2 ..   
+   28  50 00  C#3 ..   
+   29  54 00  D#3 ..   
+   30  3C 00  D#2 ..   
+   31  38 00  C#2 ..   
+   32  32 00  A#1 ..   
+   34  4A 00  A#2 ..   
+   35  32 00  A#1 ..   
+   36  46 00  G#2 ..   
+   37  4A 00  A#2 ..   
+   38  00 0F  --- .. -7
+   39  32 00  A#1 ..   
+   41  32 00  A#1 ..   
+   42  4A 00  A#2 ..   
+   43  32 00  A#1 ..   
+   44  46 00  G#2 ..   
+   45  4A 00  A#2 ..   
+   46  3E 00  E-2 ..   
+   47  40 00  F-2 ..   
+   48  32 00  A#1 ..   
+   49  00 0F  --- .. -7
+   50  4A 00  A#2 ..   
+   51  32 00  A#1 ..   
+   52  38 00  C#2 ..   
+   53  00 0F  --- .. -7
+   54  50 00  C#3 ..   
+   55  38 00  C#2 ..   
+   56  3C 00  D#2 ..   
+   57  00 0F  --- .. -7
+   58  54 00  D#3 ..   
+   59  3C 00  D#2 ..   
+   60  3E 00  E-2 ..   
+   61  00 0F  --- .. -7
+   62  56 00  E-3 ..   
+   63  3E 00  E-2 ..   
+
+PATTERN 123  $01B812  4 bytes  used at order rows: 57
+   00  FA 05  speed 5 bank0
+
+PATTERN 124  $01B816  128 bytes  used at order rows: 57, 58
+   00  E2 FF  smp4  rate $FF
+   01  E2 FF  smp4  rate $FF
+   02  E4 FF  smp5  rate $FF
+   03  E2 FF  smp4  rate $FF
+   04  E2 FF  smp4  rate $FF
+   05  E4 FF  smp5  rate $FF
+   06  E2 FF  smp4  rate $FF
+   07  E2 FF  smp4  rate $FF
+   08  E4 FF  smp5  rate $FF
+   09  E2 FF  smp4  rate $FF
+   10  E2 FF  smp4  rate $FF
+   11  E4 FF  smp5  rate $FF
+   12  E2 FF  smp4  rate $FF
+   13  E2 FF  smp4  rate $FF
+   14  E4 FF  smp5  rate $FF
+   15  E4 FF  smp5  rate $FF
+   16  E2 FF  smp4  rate $FF
+   17  E2 FF  smp4  rate $FF
+   18  E4 FF  smp5  rate $FF
+   19  E2 FF  smp4  rate $FF
+   20  E2 FF  smp4  rate $FF
+   21  E4 FF  smp5  rate $FF
+   22  E2 FF  smp4  rate $FF
+   23  E2 FF  smp4  rate $FF
+   24  E4 FF  smp5  rate $FF
+   25  E2 FF  smp4  rate $FF
+   26  E2 FF  smp4  rate $FF
+   27  E4 FF  smp5  rate $FF
+   28  E2 FF  smp4  rate $FF
+   29  E2 FF  smp4  rate $FF
+   30  E4 FF  smp5  rate $FF
+   31  E4 FF  smp5  rate $FF
+   32  E2 FF  smp4  rate $FF
+   33  E2 FF  smp4  rate $FF
+   34  E4 FF  smp5  rate $FF
+   35  E2 FF  smp4  rate $FF
+   36  E2 FF  smp4  rate $FF
+   37  E4 FF  smp5  rate $FF
+   38  E2 FF  smp4  rate $FF
+   39  E2 FF  smp4  rate $FF
+   40  E4 FF  smp5  rate $FF
+   41  E2 FF  smp4  rate $FF
+   42  E2 FF  smp4  rate $FF
+   43  E4 FF  smp5  rate $FF
+   44  E2 FF  smp4  rate $FF
+   45  E2 FF  smp4  rate $FF
+   46  E4 FF  smp5  rate $FF
+   47  E4 FF  smp5  rate $FF
+   48  E2 FF  smp4  rate $FF
+   49  E2 FF  smp4  rate $FF
+   50  E4 FF  smp5  rate $FF
+   51  E2 FF  smp4  rate $FF
+   52  E2 FF  smp4  rate $FF
+   53  E4 FF  smp5  rate $FF
+   54  E2 FF  smp4  rate $FF
+   55  E2 FF  smp4  rate $FF
+   56  E4 FF  smp5  rate $FF
+   57  E2 FF  smp4  rate $FF
+   58  E2 FF  smp4  rate $FF
+   59  E4 FF  smp5  rate $FF
+   60  E2 FF  smp4  rate $FF
+   61  E2 FF  smp4  rate $FF
+   62  E4 FF  smp5  rate $FF
+   63  E4 FF  smp5  rate $FF
+
+PATTERN 125  $01B896  16 bytes  used at order rows: 58
+   00  71 B0  F-4 27   
+   16  84 00  D#5 ..   
+   32  7A 00  A#4 ..   
+   48  82 00  D-5 ..   
+
+PATTERN 126  $01B8A6  18 bytes  used at order rows: 58
+   01  79 B0  A-4 27   
+   18  7A 00  A#4 ..   
+   33  82 00  D-5 ..   
+   50  7A 00  A#4 ..   
+
+PATTERN 127  $01B8B8  128 bytes  used at order rows: 56
+   00  33 10  A#1 17   
+   01  4A 00  A#2 ..   
+   03  4A 00  A#2 ..   
+   05  32 00  A#1 ..   
+   07  32 00  A#1 ..   
+   08  4A 00  A#2 ..   
+   10  32 00  A#1 ..   
+   12  4A 00  A#2 ..   
+   13  32 00  A#1 ..   
+   14  4A 00  A#2 ..   
+   16  32 00  A#1 ..   
+   17  4A 00  A#2 ..   
+   19  4A 00  A#2 ..   
+   21  32 00  A#1 ..   
+   23  32 00  A#1 ..   
+   24  4A 00  A#2 ..   
+   26  32 00  A#1 ..   
+   28  4A 00  A#2 ..   
+   29  32 00  A#1 ..   
+   30  4A 00  A#2 ..   
+   31  4A 00  A#2 ..   
+   32  32 00  A#1 ..   
+   33  4A 00  A#2 ..   
+   35  4A 00  A#2 ..   
+   37  32 00  A#1 ..   
+   39  32 00  A#1 ..   
+   40  4A 00  A#2 ..   
+   42  32 00  A#1 ..   
+   44  4A 00  A#2 ..   
+   45  32 00  A#1 ..   
+   46  4A 00  A#2 ..   
+   48  32 00  A#1 ..   
+   49  4A 00  A#2 ..   
+   51  4A 00  A#2 ..   
+   53  32 00  A#1 ..   
+   55  32 00  A#1 ..   
+   56  4A 00  A#2 ..   
+   58  32 00  A#1 ..   
+   60  4A 00  A#2 ..   
+   61  32 00  A#1 ..   
+   62  4A 00  A#2 ..   
+   63  4A 00  A#2 ..   
+
+PATTERN 128  $01B938  4 bytes  used at order rows: 56
+   00  4A 20  A#2 02   
+
+PATTERN 129  $01B93C  18 bytes  used at order rows: 58
+   02  7F B0  C-5 27   
+   20  74 00  G-4 ..   
+   34  88 00  F-5 ..   
+   52  70 00  F-4 ..   
+
+PATTERN 130  $01B94E  128 bytes  used at order rows: 59, 60, 61, 62, 63, 64, 65, 66
+   00  DC FF  smp1  rate $FF
+   01  E2 FF  smp4  rate $FF
+   02  E4 FF  smp5  rate $FF
+   03  DC FF  smp1  rate $FF
+   04  DA FF  smp0  rate $FF
+   05  E4 FF  smp5  rate $FF
+   06  DC FF  smp1  rate $FF
+   07  E2 FF  smp4  rate $FF
+   08  DC FF  smp1  rate $FF
+   09  E2 FF  smp4  rate $FF
+   10  E2 FF  smp4  rate $FF
+   11  DC FF  smp1  rate $FF
+   12  DA FF  smp0  rate $FF
+   13  E2 FF  smp4  rate $FF
+   14  DC FF  smp1  rate $FF
+   15  E4 FF  smp5  rate $FF
+   16  DC FF  smp1  rate $FF
+   17  E2 FF  smp4  rate $FF
+   18  E4 FF  smp5  rate $FF
+   19  DC FF  smp1  rate $FF
+   20  DA FF  smp0  rate $FF
+   21  E4 FF  smp5  rate $FF
+   22  DC FF  smp1  rate $FF
+   23  E2 FF  smp4  rate $FF
+   24  DC FF  smp1  rate $FF
+   25  E2 FF  smp4  rate $FF
+   26  E2 FF  smp4  rate $FF
+   27  DC FF  smp1  rate $FF
+   28  DA FF  smp0  rate $FF
+   29  E2 FF  smp4  rate $FF
+   30  DC FF  smp1  rate $FF
+   31  E4 FF  smp5  rate $FF
+   32  DC FF  smp1  rate $FF
+   33  E2 FF  smp4  rate $FF
+   34  E4 FF  smp5  rate $FF
+   35  DC FF  smp1  rate $FF
+   36  DA FF  smp0  rate $FF
+   37  E4 FF  smp5  rate $FF
+   38  DC FF  smp1  rate $FF
+   39  E2 FF  smp4  rate $FF
+   40  DC FF  smp1  rate $FF
+   41  E2 FF  smp4  rate $FF
+   42  E2 FF  smp4  rate $FF
+   43  DC FF  smp1  rate $FF
+   44  DA FF  smp0  rate $FF
+   45  E2 FF  smp4  rate $FF
+   46  DC FF  smp1  rate $FF
+   47  E4 FF  smp5  rate $FF
+   48  DC FF  smp1  rate $FF
+   49  E2 FF  smp4  rate $FF
+   50  E4 FF  smp5  rate $FF
+   51  DC FF  smp1  rate $FF
+   52  DA FF  smp0  rate $FF
+   53  E4 FF  smp5  rate $FF
+   54  DC FF  smp1  rate $FF
+   55  E2 FF  smp4  rate $FF
+   56  DC FF  smp1  rate $FF
+   57  E2 FF  smp4  rate $FF
+   58  E2 FF  smp4  rate $FF
+   59  DC FF  smp1  rate $FF
+   60  DA FF  smp0  rate $FF
+   61  DA FF  smp0  rate $FF
+   62  DC FF  smp1  rate $FF
+   63  E4 FF  smp5  rate $FF
+
+PATTERN 131  $01B9CE  128 bytes  used at order rows: 59, 60, 63, 64, 65, 66
+   00  88 A0  F-5 10   
+   02  9C 00  D#6 ..   
+   03  A0 00  F-6 ..   
+   04  96 00  C-6 ..   
+   05  9C 00  D#6 ..   
+   06  92 00  A#5 ..   
+   07  96 00  C-6 ..   
+   08  88 00  F-5 ..   
+   10  9C 00  D#6 ..   
+   11  A0 00  F-6 ..   
+   12  96 00  C-6 ..   
+   13  9C 00  D#6 ..   
+   14  92 00  A#5 ..   
+   15  96 00  C-6 ..   
+   16  88 00  F-5 ..   
+   18  9C 00  D#6 ..   
+   19  A0 00  F-6 ..   
+   20  96 00  C-6 ..   
+   21  9C 00  D#6 ..   
+   22  92 00  A#5 ..   
+   23  96 00  C-6 ..   
+   24  88 00  F-5 ..   
+   26  9C 00  D#6 ..   
+   27  A0 00  F-6 ..   
+   28  96 00  C-6 ..   
+   29  9C 00  D#6 ..   
+   30  92 00  A#5 ..   
+   31  96 00  C-6 ..   
+   32  92 00  A#5 ..   
+   34  A6 00  G#6 ..   
+   35  AA 00  A#6 ..   
+   36  A0 00  F-6 ..   
+   37  A6 00  G#6 ..   
+   38  9C 00  D#6 ..   
+   39  A0 00  F-6 ..   
+   40  92 00  A#5 ..   
+   42  A6 00  G#6 ..   
+   43  AA 00  A#6 ..   
+   44  A0 00  F-6 ..   
+   45  A6 00  G#6 ..   
+   46  9C 00  D#6 ..   
+   47  A0 00  F-6 ..   
+   48  92 00  A#5 ..   
+   50  8E 00  G#5 ..   
+   51  88 00  F-5 ..   
+   52  98 00  C#6 ..   
+   54  94 00  B-5 ..   
+   55  8E 00  G#5 ..   
+   56  9C 00  D#6 ..   
+   58  98 00  C#6 ..   
+   59  92 00  A#5 ..   
+   60  9E 00  E-6 ..   
+   62  9A 00  D-6 ..   
+   63  94 00  B-5 ..   
+
+PATTERN 132  $01BA4E  68 bytes  used at order rows: 59, 63
+   00  A6 80  G#6 08   
+   02  A4 00  G-6 ..   
+   03  00 90  --- 09   
+   04  A0 80  F-6 08   
+   05  00 90  --- 09   
+   06  9C 80  D#6 08   
+   07  9E 01  E-6 .. +1
+   09  A0 00  F-6 ..   
+   12  00 90  --- 09   
+   13  96 80  C-6 08   
+   14  9C 00  D#6 ..   
+   15  A0 00  F-6 ..   
+   16  9C 00  D#6 ..   
+   22  00 90  --- 09   
+   24  92 80  A#5 08   
+   26  94 00  B-5 ..   
+   27  00 90  --- 09   
+   28  96 80  C-6 08   
+   30  9C 00  D#6 ..   
+   31  00 90  --- 09   
+   32  88 80  F-5 08   
+   33  84 00  D#5 ..   
+   34  86 00  E-5 ..   
+   35  88 00  F-5 ..   
+   48  70 00  F-4 ..   
+
+PATTERN 133  $01BA92  40 bytes  used at order rows: 59, 60, 63, 64
+   00  59 B0  F-3 27   
+   12  5E 00  G#3 ..   
+   16  62 00  A#3 ..   
+   28  54 00  D#3 ..   
+   32  58 00  F-3 ..   
+   48  84 80  D#5 08   
+   56  82 00  D-5 ..   
+   58  84 00  D#5 ..   
+   60  86 00  E-5 ..   
+   62  88 00  F-5 ..   
+
+PATTERN 134  $01BABA  96 bytes  used at order rows: 60, 64
+   00  A6 80  G#6 08   
+   02  A4 00  G-6 ..   
+   03  00 90  --- 09   
+   04  A0 80  F-6 08   
+   05  00 90  --- 09   
+   06  9C 80  D#6 08   
+   07  9E 01  E-6 .. +1
+   09  A0 00  F-6 ..   
+   12  00 90  --- 09   
+   13  9C 80  D#6 08   
+   14  9E 00  E-6 ..   
+   15  A0 00  F-6 ..   
+   16  AA 00  A#6 ..   
+   22  00 90  --- 09   
+   24  AE 80  C-7 08   
+   26  B4 00  D#7 ..   
+   27  00 90  --- 09   
+   28  AA 80  A#6 08   
+   30  AE 00  C-7 ..   
+   31  00 90  --- 09   
+   32  B8 80  F-7 08   
+   33  B4 00  D#7 ..   
+   34  B6 00  E-7 ..   
+   35  B8 00  F-7 ..   
+   48  A0 00  F-6 ..   
+   49  00 90  --- 09   
+   50  96 80  C-6 08   
+   51  00 90  --- 09   
+   52  9C 80  D#6 08   
+   53  00 90  --- 09   
+   54  A0 80  F-6 08   
+   55  00 90  --- 09   
+   56  96 80  C-6 08   
+   57  00 90  --- 09   
+   58  9C 80  D#6 08   
+   59  00 90  --- 09   
+   60  92 80  A#5 08   
+   61  96 00  C-6 ..   
+   62  8E 00  G#5 ..   
+   63  92 00  A#5 ..   
+
+PATTERN 135  $01BB1A  24 bytes  used at order rows: 61
+   00  88 80  F-5 08   
+   14  98 00  C#6 ..   
+   15  9A 00  D-6 ..   
+   16  9C 00  D#6 ..   
+   30  90 00  A-5 ..   
+   31  8C 00  G-5 ..   
+   32  88 00  F-5 ..   
+   48  88 00  F-5 ..   
+
+PATTERN 136  $01BB32  24 bytes  used at order rows: 61, 62
+   00  90 80  A-5 08   
+   14  8E 00  G#5 ..   
+   15  90 00  A-5 ..   
+   16  92 00  A#5 ..   
+   30  9A 00  D-6 ..   
+   31  96 00  C-6 ..   
+   32  92 00  A#5 ..   
+   48  82 00  D-5 ..   
+
+PATTERN 137  $01BB4A  24 bytes  used at order rows: 61, 62
+   00  96 80  C-6 08   
+   14  88 00  F-5 ..   
+   15  8A 00  F#5 ..   
+   16  8C 00  G-5 ..   
+   30  A0 00  F-6 ..   
+   31  9C 00  D#6 ..   
+   32  9A 00  D-6 ..   
+   48  7A 00  A#4 ..   
+
+PATTERN 138  $01BB62  24 bytes  used at order rows: 62
+   00  88 80  F-5 08   
+   14  98 00  C#6 ..   
+   15  9A 00  D-6 ..   
+   16  9C 00  D#6 ..   
+   30  90 00  A-5 ..   
+   31  8C 00  G-5 ..   
+   32  88 00  F-5 ..   
+   48  A0 00  F-6 ..   
+
+PATTERN 139  $01BB7A  30 bytes  used at order rows: 65, 66
+   00  A9 30  A-6 19   
+   16  9C 00  D#6 ..   
+   32  9A 00  D-6 ..   
+   34  96 00  C-6 ..   
+   36  92 00  A#5 ..   
+   37  8C 00  G-5 ..   
+   38  88 00  F-5 ..   
+   39  92 00  A#5 ..   
+   48  88 00  F-5 ..   
+
+PATTERN 140  $01BB98  40 bytes  used at order rows: 65, 66
+   00  97 30  C-6 19   
+   02  92 00  A#5 ..   
+   04  90 00  A-5 ..   
+   05  8C 00  G-5 ..   
+   06  88 00  F-5 ..   
+   07  90 00  A-5 ..   
+   13  88 00  F-5 ..   
+   14  8C 00  G-5 ..   
+   15  90 00  A-5 ..   
+   16  8C 00  G-5 ..   
+   32  A0 00  F-6 ..   
+   39  88 00  F-5 ..   
+   48  82 00  D-5 ..   
+
+PATTERN 141  $01BBC0  42 bytes  used at order rows: 66
+   00  40 C0  F-2 12   
+   16  3C 00  D#2 ..   
+   32  32 00  A#1 ..   
+   48  32 00  A#1 ..   
+   51  2E 00  G#1 ..   
+   53  30 00  A-1 ..   
+   54  32 00  A#1 ..   
+   56  32 00  A#1 ..   
+   57  38 00  C#2 ..   
+   58  3C 00  D#2 ..   
+   60  3E 00  E-2 ..   
+   61  40 00  F-2 ..   
+   62  46 00  G#2 ..   
+   63  FC 3A  jump 58
+
+PATTERN 142  $019222  2 bytes  (same data as pattern 0)
+PATTERN 143  $019222  2 bytes  (same data as pattern 0)
+PATTERN 144  $019222  2 bytes  (same data as pattern 0)
+PATTERN 145  $019222  2 bytes  (same data as pattern 0)
+PATTERN 146  $019222  2 bytes  (same data as pattern 0)
+PATTERN 147  $019222  2 bytes  (same data as pattern 0)
+PATTERN 148  $019222  2 bytes  (same data as pattern 0)
+PATTERN 149  $019222  2 bytes  (same data as pattern 0)
+PATTERN 150  $019222  2 bytes  (same data as pattern 0)
+PATTERN 151  $019222  2 bytes  (same data as pattern 0)
+PATTERN 152  $019222  2 bytes  (same data as pattern 0)
+PATTERN 153  $019222  2 bytes  (same data as pattern 0)
+PATTERN 154  $019222  2 bytes  (same data as pattern 0)
+PATTERN 155  $019222  2 bytes  (same data as pattern 0)
+PATTERN 156  $019222  2 bytes  (same data as pattern 0)
+PATTERN 157  $019222  2 bytes  (same data as pattern 0)
+PATTERN 158  $019222  2 bytes  (same data as pattern 0)
+PATTERN 159  $019222  2 bytes  (same data as pattern 0)
+PATTERN 160  $019222  2 bytes  (same data as pattern 0)
+PATTERN 161  $019222  2 bytes  (same data as pattern 0)
+PATTERN 162  $019222  2 bytes  (same data as pattern 0)
+PATTERN 163  $019222  2 bytes  (same data as pattern 0)
+PATTERN 164  $019222  2 bytes  (same data as pattern 0)
+PATTERN 165  $019222  2 bytes  (same data as pattern 0)
+PATTERN 166  $019222  2 bytes  (same data as pattern 0)
+PATTERN 167  $019222  2 bytes  (same data as pattern 0)
+PATTERN 168  $019222  2 bytes  (same data as pattern 0)
+PATTERN 169  $019222  2 bytes  (same data as pattern 0)
+PATTERN 170  $019222  2 bytes  (same data as pattern 0)
+PATTERN 171  $019222  2 bytes  (same data as pattern 0)
+PATTERN 172  $019222  2 bytes  (same data as pattern 0)
+PATTERN 173  $019222  2 bytes  (same data as pattern 0)
+PATTERN 174  $019222  2 bytes  (same data as pattern 0)
+PATTERN 175  $019222  2 bytes  (same data as pattern 0)
+PATTERN 176  $019222  2 bytes  (same data as pattern 0)
+PATTERN 177  $019222  2 bytes  (same data as pattern 0)
+PATTERN 178  $019222  2 bytes  (same data as pattern 0)
+PATTERN 179  $019222  2 bytes  (same data as pattern 0)
+PATTERN 180  $019222  2 bytes  (same data as pattern 0)
+PATTERN 181  $019222  2 bytes  (same data as pattern 0)
+PATTERN 182  $019222  2 bytes  (same data as pattern 0)
+PATTERN 183  $019222  2 bytes  (same data as pattern 0)
+PATTERN 184  $019222  2 bytes  (same data as pattern 0)
+PATTERN 185  $019222  2 bytes  (same data as pattern 0)
+PATTERN 186  $019222  2 bytes  (same data as pattern 0)
+PATTERN 187  $019222  2 bytes  (same data as pattern 0)
+PATTERN 188  $019222  2 bytes  (same data as pattern 0)
+PATTERN 189  $019222  2 bytes  (same data as pattern 0)
+PATTERN 190  $019222  2 bytes  (same data as pattern 0)
+PATTERN 191  $019222  2 bytes  (same data as pattern 0)
+PATTERN 192  $019222  2 bytes  (same data as pattern 0)
+PATTERN 193  $019222  2 bytes  (same data as pattern 0)
+PATTERN 194  $019222  2 bytes  (same data as pattern 0)
+PATTERN 195  $019222  2 bytes  (same data as pattern 0)
+PATTERN 196  $019222  2 bytes  (same data as pattern 0)
+PATTERN 197  $019222  2 bytes  (same data as pattern 0)
+PATTERN 198  $019222  2 bytes  (same data as pattern 0)
+PATTERN 199  $019222  2 bytes  (same data as pattern 0)
+PATTERN 200  $019222  2 bytes  (same data as pattern 0)
+PATTERN 201  $019222  2 bytes  (same data as pattern 0)
+PATTERN 202  $019222  2 bytes  (same data as pattern 0)
+PATTERN 203  $019222  2 bytes  (same data as pattern 0)
+PATTERN 204  $019222  2 bytes  (same data as pattern 0)
+PATTERN 205  $019222  2 bytes  (same data as pattern 0)
+PATTERN 206  $019222  2 bytes  (same data as pattern 0)
+PATTERN 207  $019222  2 bytes  (same data as pattern 0)
+PATTERN 208  $019222  2 bytes  (same data as pattern 0)
+PATTERN 209  $019222  2 bytes  (same data as pattern 0)
+PATTERN 210  $019222  2 bytes  (same data as pattern 0)
+PATTERN 211  $019222  2 bytes  (same data as pattern 0)
+PATTERN 212  $019222  2 bytes  (same data as pattern 0)
+PATTERN 213  $019222  2 bytes  (same data as pattern 0)
+PATTERN 214  $019222  2 bytes  (same data as pattern 0)
+PATTERN 215  $019222  2 bytes  (same data as pattern 0)
+PATTERN 216  $019222  2 bytes  (same data as pattern 0)
+PATTERN 217  $019222  2 bytes  (same data as pattern 0)
+PATTERN 218  $019222  2 bytes  (same data as pattern 0)
+PATTERN 219  $019222  2 bytes  (same data as pattern 0)
+PATTERN 220  $019222  2 bytes  (same data as pattern 0)
+PATTERN 221  $019222  2 bytes  (same data as pattern 0)
+PATTERN 222  $019222  2 bytes  (same data as pattern 0)
+PATTERN 223  $019222  2 bytes  (same data as pattern 0)
+PATTERN 224  $019222  2 bytes  (same data as pattern 0)
+PATTERN 225  $019222  2 bytes  (same data as pattern 0)
+PATTERN 226  $019222  2 bytes  (same data as pattern 0)
+PATTERN 227  $019222  2 bytes  (same data as pattern 0)
+PATTERN 228  $019222  2 bytes  (same data as pattern 0)
+PATTERN 229  $019222  2 bytes  (same data as pattern 0)
+PATTERN 230  $019222  2 bytes  (same data as pattern 0)
+PATTERN 231  $019222  2 bytes  (same data as pattern 0)
+PATTERN 232  $019222  2 bytes  (same data as pattern 0)
+PATTERN 233  $019222  2 bytes  (same data as pattern 0)
+PATTERN 234  $019222  2 bytes  (same data as pattern 0)
+PATTERN 235  $019222  2 bytes  (same data as pattern 0)
+PATTERN 236  $019222  2 bytes  (same data as pattern 0)
+PATTERN 237  $019222  2 bytes  (same data as pattern 0)
+PATTERN 238  $019222  2 bytes  (same data as pattern 0)
+PATTERN 239  $019222  2 bytes  (same data as pattern 0)
+PATTERN 240  $019222  2 bytes  (same data as pattern 0)
+PATTERN 241  $019222  2 bytes  (same data as pattern 0)
+PATTERN 242  $019222  2 bytes  (same data as pattern 0)
+PATTERN 243  $019222  2 bytes  (same data as pattern 0)
+PATTERN 244  $019222  2 bytes  (same data as pattern 0)
+PATTERN 245  $019222  2 bytes  (same data as pattern 0)
+PATTERN 246  $019222  2 bytes  (same data as pattern 0)
+PATTERN 247  $019222  2 bytes  (same data as pattern 0)
+PATTERN 248  $019222  2 bytes  (same data as pattern 0)
+PATTERN 249  $019222  2 bytes  (same data as pattern 0)
+PATTERN 250  $019222  2 bytes  (same data as pattern 0)
+PATTERN 251  $019222  2 bytes  (same data as pattern 0)
+PATTERN 252  $019222  2 bytes  (same data as pattern 0)
+PATTERN 253  $019222  2 bytes  (same data as pattern 0)
+PATTERN 254  $019222  2 bytes  (same data as pattern 0)
+PATTERN 255  $019222  2 bytes  (same data as pattern 0)
+PATTERN 256  $019222  2 bytes  (same data as pattern 0)
+PATTERN 257  $019222  2 bytes  (same data as pattern 0)
+PATTERN 258  $019222  2 bytes  (same data as pattern 0)
+PATTERN 259  $019222  2 bytes  (same data as pattern 0)
+PATTERN 260  $019222  2 bytes  (same data as pattern 0)
+PATTERN 261  $019222  2 bytes  (same data as pattern 0)
+PATTERN 262  $019222  2 bytes  (same data as pattern 0)
+PATTERN 263  $019222  2 bytes  (same data as pattern 0)
+PATTERN 264  $019222  2 bytes  (same data as pattern 0)
+PATTERN 265  $019222  2 bytes  (same data as pattern 0)
+PATTERN 266  $019222  2 bytes  (same data as pattern 0)
+PATTERN 267  $019222  2 bytes  (same data as pattern 0)
+PATTERN 268  $019222  2 bytes  (same data as pattern 0)
+PATTERN 269  $019222  2 bytes  (same data as pattern 0)
+PATTERN 270  $019222  2 bytes  (same data as pattern 0)
+PATTERN 271  $019222  2 bytes  (same data as pattern 0)
+PATTERN 272  $019222  2 bytes  (same data as pattern 0)
+PATTERN 273  $019222  2 bytes  (same data as pattern 0)
+PATTERN 274  $019222  2 bytes  (same data as pattern 0)
+PATTERN 275  $019222  2 bytes  (same data as pattern 0)
+PATTERN 276  $019222  2 bytes  (same data as pattern 0)
+PATTERN 277  $019222  2 bytes  (same data as pattern 0)
+PATTERN 278  $019222  2 bytes  (same data as pattern 0)
+PATTERN 279  $019222  2 bytes  (same data as pattern 0)
+PATTERN 280  $019222  2 bytes  (same data as pattern 0)
+PATTERN 281  $019222  2 bytes  (same data as pattern 0)
+PATTERN 282  $019222  2 bytes  (same data as pattern 0)
+PATTERN 283  $019222  2 bytes  (same data as pattern 0)
+PATTERN 284  $019222  2 bytes  (same data as pattern 0)
+PATTERN 285  $019222  2 bytes  (same data as pattern 0)
+PATTERN 286  $019222  2 bytes  (same data as pattern 0)
+PATTERN 287  $019222  2 bytes  (same data as pattern 0)
+PATTERN 288  $019222  2 bytes  (same data as pattern 0)
+PATTERN 289  $019222  2 bytes  (same data as pattern 0)
+PATTERN 290  $019222  2 bytes  (same data as pattern 0)
+PATTERN 291  $019222  2 bytes  (same data as pattern 0)
+PATTERN 292  $019222  2 bytes  (same data as pattern 0)
+PATTERN 293  $019222  2 bytes  (same data as pattern 0)
+PATTERN 294  $019222  2 bytes  (same data as pattern 0)
+PATTERN 295  $019222  2 bytes  (same data as pattern 0)
+PATTERN 296  $019222  2 bytes  (same data as pattern 0)
+PATTERN 297  $019222  2 bytes  (same data as pattern 0)
+PATTERN 298  $019222  2 bytes  (same data as pattern 0)
+PATTERN 299  $019222  2 bytes  (same data as pattern 0)
+PATTERN 300  $019222  2 bytes  (same data as pattern 0)
+PATTERN 301  $019222  2 bytes  (same data as pattern 0)
+PATTERN 302  $019222  2 bytes  (same data as pattern 0)
+PATTERN 303  $019222  2 bytes  (same data as pattern 0)
+PATTERN 304  $019222  2 bytes  (same data as pattern 0)
+PATTERN 305  $019222  2 bytes  (same data as pattern 0)
+PATTERN 306  $019222  2 bytes  (same data as pattern 0)
+PATTERN 307  $019222  2 bytes  (same data as pattern 0)
+PATTERN 308  $019222  2 bytes  (same data as pattern 0)
+PATTERN 309  $019222  2 bytes  (same data as pattern 0)
+PATTERN 310  $019222  2 bytes  (same data as pattern 0)
+PATTERN 311  $019222  2 bytes  (same data as pattern 0)
+PATTERN 312  $019222  2 bytes  (same data as pattern 0)
+PATTERN 313  $019222  2 bytes  (same data as pattern 0)
+PATTERN 314  $019222  2 bytes  (same data as pattern 0)
+PATTERN 315  $019222  2 bytes  (same data as pattern 0)
+PATTERN 316  $019222  2 bytes  (same data as pattern 0)
+PATTERN 317  $019222  2 bytes  (same data as pattern 0)
+PATTERN 318  $019222  2 bytes  (same data as pattern 0)
+PATTERN 319  $019222  2 bytes  (same data as pattern 0)
+PATTERN 320  $019222  2 bytes  (same data as pattern 0)
+PATTERN 321  $019222  2 bytes  (same data as pattern 0)
+PATTERN 322  $019222  2 bytes  (same data as pattern 0)
+PATTERN 323  $019222  2 bytes  (same data as pattern 0)
+PATTERN 324  $019222  2 bytes  (same data as pattern 0)
+PATTERN 325  $019222  2 bytes  (same data as pattern 0)
+PATTERN 326  $019222  2 bytes  (same data as pattern 0)
+PATTERN 327  $019222  2 bytes  (same data as pattern 0)
+PATTERN 328  $019222  2 bytes  (same data as pattern 0)
+PATTERN 329  $019222  2 bytes  (same data as pattern 0)
+PATTERN 330  $019222  2 bytes  (same data as pattern 0)
+PATTERN 331  $019222  2 bytes  (same data as pattern 0)
+PATTERN 332  $019222  2 bytes  (same data as pattern 0)
+PATTERN 333  $019222  2 bytes  (same data as pattern 0)
+PATTERN 334  $019222  2 bytes  (same data as pattern 0)
+PATTERN 335  $019222  2 bytes  (same data as pattern 0)
+PATTERN 336  $019222  2 bytes  (same data as pattern 0)
+PATTERN 337  $019222  2 bytes  (same data as pattern 0)
+PATTERN 338  $019222  2 bytes  (same data as pattern 0)
+PATTERN 339  $019222  2 bytes  (same data as pattern 0)
+PATTERN 340  $019222  2 bytes  (same data as pattern 0)
+PATTERN 341  $019222  2 bytes  (same data as pattern 0)
+PATTERN 342  $019222  2 bytes  (same data as pattern 0)
+PATTERN 343  $019222  2 bytes  (same data as pattern 0)
+PATTERN 344  $019222  2 bytes  (same data as pattern 0)
+PATTERN 345  $019222  2 bytes  (same data as pattern 0)
+PATTERN 346  $019222  2 bytes  (same data as pattern 0)
+PATTERN 347  $019222  2 bytes  (same data as pattern 0)
+PATTERN 348  $019222  2 bytes  (same data as pattern 0)
+PATTERN 349  $019222  2 bytes  (same data as pattern 0)
+PATTERN 350  $019222  2 bytes  (same data as pattern 0)
+PATTERN 351  $019222  2 bytes  (same data as pattern 0)
+PATTERN 352  $019222  2 bytes  (same data as pattern 0)
+PATTERN 353  $019222  2 bytes  (same data as pattern 0)
+PATTERN 354  $019222  2 bytes  (same data as pattern 0)
+PATTERN 355  $01BBEA  10 bytes  used at order rows: 227
+   00  FA 03  speed 3 bank0
+   01  0B 40  D-0 20   
+   05  FC 00  jump 0
+
+PATTERN 356  $01BBF4  10 bytes  used at order rows: 228
+   00  FA 05  speed 5 bank0
+   01  05 C0  B-- 28   
+   02  05 40  B-- 20   
+   03  FC 00  jump 0
+
+PATTERN 357  $01BBFE  10 bytes  used at order rows: 229
+   00  FA 03  speed 3 bank0
+   01  E8 D0  smp7  rate $D0
+   05  FC 00  jump 0
+
+PATTERN 358  $01BC08  14 bytes  used at order rows: 230
+   00  FA 01  speed 1 bank0
+   01  07 40  C-0 20   
+   03  1A 0F  A#0 .. -7
+   10  FC 00  jump 0
+
+PATTERN 359  $01BC16  18 bytes  used at order rows: 231
+   00  FA 03  speed 3 bank0
+   01  41 AF  F-2 26 -7
+   02  00 07  --- .. +7
+   04  00 0A  --- .. -2
+   12  33 F0  A#1 31   
+   13  FC 00  jump 0
+
+PATTERN 360  $01BC28  18 bytes  used at order rows: 232
+   00  FA 01  speed 1 bank0
+   01  33 D0  A#1 29   
+   02  1F B0  C-1 27   
+   03  1B D0  A#0 29   
+   05  1F B0  C-1 27   
+   06  33 F0  A#1 31   
+   07  FC 00  jump 0
+
+PATTERN 361  $01BC3A  14 bytes  used at order rows: 233
+   00  FA 03  speed 3 bank0
+   01  1B AF  A#0 26 -7
+   03  01 B0  --- 27   
+   07  FC 00  jump 0
+
+PATTERN 362  $01BC48  10 bytes  used at order rows: 234
+   00  FA 03  speed 3 bank0
+   01  E0 CF  smp3  rate $CF
+   05  FC 00  jump 0
+
+PATTERN 363  $01BC52  10 bytes  used at order rows: 235
+   00  FB 03  speed 3 bank0
+   01  07 E0  C-0 30   
+   13  FC 00  jump 0
+
+PATTERN 364  $01BC5C  10 bytes  used at order rows: 236
+   00  FA 01  speed 1 bank0
+   01  E6 50  smp6  rate $50
+   39  FC 00  jump 0
+
+PATTERN 365  $01BC66  12 bytes  used at order rows: 237
+   00  FA 03  speed 3 bank0
+   01  11 AF  F-0 26 -7
+   06  1B F0  A#0 31   
+   07  FC 00  jump 0
+
+PATTERN 366  $01BC72  24 bytes  used at order rows: 238
+   00  FA 01  speed 1 bank0
+   01  4B 1F  A#2 17 -7
+   02  48 00  A-2 ..   
+   04  46 00  G#2 ..   
+   07  40 00  F-2 ..   
+   10  3C 00  D#2 ..   
+   12  FC 00  jump 0
+
+PATTERN 367  $01BC8A  10 bytes  used at order rows: 239
+   00  FA 03  speed 3 bank0
+   01  E0 80  smp3  rate $80
+   06  FC 00  jump 0
+
+PATTERN 368  $01BC94  10 bytes  used at order rows: 240
+   00  FA 04  speed 4 bank0
+   01  DE B0  smp2  rate $B0
+   11  FC 00  jump 0
+
+PATTERN 369  $01BC9E  10 bytes  used at order rows: 241
+   00  FA 03  speed 3 bank0
+   01  E8 B0  smp7  rate $B0
+   05  FC 00  jump 0
+
+PATTERN 370  $01BCA8  12 bytes  used at order rows: 242
+   00  FA 02  speed 2 bank0
+   01  11 40  F-0 20   
+   02  1A 00  A#0 ..   
+   07  FC 00  jump 0
+
+PATTERN 371  $01BCB4  12 bytes  used at order rows: 243
+   00  FA 02  speed 2 bank0
+   01  07 D0  C-0 29   
+   02  1E 00  C-1 ..   
+   03  3F F0  E-2 31   
+   04  FC 00  jump 0
+
+PATTERN 372  $01BCC0  26 bytes  used at order rows: 244
+   00  FA 02  speed 2 bank0
+   01  41 90  F-2 25   
+   02  4A 00  A#2 ..   
+   03  58 00  F-3 ..   
+   04  63 80  A#3 24   
+   05  70 00  F-4 ..   
+   06  7A 00  A#4 ..   
+   07  89 90  F-5 25   
+   08  93 80  A#5 24   
+   09  A1 90  F-6 25   
+   10  93 F0  A#5 31   
+   11  FC 00  jump 0
+
+PATTERN 373  $01BCDA  10 bytes  used at order rows: 245
+   00  FA 03  speed 3 bank0
+   01  33 D0  A#1 29   
+   11  FD 00  jump 0
+
+PATTERN 374  $01BCE4  10 bytes  used at order rows: 246
+   00  FA 03  speed 3 bank0
+   01  1F C0  C-1 28   
+   07  FC 00  jump 0
+
+PATTERN 375  $01BCEE  22 bytes  used at order rows: 247
+   00  FA 02  speed 2 bank0
+   01  33 A0  A#1 26   
+   02  2C 00  G-1 ..   
+   03  24 00  D#1 ..   
+   04  1E 00  C-1 ..   
+   05  33 B0  A#1 27   
+   06  2C 00  G-1 ..   
+   07  24 00  D#1 ..   
+   08  1E 00  C-1 ..   
+   09  33 F0  A#1 31   
+
+PATTERN 376  $01BD04  26 bytes  used at order rows: 248
+   00  FA 01  speed 1 bank0
+   01  7B 90  A#4 25   
+   02  71 80  F-4 24   
+   03  6B 90  D-4 25   
+   04  7B 80  A#4 24   
+   05  71 90  F-4 25   
+   06  83 80  D-5 24   
+   07  7B 90  A#4 25   
+   08  89 80  F-5 24   
+   09  83 90  D-5 25   
+   10  93 F0  A#5 31   
+   11  FC 00  jump 0
+
+PATTERN 377  $01BD1E  10 bytes  used at order rows: 249
+   00  FA 03  speed 3 bank0
+   01  31 77  A-1 23 +7
+   09  FC 00  jump 0
+
+PATTERN 378  $01BD28  10 bytes  used at order rows: 250
+   00  FA 03  speed 3 bank0
+   01  07 60  C-0 22   
+   04  FC 00  jump 0
+
+PATTERN 379  $01BD32  10 bytes  used at order rows: 251
+   00  FA 18  speed 24 bank0
+   01  E6 80  smp6  rate $80
+   04  FC 00  jump 0
+
+PATTERN 380  $01BD3C  10 bytes  used at order rows: 252
+   00  FA 03  speed 3 bank0
+   01  15 50  G-0 21   
+   12  FC 00  jump 0
+
+PATTERN 381  $01BD46  10 bytes  used at order rows: 253
+   00  FA 11  speed 17 bank0
+   01  E6 FF  smp6  rate $FF
+   04  FC 00  jump 0
+
+PATTERN 382  $01BD50  10 bytes  used at order rows: 254
+   00  FA 1A  speed 26 bank0
+   01  E6 BF  smp6  rate $BF
+   04  FC 00  jump 0
+
+PATTERN 383  $01BD5A  10 bytes  used at order rows: 255
+   00  FA 03  speed 3 bank0
+   01  0B 40  D-0 20   
+   05  FC 00  jump 0
+

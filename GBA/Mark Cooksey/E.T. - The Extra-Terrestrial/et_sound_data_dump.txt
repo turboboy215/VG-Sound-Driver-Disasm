@@ -1,0 +1,1014 @@
+E.T.: The Extra-Terrestrial (GBA, 2001) -- Mark Cooksey sound engine: data dump
+Generated from "E.T. - The Extra-Terrestrial (E) (M6).gba".  All addresses are GBA ROM addresses.
+Channel numbers 1-6: 1 square1, 2 square2, 3 wave, 4 noise, 5 DirectSound A, 6 DirectSound B.
+Notes are named assuming table index 0 = C#2 (69.3 Hz); on channels 5/6 a note is a sample rate.
+====================================================================================================
+
+1. SONGS (mcSongTable @ 08026EF8, 16 x 28 bytes)
+----------------------------------------------------------------------------------------------------
+song  0: tempo 255 (0.996 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 3 ticks =    0.1 s, ends
+   ch1  seq_s00_c0 @ 080256E0
+   ch2  seq_s00_c1 @ 0802570C
+   ch3  seq_s00_c2 @ 08025720
+   ch4  seq_s00_c3 @ 08025734
+song  1: tempo 205 (0.801 ticks/frame), channels [1, 2, 3, 4], length table durTable1
+         ch1 pass = 4608 ticks =   96.3 s, loops
+   ch1  seq_s01_c0 @ 08025748
+   ch2  seq_s01_c1 @ 080257A8
+   ch3  seq_s01_c2 @ 080257F0
+   ch4  seq_s01_c3 @ 08025838
+song  2: tempo 205 (0.801 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 3072 ticks =   64.2 s, loops
+   ch1  seq_s02_c0 @ 08025854
+   ch2  seq_s02_c1 @ 08025894
+   ch3  seq_s02_c2 @ 080258BC
+   ch4  seq_s02_c3 @ 080258E4
+song  3: tempo 180 (0.703 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 1536 ticks =   36.6 s, loops
+   ch1  seq_s03_c0 @ 080258FC
+   ch2  seq_s03_c1 @ 0802592C
+   ch3  seq_s03_c2 @ 08025944
+   ch4  seq_s03_c3 @ 0802595C
+song  4: tempo 195 (0.762 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 7680 ticks =  168.8 s, loops
+   ch1  seq_s04_c0 @ 08025974
+   ch2  seq_s04_c1 @ 08025A14
+   ch3  seq_s04_c2 @ 08025A7C
+   ch4  seq_s04_c3 @ 08025AE4
+song  5: tempo 164 (0.641 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 6912 ticks =  180.6 s, loops
+   ch1  seq_s05_c0 @ 08025AFC
+   ch2  seq_s05_c1 @ 08025B9C
+   ch3  seq_s05_c2 @ 08025C24
+   ch4  seq_s05_c3 @ 08025CAC
+song  6: tempo 188 (0.734 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 8448 ticks =  192.6 s, loops
+   ch1  seq_s06_c0 @ 08025CC4
+   ch2  seq_s06_c1 @ 08025D84
+   ch3  seq_s06_c2 @ 08025E2C
+   ch4  seq_s06_c3 @ 08025ED4
+song  7: tempo 214 (0.836 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 9216 ticks =  184.6 s, loops
+   ch1  seq_s07_c0 @ 08025EEC
+   ch2  seq_s07_c1 @ 08025F6C
+   ch3  seq_s07_c2 @ 08026044
+   ch4  seq_s07_c3 @ 080260BC
+song  8: tempo 248 (0.969 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 10944 ticks =  189.1 s, loops
+   ch1  seq_s08_c0 @ 080260D4
+   ch2  seq_s08_c1 @ 08026164
+   ch3  seq_s08_c2 @ 080261DC
+   ch4  seq_s08_c3 @ 08026254
+song  9: tempo 165 (0.645 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 6912 ticks =  179.6 s, loops
+   ch1  seq_s09_c0 @ 0802638C
+   ch2  seq_s09_c1 @ 0802640C
+   ch3  seq_s09_c2 @ 08026474
+   ch4  seq_s09_c3 @ 080264DC
+song 10: tempo 180 (0.703 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 7680 ticks =  182.9 s, loops
+   ch1  seq_s10_c0 @ 080264F4
+   ch2  seq_s10_c1 @ 080265B4
+   ch3  seq_s10_c2 @ 0802663C
+   ch4  seq_s10_c3 @ 080266B4
+song 11: tempo 189 (0.738 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 8064 ticks =  182.9 s, loops
+   ch1  seq_s11_c0 @ 080266CC
+   ch2  seq_s11_c1 @ 0802675C
+   ch3  seq_s11_c2 @ 08026824
+   ch4  seq_s11_c3 @ 080268EC
+song 12: tempo 214 (0.836 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 9216 ticks =  184.6 s, loops
+   ch1  seq_s12_c0 @ 08026904
+   ch2  seq_s12_c1 @ 080269C4
+   ch3  seq_s12_c2 @ 08026A2C
+   ch4  seq_s12_c3 @ 08026A94
+song 13: tempo 214 (0.836 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 1536 ticks =   30.8 s, loops
+   ch1  seq_s13_c0 @ 08026AAC
+   ch2  seq_s13_c1 @ 08026AEC
+   ch3  seq_s13_c2 @ 08026B04
+   ch4  seq_s13_c3 @ 08026B1C
+song 14: tempo 154 (0.602 ticks/frame), channels [1, 2, 3, 4], length table durTable0
+         ch1 pass = 456 ticks =   12.7 s, ends
+   ch1  seq_s14_c0 @ 08026B34
+   ch2  seq_s14_c1 @ 08026B60
+   ch3  seq_s14_c2 @ 08026B74
+   ch4  seq_s14_c3 @ 08026B88
+song 15: tempo 240 (0.938 ticks/frame), channels [1, 2, 3, 4, 5, 6], length table durTable0
+         ch1 pass = 8064 ticks =  144.0 s, loops
+   ch1  seq_s15_c0 @ 08026B9C
+   ch2  seq_s15_c1 @ 08026C1C
+   ch3  seq_s15_c2 @ 08026CE4
+   ch4  seq_s15_c3 @ 08026D4C
+   ch5  seq_s15_c4 @ 08026D64
+   ch6  seq_s15_c5 @ 08026DCC
+
+2. SEQUENCES
+----------------------------------------------------------------------------------------------------
+seq_s00_c0 @ 080256E0  (song 0, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  255
+   [  4] PAT    pat_0801B2C0  transpose   +0  x1   (1 events, 3 ticks)
+   [  8] CONDFLAG 1
+   [ 10] END
+seq_s00_c1 @ 0802570C  (song 0, channel 2)
+   [  0] PAT    pat_0801B2C0  transpose   +0  x1   (1 events, 3 ticks)
+   [  4] END
+seq_s00_c2 @ 08025720  (song 0, channel 3)
+   [  0] PAT    pat_0801B2C0  transpose   +0  x1   (1 events, 3 ticks)
+   [  4] END
+seq_s00_c3 @ 08025734  (song 0, channel 4)
+   [  0] PAT    pat_0801B2C0  transpose   +0  x1   (1 events, 3 ticks)
+   [  4] END
+seq_s01_c0 @ 08025748  (song 1, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  205
+   [  4] PAT    pat_08023B06  transpose  -30  x1   (47 events, 1152 ticks)
+   [  8] PAT    pat_08023B94  transpose  -42  x1   (63 events, 1152 ticks)
+   [ 12] PAT    pat_08023B06  transpose  -30  x1   (47 events, 1152 ticks)
+   [ 16] PAT    pat_08023B94  transpose  -42  x1   (63 events, 1152 ticks)
+   [ 20] CONDFLAG 1
+   [ 22] JUMP   -> [4]
+seq_s01_c1 @ 080257A8  (song 1, channel 2)
+   [  0] PAT    pat_08023C52  transpose  -30  x1   (96 events, 1152 ticks)
+   [  4] PAT    pat_08023D73  transpose  -42  x1   (63 events, 1152 ticks)
+   [  8] PAT    pat_08023C52  transpose  -30  x1   (96 events, 1152 ticks)
+   [ 12] PAT    pat_08023E31  transpose  -30  x1   (192 events, 1152 ticks)
+   [ 16] JUMP   -> [0]
+seq_s01_c2 @ 080257F0  (song 1, channel 3)
+   [  0] PAT    pat_08024072  transpose  -18  x1   (67 events, 1152 ticks)
+   [  4] PAT    pat_0802413C  transpose  -18  x1   (45 events, 1152 ticks)
+   [  8] PAT    pat_08024072  transpose  -18  x1   (67 events, 1152 ticks)
+   [ 12] PAT    pat_080241C4  transpose  -18  x1   (77 events, 1152 ticks)
+   [ 16] JUMP   -> [0]
+seq_s01_c3 @ 08025838  (song 1, channel 4)
+   [  0] PAT    pat_080242AC  transpose   +0  x8   (59 events, 576 ticks)
+   [  4] END
+seq_s02_c0 @ 08025854  (song 2, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  205
+   [  4] PAT    pat_0802435E  transpose  -41  x1   (40 events, 1536 ticks)
+   [  8] PAT    pat_080243D7  transpose  -41  x1   (56 events, 1536 ticks)
+   [ 12] CONDFLAG 1
+   [ 14] JUMP   -> [4]
+seq_s02_c1 @ 08025894  (song 2, channel 2)
+   [  0] PAT    pat_08024480  transpose  -17  x2   (64 events, 768 ticks)
+   [  4] PAT    pat_08024541  transpose  -17  x1   (128 events, 1536 ticks)
+   [  8] JUMP   -> [0]
+seq_s02_c2 @ 080258BC  (song 2, channel 3)
+   [  0] PAT    pat_080246C2  transpose  -17  x2   (31 events, 768 ticks)
+   [  4] PAT    pat_08024720  transpose  -17  x1   (74 events, 1536 ticks)
+   [  8] JUMP   -> [0]
+seq_s02_c3 @ 080258E4  (song 2, channel 4)
+   [  0] PAT    pat_080247FF  transpose   +0  x4   (64 events, 768 ticks)
+   [  4] JUMP   -> [0]
+seq_s03_c0 @ 080258FC  (song 3, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  180
+   [  4] PAT    pat_080248C0  transpose  -40  x1   (139 events, 1536 ticks)
+   [  8] CONDFLAG 1
+   [ 10] JUMP   -> [4]
+seq_s03_c1 @ 0802592C  (song 3, channel 2)
+   [  0] PAT    pat_08024A62  transpose  -16  x2   (96 events, 768 ticks)
+   [  4] JUMP   -> [0]
+seq_s03_c2 @ 08025944  (song 3, channel 3)
+   [  0] PAT    pat_08024B83  transpose  -16  x2   (71 events, 768 ticks)
+   [  4] JUMP   -> [0]
+seq_s03_c3 @ 0802595C  (song 3, channel 4)
+   [  0] PAT    pat_08024C59  transpose   +0  x4   (48 events, 384 ticks)
+   [  4] JUMP   -> [0]
+seq_s04_c0 @ 08025974  (song 4, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  195
+   [  4] PAT    pat_08024D33  transpose  -20  x1   (32 events, 768 ticks)
+   [  8] PAT    pat_08024D94  transpose  -32  x2   (23 events, 768 ticks)
+   [ 12] PAT    pat_08024CEA  transpose   -8  x2   (24 events, 384 ticks)
+   [ 16] PAT    pat_08024DDA  transpose  -32  x1   (31 events, 768 ticks)
+   [ 20] PAT    pat_08024DDA  transpose  -20  x1   (31 events, 768 ticks)
+   [ 24] PAT    pat_08024D94  transpose  -32  x2   (23 events, 768 ticks)
+   [ 28] PAT    pat_08024E38  transpose  -32  x1   (15 events, 768 ticks)
+   [ 32] PAT    pat_08024E66  transpose  -32  x1   (17 events, 768 ticks)
+   [ 36] CONDFLAG 1
+   [ 38] JUMP   -> [4]
+seq_s04_c1 @ 08025A14  (song 4, channel 2)
+   [  0] PAT    pat_08024E9A  transpose  -20  x3   (128 events, 768 ticks)
+   [  4] PAT    pat_0802501B  transpose  -20  x2   (64 events, 384 ticks)
+   [  8] PAT    pat_0802501B  transpose  -25  x4   (64 events, 384 ticks)
+   [ 12] PAT    pat_08024E9A  transpose  -20  x2   (128 events, 768 ticks)
+   [ 16] PAT    pat_080250DC  transpose  -32  x1   (128 events, 768 ticks)
+   [ 20] PAT    pat_0802525D  transpose  -32  x1   (128 events, 768 ticks)
+   [ 24] JUMP   -> [0]
+seq_s04_c2 @ 08025A7C  (song 4, channel 3)
+   [  0] PAT    pat_080253DE  transpose  -20  x3   (45 events, 768 ticks)
+   [  4] PAT    pat_08025466  transpose  -20  x2   (19 events, 384 ticks)
+   [  8] PAT    pat_080254A0  transpose  -25  x4   (19 events, 384 ticks)
+   [ 12] PAT    pat_080253DE  transpose  -20  x2   (45 events, 768 ticks)
+   [ 16] PAT    pat_080254DA  transpose  -20  x1   (44 events, 768 ticks)
+   [ 20] PAT    pat_0802555F  transpose  -20  x1   (45 events, 768 ticks)
+   [ 24] JUMP   -> [0]
+seq_s04_c3 @ 08025AE4  (song 4, channel 4)
+   [  0] PAT    pat_080255E7  transpose   +0  x10  (82 events, 768 ticks)
+   [  4] JUMP   -> [0]
+seq_s05_c0 @ 08025AFC  (song 5, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  164
+   [  4] PAT    pat_08022944  transpose  -30  x1   (26 events, 768 ticks)
+   [  8] PAT    pat_08022993  transpose  -30  x1   (75 events, 1152 ticks)
+   [ 12] PAT    pat_08022A75  transpose  -30  x1   (26 events, 768 ticks)
+   [ 16] PAT    pat_08022AC4  transpose  -30  x1   (29 events, 768 ticks)
+   [ 20] PAT    pat_08022993  transpose  -33  x1   (75 events, 1152 ticks)
+   [ 24] PAT    pat_08022B1C  transpose  -30  x1   (58 events, 768 ticks)
+   [ 28] PAT    pat_08022BCB  transpose  -30  x1   (67 events, 768 ticks)
+   [ 32] PAT    pat_08022AC4  transpose  -27  x1   (29 events, 768 ticks)
+   [ 36] CONDFLAG 1
+   [ 38] JUMP   -> [4]
+seq_s05_c1 @ 08025B9C  (song 5, channel 2)
+   [  0] PAT    pat_08022C95  transpose  -30  x1   (87 events, 768 ticks)
+   [  4] PAT    pat_08022D9B  transpose  -30  x1   (192 events, 1152 ticks)
+   [  8] PAT    pat_08022FDC  transpose  -30  x1   (128 events, 768 ticks)
+   [ 12] PAT    pat_0802315D  transpose  -30  x1   (128 events, 768 ticks)
+   [ 16] PAT    pat_08022D9B  transpose  -33  x1   (192 events, 1152 ticks)
+   [ 20] PAT    pat_080232DE  transpose  -30  x1   (128 events, 768 ticks)
+   [ 24] PAT    pat_0802345F  transpose  -30  x1   (128 events, 768 ticks)
+   [ 28] PAT    pat_0802315D  transpose  -27  x1   (128 events, 768 ticks)
+   [ 32] JUMP   -> [0]
+seq_s05_c2 @ 08025C24  (song 5, channel 3)
+   [  0] PAT    pat_080235E0  transpose  -18  x1   (37 events, 768 ticks)
+   [  4] PAT    pat_08023650  transpose  -18  x1   (96 events, 1152 ticks)
+   [  8] PAT    pat_08023771  transpose  -18  x1   (57 events, 768 ticks)
+   [ 12] PAT    pat_0802381D  transpose  -18  x1   (51 events, 768 ticks)
+   [ 16] PAT    pat_08023650  transpose  -21  x1   (96 events, 1152 ticks)
+   [ 20] PAT    pat_080238B7  transpose  -18  x1   (68 events, 768 ticks)
+   [ 24] PAT    pat_08023984  transpose  -18  x1   (64 events, 768 ticks)
+   [ 28] PAT    pat_0802381D  transpose  -15  x1   (51 events, 768 ticks)
+   [ 32] JUMP   -> [0]
+seq_s05_c3 @ 08025CAC  (song 5, channel 4)
+   [  0] PAT    pat_08023A45  transpose   +0  x18  (64 events, 384 ticks)
+   [  4] JUMP   -> [0]
+seq_s06_c0 @ 08025CC4  (song 6, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  188
+   [  4] PAT    pat_08021CE0  transpose  -28  x2   (17 events, 384 ticks)
+   [  8] PAT    pat_08021D14  transpose  -28  x1   (10 events, 768 ticks)
+   [ 12] PAT    pat_08021D33  transpose  -28  x1   (12 events, 768 ticks)
+   [ 16] PAT    pat_08021D58  transpose  -28  x1   (20 events, 768 ticks)
+   [ 20] PAT    pat_08021D95  transpose  -28  x1   (27 events, 768 ticks)
+   [ 24] PAT    pat_08021DE7  transpose  -28  x1   (48 events, 1536 ticks)
+   [ 28] PAT    pat_08021D58  transpose  -26  x1   (20 events, 768 ticks)
+   [ 32] PAT    pat_08021D95  transpose  -26  x1   (27 events, 768 ticks)
+   [ 36] PAT    pat_08021E78  transpose  -28  x2   (31 events, 384 ticks)
+   [ 40] PAT    pat_08021ED6  transpose  -28  x1   (50 events, 768 ticks)
+   [ 44] CONDFLAG 1
+   [ 46] JUMP   -> [4]
+seq_s06_c1 @ 08025D84  (song 6, channel 2)
+   [  0] PAT    pat_08021F6D  transpose  -28  x2   (24 events, 384 ticks)
+   [  4] PAT    pat_08021FB6  transpose  -28  x1   (48 events, 768 ticks)
+   [  8] PAT    pat_08022047  transpose  -28  x1   (48 events, 768 ticks)
+   [ 12] PAT    pat_080220D8  transpose  -28  x1   (48 events, 768 ticks)
+   [ 16] PAT    pat_08022169  transpose  -28  x1   (48 events, 768 ticks)
+   [ 20] PAT    pat_080221FA  transpose  -28  x1   (96 events, 1536 ticks)
+   [ 24] PAT    pat_080220D8  transpose  -26  x1   (48 events, 768 ticks)
+   [ 28] PAT    pat_08022169  transpose  -26  x1   (48 events, 768 ticks)
+   [ 32] PAT    pat_0802231B  transpose  -28  x2   (24 events, 384 ticks)
+   [ 36] PAT    pat_08022364  transpose  -28  x1   (48 events, 768 ticks)
+   [ 40] JUMP   -> [0]
+seq_s06_c2 @ 08025E2C  (song 6, channel 3)
+   [  0] PAT    pat_080223F5  transpose  -16  x2   (11 events, 384 ticks)
+   [  4] PAT    pat_08022417  transpose  -16  x1   (58 events, 768 ticks)
+   [  8] PAT    pat_080224C6  transpose  -16  x1   (51 events, 768 ticks)
+   [ 12] PAT    pat_08022560  transpose  -16  x1   (52 events, 768 ticks)
+   [ 16] PAT    pat_080225FD  transpose  -16  x1   (53 events, 768 ticks)
+   [ 20] PAT    pat_0802269D  transpose  -16  x1   (108 events, 1536 ticks)
+   [ 24] PAT    pat_08022560  transpose  -14  x1   (52 events, 768 ticks)
+   [ 28] PAT    pat_080225FD  transpose  -14  x1   (53 events, 768 ticks)
+   [ 32] PAT    pat_080227E2  transpose  -16  x1   (54 events, 768 ticks)
+   [ 36] PAT    pat_08022885  transpose  -16  x1   (43 events, 768 ticks)
+   [ 40] JUMP   -> [0]
+seq_s06_c3 @ 08025ED4  (song 6, channel 4)
+   [  0] PAT    pat_08022907  transpose   +0  x44  (20 events, 192 ticks)
+   [  4] JUMP   -> [0]
+seq_s07_c0 @ 08025EEC  (song 7, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  214
+   [  4] PAT    pat_08021430  transpose  -18  x1   (5 events, 768 ticks)
+   [  8] PAT    pat_08021440  transpose  -30  x1   (33 events, 1536 ticks)
+   [ 12] PAT    pat_080214A4  transpose  -30  x1   (54 events, 1536 ticks)
+   [ 16] PAT    pat_08021547  transpose  -30  x1   (95 events, 3072 ticks)
+   [ 20] PAT    pat_08021440  transpose  -30  x1   (33 events, 1536 ticks)
+   [ 24] PAT    pat_08021665  transpose  -30  x1   (24 events, 768 ticks)
+   [ 28] CONDFLAG 1
+   [ 30] JUMP   -> [4]
+seq_s07_c1 @ 08025F6C  (song 7, channel 2)
+   [  0] PAT    pat_080216AE  transpose  -30  x3   (64 events, 768 ticks)
+   [  4] PAT    pat_080216AE  transpose  -34  x1   (64 events, 768 ticks)
+   [  8] PAT    pat_080216AE  transpose  -30  x1   (64 events, 768 ticks)
+   [ 12] PAT    pat_0802176F  transpose  -30  x1   (32 events, 384 ticks)
+   [ 16] PAT    pat_0802176F  transpose  -32  x1   (32 events, 384 ticks)
+   [ 20] PAT    pat_0802176F  transpose  -37  x1   (32 events, 384 ticks)
+   [ 24] PAT    pat_0802176F  transpose  -35  x1   (32 events, 384 ticks)
+   [ 28] PAT    pat_0802176F  transpose  -30  x1   (32 events, 384 ticks)
+   [ 32] PAT    pat_0802176F  transpose  -32  x1   (32 events, 384 ticks)
+   [ 36] PAT    pat_0802176F  transpose  -37  x1   (32 events, 384 ticks)
+   [ 40] PAT    pat_0802176F  transpose  -28  x1   (32 events, 384 ticks)
+   [ 44] PAT    pat_080216AE  transpose  -30  x2   (64 events, 768 ticks)
+   [ 48] PAT    pat_080217D0  transpose  -30  x1   (64 events, 768 ticks)
+   [ 52] JUMP   -> [0]
+seq_s07_c2 @ 08026044  (song 7, channel 3)
+   [  0] PAT    pat_08021891  transpose  -18  x1   (42 events, 768 ticks)
+   [  4] PAT    pat_08021910  transpose  -18  x2   (49 events, 768 ticks)
+   [  8] PAT    pat_08021891  transpose  -22  x1   (42 events, 768 ticks)
+   [ 12] PAT    pat_08021891  transpose  -18  x1   (42 events, 768 ticks)
+   [ 16] PAT    pat_080219A4  transpose  -18  x1   (158 events, 3072 ticks)
+   [ 20] PAT    pat_08021910  transpose  -18  x2   (49 events, 768 ticks)
+   [ 24] PAT    pat_08021B7F  transpose  -18  x1   (46 events, 768 ticks)
+   [ 28] JUMP   -> [0]
+seq_s07_c3 @ 080260BC  (song 7, channel 4)
+   [  0] PAT    pat_08021C0A  transpose   +0  x12  (71 events, 768 ticks)
+   [  4] JUMP   -> [0]
+seq_s08_c0 @ 080260D4  (song 8, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  248
+   [  4] PAT    pat_0801B2BC  transpose   +0  x6   (1 events, 96 ticks)
+   [  8] PAT    pat_08020548  transpose  -28  x1   (21 events, 1152 ticks)
+   [ 12] PAT    pat_08020588  transpose  -28  x1   (26 events, 1152 ticks)
+   [ 16] PAT    pat_080205D7  transpose  -28  x1   (83 events, 2304 ticks)
+   [ 20] PAT    pat_08020588  transpose  -28  x1   (26 events, 1152 ticks)
+   [ 24] PAT    pat_080206D1  transpose  -28  x1   (102 events, 2304 ticks)
+   [ 28] PAT    pat_080205D7  transpose  -28  x1   (83 events, 2304 ticks)
+   [ 32] CONDFLAG 1
+   [ 34] JUMP   -> [4]
+seq_s08_c1 @ 08026164  (song 8, channel 2)
+   [  0] PAT    pat_08020804  transpose  -28  x1   (24 events, 576 ticks)
+   [  4] PAT    pat_0802084D  transpose  -28  x1   (48 events, 1152 ticks)
+   [  8] PAT    pat_080208DE  transpose  -28  x1   (48 events, 1152 ticks)
+   [ 12] PAT    pat_0802096F  transpose  -28  x1   (96 events, 2304 ticks)
+   [ 16] PAT    pat_080208DE  transpose  -28  x1   (48 events, 1152 ticks)
+   [ 20] PAT    pat_08020A90  transpose  -28  x1   (192 events, 2304 ticks)
+   [ 24] PAT    pat_0802096F  transpose  -28  x1   (96 events, 2304 ticks)
+   [ 28] JUMP   -> [0]
+seq_s08_c2 @ 080261DC  (song 8, channel 3)
+   [  0] PAT    pat_08020CD1  transpose  -16  x1   (32 events, 576 ticks)
+   [  4] PAT    pat_08020D32  transpose  -16  x1   (64 events, 1152 ticks)
+   [  8] PAT    pat_08020DF3  transpose  -16  x1   (68 events, 1152 ticks)
+   [ 12] PAT    pat_08020EC0  transpose  -16  x1   (126 events, 2304 ticks)
+   [ 16] PAT    pat_08020DF3  transpose  -16  x1   (68 events, 1152 ticks)
+   [ 20] PAT    pat_0802103B  transpose  -16  x1   (112 events, 2304 ticks)
+   [ 24] PAT    pat_08020EC0  transpose  -16  x1   (126 events, 2304 ticks)
+   [ 28] JUMP   -> [0]
+seq_s08_c3 @ 08026254  (song 8, channel 4)
+   [  0] PAT    pat_08021384  transpose   +0  x1   (57 events, 576 ticks)
+   [  4] PAT    pat_0802118C  transpose   +0  x1   (56 events, 576 ticks)
+   [  8] PAT    pat_08021235  transpose   +0  x1   (56 events, 576 ticks)
+   [ 12] PAT    pat_080212DE  transpose   +0  x1   (55 events, 576 ticks)
+   [ 16] PAT    pat_08021384  transpose   +0  x1   (57 events, 576 ticks)
+   [ 20] PAT    pat_0802118C  transpose   +0  x1   (56 events, 576 ticks)
+   [ 24] PAT    pat_08021235  transpose   +0  x1   (56 events, 576 ticks)
+   [ 28] PAT    pat_080212DE  transpose   +0  x1   (55 events, 576 ticks)
+   [ 32] PAT    pat_08021384  transpose   +0  x1   (57 events, 576 ticks)
+   [ 36] PAT    pat_080212DE  transpose   +0  x1   (55 events, 576 ticks)
+   [ 40] PAT    pat_08021384  transpose   +0  x1   (57 events, 576 ticks)
+   [ 44] PAT    pat_0802118C  transpose   +0  x1   (56 events, 576 ticks)
+   [ 48] PAT    pat_08021235  transpose   +0  x1   (56 events, 576 ticks)
+   [ 52] PAT    pat_080212DE  transpose   +0  x1   (55 events, 576 ticks)
+   [ 56] PAT    pat_08021384  transpose   +0  x1   (57 events, 576 ticks)
+   [ 60] PAT    pat_0802118C  transpose   +0  x1   (56 events, 576 ticks)
+   [ 64] PAT    pat_08021235  transpose   +0  x1   (56 events, 576 ticks)
+   [ 68] PAT    pat_080212DE  transpose   +0  x1   (55 events, 576 ticks)
+   [ 72] PAT    pat_08021384  transpose   +0  x1   (57 events, 576 ticks)
+   [ 76] JUMP   -> [0]
+seq_s09_c0 @ 0802638C  (song 9, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  165
+   [  4] PAT    pat_0801F1D8  transpose  -30  x2   (45 events, 768 ticks)
+   [  8] PAT    pat_0801F260  transpose  -30  x1   (112 events, 1152 ticks)
+   [ 12] PAT    pat_0801F3B1  transpose  -30  x1   (103 events, 768 ticks)
+   [ 16] PAT    pat_0801F3B1  transpose  -29  x1   (103 events, 768 ticks)
+   [ 20] PAT    pat_0801F4E7  transpose  -29  x1   (136 events, 1920 ticks)
+   [ 24] PAT    pat_0801F680  transpose  -30  x1   (38 events, 768 ticks)
+   [ 28] CONDFLAG 1
+   [ 30] JUMP   -> [4]
+seq_s09_c1 @ 0802640C  (song 9, channel 2)
+   [  0] PAT    pat_0801F6F3  transpose  -30  x1   (108 events, 1536 ticks)
+   [  4] PAT    pat_0801F838  transpose  -30  x1   (133 events, 1152 ticks)
+   [  8] PAT    pat_0801F9C8  transpose  -30  x1   (112 events, 768 ticks)
+   [ 12] PAT    pat_0801F9C8  transpose  -29  x1   (112 events, 768 ticks)
+   [ 16] PAT    pat_0801FB19  transpose  -29  x1   (195 events, 1920 ticks)
+   [ 20] PAT    pat_0801FD63  transpose  -30  x1   (64 events, 768 ticks)
+   [ 24] JUMP   -> [0]
+seq_s09_c2 @ 08026474  (song 9, channel 3)
+   [  0] PAT    pat_0801FE24  transpose  -18  x2   (62 events, 768 ticks)
+   [  4] PAT    pat_0801FEDF  transpose  -18  x1   (115 events, 1152 ticks)
+   [  8] PAT    pat_08020039  transpose  -18  x1   (69 events, 768 ticks)
+   [ 12] PAT    pat_08020109  transpose  -17  x1   (62 events, 768 ticks)
+   [ 16] PAT    pat_080201C4  transpose  -17  x1   (185 events, 1920 ticks)
+   [ 20] PAT    pat_080203F0  transpose  -18  x1   (50 events, 768 ticks)
+   [ 24] JUMP   -> [0]
+seq_s09_c3 @ 080264DC  (song 9, channel 4)
+   [  0] PAT    pat_08020487  transpose   +0  x18  (64 events, 384 ticks)
+   [  4] JUMP   -> [0]
+seq_s10_c0 @ 080264F4  (song 10, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  180
+   [  4] PAT    pat_0801DF1A  transpose  -31  x1   (80 events, 768 ticks)
+   [  8] PAT    pat_0801E00B  transpose  -31  x1   (38 events, 768 ticks)
+   [ 12] PAT    pat_0801E07E  transpose  -31  x1   (47 events, 768 ticks)
+   [ 16] PAT    pat_0801E10C  transpose  -31  x1   (74 events, 768 ticks)
+   [ 20] PAT    pat_0801E1EB  transpose  -31  x1   (33 events, 768 ticks)
+   [ 24] PAT    pat_0801E00B  transpose  -33  x1   (38 events, 768 ticks)
+   [ 28] PAT    pat_0801E07E  transpose  -21  x1   (47 events, 768 ticks)
+   [ 32] PAT    pat_0801E24F  transpose  -31  x1   (32 events, 768 ticks)
+   [ 36] PAT    pat_0801E2B0  transpose  -31  x1   (50 events, 768 ticks)
+   [ 40] PAT    pat_0801E347  transpose  -31  x1   (98 events, 768 ticks)
+   [ 44] CONDFLAG 1
+   [ 46] JUMP   -> [4]
+seq_s10_c1 @ 080265B4  (song 10, channel 2)
+   [  0] PAT    pat_0801E46E  transpose  -31  x3   (128 events, 768 ticks)
+   [  4] PAT    pat_0801E5EF  transpose  -31  x4   (32 events, 192 ticks)
+   [  8] PAT    pat_0801E650  transpose  -31  x3   (32 events, 192 ticks)
+   [ 12] PAT    pat_0801E6B1  transpose  -31  x1   (32 events, 192 ticks)
+   [ 16] PAT    pat_0801E46E  transpose  -33  x2   (128 events, 768 ticks)
+   [ 20] PAT    pat_0801E712  transpose  -31  x1   (128 events, 768 ticks)
+   [ 24] PAT    pat_0801E893  transpose  -31  x1   (128 events, 768 ticks)
+   [ 28] PAT    pat_0801EA14  transpose  -31  x1   (128 events, 768 ticks)
+   [ 32] JUMP   -> [0]
+seq_s10_c2 @ 0802663C  (song 10, channel 3)
+   [  0] PAT    pat_0801EB95  transpose  -19  x3   (57 events, 768 ticks)
+   [  4] PAT    pat_0801EC41  transpose  -19  x2   (40 events, 384 ticks)
+   [  8] PAT    pat_0801ECBA  transpose  -19  x1   (82 events, 768 ticks)
+   [ 12] PAT    pat_0801EB95  transpose  -21  x2   (57 events, 768 ticks)
+   [ 16] PAT    pat_0801EDB1  transpose  -19  x1   (84 events, 768 ticks)
+   [ 20] PAT    pat_0801EEAE  transpose  -19  x1   (80 events, 768 ticks)
+   [ 24] PAT    pat_0801EF9F  transpose  -19  x1   (79 events, 768 ticks)
+   [ 28] JUMP   -> [0]
+seq_s10_c3 @ 080266B4  (song 10, channel 4)
+   [  0] PAT    pat_0801F08D  transpose   +0  x10  (110 events, 768 ticks)
+   [  4] JUMP   -> [0]
+seq_s11_c0 @ 080266CC  (song 11, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  189
+   [  4] PAT    pat_0801D5D8  transpose  -31  x1   (4 events, 384 ticks)
+   [  8] PAT    pat_0801D5E5  transpose  -31  x1   (57 events, 768 ticks)
+   [ 12] PAT    pat_0801D691  transpose  -31  x1   (81 events, 768 ticks)
+   [ 16] PAT    pat_0801D785  transpose  -31  x1   (171 events, 1152 ticks)
+   [ 20] PAT    pat_0801D987  transpose  -31  x1   (182 events, 1536 ticks)
+   [ 24] PAT    pat_0801DBAA  transpose  -31  x1   (143 events, 2304 ticks)
+   [ 28] PAT    pat_0801D785  transpose  -31  x1   (171 events, 1152 ticks)
+   [ 32] CONDFLAG 1
+   [ 34] JUMP   -> [4]
+seq_s11_c1 @ 0802675C  (song 11, channel 2)
+   [  0] PAT    pat_0801DD58  transpose  -31  x5   (37 events, 384 ticks)
+   [  4] PAT    pat_0801DD58  transpose  -26  x2   (37 events, 384 ticks)
+   [  8] PAT    pat_0801DD58  transpose  -31  x1   (37 events, 384 ticks)
+   [ 12] PAT    pat_0801DD58  transpose  -24  x1   (37 events, 384 ticks)
+   [ 16] PAT    pat_0801DD58  transpose  -26  x1   (37 events, 384 ticks)
+   [ 20] PAT    pat_0801DD58  transpose  -31  x3   (37 events, 384 ticks)
+   [ 24] PAT    pat_0801DD58  transpose  -35  x1   (37 events, 384 ticks)
+   [ 28] PAT    pat_0801DD58  transpose  -31  x1   (37 events, 384 ticks)
+   [ 32] PAT    pat_0801DD58  transpose  -28  x1   (37 events, 384 ticks)
+   [ 36] PAT    pat_0801DD58  transpose  -31  x2   (37 events, 384 ticks)
+   [ 40] PAT    pat_0801DD58  transpose  -26  x2   (37 events, 384 ticks)
+   [ 44] PAT    pat_0801DD58  transpose  -31  x1   (37 events, 384 ticks)
+   [ 48] JUMP   -> [0]
+seq_s11_c2 @ 08026824  (song 11, channel 3)
+   [  0] PAT    pat_0801DDC8  transpose  -19  x5   (49 events, 384 ticks)
+   [  4] PAT    pat_0801DDC8  transpose  -14  x2   (49 events, 384 ticks)
+   [  8] PAT    pat_0801DDC8  transpose  -19  x1   (49 events, 384 ticks)
+   [ 12] PAT    pat_0801DDC8  transpose  -12  x1   (49 events, 384 ticks)
+   [ 16] PAT    pat_0801DDC8  transpose  -14  x1   (49 events, 384 ticks)
+   [ 20] PAT    pat_0801DDC8  transpose  -19  x3   (49 events, 384 ticks)
+   [ 24] PAT    pat_0801DDC8  transpose  -11  x1   (49 events, 384 ticks)
+   [ 28] PAT    pat_0801DDC8  transpose  -19  x1   (49 events, 384 ticks)
+   [ 32] PAT    pat_0801DDC8  transpose  -16  x1   (49 events, 384 ticks)
+   [ 36] PAT    pat_0801DDC8  transpose  -19  x2   (49 events, 384 ticks)
+   [ 40] PAT    pat_0801DDC8  transpose  -14  x2   (49 events, 384 ticks)
+   [ 44] PAT    pat_0801DDC8  transpose  -19  x1   (49 events, 384 ticks)
+   [ 48] JUMP   -> [0]
+seq_s11_c3 @ 080268EC  (song 11, channel 4)
+   [  0] PAT    pat_0801DE5C  transpose   +0  x21  (63 events, 384 ticks)
+   [  4] JUMP   -> [0]
+seq_s12_c0 @ 08026904  (song 12, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  214
+   [  4] PAT    pat_0801C80D  transpose  -32  x1   (41 events, 768 ticks)
+   [  8] PAT    pat_0801C889  transpose  -32  x1   (64 events, 768 ticks)
+   [ 12] PAT    pat_0801C94A  transpose  -32  x1   (63 events, 768 ticks)
+   [ 16] PAT    pat_0801C889  transpose  -31  x1   (64 events, 768 ticks)
+   [ 20] PAT    pat_0801C94A  transpose  -31  x1   (63 events, 768 ticks)
+   [ 24] PAT    pat_0801CA08  transpose  -31  x1   (128 events, 1536 ticks)
+   [ 28] PAT    pat_0801C889  transpose  -28  x1   (64 events, 768 ticks)
+   [ 32] PAT    pat_0801C94A  transpose  -28  x1   (63 events, 768 ticks)
+   [ 36] PAT    pat_0801CB89  transpose  -32  x1   (73 events, 768 ticks)
+   [ 40] PAT    pat_0801CC65  transpose  -32  x1   (148 events, 1536 ticks)
+   [ 44] CONDFLAG 1
+   [ 46] JUMP   -> [4]
+seq_s12_c1 @ 080269C4  (song 12, channel 2)
+   [  0] PAT    pat_0801CF87  transpose  -20  x3   (24 events, 768 ticks)
+   [  4] PAT    pat_0801CF87  transpose  -19  x2   (24 events, 768 ticks)
+   [  8] PAT    pat_0801CEF6  transpose  -19  x1   (48 events, 1536 ticks)
+   [ 12] PAT    pat_0801CF87  transpose  -16  x2   (24 events, 768 ticks)
+   [ 16] PAT    pat_0801CEAD  transpose  -20  x1   (24 events, 768 ticks)
+   [ 20] PAT    pat_0801CE22  transpose  -20  x1   (46 events, 1536 ticks)
+   [ 24] JUMP   -> [0]
+seq_s12_c2 @ 08026A2C  (song 12, channel 3)
+   [  0] PAT    pat_0801CFD0  transpose  -20  x3   (64 events, 768 ticks)
+   [  4] PAT    pat_0801CFD0  transpose  -19  x2   (64 events, 768 ticks)
+   [  8] PAT    pat_0801D091  transpose  -19  x1   (128 events, 1536 ticks)
+   [ 12] PAT    pat_0801CFD0  transpose  -16  x2   (64 events, 768 ticks)
+   [ 16] PAT    pat_0801D212  transpose  -20  x1   (69 events, 768 ticks)
+   [ 20] PAT    pat_0801D2E2  transpose  -20  x1   (128 events, 1536 ticks)
+   [ 24] JUMP   -> [0]
+seq_s12_c3 @ 08026A94  (song 12, channel 4)
+   [  0] PAT    pat_0801D463  transpose   +0  x12  (124 events, 768 ticks)
+   [  4] JUMP   -> [0]
+seq_s13_c0 @ 08026AAC  (song 13, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  214
+   [  4] PAT    pat_0801C2EC  transpose  -26  x1   (36 events, 768 ticks)
+   [  8] PAT    pat_0801C359  transpose  -26  x1   (37 events, 768 ticks)
+   [ 12] CONDFLAG 1
+   [ 14] JUMP   -> [4]
+seq_s13_c1 @ 08026AEC  (song 13, channel 2)
+   [  0] PAT    pat_0801C3C9  transpose  -26  x1   (249 events, 1536 ticks)
+   [  4] JUMP   -> [0]
+seq_s13_c2 @ 08026B04  (song 13, channel 3)
+   [  0] PAT    pat_0801C6B5  transpose  -14  x1   (72 events, 1536 ticks)
+   [  4] JUMP   -> [0]
+seq_s13_c3 @ 08026B1C  (song 13, channel 4)
+   [  0] PAT    pat_0801C78E  transpose   +0  x4   (42 events, 384 ticks)
+   [  4] JUMP   -> [0]
+seq_s14_c0 @ 08026B34  (song 14, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  154
+   [  4] PAT    pat_0801C195  transpose  -27  x1   (21 events, 456 ticks)
+   [  8] CONDFLAG 1
+   [ 10] END
+seq_s14_c1 @ 08026B60  (song 14, channel 2)
+   [  0] PAT    pat_0801C1D5  transpose  -27  x1   (21 events, 456 ticks)
+   [  4] END
+seq_s14_c2 @ 08026B74  (song 14, channel 3)
+   [  0] PAT    pat_0801C215  transpose  -15  x1   (24 events, 480 ticks)
+   [  4] END
+seq_s14_c3 @ 08026B88  (song 14, channel 4)
+   [  0] PAT    pat_0801C25E  transpose   +0  x1   (47 events, 480 ticks)
+   [  4] END
+seq_s15_c0 @ 08026B9C  (song 15, channel 1)
+   [  0] PAN    255
+   [  2] TEMPO  240
+   [  4] PAT    pat_0801BD55  transpose  -19  x2   (32 events, 768 ticks)
+   [  8] PAT    pat_0801BDB6  transpose  -19  x1   (48 events, 1152 ticks)
+   [ 12] PAT    pat_0801B2BC  transpose   +0  x16  (1 events, 96 ticks)
+   [ 16] PAT    pat_0801BD55  transpose  -19  x2   (32 events, 768 ticks)
+   [ 20] PAT    pat_0801B2BC  transpose   +0  x16  (1 events, 96 ticks)
+   [ 24] PAT    pat_0801BCF4  transpose  -19  x1   (32 events, 768 ticks)
+   [ 28] CONDFLAG 1
+   [ 30] JUMP   -> [4]
+seq_s15_c1 @ 08026C1C  (song 15, channel 2)
+   [  0] PAT    pat_0801B76F  transpose  -19  x1   (58 events, 384 ticks)
+   [  4] PAT    pat_0801B81E  transpose  -31  x1   (58 events, 384 ticks)
+   [  8] PAT    pat_0801B76F  transpose  -19  x1   (58 events, 384 ticks)
+   [ 12] PAT    pat_0801B81E  transpose  -31  x1   (58 events, 384 ticks)
+   [ 16] PAT    pat_0801B8CD  transpose  -31  x1   (100 events, 1152 ticks)
+   [ 20] PAT    pat_0801BBE8  transpose   -7  x1   (89 events, 1536 ticks)
+   [ 24] PAT    pat_0801B76F  transpose  -19  x1   (58 events, 384 ticks)
+   [ 28] PAT    pat_0801B81E  transpose  -31  x1   (58 events, 384 ticks)
+   [ 32] PAT    pat_0801B76F  transpose  -19  x1   (58 events, 384 ticks)
+   [ 36] PAT    pat_0801B81E  transpose  -31  x1   (58 events, 384 ticks)
+   [ 40] PAT    pat_0801B9FA  transpose  -31  x1   (112 events, 1536 ticks)
+   [ 44] PAT    pat_0801BB4B  transpose  -31  x1   (52 events, 768 ticks)
+   [ 48] JUMP   -> [0]
+seq_s15_c2 @ 08026CE4  (song 15, channel 3)
+   [  0] PAT    pat_0801BE47  transpose  -19  x2   (33 events, 768 ticks)
+   [  4] PAT    pat_0801BEAB  transpose  -16  x1   (54 events, 1152 ticks)
+   [  8] PAT    pat_0801BF4E  transpose  -19  x1   (64 events, 1536 ticks)
+   [ 12] PAT    pat_0801BE47  transpose  -19  x2   (33 events, 768 ticks)
+   [ 16] PAT    pat_0801C00F  transpose  -19  x1   (63 events, 1536 ticks)
+   [ 20] PAT    pat_0801C0CD  transpose  -19  x1   (29 events, 768 ticks)
+   [ 24] JUMP   -> [0]
+seq_s15_c3 @ 08026D4C  (song 15, channel 4)
+   [  0] PAT    pat_0801C125  transpose   +0  x21  (37 events, 384 ticks)
+   [  4] JUMP   -> [0]
+seq_s15_c4 @ 08026D64  (song 15, channel 5)
+   [  0] PAT    pat_0801B2C4  transpose  -18  x2   (16 events, 768 ticks)
+   [  4] PAT    pat_0801B2F5  transpose  -15  x1   (35 events, 1152 ticks)
+   [  8] PAT    pat_0801B35F  transpose  -18  x1   (89 events, 1536 ticks)
+   [ 12] PAT    pat_0801B2C4  transpose  -18  x2   (16 events, 768 ticks)
+   [ 16] PAT    pat_0801B46B  transpose   -6  x1   (39 events, 1536 ticks)
+   [ 20] PAT    pat_0801B4E1  transpose  -18  x1   (27 events, 768 ticks)
+   [ 24] JUMP   -> [0]
+seq_s15_c5 @ 08026DCC  (song 15, channel 6)
+   [  0] PAT    pat_0801B533  transpose  -18  x2   (16 events, 768 ticks)
+   [  4] PAT    pat_0801B564  transpose  -15  x1   (35 events, 1152 ticks)
+   [  8] PAT    pat_0801B5CE  transpose  -18  x1   (72 events, 1536 ticks)
+   [ 12] PAT    pat_0801B533  transpose  -18  x2   (16 events, 768 ticks)
+   [ 16] PAT    pat_0801B6A7  transpose   -6  x1   (39 events, 1536 ticks)
+   [ 20] PAT    pat_0801B71D  transpose  -18  x1   (27 events, 768 ticks)
+   [ 24] JUMP   -> [0]
+
+3. INSTRUMENTS (mcInstTable @ 08027A74, 31 x 36 bytes)
+----------------------------------------------------------------------------------------------------
+inst  0 @ 08027618  b0=0x00 lo=0x00 hi=0x00  env=-              pitch=-              arp=-              used on ch [1, 2, 3, 4, 5]
+inst  1 @ 0802763C  b0=0x40 lo=0xBD hi=0x00  env=mod_080270B8   pitch=mod_08027350   arp=-              used on ch [4, 6]
+inst  2 @ 08027660  b0=0x00 lo=0x80 hi=0x00  env=mod_080270CC   pitch=mod_08027360   arp=-              used on ch [4]
+inst  3 @ 08027684  b0=0x40 lo=0xBC hi=0x41  env=-              pitch=mod_080273E0   arp=-              used on ch [4]
+inst  4 @ 080276A8  b0=0x00 lo=0x00 hi=0x00  env=mod_080270EC   pitch=mod_080273F0   arp=-              used on ch [4]
+inst  5 @ 080276CC  b0=0x00 lo=0x00 hi=0x00  env=mod_0802710C   pitch=mod_080273F0   arp=-              used on ch [4]
+inst  6 @ 080276F0  b0=0x00 lo=0x00 hi=0x00  env=mod_0802712C   pitch=mod_08027400   arp=-              used on ch [4]
+inst  7 @ 08027714  b0=0x00 lo=0x40 hi=0x72  env=-              pitch=mod_0802743C   arp=-              used on ch [2]
+inst  8 @ 08027738  b0=0x00 lo=0x40 hi=0x87  env=-              pitch=mod_0802743C   arp=-              used on ch [1, 2]
+inst  9 @ 0802775C  b0=0x00 lo=0x40 hi=0x00  env=mod_08027154   pitch=mod_0802743C   arp=-              used on ch [1]
+inst 10 @ 08027780  b0=0x00 lo=0x80 hi=0x00  env=mod_08027188   pitch=mod_0802743C   arp=-              used on ch [1, 2]
+inst 11 @ 080277A4  b0=0x00 lo=0x00 hi=0x00  env=mod_080271B8   pitch=mod_08027454   arp=-              used on ch [3]
+inst 12 @ 080277C8  b0=0x00 lo=0x00 hi=0x00  env=mod_080271D8   pitch=mod_08027454   arp=-              used on ch [3]
+inst 13 @ 080277EC  b0=0x00 lo=0x80 hi=0x37  env=-              pitch=mod_0802743C   arp=-              used on ch [2]
+inst 14 @ 08027810  b0=0x00 lo=0x00 hi=0x00  env=mod_080271F8   pitch=-              arp=-              used on ch [3]
+inst 15 @ 08027834  b0=0x00 lo=0x80 hi=0x00  env=mod_08027218   pitch=-              arp=-              used on ch [2]
+inst 16 @ 08027858  b0=0x00 lo=0x80 hi=0x00  env=mod_08027238   pitch=-              arp=mod_08027494   used on ch [1]
+inst 17 @ 0802787C  b0=0x00 lo=0x80 hi=0x00  env=mod_08027268   pitch=-              arp=mod_080274F8   used on ch [1, 2]
+inst 18 @ 080278A0  b0=0x00 lo=0x80 hi=0x00  env=mod_080272A4   pitch=-              arp=-              used on ch [2]
+inst 19 @ 080278C4  b0=0x00 lo=0x80 hi=0x57  env=-              pitch=-              arp=mod_08027558   used on ch [1, 2]
+inst 20 @ 080278E8  b0=0x00 lo=0x80 hi=0x57  env=-              pitch=-              arp=mod_08027578   used on ch [1, 2]
+inst 21 @ 0802790C  b0=0x00 lo=0x80 hi=0x57  env=-              pitch=-              arp=mod_08027598   used on ch [1, 2]
+inst 22 @ 08027930  b0=0x00 lo=0x80 hi=0x57  env=-              pitch=-              arp=mod_080275B8   used on ch [1, 2]
+inst 23 @ 08027954  b0=0x00 lo=0x80 hi=0x57  env=-              pitch=-              arp=mod_080275D8   used on ch [2]
+inst 24 @ 08027978  b0=0x00 lo=0x80 hi=0x57  env=-              pitch=-              arp=mod_080275F8   used on ch [2]
+inst 25 @ 0802799C  b0=0x00 lo=0x40 hi=0x93  env=-              pitch=-              arp=-              used on ch [2]
+inst 26 @ 080279C0  b0=0x00 lo=0x40 hi=0x00  env=mod_080272CC   pitch=-              arp=mod_08027528   used on ch [2]
+inst 27 @ 080279E4  b0=0x00 lo=0x80 hi=0x00  env=mod_080272F4   pitch=-              arp=-              used on ch [1]
+inst 28 @ 08027A08  b0=0x00 lo=0x40 hi=0x45  env=-              pitch=mod_0802743C   arp=-              used on ch [2]
+inst 29 @ 08027A2C  b0=0x00 lo=0x80 hi=0x00  env=mod_08027320   pitch=-              arp=mod_08027494   used on ch [1, 2]
+inst 30 @ 08027A50  b0=0x00 lo=0x80 hi=0x47  env=-              pitch=-              arp=-              used on ch [2]
+
+4. MODULATION TABLES (s16 pairs)
+----------------------------------------------------------------------------------------------------
+mod_080270B8 env   insts [1]: 0xf0/1f 0x0/1f 0x70/1f 0x0/1f HOLD
+mod_080270CC env   insts [2]: 0xf0/1f 0x70/2f 0x30/1f 0x20/5f 0x10/15f 0x0/1f HOLD
+mod_080270EC env   insts [4]: 0x40/1f 0x30/1f 0x20/1f 0x10/1f 0x0/1f HOLD
+mod_0802710C env   insts [5]: 0x40/1f 0x30/2f 0x20/8f 0x10/2f 0x10/2f 0x0/1f HOLD
+mod_0802712C env   insts [6]: 0x90/1f 0x40/1f 0x30/2f 0x20/3f 0x10/6f 0x0/1f HOLD
+mod_08027154 env   insts [9]: 0x10/1f 0x30/1f 0x50/1f 0x80/5f 0x70/10f 0x60/100f 0x50/100f 0x40/100f 0x30/100f 0x20/100f 0x10/100f 0x0/1f HOLD
+mod_08027188 env   insts [10]: 0x50/1f 0x40/20f 0x30/30f 0x20/40f 0x10/50f 0x0/1f HOLD
+mod_080271B8 env   insts [11]: 0x20/1f 0x80/4f 0x40/14f 0x60/14f 0x0/1f HOLD
+mod_080271D8 env   insts [12]: 0x20/2f 0x80/20f 0x40/60f 0x60/120f 0x0/1f HOLD
+mod_080271F8 env   insts [14]: 0x20/4f 0x80/6f 0x40/10f 0x60/20f 0x0/1f HOLD
+mod_08027218 env   insts [15]: 0x10/1f 0x20/1f 0x40/6f 0x20/50f 0x10/50f 0x0/1f HOLD
+mod_08027238 env   insts [16]: 0x30/1f 0x60/1f 0x70/1f 0x60/3f 0x50/3f 0x40/12f 0x30/16f 0x20/24f 0x10/24f 0x0/1f HOLD
+mod_08027268 env   insts [17]: 0x30/1f 0x60/1f 0x70/3f 0x80/5f 0x70/5f 0x60/3f 0x50/10f 0x40/52f 0x30/56f 0x20/24f 0x10/24f 0x0/1f HOLD
+mod_080272A4 env   insts [18]: 0x10/1f 0x20/1f 0x40/2f 0x50/2f 0x40/2f 0x30/60f 0x20/60f 0x10/50f 0x0/1f HOLD
+mod_080272CC env   insts [26]: 0x60/1f 0x50/1f 0x40/10f 0x30/50f 0x20/100f 0x10/100f 0x0/1f HOLD
+mod_080272F4 env   insts [27]: 0x30/1f 0x40/1f 0x50/5f 0x40/5f 0x30/70f 0x20/50f 0x10/50f 0x0/1f HOLD
+mod_08027320 env   insts [29]: 0x40/2f 0x80/1f 0x70/2f 0x60/5f 0x50/5f 0x40/12f 0x30/26f 0x20/94f 0x10/64f 0x0/1f HOLD
+mod_08027350 pitch insts [1]: 97/200f HOLD
+mod_08027360 pitch insts [2]: 55/2f 100/2f 34/1f 55/1f 34/1f 55/1f 34/1f 34/1f 55/1f 34/1f 55/1f 34/1f 55/1f 34/1f 55/1f 34/16f HOLD
+mod_080273E0 pitch insts [3]: 18/200f HOLD
+mod_080273F0 pitch insts [4, 5]: 34/1f 16/200f HOLD
+mod_08027400 pitch insts [6]: 55/1f 70/1f 35/1f 70/1f 35/1f 70/1f 35/1f 70/1f 35/1f 70/1f 35/1f 70/1f LOOP->0
+mod_0802743C pitch insts [7, 8, 9, 10, 13, 28]: 1/3f -1/3f -1/3f 1/3f LOOP->0
+mod_08027454 pitch insts [11, 12]: 4/2f -4/2f -4/2f 4/2f LOOP->0
+mod_08027494 arp   insts [16, 29]: 1f:+24 23f:+0 4f:+0 4f:-12 4f:+0 4f:-12 LOOP->4
+mod_080274F8 arp   insts [17]: 1f:+0 6f:+0 4f:-12 6f:+0 4f:-12 6f:+0 4f:-12 LOOP->2
+mod_08027528 arp   insts [26]: 8f:+0 8f:-12 8f:+0 8f:-12 8f:+0 8f:-12 LOOP->0
+mod_08027558 arp   insts [19]: 1f:+0 1f:+4 1f:+7 1f:+0 1f:+4 1f:+7 LOOP->0
+mod_08027578 arp   insts [20]: 1f:+4 1f:+7 1f:+12 1f:+4 1f:+7 1f:+12 LOOP->0
+mod_08027598 arp   insts [21]: 1f:+7 1f:+12 1f:+16 1f:+7 1f:+12 1f:+16 LOOP->0
+mod_080275B8 arp   insts [22]: 1f:+0 1f:+3 1f:+7 1f:+0 1f:+3 1f:+7 LOOP->0
+mod_080275D8 arp   insts [23]: 1f:+3 1f:+7 1f:+12 1f:+3 1f:+7 1f:+12 LOOP->0
+mod_080275F8 arp   insts [24]: 1f:+7 1f:+12 1f:+15 1f:+7 1f:+12 1f:+15 LOOP->0
+
+5. PATTERN INDEX (210 patterns, 0801B2BC-080256DE)
+----------------------------------------------------------------------------------------------------
+pat_0801B2BC     1 events      4 bytes  used by song 8 ch1, song 15 ch1
+pat_0801B2C0     1 events      4 bytes  used by song 0 ch1, song 0 ch2, song 0 ch3, song 0 ch4
+pat_0801B2C4    16 events     49 bytes  used by song 15 ch5
+pat_0801B2F5    35 events    106 bytes  used by song 15 ch5
+pat_0801B35F    89 events    268 bytes  used by song 15 ch5
+pat_0801B46B    39 events    118 bytes  used by song 15 ch5
+pat_0801B4E1    27 events     82 bytes  used by song 15 ch5
+pat_0801B533    16 events     49 bytes  used by song 15 ch6
+pat_0801B564    35 events    106 bytes  used by song 15 ch6
+pat_0801B5CE    72 events    217 bytes  used by song 15 ch6
+pat_0801B6A7    39 events    118 bytes  used by song 15 ch6
+pat_0801B71D    27 events     82 bytes  used by song 15 ch6
+pat_0801B76F    58 events    175 bytes  used by song 15 ch2
+pat_0801B81E    58 events    175 bytes  used by song 15 ch2
+pat_0801B8CD   100 events    301 bytes  used by song 15 ch2
+pat_0801B9FA   112 events    337 bytes  used by song 15 ch2
+pat_0801BB4B    52 events    157 bytes  used by song 15 ch2
+pat_0801BBE8    89 events    268 bytes  used by song 15 ch2
+pat_0801BCF4    32 events     97 bytes  used by song 15 ch1
+pat_0801BD55    32 events     97 bytes  used by song 15 ch1
+pat_0801BDB6    48 events    145 bytes  used by song 15 ch1
+pat_0801BE47    33 events    100 bytes  used by song 15 ch3
+pat_0801BEAB    54 events    163 bytes  used by song 15 ch3
+pat_0801BF4E    64 events    193 bytes  used by song 15 ch3
+pat_0801C00F    63 events    190 bytes  used by song 15 ch3
+pat_0801C0CD    29 events     88 bytes  used by song 15 ch3
+pat_0801C125    37 events    112 bytes  used by song 15 ch4
+pat_0801C195    21 events     64 bytes  used by song 14 ch1
+pat_0801C1D5    21 events     64 bytes  used by song 14 ch2
+pat_0801C215    24 events     73 bytes  used by song 14 ch3
+pat_0801C25E    47 events    142 bytes  used by song 14 ch4
+pat_0801C2EC    36 events    109 bytes  used by song 13 ch1
+pat_0801C359    37 events    112 bytes  used by song 13 ch1
+pat_0801C3C9   249 events    748 bytes  used by song 13 ch2
+pat_0801C6B5    72 events    217 bytes  used by song 13 ch3
+pat_0801C78E    42 events    127 bytes  used by song 13 ch4
+pat_0801C80D    41 events    124 bytes  used by song 12 ch1
+pat_0801C889    64 events    193 bytes  used by song 12 ch1
+pat_0801C94A    63 events    190 bytes  used by song 12 ch1
+pat_0801CA08   128 events    385 bytes  used by song 12 ch1
+pat_0801CB89    73 events    220 bytes  used by song 12 ch1
+pat_0801CC65   148 events    445 bytes  used by song 12 ch1
+pat_0801CE22    46 events    139 bytes  used by song 12 ch2
+pat_0801CEAD    24 events     73 bytes  used by song 12 ch2
+pat_0801CEF6    48 events    145 bytes  used by song 12 ch2
+pat_0801CF87    24 events     73 bytes  used by song 12 ch2
+pat_0801CFD0    64 events    193 bytes  used by song 12 ch3
+pat_0801D091   128 events    385 bytes  used by song 12 ch3
+pat_0801D212    69 events    208 bytes  used by song 12 ch3
+pat_0801D2E2   128 events    385 bytes  used by song 12 ch3
+pat_0801D463   124 events    373 bytes  used by song 12 ch4
+pat_0801D5D8     4 events     13 bytes  used by song 11 ch1
+pat_0801D5E5    57 events    172 bytes  used by song 11 ch1
+pat_0801D691    81 events    244 bytes  used by song 11 ch1
+pat_0801D785   171 events    514 bytes  used by song 11 ch1
+pat_0801D987   182 events    547 bytes  used by song 11 ch1
+pat_0801DBAA   143 events    430 bytes  used by song 11 ch1
+pat_0801DD58    37 events    112 bytes  used by song 11 ch2
+pat_0801DDC8    49 events    148 bytes  used by song 11 ch3
+pat_0801DE5C    63 events    190 bytes  used by song 11 ch4
+pat_0801DF1A    80 events    241 bytes  used by song 10 ch1
+pat_0801E00B    38 events    115 bytes  used by song 10 ch1
+pat_0801E07E    47 events    142 bytes  used by song 10 ch1
+pat_0801E10C    74 events    223 bytes  used by song 10 ch1
+pat_0801E1EB    33 events    100 bytes  used by song 10 ch1
+pat_0801E24F    32 events     97 bytes  used by song 10 ch1
+pat_0801E2B0    50 events    151 bytes  used by song 10 ch1
+pat_0801E347    98 events    295 bytes  used by song 10 ch1
+pat_0801E46E   128 events    385 bytes  used by song 10 ch2
+pat_0801E5EF    32 events     97 bytes  used by song 10 ch2
+pat_0801E650    32 events     97 bytes  used by song 10 ch2
+pat_0801E6B1    32 events     97 bytes  used by song 10 ch2
+pat_0801E712   128 events    385 bytes  used by song 10 ch2
+pat_0801E893   128 events    385 bytes  used by song 10 ch2
+pat_0801EA14   128 events    385 bytes  used by song 10 ch2
+pat_0801EB95    57 events    172 bytes  used by song 10 ch3
+pat_0801EC41    40 events    121 bytes  used by song 10 ch3
+pat_0801ECBA    82 events    247 bytes  used by song 10 ch3
+pat_0801EDB1    84 events    253 bytes  used by song 10 ch3
+pat_0801EEAE    80 events    241 bytes  used by song 10 ch3
+pat_0801EF9F    79 events    238 bytes  used by song 10 ch3
+pat_0801F08D   110 events    331 bytes  used by song 10 ch4
+pat_0801F1D8    45 events    136 bytes  used by song 9 ch1
+pat_0801F260   112 events    337 bytes  used by song 9 ch1
+pat_0801F3B1   103 events    310 bytes  used by song 9 ch1
+pat_0801F4E7   136 events    409 bytes  used by song 9 ch1
+pat_0801F680    38 events    115 bytes  used by song 9 ch1
+pat_0801F6F3   108 events    325 bytes  used by song 9 ch2
+pat_0801F838   133 events    400 bytes  used by song 9 ch2
+pat_0801F9C8   112 events    337 bytes  used by song 9 ch2
+pat_0801FB19   195 events    586 bytes  used by song 9 ch2
+pat_0801FD63    64 events    193 bytes  used by song 9 ch2
+pat_0801FE24    62 events    187 bytes  used by song 9 ch3
+pat_0801FEDF   115 events    346 bytes  used by song 9 ch3
+pat_08020039    69 events    208 bytes  used by song 9 ch3
+pat_08020109    62 events    187 bytes  used by song 9 ch3
+pat_080201C4   185 events    556 bytes  used by song 9 ch3
+pat_080203F0    50 events    151 bytes  used by song 9 ch3
+pat_08020487    64 events    193 bytes  used by song 9 ch4
+pat_08020548    21 events     64 bytes  used by song 8 ch1
+pat_08020588    26 events     79 bytes  used by song 8 ch1
+pat_080205D7    83 events    250 bytes  used by song 8 ch1
+pat_080206D1   102 events    307 bytes  used by song 8 ch1
+pat_08020804    24 events     73 bytes  used by song 8 ch2
+pat_0802084D    48 events    145 bytes  used by song 8 ch2
+pat_080208DE    48 events    145 bytes  used by song 8 ch2
+pat_0802096F    96 events    289 bytes  used by song 8 ch2
+pat_08020A90   192 events    577 bytes  used by song 8 ch2
+pat_08020CD1    32 events     97 bytes  used by song 8 ch3
+pat_08020D32    64 events    193 bytes  used by song 8 ch3
+pat_08020DF3    68 events    205 bytes  used by song 8 ch3
+pat_08020EC0   126 events    379 bytes  used by song 8 ch3
+pat_0802103B   112 events    337 bytes  used by song 8 ch3
+pat_0802118C    56 events    169 bytes  used by song 8 ch4
+pat_08021235    56 events    169 bytes  used by song 8 ch4
+pat_080212DE    55 events    166 bytes  used by song 8 ch4
+pat_08021384    57 events    172 bytes  used by song 8 ch4
+pat_08021430     5 events     16 bytes  used by song 7 ch1
+pat_08021440    33 events    100 bytes  used by song 7 ch1
+pat_080214A4    54 events    163 bytes  used by song 7 ch1
+pat_08021547    95 events    286 bytes  used by song 7 ch1
+pat_08021665    24 events     73 bytes  used by song 7 ch1
+pat_080216AE    64 events    193 bytes  used by song 7 ch2
+pat_0802176F    32 events     97 bytes  used by song 7 ch2
+pat_080217D0    64 events    193 bytes  used by song 7 ch2
+pat_08021891    42 events    127 bytes  used by song 7 ch3
+pat_08021910    49 events    148 bytes  used by song 7 ch3
+pat_080219A4   158 events    475 bytes  used by song 7 ch3
+pat_08021B7F    46 events    139 bytes  used by song 7 ch3
+pat_08021C0A    71 events    214 bytes  used by song 7 ch4
+pat_08021CE0    17 events     52 bytes  used by song 6 ch1
+pat_08021D14    10 events     31 bytes  used by song 6 ch1
+pat_08021D33    12 events     37 bytes  used by song 6 ch1
+pat_08021D58    20 events     61 bytes  used by song 6 ch1
+pat_08021D95    27 events     82 bytes  used by song 6 ch1
+pat_08021DE7    48 events    145 bytes  used by song 6 ch1
+pat_08021E78    31 events     94 bytes  used by song 6 ch1
+pat_08021ED6    50 events    151 bytes  used by song 6 ch1
+pat_08021F6D    24 events     73 bytes  used by song 6 ch2
+pat_08021FB6    48 events    145 bytes  used by song 6 ch2
+pat_08022047    48 events    145 bytes  used by song 6 ch2
+pat_080220D8    48 events    145 bytes  used by song 6 ch2
+pat_08022169    48 events    145 bytes  used by song 6 ch2
+pat_080221FA    96 events    289 bytes  used by song 6 ch2
+pat_0802231B    24 events     73 bytes  used by song 6 ch2
+pat_08022364    48 events    145 bytes  used by song 6 ch2
+pat_080223F5    11 events     34 bytes  used by song 6 ch3
+pat_08022417    58 events    175 bytes  used by song 6 ch3
+pat_080224C6    51 events    154 bytes  used by song 6 ch3
+pat_08022560    52 events    157 bytes  used by song 6 ch3
+pat_080225FD    53 events    160 bytes  used by song 6 ch3
+pat_0802269D   108 events    325 bytes  used by song 6 ch3
+pat_080227E2    54 events    163 bytes  used by song 6 ch3
+pat_08022885    43 events    130 bytes  used by song 6 ch3
+pat_08022907    20 events     61 bytes  used by song 6 ch4
+pat_08022944    26 events     79 bytes  used by song 5 ch1
+pat_08022993    75 events    226 bytes  used by song 5 ch1
+pat_08022A75    26 events     79 bytes  used by song 5 ch1
+pat_08022AC4    29 events     88 bytes  used by song 5 ch1
+pat_08022B1C    58 events    175 bytes  used by song 5 ch1
+pat_08022BCB    67 events    202 bytes  used by song 5 ch1
+pat_08022C95    87 events    262 bytes  used by song 5 ch2
+pat_08022D9B   192 events    577 bytes  used by song 5 ch2
+pat_08022FDC   128 events    385 bytes  used by song 5 ch2
+pat_0802315D   128 events    385 bytes  used by song 5 ch2
+pat_080232DE   128 events    385 bytes  used by song 5 ch2
+pat_0802345F   128 events    385 bytes  used by song 5 ch2
+pat_080235E0    37 events    112 bytes  used by song 5 ch3
+pat_08023650    96 events    289 bytes  used by song 5 ch3
+pat_08023771    57 events    172 bytes  used by song 5 ch3
+pat_0802381D    51 events    154 bytes  used by song 5 ch3
+pat_080238B7    68 events    205 bytes  used by song 5 ch3
+pat_08023984    64 events    193 bytes  used by song 5 ch3
+pat_08023A45    64 events    193 bytes  used by song 5 ch4
+pat_08023B06    47 events    142 bytes  used by song 1 ch1
+pat_08023B94    63 events    190 bytes  used by song 1 ch1
+pat_08023C52    96 events    289 bytes  used by song 1 ch2
+pat_08023D73    63 events    190 bytes  used by song 1 ch2
+pat_08023E31   192 events    577 bytes  used by song 1 ch2
+pat_08024072    67 events    202 bytes  used by song 1 ch3
+pat_0802413C    45 events    136 bytes  used by song 1 ch3
+pat_080241C4    77 events    232 bytes  used by song 1 ch3
+pat_080242AC    59 events    178 bytes  used by song 1 ch4
+pat_0802435E    40 events    121 bytes  used by song 2 ch1
+pat_080243D7    56 events    169 bytes  used by song 2 ch1
+pat_08024480    64 events    193 bytes  used by song 2 ch2
+pat_08024541   128 events    385 bytes  used by song 2 ch2
+pat_080246C2    31 events     94 bytes  used by song 2 ch3
+pat_08024720    74 events    223 bytes  used by song 2 ch3
+pat_080247FF    64 events    193 bytes  used by song 2 ch4
+pat_080248C0   139 events    418 bytes  used by song 3 ch1
+pat_08024A62    96 events    289 bytes  used by song 3 ch2
+pat_08024B83    71 events    214 bytes  used by song 3 ch3
+pat_08024C59    48 events    145 bytes  used by song 3 ch4
+pat_08024CEA    24 events     73 bytes  used by song 4 ch1
+pat_08024D33    32 events     97 bytes  used by song 4 ch1
+pat_08024D94    23 events     70 bytes  used by song 4 ch1
+pat_08024DDA    31 events     94 bytes  used by song 4 ch1
+pat_08024E38    15 events     46 bytes  used by song 4 ch1
+pat_08024E66    17 events     52 bytes  used by song 4 ch1
+pat_08024E9A   128 events    385 bytes  used by song 4 ch2
+pat_0802501B    64 events    193 bytes  used by song 4 ch2
+pat_080250DC   128 events    385 bytes  used by song 4 ch2
+pat_0802525D   128 events    385 bytes  used by song 4 ch2
+pat_080253DE    45 events    136 bytes  used by song 4 ch3
+pat_08025466    19 events     58 bytes  used by song 4 ch3
+pat_080254A0    19 events     58 bytes  used by song 4 ch3
+pat_080254DA    44 events    133 bytes  used by song 4 ch3
+pat_0802555F    45 events    136 bytes  used by song 4 ch3
+pat_080255E7    82 events    247 bytes  used by song 4 ch4
+
+6. MUSIC SAMPLES (mcSmpInstTable @ 0801AB68)
+----------------------------------------------------------------------------------------------------
+sample 0: 08016C10, 5688 bytes, 8-bit signed PCM = 0.516 s at 11025 Hz (note 48); used by song 15 ch5
+sample 1: 08018248, 9088 bytes, 8-bit signed PCM = 0.824 s at 11025 Hz (note 48); used by song 15 ch6
+
+7. PSG SOUND EFFECTS (unused in E.T.)
+----------------------------------------------------------------------------------------------------
+psg sfx  0: scripts [0, 1, 2, 3]
+psg sfx  1: scripts [4, 255, 255, 255]
+psg sfx  2: scripts [5, 255, 255, 255]
+psg sfx  3: scripts [6, 7, 8, 255]
+psg sfx  4: scripts [9, 10, 11, 255]
+psgScript_00 @ 0801B144 ch1: 1f:0000/0000 END
+psgScript_01 @ 0801B164 ch2: 1f:0000/0000 END
+psgScript_02 @ 0801B184 ch3: 1f:0000/0000 END
+psgScript_03 @ 0801B1A4 ch4: 1f:0000/0000 END
+psgScript_04 @ 0801B0CC ch4: 20f:2A00/8021 60f:C400/8021 END
+psgScript_05 @ 0801B0F4 ch2: 6f:C380/8714 5f:C380/8745 4f:C380/8763 4f:C380/878A 3f:C380/87A3 3f:C380/87B1 60f:C480/87C5 END
+psgScript_06 @ 0801AE10 ch1: 8f:A280/8714 8f:A280/872E 8f:A280/8745 8f:A280/8763 8f:A280/878A 8f:A280/8797 8f:A280/87A3 8f:A280/8797 8f:A280/878A 8f:A280/8763 8f:A280/8745 8f:A280/8714 8f:A280/872E 8f:A280/8745 8f:A280/8759 8f:A280/8774 8f:A280/8797 8f:A280/87A3 8f:A280/87AD 8f:A280/87A3 8f:A280/8797 8f:A280/8774 8f:A280/8759 8f:A280/872E 60f:A780/8745 END
+psgScript_07 @ 0801AF3C ch2: 8f:A280/8689 8f:A280/869E 8f:A280/86C5 8f:A280/8714 8f:A280/8745 8f:A280/874F 8f:A280/8763 8f:A280/874F 8f:A280/8745 8f:A280/8714 8f:A280/86C5 8f:A280/8689 8f:A280/86B2 8f:A280/86C5 8f:A280/86E7 8f:A280/872E 8f:A280/8759 8f:A280/8763 8f:A280/8797 8f:A280/878A 8f:A280/8759 8f:A280/872E 8f:A280/86E7 8f:A280/86B2 60f:A780/876C END
+psgScript_08 @ 0801B068 ch3: 48f:8000/844F 48f:8000/8628 48f:8000/84B6 48f:8000/865B 20f:2000/8689 20f:8000/8689 10f:4000/8689 10f:6000/8689 END
+psgScript_09 @ 0801ABB8 ch1: 5f:A180/84B6 5f:A180/8512 5f:A180/8564 5f:A180/85CE 5f:A180/865B 5f:A180/8689 5f:A180/86B2 5f:A180/86E7 5f:A180/872E 5f:A180/8745 5f:A180/8759 5f:A180/8774 5f:A180/8797 5f:A180/87A3 5f:A180/87AD 5f:A180/87BA 10f:A380/87BA 10f:A380/86E7 60f:A780/8774 END
+psgScript_10 @ 0801ACA8 ch2: 5f:A180/87BA 5f:A180/87AD 5f:A180/87A3 5f:A180/8797 5f:A180/8774 5f:A180/8759 5f:A180/8745 5f:A180/872E 5f:A180/86E7 5f:A180/86B2 5f:A180/8689 5f:A180/865B 5f:A180/85CE 5f:A180/8564 5f:A180/8512 5f:A180/84B6 10f:A380/87AD 10f:A380/86B2 60f:A780/8759 END
+psgScript_11 @ 0801AD98 ch3: 20f:2000/84B6 20f:2000/8512 20f:2000/8564 20f:2000/85CE 10f:2000/865B 10f:2000/86E7 20f:2000/872E 20f:8000/872E 10f:4000/872E 10f:6000/872E END
+
+8. WAV SOUND EFFECTS (SfxTable @ 080284FC, 94 x 8 bytes)
+----------------------------------------------------------------------------------------------------
+ id  prio  pan  pitch   WAV addr    rate   bytes   seconds(at pitch)
+  0   100    0    256   0833EB9C  11025    3259     0.30
+  1   100    0    256   0833F884  11025    2398     0.22
+  2   100    0    256   08340210  11025    2996     0.27
+  3   100    0    256   08340DF0  11025    2204     0.20
+  4   100    0    256   083416B8  11025    2204     0.20
+  5   100    0    256   08341F80  11025    3897     0.35
+  6   100    0    768   08341F80  11025    3897     0.12
+  7   100    0    256   08342EE8  11025   10383     0.94
+  8   100    0    256   083457A4  11025    7114     0.65
+  9   240    0    256   0834739C  11025   16536     1.50
+ 10   240    0    256   0834B460  11025   15283     1.39
+ 11   100    0    256   0834F040  11025   22014     2.00
+ 12   100    0    256   0835466C  11025   12962     1.18
+ 13   100    0    384   0835466C  11025   12962     0.78
+ 14   210    0    384   0834B460  11025   15283     0.92
+ 15   200    0    256   0835793C  11025   14111     1.28
+ 16   100    0    256   0835B088  11025   18755     1.70
+ 17   100    0    256   0835F9F8  11025   21001     1.90
+ 18   100    0    256   0835B088  11025   18755     1.70
+ 19   100    0    256   0835F9F8  11025   21001     1.90
+ 20   100    0    256   08364C30  11025    8217     0.75
+ 21   100    0    256   08366C78  11025    6823     0.62
+ 22   100    0    256   0836874C  11025    8417     0.76
+ 23   100    0    256   0836A85C  11025    9689     0.88
+ 24   100    0    256   0836CE64  11025    4655     0.42
+ 25   100    0    256   0836E0C0  11025    3695     0.34
+ 26   100    0    256   0836EF5C  11025    9281     0.84
+ 27   100    0    256   083713CC  11025    9263     0.84
+ 28   100    0    256   08373828  11025    7119     0.65
+ 29   100    0    256   08375424  11025    7647     0.69
+ 30   100    0    256   08377230  11025    4745     0.43
+ 31   100    0    256   083784E8  11025    5671     0.51
+ 32   100    0    256   08379B3C  11025    4013     0.36
+ 33   100    0    256   0837AB18  11025    9947     0.90
+ 34     4    0    512   0837D220  11025    1121     0.05
+ 35     4    0    512   0837D6B0  11025   11999     0.54
+ 36    40    0    256   083805BC  11025    8268     0.75
+ 37     4    0    256   0837D6B0  11025   11999     1.09
+ 38     4    0    256   08382634  11025    7183     0.65
+ 39   200    0    256   0834B460  11025   15283     1.39
+ 40   200    0    256   08384270  11025    7824     0.71
+ 41   200    0    256   0838612C  11025    9575     0.87
+ 42   200    0    256   083886C0  11025   12977     1.18
+ 43   200    0    256   0833EB9C  11025    3259     0.30
+ 44   200    0    256   0833EB9C  11025    3259     0.30
+ 45   200    0    256   0838B9A0  11025    2659     0.24
+ 46     9    0    256   0838C430  11025     595     0.05
+ 47     3    0    256   0838C6B0  11025   31743     2.88
+ 48     3    0    256   083942DC  11025    4463     0.40
+ 49     3    0    256   08395478  11025   21503     1.95
+ 50     3    0    256   0839A8A4  11025   22975     2.08
+ 51     3    0    256   083A0290  11025    8479     0.77
+ 52    30    0    256   083A23DC  11025   14591     1.32
+ 53    30    0    256   083A5D08  11025   14591     1.32
+ 54     2    0    512   08379B3C  11025    4013     0.18
+ 55    30    0    256   083A9634  11025   11327     1.03
+ 56     1    0    256   0837D220  11025    1121     0.10
+ 57   100    0    256   0837AB18  11025    9947     0.90
+ 58   100    0    512   083AC2A0  11025   32254     1.46
+ 59    12    0    256   083B40CC  11025    2434     0.22
+ 60    10    0    256   083457A4  11025    7114     0.65
+ 61    11    0    256   0835793C  11025   14111     1.28
+ 62    11    0    256   083B4A7C  11025    6397     0.58
+ 63    50    0    256   083B63A8  11025   13119     1.19
+ 64    50    0    256   083AC2A0  11025   32254     2.93
+ 65    40    0    256   083B9714  11025    8124     0.74
+ 66     1    0    768   083BB6FC  11025   10530     0.32
+ 67    50    0    256   083BE04C  11025    4472     0.41
+ 68     5    0    256   083BF1F0  11025   18431     1.67
+ 69     7    0    256   083C3A1C  11025   34986     3.17
+ 70    50    0    512   083BB6FC  11025   10530     0.48
+ 71    50    0    128   08379B3C  11025    4013     0.73
+ 72    50    0    256   083A5D08  11025   14591     1.32
+ 73     2    0    256   08379B3C  11025    4013     0.36
+ 74   100    0    256   083CC2F4  11025   17072     1.55
+ 75   100    0    256   083D05D0  11025   10751     0.98
+ 76   100    0    256   0833EB9C  11025    3259     0.30
+ 77   100    0    256   083D05D0  11025   10751     0.98
+ 78   100    0    256   083D2FFC  11025   18110     1.64
+ 79   100    0    256   083D76E8  11025    5759     0.52
+ 80   100    0    256   083D8D94  11025   10207     0.93
+ 81   100    0    256   083DB5A0  11025    3731     0.34
+ 82   100    0    256   083DC460  11025    3731     0.34
+ 83   100    0    256   0834B460  11025   15283     1.39
+ 84   100    0    256   0834B460  11025   15283     1.39
+ 85    10    0    256   083DD320  11025   14271     1.29
+ 86    10    0    256   083E0B0C  11025   23808     2.16
+ 87    10    0    256   083E6838  11025   12733     1.15
+ 88    11    0    512   0833EB9C  11025    3259     0.15
+ 89    11    0    512   0833F884  11025    2398     0.11
+ 90   210    0    256   083E9A24  11025   27051     2.45
+ 91    10    0    512   0834B460  11025   15283     0.69
+ 92    10    0    128   08340DF0  11025    2204     0.40
+ 93    10    0    128   08340210  11025    2996     0.54
+66 distinct WAV files, 727094 bytes of RIFF data (0833EB9C..)

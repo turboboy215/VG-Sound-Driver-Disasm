@@ -1,0 +1,702 @@
+QUICKTHUNDER DRIVER - DECODED DATA DUMP
+generated from musicd.o (.text base in musicd.bin = 0x080001CC)
+==============================================================================
+
+
+[1] SONG TABLE   songtab @ .text+0x14C0  (36 bytes/entry)
+
+  song 0: tempo=6 frames/tick   channel mask=0x003f
+      ch1 step-list -> blank1                                         (.text+0x014a8)
+      ch2 step-list -> blank2                                         (.text+0x014ac)
+      ch3 step-list -> blank3                                         (.text+0x014b0)
+      ch4 step-list -> blank4                                         (.text+0x014b4)
+      ch5 step-list -> blank5                                         (.text+0x014b8)
+      ch6 step-list -> blank6                                         (.text+0x014bc)
+      +28 (unused)   -> .text+0x0234d
+      wave-RAM data  -> sample_0/wave_blank                            (.text+0x02538)
+
+  song 1: tempo=7 frames/tick   channel mask=0x003f
+      ch1 step-list -> LEVEL1_1                                       (.text+0x016cc)
+      ch2 step-list -> LEVEL1_2/PAT_26/PAT_28/PAT_31                  (.text+0x017b4)
+      ch3 step-list -> LEVEL1_3/PAT_34/PAT_35/PAT_36/PAT_37/PAT_39    (.text+0x01868)
+      ch4 step-list -> LEVEL1_4/PAT_43/PAT_46/PAT_47                  (.text+0x01968)
+      ch5 step-list -> LEVEL1_5/PAT_50/PAT_52/PAT_54/PAT_55           (.text+0x01ac4)
+      ch6 step-list -> blank6                                         (.text+0x014bc)
+      +28 (unused)   -> .text+0x0234d
+      wave-RAM data  -> PAT_96/PAT_97/wave_saw                         (.text+0x02340)
+
+  song 2: tempo=7 frames/tick   channel mask=0x003f
+      ch1 step-list -> LEVEL2_1/PAT_59/PAT_60                         (.text+0x01cc0)
+      ch2 step-list -> LEVEL2_2/PAT_68/PAT_69                         (.text+0x01e28)
+      ch3 step-list -> LEVEL2_3/PAT_73/PAT_75/PAT_76                  (.text+0x01f3c)
+      ch4 step-list -> LEVEL2_4/PAT_80/PAT_81/PAT_83                  (.text+0x0205c)
+      ch5 step-list -> LEVEL2_5/PAT_88/PAT_89/PAT_90/PAT_91           (.text+0x021b4)
+      ch6 step-list -> blank6                                         (.text+0x014bc)
+      +28 (unused)   -> .text+0x0234d
+      wave-RAM data  -> PAT_96/PAT_97/wave_saw                         (.text+0x02340)
+
+
+[2] SFX TABLE   SFXTab @ .text+0x152C  (4 bytes/entry)
+   #  name              priority  channel      pattern
+   0  SFX_BLANK            127     5 sampleB    0
+   1  SFX_WINDOWBREAK       80     5 sampleB    6
+   2  SFX_BULLETIMPACT     100     5 sampleB    7
+   3  SFX_CHAINSAW          90     5 sampleB    8
+   4  SFX_FLAMETHROWER      20     3 noise      9
+   5  SFX_GUNSHOT           90     5 sampleB    10
+   6  SFX_ROBOCOP_HIT       90     5 sampleB    11
+   7  SFX_MACHINEGUN        90     5 sampleB    12
+   8  SFX_BONUS             25     0 tone1      13
+   9  SFX_ROBOCOP_JUMP      70     5 sampleB    14
+  10  SFX_ROBOCOP_PUNCH    100     5 sampleB    15
+  11  SFX_ROBOCOP_GUN      100     5 sampleB    16
+  12  SFX_ROCKET            20     3 noise      17
+  13  SFX_BULLETBOUNCE      80     5 sampleB    18
+  14  SFX_HELPME           120     4 sampleA    19
+  15  SFX_THANKYOU         120     4 sampleA    20
+  16  SFX_ENEMYDIE1        100     5 sampleB    21
+  17  SFX_ENEMYDIE2        100     5 sampleB    22
+  18  SFX_EXPLOSION1        80     3 noise      23
+  19  SFX_EXPLOSION2        80     3 noise      24
+
+
+[3] INSTRUMENT TABLE   InsTab @ .text+0x1264  (35 pointers)
+    tone(ch1/2) layout: u16 attack u16 release, ptr arp, ptr freq, ptr combine  (16 bytes)
+    wave(ch3)   layout: ptr volAtk, ptr volRel, ptr arp, ptr freq, ptr combine  (20 bytes)
+  ins  0 -> ins_blanktone                              atk=0x0180 rel=0x0180 t1=freq_combine_end       t2=0xe69                  t3=normal_combine_end
+  ins  1 -> ins_blankrdc                               atk=0x0ede rel=0x0000 t1=vibrato_faste          t2=freq_combine_end       t3=0xe69
+  ins  2 -> ins_blankrdc                               atk=0x0ede rel=0x0000 t1=vibrato_faste          t2=freq_combine_end       t3=0xe69
+  ins  3 -> ins_blankrdc                               atk=0x0ede rel=0x0000 t1=vibrato_faste          t2=freq_combine_end       t3=0xe69
+  ins  4 -> ins_bass1                                  atk=0xf2c0 rel=0x3180 t1=freq_combine_end       t2=0xf77                  t3=0xe5a
+  ins  5 -> ins_bass2                                  atk=0xf2c0 rel=0x3180 t1=vibrato_basse          t2=0xf69                  t3=0xe5a
+  ins  6 -> ins_longbass                               atk=0xe360 rel=0x1160 t1=freq_combine_end       t2=0xeb2                  t3=0xe5a
+  ins  7 -> ins_banjo                                  atk=0x8500 rel=0x1120 t1=freq_combine_end       t2=0xe69                  t3=normal_combine_end
+  ins  8 -> ins_banjo_slide                            atk=0x5600 rel=0x1120 t1=freq_combine_end       t2=0xfd1                  t3=0xe5a
+  ins  9 -> ins_square_leed                            atk=0x7880 rel=0x7480 t1=freq_combine_end       t2=0xe8a                  t3=0xe5a
+  ins 10 -> ins_square_leed_slide                      atk=0x5880 rel=0x5680 t1=freq_combine_end       t2=0xffd                  t3=0xe5a
+  ins 11 -> ins_arp_0c                                 atk=0x7560 rel=0x1140 t1=freq_combine_end       t2=0xeb2                  t3=normal_combine_end
+  ins 12 -> ins_shortarp_0c                            atk=0x6340 rel=0x1140 t1=0x1036                 t2=0xe69                  t3=normal_combine_end
+  ins 13 -> ins_arp_37                                 atk=0x4540 rel=0x1140 t1=0x104e                 t2=0xe69                  t3=normal_combine_end
+  ins 14 -> ins_arp_47                                 atk=0x4540 rel=0x1140 t1=0x1066                 t2=0xe69                  t3=normal_combine_end
+  ins 15 -> ins_arp_58                                 atk=0x4540 rel=0x1140 t1=0x107e                 t2=0xe69                  t3=normal_combine_end
+  ins 16 -> ins_arp_59                                 atk=0x4540 rel=0x1140 t1=0x1096                 t2=0xe69                  t3=normal_combine_end
+  ins 17 -> ins_arp_38                                 atk=0x4540 rel=0x1140 t1=0x10ae                 t2=0xe69                  t3=normal_combine_end
+  ins 18 -> ins_arp_49                                 atk=0x4540 rel=0x1140 t1=0x10c6                 t2=0xe69                  t3=normal_combine_end
+  ins 19 -> ins_arp_7a                                 atk=0x4540 rel=0x1140 t1=0x10de                 t2=0xe69                  t3=normal_combine_end
+  ins 20 -> ins_arp_5a                                 atk=0x4540 rel=0x1140 t1=0x10f6                 t2=0xe69                  t3=normal_combine_end
+  ins 21 -> ins_arp_36                                 atk=0x4540 rel=0x1140 t1=0x110e                 t2=0xe69                  t3=normal_combine_end
+  ins 22 -> ins_arp_27                                 atk=0x4540 rel=0x1140 t1=0x1126                 t2=0xe69                  t3=normal_combine_end
+  ins 23 -> ins_tone_loud                              atk=0x88c0 rel=0x81c0 t1=freq_combine_end       t2=0xe69                  t3=0xe5a
+  ins 24 -> ins_tone_quiet                             atk=0x48c0 rel=0x31c0 t1=freq_combine_end       t2=0xe69                  t3=0xe5a
+  ins 25 -> ins_tom                                    atk=0xf180 rel=0x2180 t1=freq_combine_end       t2=0x1163                 t3=note_combine_end
+  ins 26 -> ins_tonekick                               atk=0xe180 rel=0x2180 t1=0x115e                 t2=0x1181                 t3=note_combine_end
+  ins 27 -> ins_rdclead/ins_rdcleadslide/ins_rdcwhistle atk=0x1246 rel=0x0000 t1=vol_whistlee           t2=vol_whistleoffe        t3=0xe9b
+  ins 28 -> ins_rdclead/ins_rdcleadslide/ins_rdcwhistle atk=0x1246 rel=0x0000 t1=vol_whistlee           t2=vol_whistleoffe        t3=0xe9b
+  ins 29 -> ins_rdcloud                                atk=0x1232 rel=0x0000 t1=vol_mede               t2=freq_combine_end       t3=0xe6e
+  ins 30 -> ins_rdcmed                                 atk=0x123e rel=0x0000 t1=vol_mede               t2=freq_combine_end       t3=0xe6e
+  ins 31 -> ins_rdcquiet                               atk=0x0eea rel=0x0000 t1=vol_mede               t2=freq_combine_end       t3=0xeb2
+  ins 32 -> ins_rdclead/ins_rdcleadslide/ins_rdcwhistle atk=0x1246 rel=0x0000 t1=vol_whistlee           t2=vol_whistleoffe        t3=0xe9b
+  ins 33 -> ins_rdcflute                               atk=0x0ef2 rel=0x0000 t1=vol_mede               t2=freq_combine_end       t3=0xeb2
+  ins 34 -> ins_pickup                                 atk=0xf2c0 rel=0x3180 t1=0x15fe                 t2=0xf77                  t3=normal_combine_end
+
+[3b] NOISE INSTRUMENT TABLE   InsTab4 @ .text+0x12F0  (9 pointers)
+    layout: u16 attack(SOUND4CNT_L) u16 release, ptr noiseTable, (ptr unused)  (16 bytes)
+  ins4 0 -> ins_blanknoise         atk=0x0000 rel=0x0000 tab=0xf56                  unused=0x00000ede
+  ins4 1 -> ins_snare              atk=0x7100 rel=0x0100 tab=0x11a6                 unused=0x000032ff
+  ins4 2 -> ins_kick               atk=0x5100 rel=0x5100 tab=0x11b2                 unused=0x000032ff
+  ins4 3 -> ins_hihat              atk=0x4100 rel=0x4100 tab=0x11c6                 unused=0x01004700
+  ins4 4 -> ins_ohihat             atk=0x4700 rel=0x0100 tab=0x11c6                 unused=0x000022ff
+  ins4 5 -> ins_flamethrower       atk=0x5900 rel=0xc300 tab=0x1196                 unused=0x35023602
+  ins4 6 -> ins_rocket             atk=0xc800 rel=0xc300 tab=0x1632                 unused=0x54015501
+  ins4 7 -> ins_explode            atk=0xf600 rel=0x3100 tab=explode_tab2e          unused=0x56025402
+  ins4 8 -> ins_explode2           atk=0xf300 rel=0x3100 tab=0x16a6                 unused=0x3100f600
+
+
+[4] MODULATION TABLES (raw)
+
+  -- freq (3B: len,dLo,dHi / 00,rel8)
+     normal_freq          @0x00e6c: ff 00 00 00 00
+     vibrato_bell         @0x00e71: 01 ff ff 01 00 00 01 01 00 01 00 00 00 f7
+     vibrato_small        @0x00e7f: 03 02 00 03 fe ff 03 fe ff 03 02 00 00 f7
+     vibrato_small2       @0x00e8d: 19 00 00 03 02 00 03 fe ff 03 fe ff 03 02 00
+     vibrato_whistle      @0x00e9e: 0a 00 00
+     vibrato_tiny         @0x00ea1: 03 01 00 03 ff ff 03 ff ff 03 01 00 00 f7
+     violin_slide         @0x00eaf: 01 fc ff 02 02 00
+     vibrato_smallest     @0x00eb5: 06 00 00 01 01 00 02 00 00 01 ff ff 02 00 00 01 ff ff 02 00 00 01 01 00 02 00 00 00 eb
+     vibrato_fast         @0x00ed2: 02 02 00 02 fe ff 02 fe ff 02 02 00 00 f7
+     vibrato_bass2        @0x00f6c: 03 fd ff 03 03 00 03 03 00 03 fd ff 00 f7
+     vibrato_bass         @0x00f7a: 03 03 00 03 fd ff 03 fd ff 03 03 00 00 f7
+     testfx_freq          @0x00f40: 05 06 00 05 fd ff
+     banjoslide_freq      @0x00fd4: 01 f8 ff 04 02 00 ff 00 00
+     leedslide            @0x01000: 01 ec ff 05 04 00 19 00 00 03 02 00 03 fe ff 03 fe ff 03 02 00 00 f7 00
+     tom_freq             @0x01166: 01 40 06 02 c4 ff 01 64 00 ff c4 ff 00 fd
+     kick_freq            @0x01184: 01 4c 04 01 64 00 ff b0 ff 00 fa 00 00
+
+  -- arp (2B: len,semitone / 00,rel8)
+     normal_arp           @0x00e68: ff 00
+     arp_bass2            @0x00f88: 01 0c 01 00 01 0c ff 00
+     arp_0c               @0x01038: 01 0c 01 00
+     arp_37               @0x01050: 01 00 01 03 01 07
+     arp_47               @0x01068: 01 00 01 04 01 07
+     arp_58               @0x01080: 01 00 01 05 01 08
+     arp_59               @0x01098: 01 00 01 05 01 09
+     arp_38               @0x010b0: 01 00 01 03 01 08
+     arp_49               @0x010c8: 01 00 01 04 01 09
+     arp_7a               @0x010e0: 01 00 01 07 01 0a
+     arp_5a               @0x010f8: 01 00 01 05 01 0a
+     arp_36               @0x01110: 01 00 01 03 01 06
+     arp_27               @0x01128: 01 00 01 02 01 07
+     tom_arp              @0x01160: 01 00 01 02
+     violin_arp           @0x011cc: ff 0c
+     whistle_arp          @0x0125a: 01 f2 01 f3 ff f4
+     pickup_arp           @0x01600: 03 00 03 05 03 0a 00 fc
+
+  -- combine (2B: len,mode 0=freqOnly 1=noteOnly >=2=sum)
+     normal_combine       @0x00e5c: ff 02
+     note_combine         @0x00e60: ff 01
+     freq_combine         @0x00e64: ff 00
+
+  -- wave volume (2B: len,SOUND3CNT_H high byte)
+     vol_0                @0x00ee0: ff 00
+     vol_hi               @0x00ee4: ff 20
+     vol_med              @0x00ee8: ff 40
+     vol_lo               @0x00eec: ff 60
+     vol_34               @0x00ef0: ff 80
+     vol_flute            @0x00ef4: 01 60 01 40 ff 80 00 00
+     vol_attack1          @0x00efc: 02 20 06 80 ff 60 00 00
+     vol_bell             @0x01234: 02 20 02 80 02 40 02 60
+     vol_bell2            @0x01240: 02 40 08 60 ff 00
+     vol_whistle          @0x01248: 02 60 01 40 01 80 ff 20 00 00
+     vol_whistleoff       @0x01252: 05 40 05 60 ff 00
+
+  -- noise (2B: len,SOUND4CNT_H low byte)
+     blank_tab            @0x00f58: ff 10
+     flame_tab            @0x01198: 02 36 02 35 02 34
+     snare_tab            @0x011a8: ff 32
+     kick_tab             @0x011b4: ff 32
+     hihat_tab            @0x011c8: ff 22
+     rocket_tab           @0x01634: 01 55 01 54 01 53 01 52 01 30 01 31 01 32 01 33 01 34 01 35 01 42 01 43 01 44 01 45 01 46 01 47 01 53 01 54 01 55 ff 56 00 da
+     explode_tab2         @0x016a8: 02 54 02 56 02 57 02 55
+     explode_tab          @0x016b2: 03 43 02 56 02 54 02 55 02 56 02 53 02 57 02 55 02 54 02 53 02 55 02 56
+
+
+[5] SAMPLE TABLE   sampletab @ .text+0x2358  (16 bytes/entry)
+    +0 u32 start ptr   +4 u32 DMA block count (x16 bytes)   +8 u32 unused rate   +12 u32 volume flags
+  smp  0: .text+0x02538 (abs 0x08002704, align 0)  blocks=    1 bytes=    16  rate_word=0x0080f800 flags=0x00000000
+  smp  1: .text+0x02578 (abs 0x08002744, align 0)  blocks=  163 bytes=  2608  rate_word=0x0080fc15 flags=0xffffffff
+  smp  2: .text+0x02fa9 (abs 0x08003175, align 1)  blocks=  175 bytes=  2800  rate_word=0x0080fc15 flags=0x00000000
+  smp  3: .text+0x03a9f (abs 0x08003c6b, align 3)  blocks=  344 bytes=  5504  rate_word=0x0080fc15 flags=0x00000000
+  smp  4: .text+0x03a9f (abs 0x08003c6b, align 3)  blocks=   60 bytes=   960  rate_word=0x0080fc15 flags=0x00000000
+  smp  5: .text+0x03a9f (abs 0x08003c6b, align 3)  blocks=  141 bytes=  2256  rate_word=0x0080fc15 flags=0x00000000
+  smp  6: .text+0x03a9f (abs 0x08003c6b, align 3)  blocks=   99 bytes=  1584  rate_word=0x0080fc15 flags=0x00000000
+  smp  7: .text+0x03a9f (abs 0x08003c6b, align 3)  blocks=  127 bytes=  2032  rate_word=0x0080fc15 flags=0x00000000
+  smp  8: .text+0x03a9f (abs 0x08003c6b, align 3)  blocks=  582 bytes=  9312  rate_word=0x0080fc15 flags=0xffffffff
+  smp  9: .text+0x05f00 (abs 0x080060cc, align 0)  blocks=  234 bytes=  3744  rate_word=0x0080fc15 flags=0xffffffff
+  smp 10: .text+0x06da3 (abs 0x08006f6f, align 3)  blocks=  552 bytes=  8832  rate_word=0x0080fc15 flags=0xffffffff
+  smp 11: .text+0x0902a (abs 0x080091f6, align 2)  blocks=  340 bytes=  5440  rate_word=0x0080fc15 flags=0xffffffff
+  smp 12: .text+0x0902a (abs 0x080091f6, align 2)  blocks=  224 bytes=  3584  rate_word=0x0080fc15 flags=0xffffffff
+  smp 13: .text+0x09e35 (abs 0x0800a001, align 1)  blocks=  152 bytes=  2432  rate_word=0x0080fc15 flags=0xffffffff
+  smp 14: .text+0x0a7ba (abs 0x0800a986, align 2)  blocks=  492 bytes=  7872  rate_word=0x0080fc15 flags=0xffffffff
+  smp 15: .text+0x0c679 (abs 0x0800c845, align 1)  blocks=  210 bytes=  3360  rate_word=0x0080fc15 flags=0xffffffff
+  smp 16: .text+0x0c679 (abs 0x0800c845, align 1)  blocks=  292 bytes=  4672  rate_word=0x0080fc15 flags=0xffffffff
+  smp 17: .text+0x0d8c4 (abs 0x0800da90, align 0)  blocks=  185 bytes=  2960  rate_word=0x0080fc15 flags=0xffffffff
+  smp 18: .text+0x0e457 (abs 0x0800e623, align 3)  blocks=  379 bytes=  6064  rate_word=0x0080fc15 flags=0xffffffff
+  smp 19: .text+0x0fc26 (abs 0x0800fdf2, align 2)  blocks=  621 bytes=  9936  rate_word=0x0080fc15 flags=0xffffffff
+  smp 20: .text+0x0fc26 (abs 0x0800fdf2, align 2)  blocks=  288 bytes=  4608  rate_word=0x0080fc15 flags=0xffffffff
+  smp 21: .text+0x10e29 (abs 0x08010ff5, align 1)  blocks=  380 bytes=  6080  rate_word=0x0080fc15 flags=0xffffffff
+  smp 22: .text+0x125ea (abs 0x080127b6, align 2)  blocks=  267 bytes=  4272  rate_word=0x0080fc15 flags=0xffffffff
+  smp 23: .text+0x1369b (abs 0x08013867, align 3)  blocks=  199 bytes=  3184  rate_word=0x0080fc15 flags=0xffffffff
+  smp 24: .text+0x14312 (abs 0x080144de, align 2)  blocks=  217 bytes=  3472  rate_word=0x0080fc15 flags=0xffffffff
+  smp 25: .text+0x150ae (abs 0x0801527a, align 2)  blocks=  296 bytes=  4736  rate_word=0x0080fc15 flags=0x00000000
+  smp 26: .text+0x16330 (abs 0x080164fc, align 0)  blocks=  310 bytes=  4960  rate_word=0x0080fc15 flags=0x00000000
+  smp 27: .text+0x17696 (abs 0x08017862, align 2)  blocks=  305 bytes=  4880  rate_word=0x0080fc15 flags=0x00000000
+  smp 28: .text+0x189b3 (abs 0x08018b7f, align 3)  blocks=  306 bytes=  4896  rate_word=0x0080fc15 flags=0x00000000
+  smp 29: .text+0x19cd2 (abs 0x08019e9e, align 2)  blocks=  209 bytes=  3344  rate_word=0x0080fc15 flags=0x00000000
+
+
+[6] PATTERN TABLE + DISASSEMBLY   PatTab @ .text+0x1314  (100 entries)
+
+  pat   0 @ .text+0x0157c PAT_0
+      1:-- [END loop=0]
+
+  pat   1 @ .text+0x01581 PAT_1
+      16:c5(48)/i0 [JUMP -> blank]
+
+  pat   2 @ .text+0x0158c PAT_2
+      16:c1(0)/i1 [JUMP -> blank]
+
+  pat   3 @ .text+0x01594 PAT_3
+      16:c1(0)/i0 [JUMP -> blank]
+
+  pat   4 @ .text+0x0159c PAT_4
+      16:c1(0)/i0 [JUMP -> blank]
+
+  pat   5 @ .text+0x015a4 PAT_5
+      16:-- [JUMP -> blank]
+
+  pat   6 @ .text+0x015ac PAT_6
+      30:g4(43)/i8 1:-- [END loop=0]
+
+  pat   7 @ .text+0x015b4 PAT_7
+      5:g4(43)/i9 1:-- [END loop=0]
+
+  pat   8 @ .text+0x015bc PAT_8
+      24:g4(43)/i10 1:-- [END loop=0]
+
+  pat   9 @ .text+0x015c4 PAT_9
+      20:c4(36)/i5 10:OFF 1:-- [END loop=0]
+
+  pat  10 @ .text+0x015ce PAT_10
+      10:g4(43)/i12 1:-- [END loop=0]
+
+  pat  11 @ .text+0x015d6 PAT_11
+      10:g4(43)/i13 1:-- [END loop=0]
+
+  pat  12 @ .text+0x015de PAT_12
+      20:g4(43)/i14 1:-- [END loop=0]
+
+  pat  13 @ .text+0x015e6 PAT_13
+      30:c4(36)/i34 1:-- [END loop=0]
+
+  pat  14 @ .text+0x01608 PAT_14
+      14:g4(43)/i16 1:-- [END loop=0]
+
+  pat  15 @ .text+0x01610 PAT_15
+      8:g4(43)/i17 1:-- [END loop=0]
+
+  pat  16 @ .text+0x01618 PAT_16
+      16:g4(43)/i18 1:-- [END loop=0]
+
+  pat  17 @ .text+0x01620 PAT_17
+      4:c4(36)/i6 20:OFF 1:-- [END loop=0]
+
+  pat  18 @ .text+0x0165e PAT_18
+      12:g4(43)/i20 1:-- [END loop=0]
+
+  pat  19 @ .text+0x01666 PAT_19
+      41:c4(36)/i21 1:-- [END loop=0]
+
+  pat  20 @ .text+0x0166e PAT_20
+      30:c4(36)/i22 1:-- [END loop=0]
+
+  pat  21 @ .text+0x01676 PAT_21
+      14:c4(36)/i23 1:-- [END loop=0]
+
+  pat  22 @ .text+0x0167e PAT_22
+      14:c4(36)/i24 1:-- [END loop=0]
+
+  pat  23 @ .text+0x01686 PAT_23
+      80:c4(36)/i7 1:-- [END loop=0]
+
+  pat  24 @ .text+0x0168e PAT_24
+      40:c4(36)/i8 1:-- [END loop=0]
+
+  pat  25 @ .text+0x016fc PAT_25
+      32:-- [END loop=65284]
+
+  pat  26 @ .text+0x017b4 LEVEL1_2/PAT_26/PAT_28/PAT_31
+      [END loop=8448]
+
+  pat  27 @ .text+0x016ff PAT_27
+      4:-- 8:g2(19)/i25 8:g2(19)/i25 8:g2(19)/i25 4:g2(19)/i25 [END loop=65284]
+
+  pat  28 @ .text+0x017b4 LEVEL1_2/PAT_26/PAT_28/PAT_31
+      [END loop=8448]
+
+  pat  29 @ .text+0x0170e PAT_29
+      4:-- 8:a2(21)/i25 8:a2(21)/i25 8:a2(21)/i25 4:a2(21)/i25 [END loop=1537]
+
+  pat  30 @ .text+0x0171d PAT_30
+      1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 5:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 5:OFF [END loop=1537]
+
+  pat  31 @ .text+0x017b4 LEVEL1_2/PAT_26/PAT_28/PAT_31
+      [END loop=8448]
+
+  pat  32 @ .text+0x0175e PAT_32
+      1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 5:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:c3(24)/i25 1:c3(24)/i25 1:c3(24)/i25 1:c3(24)/i25 1:c3(24)/i25 1:c3(24)/i25 1:c3(24)/i25 1:c3(24)/i25 [JUMP -> LEVEL1_1]
+
+  pat  33 @ .text+0x017e4 PAT_33
+      32:-- [END loop=1537]
+
+  pat  34 @ .text+0x01868 LEVEL1_3/PAT_34/PAT_35/PAT_36/PAT_37/PAT_39
+      [END loop=10496]
+
+  pat  35 @ .text+0x01868 LEVEL1_3/PAT_34/PAT_35/PAT_36/PAT_37/PAT_39
+      [END loop=10496]
+
+  pat  36 @ .text+0x01868 LEVEL1_3/PAT_34/PAT_35/PAT_36/PAT_37/PAT_39
+      [END loop=10496]
+
+  pat  37 @ .text+0x01868 LEVEL1_3/PAT_34/PAT_35/PAT_36/PAT_37/PAT_39
+      [END loop=10496]
+
+  pat  38 @ .text+0x017e7 PAT_38
+      1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 5:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 5:OFF [END loop=1537]
+
+  pat  39 @ .text+0x01868 LEVEL1_3/PAT_34/PAT_35/PAT_36/PAT_37/PAT_39
+      [END loop=10496]
+
+  pat  40 @ .text+0x01828 PAT_40
+      1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 5:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 8:OFF [JUMP -> LEVEL1_2/PAT_26/PAT_28/PAT_31]
+
+  pat  41 @ .text+0x01898 PAT_41
+      32:c4(36)/i2 [END loop=65312]
+
+  pat  42 @ .text+0x0189c PAT_42
+      32:-- [END loop=7169]
+
+  pat  43 @ .text+0x01968 LEVEL1_4/PAT_43/PAT_46/PAT_47
+      [END loop=12544]
+
+  pat  44 @ .text+0x0189f PAT_44
+      1:e3(28)/i29 1:e4(40)/i29 1:e3(28)/i30 1:e3(28)/i29 1:b3(35)/i29 1:e3(28)/i30 1:c4(36)/i29 1:e3(28)/i30 1:e3(28)/i29 1:e4(40)/i29 1:e3(28)/i29 1:b3(35)/i29 1:e3(28)/i30 1:b3(35)/i30 1:c4(36)/i29 1:e3(28)/i29 1:e3(28)/i29 1:e4(40)/i29 1:e3(28)/i30 1:e3(28)/i29 1:b3(35)/i29 1:e3(28)/i30 1:c4(36)/i29 1:e3(28)/i30 1:e3(28)/i29 1:e4(40)/i29 1:e3(28)/i29 1:b3(35)/i29 1:e3(28)/i30 1:c4(36)/i29 1:a3(33)/i29 1:b3(35)/i29 [END loop=7681]
+
+  pat  45 @ .text+0x01900 PAT_45
+      1:f#3(30)/i29 1:f#4(42)/i29 1:f#3(30)/i30 1:f#3(30)/i29 1:c#4(37)/i29 1:f#3(30)/i30 1:d4(38)/i29 1:f#3(30)/i30 1:f#3(30)/i29 1:f#4(42)/i29 1:f#3(30)/i29 1:c#4(37)/i29 1:f#3(30)/i30 1:c#4(37)/i30 1:d4(38)/i29 1:f#3(30)/i29 1:f#3(30)/i29 1:f#4(42)/i29 1:f#3(30)/i30 1:f#3(30)/i29 1:c#4(37)/i29 1:f#3(30)/i30 1:d4(38)/i29 1:f#3(30)/i30 1:f#3(30)/i29 1:f#4(42)/i29 1:f#3(30)/i29 1:c#4(37)/i29 1:f#3(30)/i30 1:d4(38)/i29 1:b3(35)/i29 1:c#4(37)/i29 [END loop=65312]
+
+  pat  46 @ .text+0x01968 LEVEL1_4/PAT_43/PAT_46/PAT_47
+      [END loop=12544]
+
+  pat  47 @ .text+0x01968 LEVEL1_4/PAT_43/PAT_46/PAT_47
+      [END loop=12544]
+
+  pat  48 @ .text+0x01961 PAT_48
+      32:-- [JUMP -> LEVEL1_3/PAT_34/PAT_35/PAT_36/PAT_37/PAT_39]
+
+  pat  49 @ .text+0x01998 PAT_49
+      32:-- [END loop=11009]
+
+  pat  50 @ .text+0x01ac4 LEVEL1_5/PAT_50/PAT_52/PAT_54/PAT_55
+      [END loop=14592]
+
+  pat  51 @ .text+0x0199b PAT_51
+      1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:c5(48)/i1 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:c5(48)/i1 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:c5(48)/i1 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 1:c5(48)/i1 1:g4(43)/i3 1:g4(43)/i3 1:g4(43)/i3 [END loop=11521]
+
+  pat  52 @ .text+0x01ac4 LEVEL1_5/PAT_50/PAT_52/PAT_54/PAT_55
+      [END loop=14592]
+
+  pat  53 @ .text+0x019fc PAT_53
+      1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:d5(50)/i1 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:d5(50)/i1 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:d5(50)/i1 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:d5(50)/i1 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 [END loop=11521]
+
+  pat  54 @ .text+0x01ac4 LEVEL1_5/PAT_50/PAT_52/PAT_54/PAT_55
+      [END loop=14592]
+
+  pat  55 @ .text+0x01ac4 LEVEL1_5/PAT_50/PAT_52/PAT_54/PAT_55
+      [END loop=14592]
+
+  pat  56 @ .text+0x01a5d PAT_56
+      1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:d5(50)/i1 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:d5(50)/i1 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:d5(50)/i1 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i3 1:a4(45)/i1 1:a4(45)/i1 1:a4(45)/i1 1:a4(45)/i1 1:a4(45)/i1 1:a4(45)/i1 1:a4(45)/i1 1:a4(45)/i1 [JUMP -> LEVEL1_4/PAT_43/PAT_46/PAT_47]
+
+  pat  57 @ .text+0x01af4 PAT_57
+      1:g4(43)/i25 2:g4(43)/i25 1:g4(43)/i25 2:g4(43)/i25 1:g4(43)/i25 2:g4(43)/i25 1:g4(43)/i25 3:g4(43)/i25 1:g4(43)/i26 2:g4(43)/i26 1:g4(43)/i28 2:g4(43)/i28 1:g4(43)/i28 2:g4(43)/i28 1:g4(43)/i28 2:g4(43)/i28 1:g4(43)/i28 3:g4(43)/i28 1:g4(43)/i26 1:g4(43)/i26 1:g4(43)/i26 [END loop=11009]
+
+  pat  58 @ .text+0x01b34 PAT_58
+      1:g4(43)/i25 2:g4(43)/i25 1:g4(43)/i25 2:g4(43)/i25 1:g4(43)/i25 2:g4(43)/i25 1:g4(43)/i25 3:g4(43)/i25 1:g4(43)/i26 2:g4(43)/i26 1:g4(43)/i28 2:g4(43)/i28 1:g4(43)/i28 2:g4(43)/i28 1:g4(43)/i28 2:g4(43)/i28 1:g4(43)/i28 3:g4(43)/i28 1:g4(43)/i26 1:g4(43)/i26 1:g4(43)/i26 [END loop=11521]
+
+  pat  59 @ .text+0x01cc0 LEVEL2_1/PAT_59/PAT_60
+      [END loop=16640]
+
+  pat  60 @ .text+0x01cc0 LEVEL2_1/PAT_59/PAT_60
+      [END loop=16640]
+
+  pat  61 @ .text+0x01b74 PAT_61
+      1:a4(45)/i25 2:a4(45)/i25 1:a4(45)/i25 2:a4(45)/i25 1:a4(45)/i25 2:a4(45)/i25 1:a4(45)/i25 3:a4(45)/i25 1:a4(45)/i26 2:a4(45)/i26 1:a4(45)/i28 2:a4(45)/i28 1:a4(45)/i28 2:a4(45)/i28 1:a4(45)/i28 2:a4(45)/i28 1:a4(45)/i28 3:a4(45)/i28 1:a4(45)/i26 1:a4(45)/i26 1:a4(45)/i26 [END loop=11521]
+
+  pat  62 @ .text+0x01bb4 PAT_62
+      1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i2 1:g4(43)/i1 1:g4(43)/i1 1:g4(43)/i1 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 2:a4(45)/i2 1:a4(45)/i2 1:a4(45)/i2 1:a4(45)/i2 [END loop=11521]
+
+  pat  63 @ .text+0x01c12 PAT_63
+      1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i2 1:g4(43)/i1 1:g4(43)/i1 1:g4(43)/i1 1:g4(43)/i26 1:g4(43)/i26 1:a4(45)/i2 1:g4(43)/i26 1:g4(43)/i26 1:a4(45)/i2 1:g4(43)/i26 1:g4(43)/i26 1:a4(45)/i2 1:g4(43)/i26 1:g4(43)/i26 2:a4(45)/i2 1:a4(45)/i2 1:a4(45)/i2 1:a4(45)/i2 [END loop=11521]
+
+  pat  64 @ .text+0x01c70 PAT_64
+      1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i2 1:a4(45)/i2 1:g4(43)/i1 1:g4(43)/i1 1:g4(43)/i1 1:g4(43)/i26 1:g4(43)/i26 1:a4(45)/i2 1:g4(43)/i26 1:g4(43)/i26 1:a4(45)/i2 1:g4(43)/i26 9:g4(43)/i26 [JUMP -> LEVEL1_5/PAT_50/PAT_52/PAT_54/PAT_55]
+
+  pat  65 @ .text+0x01cf0 PAT_65
+      32:-- [END loop=1537]
+
+  pat  66 @ .text+0x01cf3 PAT_66
+      1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#2(18)/i4 1:e1(4)/i4 1:f1(5)/i4 [END loop=1537]
+
+  pat  67 @ .text+0x01d46 PAT_67
+      1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:b1(11)/i4 1:OFF 1:b1(11)/i4 1:OFF 2:a1(9)/i4 1:e1(4)/i4 1:f1(5)/i4 [END loop=1538]
+
+  pat  68 @ .text+0x01e28 LEVEL2_2/PAT_68/PAT_69
+      [END loop=18432]
+
+  pat  69 @ .text+0x01e28 LEVEL2_2/PAT_68/PAT_69
+      [END loop=18432]
+
+  pat  70 @ .text+0x01d96 PAT_70
+      2:f#1(6)/i4 2:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 2:f#2(18)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:f#2(18)/i4 1:OFF 1:f#1(6)/i4 3:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 2:f#2(18)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:e1(4)/i4 1:f1(5)/i4 [END loop=1538]
+
+  pat  71 @ .text+0x01ddc PAT_71
+      2:f#1(6)/i4 2:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 2:f#2(18)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:f#2(18)/i4 1:OFF 1:f#1(6)/i4 3:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 2:f#2(18)/i4 1:OFF 1:f#1(6)/i4 1:OFF 1:f#1(6)/i4 1:f#1(6)/i4 1:e1(4)/i4 1:f1(5)/i4 [JUMP -> LEVEL2_1/PAT_59/PAT_60]
+
+  pat  72 @ .text+0x01e58 PAT_72
+      32:-- [END loop=1537]
+
+  pat  73 @ .text+0x01f3c LEVEL2_3/PAT_73/PAT_75/PAT_76
+      [END loop=20224]
+
+  pat  74 @ .text+0x01e5b PAT_74
+      1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:b1(11)/i5 1:OFF 1:b1(11)/i5 1:OFF 2:a1(9)/i5 1:e1(4)/i5 1:f1(5)/i5 [END loop=1538]
+
+  pat  75 @ .text+0x01f3c LEVEL2_3/PAT_73/PAT_75/PAT_76
+      [END loop=20224]
+
+  pat  76 @ .text+0x01f3c LEVEL2_3/PAT_73/PAT_75/PAT_76
+      [END loop=20224]
+
+  pat  77 @ .text+0x01eab PAT_77
+      2:f#1(6)/i5 2:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 2:f#2(18)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:f#2(18)/i5 1:OFF 1:f#1(6)/i5 3:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 2:f#2(18)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:e1(4)/i5 1:f1(5)/i5 [END loop=1538]
+
+  pat  78 @ .text+0x01ef1 PAT_78
+      2:f#1(6)/i5 2:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 2:f#2(18)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:f#2(18)/i5 1:OFF 1:f#1(6)/i5 3:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 2:f#2(18)/i5 1:OFF 1:f#1(6)/i5 1:OFF 1:f#1(6)/i5 1:f#1(6)/i5 1:e1(4)/i5 1:f1(5)/i5 [JUMP -> LEVEL2_2/PAT_68/PAT_69]
+
+  pat  79 @ .text+0x01f6c PAT_79
+      32:c4(36)/i2 [END loop=7681]
+
+  pat  80 @ .text+0x0205c LEVEL2_4/PAT_80/PAT_81/PAT_83
+      [END loop=22016]
+
+  pat  81 @ .text+0x0205c LEVEL2_4/PAT_80/PAT_81/PAT_83
+      [END loop=22016]
+
+  pat  82 @ .text+0x01f70 PAT_82
+      1:f#3(30)/i29 1:f#4(42)/i29 1:f#4(42)/i29 1:f#4(42)/i30 1:f#4(42)/i29 1:f#4(42)/i30 1:c#4(37)/i29 1:f#4(42)/i30 1:e4(40)/i29 1:c#4(37)/i30 1:b3(35)/i29 1:c4(36)/i29 1:c#4(37)/i29 1:b3(35)/i30 1:e3(28)/i29 1:c#4(37)/i30 1:f#3(30)/i29 1:f#4(42)/i29 1:f#4(42)/i29 1:f#3(30)/i30 1:f#4(42)/i29 1:f#4(42)/i30 1:c#4(37)/i29 1:f#4(42)/i30 1:e4(40)/i29 1:c#4(37)/i30 1:b3(35)/i29 1:c#4(37)/i30 1:c#4(37)/i29 1:e4(40)/i29 1:c#4(37)/i29 1:c#4(37)/i30 [END loop=4610]
+
+  pat  83 @ .text+0x0205c LEVEL2_4/PAT_80/PAT_81/PAT_83
+      [END loop=22016]
+
+  pat  84 @ .text+0x01fd1 PAT_84
+      2:f#2(18)/i29 1:f#2(18)/i30 1:f#2(18)/i29 2:f#1(6)/i29 2:f#2(18)/i29 2:f#2(18)/i30 2:f#2(18)/i29 1:f#1(6)/i29 1:f#1(6)/i29 1:f#2(18)/i29 1:f#1(6)/i29 2:f#2(18)/i29 1:f#2(18)/i30 1:f#2(18)/i29 2:f#1(6)/i29 2:f#2(18)/i29 2:f#2(18)/i30 2:f#2(18)/i29 1:f#1(6)/i29 1:f#1(6)/i29 1:f#2(18)/i29 1:f#1(6)/i29 [END loop=4610]
+
+  pat  85 @ .text+0x02014 PAT_85
+      2:f#2(18)/i29 1:f#2(18)/i30 1:f#2(18)/i29 2:f#1(6)/i29 2:f#2(18)/i29 2:f#2(18)/i30 2:f#2(18)/i29 1:f#1(6)/i29 1:f#1(6)/i29 1:f#2(18)/i29 1:f#1(6)/i29 2:f#2(18)/i29 1:f#2(18)/i30 1:f#2(18)/i29 2:f#1(6)/i29 2:f#2(18)/i29 2:f#2(18)/i30 2:f#2(18)/i29 1:f#1(6)/i29 1:f#1(6)/i29 1:f#2(18)/i29 1:f#1(6)/i29 [JUMP -> LEVEL2_3/PAT_73/PAT_75/PAT_76]
+
+  pat  86 @ .text+0x0208c PAT_86
+      1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 [END loop=12289]
+
+  pat  87 @ .text+0x020ed PAT_87
+      1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 [END loop=12289]
+
+  pat  88 @ .text+0x021b4 LEVEL2_5/PAT_88/PAT_89/PAT_90/PAT_91
+      [END loop=23808]
+
+  pat  89 @ .text+0x021b4 LEVEL2_5/PAT_88/PAT_89/PAT_90/PAT_91
+      [END loop=23808]
+
+  pat  90 @ .text+0x021b4 LEVEL2_5/PAT_88/PAT_89/PAT_90/PAT_91
+      [END loop=23808]
+
+  pat  91 @ .text+0x021b4 LEVEL2_5/PAT_88/PAT_89/PAT_90/PAT_91
+      [END loop=23808]
+
+  pat  92 @ .text+0x0214e PAT_92
+      1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 1:c5(48)/i3 [JUMP -> LEVEL2_4/PAT_80/PAT_81/PAT_83]
+
+  pat  93 @ .text+0x021e4 PAT_93
+      2:d4(38)/i29 1:d4(38)/i29 1:d4(38)/i29 2:d4(38)/i29 1:d4(38)/i29 1:d4(38)/i29 2:d4(38)/i29 1:d4(38)/i29 1:d4(38)/i29 2:d4(38)/i29 1:d4(38)/i29 1:d4(38)/i29 2:d4(38)/i29 1:d4(38)/i29 1:d4(38)/i29 2:d4(38)/i29 1:d4(38)/i29 1:d4(38)/i29 2:d4(38)/i29 1:d4(38)/i29 1:d4(38)/i29 2:d4(38)/i29 1:d4(38)/i29 1:d4(38)/i29 [END loop=11522]
+
+  pat  94 @ .text+0x0222d PAT_94
+      2:a4(45)/i26 1:a4(45)/i26 1:a4(45)/i26 2:a4(45)/i26 1:a4(45)/i26 1:a4(45)/i26 2:a4(45)/i25 1:a4(45)/i25 1:a4(45)/i25 2:a4(45)/i25 1:a4(45)/i25 1:a4(45)/i25 2:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i27 2:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i27 2:a4(45)/i25 1:a4(45)/i25 1:a4(45)/i25 2:a4(45)/i25 1:a4(45)/i25 1:a4(45)/i25 [END loop=11522]
+
+  pat  95 @ .text+0x02276 PAT_95
+      2:a4(45)/i26 1:a4(45)/i26 1:a4(45)/i26 2:a4(45)/i26 1:a4(45)/i26 1:a4(45)/i26 2:a4(45)/i25 1:a4(45)/i25 1:a4(45)/i25 2:a4(45)/i25 1:a4(45)/i25 1:a4(45)/i25 2:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i27 2:a4(45)/i27 1:a4(45)/i27 1:a4(45)/i27 2:a4(45)/i28 1:a4(45)/i28 1:a4(45)/i28 2:a4(45)/i28 1:a4(45)/i28 1:a4(45)/i28 [END loop=11521]
+
+  pat  96 @ .text+0x02340 PAT_96/PAT_97/wave_saw
+      [END loop=8721]
+
+  pat  97 @ .text+0x02340 PAT_96/PAT_97/wave_saw
+      [END loop=8721]
+
+  pat  98 @ .text+0x022bf PAT_98
+      1:a4(45)/i25 2:a4(45)/i25 1:a4(45)/i25 2:b4(47)/i2 1:b4(47)/i2 3:b4(47)/i2 2:g4(43)/i2 2:g4(43)/i2 2:f4(41)/i2 1:a4(45)/i27 2:a4(45)/i27 1:a4(45)/i27 2:b4(47)/i2 1:b4(47)/i2 3:b4(47)/i2 2:a4(45)/i2 1:g4(43)/i2 1:g4(43)/i2 1:f4(41)/i2 1:f4(41)/i2 [END loop=11521]
+
+  pat  99 @ .text+0x022fc PAT_99
+      1:a4(45)/i25 2:a4(45)/i25 1:a4(45)/i25 2:b4(47)/i2 1:b4(47)/i2 3:b4(47)/i2 2:g4(43)/i2 2:g4(43)/i2 2:f4(41)/i2 1:a4(45)/i2 2:a4(45)/i2 1:g4(43)/i2 2:g4(43)/i2 1:f#4(42)/i2 2:f#4(42)/i2 1:f4(41)/i2 2:f4(41)/i2 1:e4(40)/i2 1:e4(40)/i2 1:e4(40)/i2 1:e4(40)/i2 [JUMP -> LEVEL2_5/PAT_88/PAT_89/PAT_90/PAT_91]
+
+
+[7] STEP LISTS
+
+  blank @ .text+0x014a4
+      step  0: transpose=  +0  pattern=5
+
+  blank1 @ .text+0x014a8
+      step  0: transpose=  +0  pattern=1
+
+  blank2 @ .text+0x014ac
+      step  0: transpose=  +0  pattern=1
+
+  blank3 @ .text+0x014b0
+      step  0: transpose=  +0  pattern=2
+
+  blank4 @ .text+0x014b4
+      step  0: transpose=  +0  pattern=3
+
+  blank5 @ .text+0x014b8
+      step  0: transpose=  +0  pattern=4
+
+  blank6 @ .text+0x014bc
+      step  0: transpose=  +0  pattern=4
+
+  LEVEL1_1 @ .text+0x016cc
+      step  0: transpose=  +0  pattern=25
+      step  1: transpose=  +0  pattern=25
+      step  2: transpose=  +0  pattern=25
+      step  3: transpose=  +0  pattern=27
+      step  4: transpose=  +0  pattern=27
+      step  5: transpose=  +0  pattern=27
+      step  6: transpose=  +0  pattern=29
+      step  7: transpose=  +0  pattern=29
+      step  8: transpose=  +0  pattern=30
+      step  9: transpose=  +0  pattern=30
+      step 10: transpose=  +0  pattern=30
+      step 11: transpose=  +0  pattern=32
+
+  LEVEL1_2 @ .text+0x017b4
+      step  0: transpose=  +0  pattern=33
+      step  1: transpose=  +0  pattern=33
+      step  2: transpose=  +0  pattern=33
+      step  3: transpose=  +0  pattern=33
+      step  4: transpose=  +0  pattern=33
+      step  5: transpose=  +0  pattern=33
+      step  6: transpose=  +0  pattern=33
+      step  7: transpose=  +0  pattern=33
+      step  8: transpose=  +0  pattern=38
+      step  9: transpose=  +0  pattern=38
+      step 10: transpose=  +0  pattern=38
+      step 11: transpose=  +0  pattern=40
+
+  LEVEL1_3 @ .text+0x01868
+      step  0: transpose=  +0  pattern=41
+      step  1: transpose=  +0  pattern=41
+      step  2: transpose=  +0  pattern=42
+      step  3: transpose=  +0  pattern=42
+      step  4: transpose=  +0  pattern=44
+      step  5: transpose=  +0  pattern=44
+      step  6: transpose=  +0  pattern=45
+      step  7: transpose=  +0  pattern=45
+      step  8: transpose=  +0  pattern=42
+      step  9: transpose=  +0  pattern=42
+      step 10: transpose=  +0  pattern=42
+      step 11: transpose=  +0  pattern=48
+
+  LEVEL1_4 @ .text+0x01968
+      step  0: transpose=  +0  pattern=49
+      step  1: transpose=  +0  pattern=49
+      step  2: transpose=  +0  pattern=49
+      step  3: transpose=  +0  pattern=51
+      step  4: transpose=  +0  pattern=51
+      step  5: transpose=  +0  pattern=51
+      step  6: transpose=  +0  pattern=53
+      step  7: transpose=  +0  pattern=53
+      step  8: transpose=  +0  pattern=53
+      step  9: transpose=  +0  pattern=53
+      step 10: transpose=  +0  pattern=53
+      step 11: transpose=  +0  pattern=56
+
+  LEVEL1_5 @ .text+0x01ac4
+      step  0: transpose=  +0  pattern=57
+      step  1: transpose=  +0  pattern=57
+      step  2: transpose=  +0  pattern=58
+      step  3: transpose=  +0  pattern=58
+      step  4: transpose=  +0  pattern=58
+      step  5: transpose=  +0  pattern=58
+      step  6: transpose=  +0  pattern=61
+      step  7: transpose=  +0  pattern=61
+      step  8: transpose=  +0  pattern=62
+      step  9: transpose=  +0  pattern=63
+      step 10: transpose=  +0  pattern=62
+      step 11: transpose=  +0  pattern=64
+
+  LEVEL2_1 @ .text+0x01cc0
+      step  0: transpose=  +0  pattern=65
+      step  1: transpose=  +0  pattern=65
+      step  2: transpose=  +0  pattern=66
+      step  3: transpose=  +0  pattern=67
+      step  4: transpose=  +0  pattern=66
+      step  5: transpose=  +0  pattern=67
+      step  6: transpose=  +0  pattern=66
+      step  7: transpose=  +0  pattern=67
+      step  8: transpose=  +0  pattern=66
+      step  9: transpose=  +0  pattern=67
+      step 10: transpose=  +0  pattern=70
+      step 11: transpose=  +0  pattern=71
+
+  LEVEL2_2 @ .text+0x01e28
+      step  0: transpose=  +0  pattern=72
+      step  1: transpose=  +0  pattern=72
+      step  2: transpose=  +0  pattern=72
+      step  3: transpose=  +0  pattern=74
+      step  4: transpose=  +0  pattern=72
+      step  5: transpose=  +0  pattern=74
+      step  6: transpose=  +0  pattern=72
+      step  7: transpose=  +0  pattern=74
+      step  8: transpose=  +0  pattern=72
+      step  9: transpose=  +0  pattern=74
+      step 10: transpose=  +0  pattern=77
+      step 11: transpose=  +0  pattern=78
+
+  LEVEL2_3 @ .text+0x01f3c
+      step  0: transpose=  +0  pattern=79
+      step  1: transpose=  +0  pattern=79
+      step  2: transpose=  +0  pattern=79
+      step  3: transpose=  +0  pattern=79
+      step  4: transpose=  +0  pattern=79
+      step  5: transpose=  +0  pattern=79
+      step  6: transpose=  +0  pattern=82
+      step  7: transpose=  +0  pattern=82
+      step  8: transpose=  +0  pattern=82
+      step  9: transpose=  +0  pattern=82
+      step 10: transpose=  +0  pattern=84
+      step 11: transpose=  +0  pattern=85
+
+  LEVEL2_4 @ .text+0x0205c
+      step  0: transpose=  +0  pattern=86
+      step  1: transpose=  +0  pattern=86
+      step  2: transpose=  +0  pattern=87
+      step  3: transpose=  +0  pattern=87
+      step  4: transpose=  +0  pattern=87
+      step  5: transpose=  +0  pattern=87
+      step  6: transpose=  +0  pattern=87
+      step  7: transpose=  +0  pattern=87
+      step  8: transpose=  +0  pattern=87
+      step  9: transpose=  +0  pattern=87
+      step 10: transpose=  +0  pattern=87
+      step 11: transpose=  +0  pattern=92
+
+  LEVEL2_5 @ .text+0x021b4
+      step  0: transpose=  +0  pattern=93
+      step  1: transpose=  +0  pattern=93
+      step  2: transpose=  +0  pattern=94
+      step  3: transpose=  +0  pattern=95
+      step  4: transpose=  +0  pattern=94
+      step  5: transpose=  +0  pattern=95
+      step  6: transpose=  +0  pattern=94
+      step  7: transpose=  +0  pattern=95
+      step  8: transpose=  +0  pattern=94
+      step  9: transpose=  +0  pattern=95
+      step 10: transpose=  +0  pattern=98
+      step 11: transpose=  +0  pattern=99
+
+
+[8] FREQUENCY TABLES
+
+  FreqTable @ .text+0xCD0 : 72 x u16 PSG frequency values (rate = 131072/(2048-x))
+    note   0:   44  156  262  363  457  547  631  710  786  854  923  986
+    note  12: 1046 1102 1155 1205 1253 1297 1339 1379 1417 1452 1486 1517
+    note  24: 1546 1575 1602 1627 1650 1673 1694 1714 1732 1750 1767 1783
+    note  36: 1798 1812 1825 1837 1849 1860 1871 1881 1890 1899 1907 1915
+    note  48: 1923 1930 1936 1943 1949 1954 1959 1964 1969 1974 1978 1982
+    note  60: 1985 1988 1992 1995 1998 2001 2004 2006 2009 2011 2013 2015
+
+  sampfreqtab @ .text+0xD60 : 61 x u32 (low half = TMxCNT_L reload, high half = TMxCNT_H = 0x0080)
+    note   0:  4183Hz  4430Hz  4694Hz  4974Hz  5269Hz  5583Hz  5914Hz  6267Hz
+    note   8:  6639Hz  7034Hz  7453Hz  7895Hz  8364Hz  8863Hz  9388Hz  9945Hz
+    note  16: 10538Hz 11170Hz 11832Hz 12539Hz 13284Hz 14075Hz 14913Hz 15798Hz
+    note  24:  4183Hz  4430Hz  4694Hz  4974Hz  5269Hz  5583Hz  5914Hz  6267Hz
+    note  32:  6639Hz  7034Hz  7453Hz  7895Hz  8364Hz  8863Hz  9388Hz  9945Hz
+    note  40: 10538Hz 11170Hz 11832Hz 12539Hz 13284Hz 14075Hz 14913Hz 15798Hz
+    note  48: 16727Hz 17735Hz 18787Hz 19902Hz 21077Hz 22340Hz 23663Hz 25078Hz
+    note  56: 26588Hz 28150Hz 29853Hz 31596Hz 33487Hz

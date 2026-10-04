@@ -1,0 +1,1059 @@
+Super Mario Advance 2 (E): sound data (decoded by nsnd_tool.py; all names are assigned)
+====================================================================================================
+
+SndConfig at 081B3EE4 (driver generation A)
+  +00 sampleBanks        0823C62C
+  +04 instBanks          0823B854
+  +08 songs              0831C108
+  +0C sfxSets            08239C8C
+  +10 instToSampleBank   0823C484
+  +14 songBankMaps       0823C494
+  +18 sfxBankMaps        08239C74
+  instrument bank -> sample bank: [0, 1, 0, 2]
+
+Sample bank 0 at 0823C638: 50 samples
+   #  header    length    rate  loop start  loop end  seconds
+   0  0823C700      662   44100          67       596   0.014
+   1  0823C970      662   44100          67       596   0.014
+   2  0823CBE0     5296   44100         280      3984   0.090
+   3  0823DB80      500   32000          60       492   0.015
+   4  0823DD80     1677   44100         644      1636   0.037
+   5  0823E400     2326   48000         686      2198   0.046
+   6  0823ECB0    10980   84096        3304     10375   0.123
+   7  08241550     2628   44100         323      2438   0.055
+   8  08241EF0     2999   48000          68      2947   0.061
+   9  08242A90      559   44100           0       529   0.012
+  10  08242CC0      221   44100           0       198   0.004
+  11  08242DA0      334   10512           0       315   0.030
+  12  08242EF0     2803   44100           -         -   0.064
+  13  08243A00     1966   10512        1301      1875   0.178
+  14  08244170    15568   44100        7517     14900   0.338
+  15  08247BC0    11468   32000        6758     11462   0.358
+  16  0824A8A0     6372   32000           -         -   0.199
+  17  0824C1A0     4170   44100           -         -   0.095
+  18  0824D200      266   48000           3       219   0.005
+  19  0824D2F0      844   48000          11       697   0.015
+  20  0824D5C0     3662   32000           -         -   0.114
+  21  0824E420      742   10512           -         -   0.071
+  22  0824E720    10994   16000       10933     10994   0.687
+  23  08251230     3158   32000           -         -   0.099
+  24  08251EA0     3716   32000           -         -   0.116
+  25  08252D40    89184   48000           -         -   1.858
+  26  082689B0    11080   44100           -         -   0.251
+  27  0826B510     4480   48000           -         -   0.093
+  28  0826C6A0     4552   32000           -         -   0.142
+  29  0826D880      783   10512         508       723   0.069
+  30  0826DB70     1467   10512           -         -   0.140
+  31  0826E140     4737   32000        2324      4724   0.148
+  32  0826F3D0    19097   32000        8645     19061   0.596
+  33  08273E60     5331   32000           -         -   0.167
+  34  08275350     9483   32000           -         -   0.296
+  35  08277870     5848   32000           -         -   0.183
+  36  08278F60    11080   44100           -         -   0.251
+  37  0827BAC0    47974   10512         457     11327   1.078
+  38  0827E710    10319   44100           -         -   0.234
+  39  08280F70     5304   32000           -         -   0.166
+  40  08282440     1772   10512           -         -   0.169
+  41  08282B40     1972   10512           -         -   0.188
+  42  08283310     1784   10512           -         -   0.170
+  43  08283A20    12094   44100           -         -   0.274
+  44  08286970      499   32000           1       481   0.015
+  45  08286B70      233   48000           0       218   0.005
+  46  08286C60     4314   48000           0       109   0.002
+  47  08286CE0    31732   10512          18     31721   3.018
+  48  0828E8E0    12091   32000           -         -   0.378
+  49  08291830      748   48000          87       669   0.014
+
+Sample bank 1 at 08291AE8: 5 samples
+   #  header    length    rate  loop start  loop end  seconds
+   0  08291AFC     1772   10512           -         -   0.169
+   1  082921FC     1784   10512           -         -   0.170
+   2  0829290C     1972   10512           -         -   0.188
+   3  082930DC      742   10512           -         -   0.071
+   4  082933DC     1083   10512           -         -   0.103
+
+Sample bank 2 at 08293838: 59 samples
+   #  header    length    rate  loop start  loop end  seconds
+   0  08293924    18209   10512           -         -   1.732
+   1  08298064    17580   10512           -         -   1.672
+   2  0829C524     5037   10512           -         -   0.479
+   3  0829D8E4    12864   10512           -         -   1.224
+   4  082A0B34    12818   10512           -         -   1.219
+   5  082A3D64     7664   10512           -         -   0.729
+   6  082A5B64    19580   10512           -         -   1.863
+   7  082AA7F4    22726   10512           -         -   2.162
+   8  082B00D4    13669   10512           -         -   1.300
+   9  082B3654    10933   10512           -         -   1.040
+  10  082B6124     7281   10512           -         -   0.693
+  11  082B7DB4     9566   10512           -         -   0.910
+  12  082BA324     9606   10512           -         -   0.914
+  13  082BC8C4     6728   10512           -         -   0.640
+  14  082BE324    27046   10512           -         -   2.573
+  15  082C4CE4    24875   10512           -         -   2.366
+  16  082CAE24     6907   10512           -         -   0.657
+  17  082CC934     6819   10512           -         -   0.649
+  18  082CE3F4     1654   10512           -         -   0.157
+  19  082CEA84     1311   10512           -         -   0.125
+  20  082CEFB4     1155   10512           -         -   0.110
+  21  082CF454     1658   10512           -         -   0.158
+  22  082CFAE4     1454   10512           -         -   0.138
+  23  082D00A4     3266   10512           -         -   0.311
+  24  082D0D84    12998   10512           -         -   1.236
+  25  082D4064    13428   10512           -         -   1.277
+  26  082D74F4     5639   10512           -         -   0.536
+  27  082D8B14     5805   10512           -         -   0.552
+  28  082DA1D4     6617   10512           -         -   0.629
+  29  082DBBC4     8466   10512           -         -   0.805
+  30  082DDCF4    10818   10512           -         -   1.029
+  31  082E0754    12012   10512           -         -   1.143
+  32  082E3654    15415   10512           -         -   1.466
+  33  082E72A4    14935   10512           -         -   1.421
+  34  082EAD14     8275   10512           -         -   0.787
+  35  082ECD84     6409   10512           -         -   0.610
+  36  082EE6A4    10476   10512           -         -   0.997
+  37  082F0FA4    10232   10512           -         -   0.973
+  38  082F37B4     8384   10512           -         -   0.798
+  39  082F5884     6829   10512           -         -   0.650
+  40  082F7344     8305   10512           -         -   0.790
+  41  082F93D4     5480   10512           -         -   0.521
+  42  082FA954    14584   10512           -         -   1.387
+  43  082FE264    10064   10512           -         -   0.957
+  44  083009C4    28214   10512           -         -   2.684
+  45  08307814     6194   10512           -         -   0.589
+  46  08309064     5108   10512           -         -   0.486
+  47  0830A474     5360   10512           -         -   0.510
+  48  0830B974     5592   10512           -         -   0.532
+  49  0830CF64     4924   10512           -         -   0.468
+  50  0830E2B4     4409   10512           -         -   0.419
+  51  0830F404     4003   10512           -         -   0.381
+  52  083103C4     8576   10512           -         -   0.816
+  53  08312554     7864   10512           -         -   0.748
+  54  08314424     3324   10512           -         -   0.316
+  55  08315134     6408   10512           -         -   0.610
+  56  08316A54     7513   10512           -         -   0.715
+  57  083187C4     8266   10512           -         -   0.786
+  58  0831A824     6339   10512           -         -   0.603
+
+Instrument bank 0 at 0823B864: 128 program slots, 30 used by the sequences
+  prog   0  +01F8 sample     sample 12, root C3, release 0, flags 00, env [3>7FFF 1>6D60 1000>6D60 hold]
+  prog   1  +0200 sample     sample 1, root E4, release 0, flags 00, env [1>7FFF 2>3E80 2>1F40 2>0FA0 2>0000 hold]   keys used: G1-G#4 (15)
+  prog   2  +0208 sample     sample 5, root E4, release 0, flags 00, env [1>7FFF 2>3E80 2>1F40 2>0FA0 2>0000 hold]   keys used: C2-G5 (30)
+  prog   3  +0210 sample     sample 7, root E2, release 60, flags 00, env [2>7FFF 5>6D60 hold]   keys used: C1-C5 (32)
+  prog   4  +0218 sample     sample 1, root E4, release 0, flags 00, env [1>7FFF hold]   keys used: C3-G4 (20)
+  prog   5  +0220 sample     sample 44, root E3, release 0, flags 00, env [1>7FFF 2>3E80 hold]   keys used: E0-C4 (21)
+  prog   6  +0228 sample     sample 4, root E4, release 20, flags 00, env [2>7FFF 5>6D60 hold]   keys used: G2-F5 (16)
+  prog   7  +0230 sample     sample 12, root C3, release 0, flags 00, env [1>7FFF hold]   keys used: D0-E5 (17)
+  prog   8  +0238 sample     sample 1, root E3, release 0, flags 00, env [1>7FFF hold]   keys used: C2-A4 (20)
+  prog   9  +0240 sample     sample 23, root C4, release 0, flags 00, env [1>7FFF hold]
+  prog  10  +0248 sample     sample 17, root C4, release 0, flags 00, env [1>7FFF hold]   keys used: E0-D#3 (17)
+  prog  11  +0250 sample     sample 17, root G3, release 255, flags 00, env [1>7FFF hold]   keys used: D0-G3 (19)
+  prog  12  +0258 sample     sample 20, root C3, release 0, flags 00, env [1>7FFF hold]   keys used: C2-F4 (2)
+  prog  13  +0260 sample     sample 1, root E4, release 0, flags 00, env [1>7FFF hold]   keys used: G2-C5 (3)
+  prog  14  +0268 sample     sample 24, root C4, release 0, flags 00, env [1>7FFF hold]
+  prog  15  +0270 sample     sample 3, root E4, release 0, flags 00, env [1>7FFF hold]   keys used: F3-A#4 (10)
+  prog  16  +0278 sample     sample 4, root E4, release 0, flags 00, env [1>7FFF hold]
+  prog  17  +0280 sample     sample 26, root C3, release 0, flags 00, env [1>7FFF hold]   keys used: C0-C3 (29)
+  prog  18  +0288 sample     sample 4, root E4, release 0, flags 00, env [1>7FFF 10>6D60 20>0000 hold]   keys used: C3-B4 (13)
+  prog  19  +0290 sample     sample 4, root E4, release 0, flags 00, env [2>7FFF 12>6D60 2>4E20 1>2EE0 1>1770 1>0000 hold]   keys used: A-1-E2 (3)
+  prog  20  +0298 sample     sample 5, root C4, release 0, flags 00, env [2>7FFF 12>6D60 2>4E20 1>2EE0 1>1770 1>0000 hold]   keys used: G2-F3 (3)
+  prog  21  +02A0 sample     sample 5, root C4, release 0, flags 00, env [1>7FFF hold]   keys used: G2-F#4 (24)
+  prog  22  +02A8 sample     sample 7, root E2, release 60, flags 00, env [1>7FFF 8>5DC0 10>2EE0 12>0000 hold]
+  prog  23  +02B0 sample     sample 43, root C3, release 100, flags 00, env [1>7FFF hold]   keys used: G5-G5 (1)
+  prog  30  +02B8 sample     sample 4, root E4, release 0, flags 00, env [6>7FFF 2>7FFF 2>3E80 2>1F40 2>0FA0 2>0000 hold]   keys used: A2-A2 (1)
+  prog  31  +02C0 sample     sample 37, root C3, release 0, flags 00, env [1>7FFF hold]   keys used: G1-C5 (11)
+  prog  32  +02C8 sample     sample 1, root E4, release 0, flags 00, env [1>7FFF 2>3E80 2>7FFF 2>3E80 2>1F40 2>0FA0 2>07D0 2>0000 hold]   keys used: G2-G5 (4)
+  prog  33  +02D0 sample     sample 5, root C4, release 0, flags 00, env [5>7FFF 2>3E80 2>1F40 2>0FA0 2>0000 hold]   keys used: C#3-G3 (2)
+  prog  34  +02D8 sample     sample 5, root E4, release 105, flags 00, env [1>7FFF hold]   keys used: B4-E5 (2)
+  prog  35  +02E0 noise      duty/mode 0, root C3, release 100, flags 00, env [1>7FFF hold]   keys used: G#1-G#1 (1)
+  prog  36  +02E8 sample     sample 5, root E3, release 0, flags 00, env [2>7FFF 5>6D60 hold]
+  prog  92  +02F0 sample     sample 42, root E3, release 100, flags 00, env [1>7FFF hold]
+  prog 100  +02F8 sample     sample 46, root A2, release 0, flags 00, env [1>7FFF hold]   keys used: A3-E4 (4)
+  prog 101  +0300 wave       wave @+1E8, root C2, release 0, flags 00, env [1>7FFF hold]   keys used: F#4-F#5 (4)
+  prog 102  +0308 square2    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF hold]   keys used: F#3-F#4 (4)
+  prog 108  +0310 sample     sample 5, root E4, release 0, flags 00, env [1>7FFF 2>3E80 2>1F40 2>0FA0 2>0000 hold]   keys used: D4-G5 (11)
+  prog 115  +0318 sample     sample 6, root B1, release 100, flags 00, env [3>7FFF 1>6D60 1000>6D60 hold]
+  prog 118  +0320 sample     sample 1, root E3, release 100, flags 00, env [1>7FFF hold]   keys used: D4-A4 (2)
+  prog 127  +0328 drum kit   table @+1E0, first key C-1
+
+Instrument bank 1 at 0823BBA4: 131 program slots, 34 used by the sequences
+  prog   0  +01D8 square2    duty/mode 0, root C2, release 0, flags 00, env [1>7FFF 60>2D50 hold]   keys used: F#3-G3 (2)
+  prog   1  +01E0 square2    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: C#0-G#6 (47)
+  prog   2  +01E8 square1    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold], sweep 08   keys used: G1-F#3 (11)
+  prog   3  +01F4 noise      duty/mode 0, root C3, release 0, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: D#1-C3 (14)
+  prog   4  +01FC square1    duty/mode 0, root C2, release 0, flags 00, env [1>7FFF 60>2D50 hold], sweep 08   keys used: C2-G3 (10)
+  prog   5  +0208 square1    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold], sweep 08   keys used: G0-C6 (57)
+  prog   6  +0214 square1    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold], sweep 16   keys used: G1-B2 (14)
+  prog   7  +0220 square1    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold], sweep 2B   keys used: E0-C3 (9)
+  prog   8  +022C square1    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 60>2D50 hold], sweep 08   keys used: C1-E4 (29)
+  prog   9  +0238 square1    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 20>0000 hold], sweep 3F   keys used: B1-G#2 (2)
+  prog  10  +0244 square1    duty/mode 0, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold], sweep 3F   keys used: G0-B2 (12)
+  prog  11  +0250 wave       wave @+1B8, root C2, release 30, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: G0-G3 (32)
+  prog  12  +0258 wave       wave @+1C8, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: G1-D2 (4)
+  prog  13  +0260 wave       wave @+178, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: D1-G3 (20)
+  prog  14  +0268 wave       wave @+188, root C2, release 10, flags 00, env [1>7FFF 32767>7FFF hold]
+  prog  15  +0270 wave       wave @+198, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: A1-G5 (16)
+  prog  16  +0278 noise      duty/mode 1, root C3, release 0, flags 00, env [1>7FFF 32767>7FFF hold]
+  prog  17  +0280 square1    duty/mode 2, root C2, release 50, flags 00, env [1>7FFF 80>2D40 hold], sweep 08   keys used: D2-G3 (15)
+  prog  18  +028C square2    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 20>0000 hold]   keys used: E2-D5 (9)
+  prog  19  +0294 square1    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 10>0000 hold], sweep 08
+  prog  20  +02A0 square2    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 10>0000 hold]   keys used: C0-C#4 (38)
+  prog  21  +02A8 noise      duty/mode 0, root C3, release 0, flags 00, env [8>7FFF hold]   keys used: D#1-D#1 (1)
+  prog  22  +02B0 noise      duty/mode 0, root C3, release 0, flags 00, env [1>7FFF 15>0000 hold]   keys used: B0-B0 (1)
+  prog  23  +02B8 square1    duty/mode 2, root C2, release 60, flags 00, env [1>7FFF 3>19C8 hold], sweep 08   keys used: D2-D5 (31)
+  prog  24  +02C4 square2    duty/mode 0, root C2, release 60, flags 00, env [1>7FFF 3>19C8 hold]   keys used: D2-G4 (26)
+  prog  25  +02CC square1    duty/mode 0, root C2, release 0, flags 00, env [1>7FFF 20>0000 hold], sweep 08   keys used: F#0-G3 (2)
+  prog  26  +02D8 square1    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 10>0000 hold], sweep 08   keys used: F1-G5 (9)
+  prog  27  +02E4 square1    duty/mode 0, root C2, release 0, flags 00, env [1>7FFF 20>0000 hold], sweep 3F   keys used: A2-A2 (1)
+  prog  28  +02F0 square2    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 60>2D50 hold]   keys used: C#0-D3 (15)
+  prog  29  +02F8 square2    duty/mode 1, root C2, release 0, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: C0-A#4 (26)
+  prog  30  +0300 square1    duty/mode 0, root C2, release 60, flags 00, env [1>7FFF 3>19C8 hold], sweep 08   keys used: B1-G4 (27)
+  prog  31  +030C square2    duty/mode 0, root C2, release 0, flags 00, env [10>7FFF hold]   keys used: G4-G4 (1)
+  prog  32  +0314 square2    duty/mode 2, root C2, release 0, flags 00, env [1>7FFF 80>2D40 hold]   keys used: G2-G2 (1)
+  prog  92  +031C sample     sample 1, root C2, release 100, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: G#0-C2 (3)
+  prog 124  +0324 sample     sample 0, root F#1, release 100, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: C2-G2 (3)
+  prog 127  +032C drum kit   table @+16C, first key C1   keys used: C1-D1 (3)
+  prog 128  +0334 sample     sample 3, root C3, release 0, flags 00, env [1>7FFF 32767>7FFF hold]
+  prog 129  +033C sample     sample 4, root C3, release 0, flags 00, env [1>7FFF 32767>7FFF hold]
+  prog 130  +0344 sample     sample 2, root C3, release 0, flags 00, env [1>7FFF 32767>7FFF hold]   keys used: C2-D2 (2)
+
+Instrument bank 2 at 0823BF04: 145 program slots, 54 used by the sequences
+  prog   1  +0294 sample     sample 1, root E2, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: C1-F3 (13)
+  prog   3  +029C sample     sample 5, root E3, release 100, flags 00, env [2>7D00 20>2EE0 hold]   keys used: F-1-E4 (48)
+  prog   4  +02A4 sample     sample 7, root E2, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: B-1-F4 (52)
+  prog   6  +02AC sample     sample 44, root E3, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: C#1-C4 (32)
+  prog   8  +02B4 sample     sample 11, root C0, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: G-1-D2 (29)
+  prog  10  +02BC sample     sample 39, root C3, release 100, flags 00, env [1>7FFF hold]   keys used: F-1-G#-1 (4)
+  prog  11  +02C4 sample     sample 3, root E3, release 0, flags 00, env [1>7FFF hold]
+  prog  12  +02CC sample     sample 33, root G2, release 100, flags 00, env [1>7FFF hold]   keys used: B0-A3 (24)
+  prog  13  +02D4 sample     sample 18, root E3, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: G1-G4 (18)
+  prog  14  +02DC sample     sample 29, root D2, release 100, flags 00, env [1>7FFF hold]   keys used: E-1-E1 (12)
+  prog  16  +02E4 sample     sample 22, root C3, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: G2-G4 (9)
+  prog  17  +02EC sample     sample 31, root G2, release 100, flags 00, env [2>7FFF 20>5DC0 40>2710 60>0000 hold]   keys used: C#0-A3 (34)
+  prog  28  +02F4 sample     sample 32, root C2, release 100, flags 00, env [2>7FFF 600>2EE0 hold]
+  prog  29  +02FC sample     sample 8, root E0, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: C-1-A#3 (38)
+  prog  30  +0304 sample     sample 9, root E3, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: A1-F4 (20)
+  prog  31  +030C sample     sample 3, root E3, release 100, flags 00, env [60>7FFF 70>7530 60>4E20 60>2710 150>0190 180>0000 hold]   keys used: D1-C#4 (22)
+  prog  32  +0314 sample     sample 8, root E0, release 100, flags 00, env [2>7FFF 40>6D60 46>2EE0 48>1770 50>0000 hold]   keys used: B0-B0 (1)
+  prog  33  +031C sample     sample 31, root G2, release 100, flags 00, env [2>7FFF 40>5DC0 60>2710 80>0000 hold]   keys used: B3-B3 (1)
+  prog  34  +0324 sample     sample 7, root E1, release 100, flags 00, env [2>7FFF 50>5DC0 83>2710 95>07D0 105>0000 hold]   keys used: G#1-G#2 (6)
+  prog  35  +032C sample     sample 14, root D#1, release 100, flags 00, env [1>7FFF hold]   keys used: D#1-D#1 (1)
+  prog  36  +0334 sample     sample 4, root E4, release 0, flags 00, env [2>7FFF 9>4650 6>2EE0 6>1770 6>0BB8 6>0000 hold]
+  prog  37  +033C sample     sample 2, root E0, release 0, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: G0-G#0 (2)
+  prog  38  +0344 sample     sample 25, root C-1, release 90, flags 00, env [1>7FFF hold]   keys used: C#0-G#0 (4)
+  prog  39  +034C sample     sample 19, root G#1, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: B0-C3 (20)
+  prog  40  +0354 sample     sample 45, root E4, release 100, flags 00, env [2>7FFF 12>1770 hold]   keys used: G1-E4 (18)
+  prog  41  +035C sample     sample 9, root E3, release 100, flags 00, env [2>7FFF 12>1770 hold]   keys used: D#1-E4 (25)
+  prog  42  +0364 sample     sample 10, root E4, release 100, flags 00, env [2>7FFF 12>1770 hold]   keys used: G2-G#4 (20)
+  prog  43  +036C sample     sample 47, root C3, release 100, flags 00, env [1>7FFF hold]   keys used: C3-C3 (1)
+  prog  45  +0374 sample     sample 3, root E3, release 0, flags 00, env [2>7FFF 40>5DC0 60>2710 80>0000 hold]   keys used: G#1-A#3 (26)
+  prog  47  +037C sample     sample 4, root E4, release 0, flags 00, env [2>7FFF 14>4E20 12>2EE0 12>1770 12>0BB8 12>0000 hold]   keys used: C3-C4 (7)
+  prog  48  +0384 sample     sample 4, root E4, release 0, flags 00, env [2>7FFF 10>2EE0 hold]   keys used: D1-E4 (32)
+  prog  50  +038C sample     sample 18, root E3, release 100, flags 00, env [2>7FFF 20>5DC0 40>2710 60>0000 hold]   keys used: C1-G3 (26)
+  prog  53  +0394 sample     sample 1, root E3, release 100, flags 00, env [2>7FFF 40>5DC0 60>2710 80>0000 hold]   keys used: D2-E5 (34)
+  prog  55  +039C sample     sample 3, root E3, release 0, flags 00, env [2>7FFF 70>7530 20>3A98 10>1D4C 10>0EA6 10>0708 10>0384 10>0000 hold]   keys used: A0-E3 (5)
+  prog  58  +03A4 sample     sample 11, root C0, release 200, flags 00, env [2>7FFF 50>5DC0 83>2710 95>07D0 105>0000 hold]   keys used: C1-C2 (7)
+  prog  59  +03AC sample     sample 5, root E3, release 150, flags 00, env [2>7FFF 14>4E20 12>2EE0 12>1770 12>0BB8 12>0000 hold]   keys used: C3-E4 (11)
+  prog  61  +03B4 sample     sample 9, root E3, release 255, flags 00, env [2>7FFF 12>1770 hold]   keys used: C#2-F3 (4)
+  prog  62  +03BC sample     sample 10, root E4, release 255, flags 00, env [2>7FFF 12>1770 hold]   keys used: C#4-C#4 (1)
+  prog  63  +03C4 sample     sample 11, root C0, release 255, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: C#0-C#0 (1)
+  prog  64  +03CC sample     sample 7, root E1, release 255, flags 00, env [2>7FFF 12>1770 hold]   keys used: F1-B1 (2)
+  prog  65  +03D4 sample     sample 3, root E3, release 0, flags 00, env [2>7FFF 14>4E20 12>2EE0 12>1770 12>0BB8 12>0000 hold]   keys used: C2-A#3 (16)
+  prog  66  +03DC sample     sample 3, root E3, release 200, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: G0-D4 (5)
+  prog  75  +03E4 sample     sample 49, root E3, release 0, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: G#1-C3 (10)
+  prog  87  +03EC sample     sample 7, root E1, release 100, flags 00, env [2>7FFF 12>1770 hold]   keys used: C0-E4 (47)
+  prog  88  +03F4 sample     sample 7, root E1, release 100, flags 00, env [30>7FFF hold]
+  prog  91  +03FC sample     sample 15, root E3, release 100, flags 00, env [2>7FFF 10>2EE0 hold]   keys used: C0-C4 (39)
+  prog  92  +0404 sample     sample 42, root E3, release 100, flags 00, env [1>7FFF hold]
+  prog  94  +040C sample     sample 24, root C3, release 100, flags 00, env [1>7FFF hold]   keys used: A0-A2 (6)
+  prog  96  +0414 sample     sample 13, root D2, release 100, flags 00, env [1>7FFF hold]   keys used: A1-G4 (26)
+  prog  97  +041C sample     sample 30, root G3, release 100, flags 00, env [1>7FFF hold]   keys used: F#0-B1 (7)
+  prog 102  +0424 sample     sample 7, root E1, release 100, flags 00, env [2>7FFF 12>1770 hold]   keys used: C0-C#3 (29)
+  prog 106  +042C sample     sample 16, root F#3, release 100, flags 00, env [2>7D00 20>2EE0 hold]   keys used: G-1-A4 (55)
+  prog 107  +0434 sample     sample 4, root E4, release 0, flags 00, env [2>7FFF 10>2EE0 hold]   keys used: C1-G#4 (40)
+  prog 109  +043C sample     sample 29, root D3, release 100, flags 00, env [1>7FFF hold]   keys used: G0-A3 (26)
+  prog 113  +0444 sample     sample 41, root C3, release 100, flags 00, env [1>7FFF hold]
+  prog 115  +044C sample     sample 6, root B1, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: E2-C4 (15)
+  prog 119  +0454 sample     sample 1, root E3, release 100, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: D1-B4 (40)
+  prog 124  +045C sample     sample 40, root E3, release 100, flags 00, env [1>7FFF hold]
+  prog 125  +0464 sample     sample 3, root E3, release 0, flags 00, env [2>7FFF 600>2EE0 hold]   keys used: G-1-G#4 (58)
+  prog 127  +046C drum kit   table @+250, first key C1   keys used: C1-G2 (17)
+  prog 128  +0474 sample     sample 21, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 129  +047C sample     sample 20, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 130  +0484 sample     sample 17, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 131  +048C sample     sample 12, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 132  +0494 sample     sample 21, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 133  +049C sample     sample 12, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 134  +04A4 sample     sample 27, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 135  +04AC sample     sample 48, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 136  +04B4 sample     sample 28, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 137  +04BC sample     sample 38, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 138  +04C4 sample     sample 35, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 139  +04CC sample     sample 34, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 140  +04D4 sample     sample 0, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 141  +04DC sample     sample 34, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 142  +04E4 sample     sample 27, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 143  +04EC sample     sample 12, root C3, release 0, flags 00, env [1>7FFF hold]
+  prog 144  +04F4 sample     sample 35, root C3, release 0, flags 00, env [1>7FFF hold]
+
+Instrument bank 3 at 0823C404: 2 program slots, 1 used by the sequences
+  prog   0  +007C sample kit table @+4   keys used: C-1-A#3 (57)
+
+Songs (67)
+  song  0 at 0831C214: 9 track slots, bank map 0823C5A0 [2, 3, 2, 3], first tempo 140
+    track 0 at 0831D039: 103 events, 0 notes, loops, 10128 ticks (loop at tick 7248), programs []
+    track 1 at 0831D0B2: 522 events, 320 notes, loops, 10128 ticks (loop at tick 7248), programs [45, 48, 53, 87]
+    track 2 at 0831D3DC: 432 events, 251 notes, loops, 10128 ticks (loop at tick 7248), programs [45, 48, 53, 87]
+    track 3 at 0831D691: 496 events, 308 notes, loops, 10128 ticks (loop at tick 7248), programs [6, 8, 45, 87, 97]
+    track 4 at 0831D95C: 1106 events, 591 notes, loops, 10128 ticks (loop at tick 7248), programs [3, 8, 53, 87, 97]
+    track 5 at 0831DC84: 275 events, 166 notes, loops, 10128 ticks (loop at tick 7248), programs [45, 48, 53, 91]
+    track 6 at 0831DE10: 608 events, 460 notes, loops, 10128 ticks (loop at tick 7248), programs [12, 48, 53, 91, 97]
+    track 7 at 0831E224: 163 events, 55 notes, loops, 10128 ticks (loop at tick 7248), programs [3, 43, 97, 127]
+    track 8 at 0831E284: 552 events, 265 notes, loops, 10128 ticks (loop at tick 7248), programs [127]
+  song  1 at 0831E3F4: 9 track slots, bank map 0823C5A4 [2, 3, 2, 2], first tempo 140
+    track 0 at 0831F219: 93 events, 0 notes, loops, 9888 ticks (loop at tick 7008), programs []
+    track 1 at 0831F27D: 396 events, 258 notes, loops, 9888 ticks (loop at tick 7008), programs [45, 48, 53]
+    track 2 at 0831F4A3: 296 events, 184 notes, loops, 9888 ticks (loop at tick 7008), programs [45, 48, 53]
+    track 3 at 0831F641: 460 events, 291 notes, loops, 9888 ticks (loop at tick 7008), programs [6, 8, 45, 53]
+    track 4 at 0831F8C7: 1242 events, 659 notes, loops, 9888 ticks (loop at tick 7008), programs [3, 8, 53, 87, 97]
+    track 5 at 0831FC90: 228 events, 144 notes, loops, 9888 ticks (loop at tick 7008), programs [45, 48, 53]
+    track 6 at 0831FDC1: 775 events, 546 notes, loops, 9888 ticks (loop at tick 7008), programs [12, 53, 97]
+    track 7 at 08320337: 138 events, 44 notes, loops, 9888 ticks (loop at tick 7008), programs [43, 97, 127]
+    track 8 at 08320361: 519 events, 245 notes, loops, 9888 ticks (loop at tick 7008), programs [6, 127]
+  song  2 at 08320494: 7 track slots, bank map 0823C5A8 [2, 2, 2, 2], first tempo 200
+    track 0 at 083204A4: 3 events, 0 notes, loops, 5760 ticks (loop at tick 2880), programs []
+    track 1 at 083204AF: 148 events, 140 notes, loops, 5760 ticks (loop at tick 2880), programs [48, 53]
+    track 2 at 083205F6: 104 events, 94 notes, loops, 5760 ticks (loop at tick 2880), programs [48, 53]
+    track 3 at 083206E3: 161 events, 150 notes, loops, 5760 ticks (loop at tick 2880), programs [6, 8]
+    track 4 at 08320832: 209 events, 200 notes, loops, 5760 ticks (loop at tick 2880), programs [8, 87]
+    track 5 at 083209DA: 91 events, 82 notes, loops, 5760 ticks (loop at tick 2880), programs [48, 53]
+    track 6 at 08320AA7: 380 events, 368 notes, loops, 5760 ticks (loop at tick 2880), programs [12, 97]
+  song  3 at 08320E54: 9 track slots, bank map 0823C5AA [2, 2, 2, 2], first tempo 132
+    track 0 at 08320E68: 126 events, 0 notes, loops, 6108 ticks (loop at tick 4572), programs []
+    track 1 at 08320F6D: 474 events, 275 notes, loops, 6108 ticks (loop at tick 4572), programs [48, 50, 87, 91]
+    track 2 at 083212D0: 450 events, 263 notes, loops, 6108 ticks (loop at tick 4572), programs [48, 50, 87, 91]
+    track 3 at 083215F6: 301 events, 188 notes, loops, 6108 ticks (loop at tick 4572), programs [48, 50, 87, 91]
+    track 4 at 083217FF: 406 events, 279 notes, loops, 6108 ticks (loop at tick 4572), programs [12, 50, 53, 65, 97]
+    track 5 at 08321AFD: 323 events, 158 notes, loops, 6108 ticks (loop at tick 4572), programs [8]
+    track 6 at 08321D6E: 212 events, 102 notes, loops, 6108 ticks (loop at tick 4572), programs [53, 65]
+    track 7 at 08321F32: 708 events, 394 notes, loops, 6108 ticks (loop at tick 4572), programs [45, 97, 127]
+    track 8 at 08322456: 442 events, 314 notes, loops, 6108 ticks (loop at tick 4572), programs [127]
+  song  4 at 08322714: 7 track slots, bank map 0823C5AC [2, 2, 2, 2], first tempo 212
+    track 0 at 08322724: 9 events, 0 notes, ends, 2688 ticks, programs []
+    track 1 at 08322739: 347 events, 168 notes, ends, 2688 ticks, programs [3, 48, 53, 87]
+    track 2 at 083229F7: 370 events, 167 notes, ends, 2688 ticks, programs [3, 48, 53, 87]
+    track 3 at 08322CE4: 238 events, 102 notes, ends, 2688 ticks, programs [6, 45]
+    track 4 at 08322EC3: 230 events, 112 notes, ends, 2688 ticks, programs [8]
+    track 5 at 08323063: 230 events, 98 notes, ends, 2688 ticks, programs [6, 45]
+    track 6 at 08323236: 242 events, 99 notes, ends, 2688 ticks, programs [12, 97]
+  song  5 at 08323434: 7 track slots, bank map 0823C5AE [2, 2, 2, 2], first tempo 180
+    track 0 at 08323444: 3 events, 0 notes, loops, 2304 ticks (loop at tick 1152), programs []
+    track 1 at 0832344D: 67 events, 62 notes, loops, 2304 ticks (loop at tick 1152), programs [102]
+    track 2 at 083234BE: 132 events, 126 notes, loops, 2304 ticks (loop at tick 1152), programs [106]
+    track 3 at 083235A5: 103 events, 98 notes, loops, 2304 ticks (loop at tick 1152), programs [127]
+    track 4 at 0832364C: 172 events, 142 notes, loops, 2304 ticks (loop at tick 1152), programs [109, 115]
+    track 5 at 08323771: 64 events, 58 notes, loops, 2304 ticks (loop at tick 1152), programs [96]
+    track 6 at 083237DA: 64 events, 58 notes, loops, 2304 ticks (loop at tick 1152), programs [96]
+  song  6 at 08323854: 8 track slots, bank map 0823C5B0 [2, 2, 2, 2], first tempo 150
+    track 0 at 08323866: 4 events, 0 notes, loops, 4788 ticks (loop at tick 2484), programs []
+    track 1 at 08323874: 343 events, 293 notes, loops, 4788 ticks (loop at tick 2484), programs [3, 107, 119, 125]
+    track 2 at 08323AED: 561 events, 514 notes, loops, 4788 ticks (loop at tick 2484), programs [3, 107, 119, 125]
+    track 3 at 08323EE0: 144 events, 128 notes, loops, 4788 ticks (loop at tick 2484), programs [87, 125]
+    track 4 at 08324020: 284 events, 258 notes, loops, 4788 ticks (loop at tick 2484), programs [125]
+    track 5 at 08324219: 91 events, 74 notes, loops, 4788 ticks (loop at tick 2484), programs [3, 119, 125]
+    track 7 at 083242CE: 24 events, 14 notes, loops, 4788 ticks (loop at tick 2484), programs [125]
+  song  7 at 08324314: 5 track slots, bank map 0823C5B2 [2, 2, 2, 2], first tempo 143
+    track 0 at 08324320: 3 events, 0 notes, loops, 1152 ticks (loop at tick 576), programs []
+    track 1 at 0832432B: 94 events, 70 notes, loops, 1152 ticks (loop at tick 576), programs [3, 119, 125]
+    track 2 at 083243F4: 94 events, 70 notes, loops, 1152 ticks (loop at tick 576), programs [3, 119, 125]
+    track 3 at 083244BD: 54 events, 50 notes, loops, 1152 ticks (loop at tick 576), programs [87]
+    track 4 at 08324532: 64 events, 62 notes, loops, 1152 ticks (loop at tick 576), programs [127]
+  song  8 at 083245D4: 9 track slots, bank map 0823C5B4 [2, 2, 2, 2], first tempo 143
+    track 0 at 083245E8: 3 events, 0 notes, loops, 1536 ticks (loop at tick 768), programs []
+    track 1 at 083245F3: 91 events, 84 notes, loops, 1536 ticks (loop at tick 768), programs [3, 119]
+    track 2 at 083246A5: 54 events, 52 notes, loops, 1536 ticks (loop at tick 768), programs [8]
+    track 3 at 08324703: 44 events, 40 notes, loops, 1536 ticks (loop at tick 768), programs [3]
+    track 4 at 08324765: 44 events, 40 notes, loops, 1536 ticks (loop at tick 768), programs [3]
+    track 8 at 083247C7: 98 events, 96 notes, loops, 1536 ticks (loop at tick 768), programs [127]
+  song  9 at 083248B4: 9 track slots, bank map 0823C5B6 [2, 2, 2, 2], first tempo 177
+    track 0 at 083248C8: 4 events, 0 notes, loops, 2688 ticks (loop at tick 1536), programs []
+    track 1 at 083248D6: 42 events, 32 notes, loops, 2688 ticks (loop at tick 1536), programs [107]
+    track 2 at 08324906: 35 events, 24 notes, loops, 2688 ticks (loop at tick 1536), programs [107]
+    track 3 at 08324938: 58 events, 42 notes, loops, 2688 ticks (loop at tick 1536), programs [38]
+    track 4 at 08324968: 292 events, 224 notes, loops, 2688 ticks (loop at tick 1536), programs [127]
+    track 5 at 083249A4: 75 events, 56 notes, loops, 2688 ticks (loop at tick 1536), programs [91, 127]
+    track 6 at 083249F6: 31 events, 20 notes, loops, 2688 ticks (loop at tick 1536), programs [107]
+    track 7 at 08324A1E: 35 events, 24 notes, loops, 2688 ticks (loop at tick 1536), programs [107]
+    track 8 at 08324A50: 142 events, 109 notes, loops, 2688 ticks (loop at tick 1536), programs [127]
+  song 10 at 08324BB4: 7 track slots, bank map 0823C5B8 [2, 2, 2, 2], first tempo 128
+    track 0 at 08324BC4: 3 events, 0 notes, loops, 1152 ticks (loop at tick 576), programs []
+    track 1 at 08324BCF: 82 events, 78 notes, loops, 1152 ticks (loop at tick 576), programs [87]
+    track 2 at 08324C6A: 70 events, 56 notes, loops, 1152 ticks (loop at tick 576), programs [8]
+    track 3 at 08324C9B: 59 events, 50 notes, loops, 1152 ticks (loop at tick 576), programs [87]
+    track 4 at 08324CCE: 43 events, 38 notes, loops, 1152 ticks (loop at tick 576), programs [127]
+    track 5 at 08324D31: 59 events, 50 notes, loops, 1152 ticks (loop at tick 576), programs [87]
+    track 6 at 08324D64: 75 events, 60 notes, loops, 1152 ticks (loop at tick 576), programs [12]
+  song 11 at 08324E34: 9 track slots, bank map 0823C5BA [2, 2, 2, 2], first tempo 128
+    track 0 at 08324E48: 3 events, 0 notes, loops, 1536 ticks (loop at tick 768), programs []
+    track 1 at 08324E53: 114 events, 102 notes, loops, 1536 ticks (loop at tick 768), programs [119]
+    track 2 at 08324ED4: 45 events, 36 notes, loops, 1536 ticks (loop at tick 768), programs [119]
+    track 3 at 08324F36: 44 events, 36 notes, loops, 1536 ticks (loop at tick 768), programs [119]
+    track 4 at 08324F96: 17 events, 8 notes, loops, 1536 ticks (loop at tick 768), programs [119]
+    track 8 at 08324FC1: 16 events, 8 notes, loops, 1536 ticks (loop at tick 768), programs [37]
+  song 12 at 08325034: 9 track slots, bank map 0823C5BC [2, 2, 2, 2], first tempo 185
+    track 0 at 08325048: 3 events, 0 notes, ends, 480 ticks, programs []
+    track 1 at 0832504E: 28 events, 10 notes, ends, 456 ticks, programs [4]
+    track 2 at 08325089: 28 events, 10 notes, ends, 456 ticks, programs [4]
+    track 3 at 083250C4: 28 events, 10 notes, ends, 456 ticks, programs [4]
+    track 4 at 083250FF: 28 events, 10 notes, ends, 456 ticks, programs [29]
+    track 6 at 0832513A: 28 events, 10 notes, ends, 456 ticks, programs [4]
+    track 8 at 08325175: 24 events, 10 notes, ends, 350 ticks, programs [127]
+  song 13 at 083251B4: 7 track slots, bank map 0823C5BE [2, 2, 2, 2], first tempo 120
+    track 0 at 083251C4: 4 events, 0 notes, loops, 960 ticks (loop at tick 576), programs []
+    track 1 at 083251D2: 16 events, 9 notes, loops, 960 ticks (loop at tick 576), programs [34]
+    track 2 at 083251FE: 52 events, 40 notes, loops, 384 ticks (loop at tick 192), programs [14]
+    track 3 at 0832520D: 15 events, 9 notes, loops, 960 ticks (loop at tick 576), programs [34]
+    track 4 at 08325237: 51 events, 40 notes, loops, 960 ticks (loop at tick 576), programs [127]
+    track 5 at 0832528B: 16 events, 9 notes, loops, 960 ticks (loop at tick 576), programs [34]
+    track 6 at 083252B7: 22 events, 16 notes, loops, 96 ticks (loop at tick 48), programs [35]
+  song 14 at 08325374: 9 track slots, bank map 0823C5C0 [2, 2, 2, 2], first tempo 206
+    track 0 at 08325388: 4 events, 0 notes, loops, 23616 ticks (loop at tick 16704), programs []
+    track 1 at 08325394: 1848 events, 1178 notes, loops, 23616 ticks (loop at tick 16704), programs [12, 87, 109]
+    track 2 at 083254AB: 1683 events, 1074 notes, loops, 23616 ticks (loop at tick 16704), programs [91, 109, 115]
+    track 3 at 0832557D: 1672 events, 1057 notes, loops, 23616 ticks (loop at tick 16704), programs [6, 87, 91, 94, 115]
+    track 4 at 0832564B: 1561 events, 1015 notes, loops, 23616 ticks (loop at tick 16704), programs [6, 87, 91, 94, 109]
+    track 5 at 0832571D: 1204 events, 559 notes, loops, 10176 ticks (loop at tick 9984), programs [127]
+    track 6 at 083257C3: 941 events, 424 notes, loops, 10176 ticks (loop at tick 9984), programs [12]
+    track 7 at 0832586B: 1473 events, 828 notes, loops, 23616 ticks (loop at tick 16704), programs [12, 87, 107, 115]
+    track 8 at 08325920: 1324 events, 620 notes, loops, 10176 ticks (loop at tick 9984), programs [127]
+  song 15 at 08326234: 7 track slots, bank map 0823C5C2 [2, 2, 2, 2], first tempo 160
+    track 0 at 08326244: 4 events, 0 notes, loops, 4704 ticks (loop at tick 2400), programs []
+    track 1 at 08326251: 386 events, 371 notes, loops, 4704 ticks (loop at tick 2400), programs [106]
+    track 2 at 0832658D: 385 events, 377 notes, loops, 4704 ticks (loop at tick 2400), programs [106]
+    track 3 at 08326945: 222 events, 211 notes, loops, 4704 ticks (loop at tick 2400), programs [106]
+    track 4 at 08326AF9: 222 events, 209 notes, loops, 4704 ticks (loop at tick 2400), programs [106]
+    track 6 at 08326C77: 488 events, 484 notes, loops, 4704 ticks (loop at tick 2400), programs [12]
+  song 16 at 08327014: 9 track slots, bank map 0823C5C4 [2, 2, 2, 2], first tempo 135
+    track 0 at 08327028: 4 events, 0 notes, loops, 4320 ticks (loop at tick 2208), programs []
+    track 1 at 08327035: 434 events, 418 notes, loops, 4320 ticks (loop at tick 2208), programs [96, 125]
+    track 2 at 08327450: 492 events, 470 notes, loops, 4320 ticks (loop at tick 2208), programs [96, 119, 125]
+    track 3 at 0832787C: 277 events, 262 notes, loops, 4320 ticks (loop at tick 2208), programs [4, 8, 125]
+    track 4 at 08327A36: 277 events, 250 notes, loops, 4320 ticks (loop at tick 2208), programs [91, 119, 125]
+    track 5 at 08327C9F: 18 events, 6 notes, loops, 4320 ticks (loop at tick 2208), programs [107]
+    track 6 at 08327CCA: 520 events, 502 notes, loops, 4320 ticks (loop at tick 2208), programs [12, 125]
+    track 7 at 083280EA: 18 events, 6 notes, loops, 4320 ticks (loop at tick 2208), programs [125]
+    track 8 at 08328115: 547 events, 530 notes, loops, 4320 ticks (loop at tick 2208), programs [96, 107]
+  song 17 at 083285B4: 7 track slots, bank map 0823C5C6 [2, 2, 2, 2], first tempo 175
+    track 0 at 083285C4: 4 events, 0 notes, loops, 5760 ticks (loop at tick 3072), programs []
+    track 1 at 083285D2: 293 events, 270 notes, loops, 5760 ticks (loop at tick 3072), programs [3]
+    track 2 at 083287D4: 91 events, 76 notes, loops, 5760 ticks (loop at tick 3072), programs [58]
+    track 3 at 083288B2: 92 events, 76 notes, loops, 5760 ticks (loop at tick 3072), programs [58]
+    track 4 at 08328992: 516 events, 480 notes, loops, 5760 ticks (loop at tick 3072), programs [3]
+    track 6 at 08328CA0: 451 events, 420 notes, loops, 5760 ticks (loop at tick 3072), programs [12]
+  song 18 at 083290D4: 9 track slots, bank map 0823C5C8 [2, 2, 2, 2], first tempo 250
+    track 0 at 083290E8: 4 events, 0 notes, loops, 9492 ticks (loop at tick 4884), programs []
+    track 1 at 083290F6: 223 events, 204 notes, loops, 9492 ticks (loop at tick 4884), programs [59, 125]
+    track 2 at 083292E6: 260 events, 240 notes, loops, 9492 ticks (loop at tick 4884), programs [47, 65, 125]
+    track 3 at 083294C4: 186 events, 168 notes, loops, 9492 ticks (loop at tick 4884), programs [125]
+    track 5 at 08329838: 104 events, 96 notes, loops, 9492 ticks (loop at tick 4884), programs [125]
+    track 6 at 08329614: 304 events, 298 notes, loops, 9492 ticks (loop at tick 4884), programs [12]
+    track 7 at 083298E1: 286 events, 264 notes, loops, 9492 ticks (loop at tick 4884), programs [125]
+    track 8 at 08329AA9: 159 events, 138 notes, loops, 9492 ticks (loop at tick 4884), programs [119, 125]
+  song 19 at 08329BF4: 9 track slots, bank map 0823C5CA [2, 2, 2, 2], first tempo 160
+    track 0 at 08329C08: 4 events, 0 notes, loops, 4032 ticks (loop at tick 2112), programs []
+    track 1 at 08329C16: 289 events, 208 notes, loops, 4032 ticks (loop at tick 2112), programs [4, 94, 125]
+    track 2 at 08329D4C: 298 events, 278 notes, loops, 4032 ticks (loop at tick 2112), programs [14, 91]
+    track 3 at 08329F2E: 214 events, 194 notes, loops, 4032 ticks (loop at tick 2112), programs [4, 91]
+    track 4 at 0832A091: 423 events, 408 notes, loops, 4032 ticks (loop at tick 2112), programs [4, 12]
+    track 6 at 0832A431: 193 events, 170 notes, loops, 4032 ticks (loop at tick 2112), programs [94, 107, 119]
+    track 8 at 0832A5CE: 139 events, 128 notes, loops, 4032 ticks (loop at tick 2112), programs [91]
+  song 20 at 0832A734: 4 track slots, bank map 0823C5CC [2, 2, 2, 2], first tempo 80
+    track 0 at 0832A73E: 15 events, 0 notes, loops, 576 ticks (loop at tick 480), programs []
+    track 1 at 0832A75E: 303 events, 72 notes, loops, 576 ticks (loop at tick 480), programs [3]
+    track 2 at 0832A774: 293 events, 48 notes, loops, 576 ticks (loop at tick 480), programs [3]
+    track 3 at 0832A78A: 252 events, 144 notes, loops, 576 ticks (loop at tick 480), programs [12]
+  song 21 at 0832A8F4: 8 track slots, bank map 0823C5CE [2, 2, 2, 2], first tempo 90
+    track 0 at 0832A906: 3 events, 0 notes, loops, 5760 ticks (loop at tick 2880), programs []
+    track 1 at 0832A911: 1176 events, 960 notes, loops, 5760 ticks (loop at tick 2880), programs [125]
+    track 2 at 0832B067: 908 events, 636 notes, loops, 5760 ticks (loop at tick 2880), programs [31, 125]
+    track 3 at 0832B66F: 887 events, 704 notes, loops, 5760 ticks (loop at tick 2880), programs [107]
+    track 4 at 0832BC05: 468 events, 72 notes, loops, 5760 ticks (loop at tick 2880), programs [29, 31, 125]
+    track 6 at 0832BFBD: 483 events, 72 notes, loops, 5760 ticks (loop at tick 2880), programs [31, 125]
+    track 7 at 0832C393: 444 events, 384 notes, loops, 5760 ticks (loop at tick 2880), programs [125]
+  song 22 at 0832C654: 9 track slots, bank map 0823C5D0 [2, 2, 2, 2], first tempo 100
+    track 0 at 0832C668: 78 events, 0 notes, loops, 3864 ticks (loop at tick 2712), programs []
+    track 1 at 0832C70C: 2000 events, 951 notes, loops, 3864 ticks (loop at tick 2712), programs [125]
+    track 2 at 0832D669: 2009 events, 951 notes, loops, 3864 ticks (loop at tick 2712), programs [125]
+    track 3 at 0832E5D8: 390 events, 226 notes, loops, 3864 ticks (loop at tick 2712), programs [29, 125]
+    track 4 at 0832E915: 175 events, 106 notes, loops, 3864 ticks (loop at tick 2712), programs [119, 125]
+    track 5 at 0832EA83: 69 events, 25 notes, loops, 3864 ticks (loop at tick 2712), programs [125]
+    track 6 at 0832EB06: 412 events, 310 notes, loops, 3864 ticks (loop at tick 2712), programs [29, 125]
+    track 7 at 0832EDBA: 61 events, 39 notes, loops, 3864 ticks (loop at tick 2712), programs [125]
+    track 8 at 0832EE3B: 80 events, 50 notes, loops, 3864 ticks (loop at tick 2712), programs [10, 107, 119, 125]
+  song 23 at 0832EEF4: 9 track slots, bank map 0823C5D2 [2, 2, 2, 2], first tempo 250
+    track 0 at 0832EF08: 4 events, 0 notes, loops, 9432 ticks (loop at tick 4824), programs []
+    track 1 at 0832EF16: 428 events, 410 notes, loops, 9432 ticks (loop at tick 4824), programs [119, 125]
+    track 2 at 0832F21E: 30 events, 14 notes, loops, 9432 ticks (loop at tick 4824), programs [4]
+    track 3 at 0832F267: 480 events, 446 notes, loops, 9432 ticks (loop at tick 4824), programs [4, 96]
+    track 4 at 0832F5B8: 794 events, 778 notes, loops, 9432 ticks (loop at tick 4824), programs [4, 127]
+    track 6 at 0832FC00: 344 events, 313 notes, loops, 9432 ticks (loop at tick 4824), programs [4]
+    track 7 at 0832FEE2: 429 events, 410 notes, loops, 9432 ticks (loop at tick 4824), programs [4, 125]
+    track 8 at 083301EC: 435 events, 414 notes, loops, 9432 ticks (loop at tick 4824), programs [4, 125]
+  song 24 at 083304F4: 9 track slots, bank map 0823C5D4 [2, 2, 2, 2], first tempo 65
+    track 0 at 08330508: 52 events, 0 notes, loops, 5664 ticks (loop at tick 3360), programs []
+    track 1 at 08330577: 606 events, 553 notes, loops, 5520 ticks (loop at tick 3216), programs [14, 29, 32]
+    track 2 at 083309EC: 334 events, 295 notes, loops, 5520 ticks (loop at tick 3216), programs [17, 29, 32]
+    track 3 at 08330C93: 159 events, 99 notes, loops, 5328 ticks (loop at tick 3024), programs [17, 29, 32, 33]
+    track 4 at 08330DF0: 385 events, 345 notes, loops, 5520 ticks (loop at tick 3216), programs [29, 32, 127]
+    track 5 at 08331180: 67 events, 41 notes, loops, 5520 ticks (loop at tick 3216), programs [29, 32, 94]
+    track 6 at 08331229: 298 events, 255 notes, loops, 5520 ticks (loop at tick 3216), programs [29, 32, 127]
+    track 8 at 08331430: 332 events, 296 notes, loops, 5520 ticks (loop at tick 3216), programs [17, 29, 127]
+  song 25 at 083316D4: 7 track slots, bank map 0823C5D6 [2, 2, 2, 2], first tempo 140
+    track 0 at 083316E4: 3 events, 0 notes, loops, 384 ticks (loop at tick 192), programs []
+    track 1 at 083316EF: 31 events, 28 notes, loops, 384 ticks (loop at tick 192), programs [125]
+    track 2 at 0833172F: 22 events, 20 notes, loops, 384 ticks (loop at tick 192), programs [8]
+    track 3 at 08331761: 44 events, 56 notes, loops, 384 ticks (loop at tick 192), programs [125]
+    track 4 at 083317AD: 44 events, 40 notes, loops, 384 ticks (loop at tick 192), programs [125]
+    track 6 at 08331807: 59 events, 56 notes, loops, 384 ticks (loop at tick 192), programs [127]
+  song 26 at 08331894: 5 track slots, bank map 0823C5D8 [2, 2, 2, 2], first tempo 225
+    track 0 at 083318A0: 3 events, 0 notes, ends, 384 ticks, programs []
+    track 1 at 083318A6: 14 events, 4 notes, ends, 336 ticks, programs [125]
+    track 2 at 083318C3: 14 events, 4 notes, ends, 336 ticks, programs [125]
+    track 3 at 083318E0: 49 events, 22 notes, ends, 364 ticks, programs [125]
+    track 4 at 08331933: 47 events, 21 notes, ends, 345 ticks, programs [119]
+  song 27 at 08331994: 9 track slots, bank map 0823C5DA [2, 2, 2, 2], first tempo 250
+    track 0 at 083319A8: 3 events, 0 notes, ends, 1248 ticks, programs []
+    track 1 at 083319AE: 69 events, 31 notes, ends, 1248 ticks, programs [125]
+    track 2 at 08331A34: 66 events, 29 notes, ends, 1209 ticks, programs [125]
+    track 3 at 08331AB3: 27 events, 10 notes, ends, 1190 ticks, programs [125]
+    track 4 at 08331AFE: 26 events, 10 notes, ends, 1190 ticks, programs [4]
+    track 5 at 08331B47: 81 events, 37 notes, ends, 1209 ticks, programs [119]
+    track 6 at 08331BE2: 125 events, 43 notes, ends, 1233 ticks, programs [16, 125]
+    track 7 at 08331CCE: 241 events, 108 notes, ends, 1152 ticks, programs [127]
+    track 8 at 08331DB8: 114 events, 39 notes, ends, 1248 ticks, programs [125]
+  song 28 at 08331EF4: 9 track slots, bank map 0823C5DC [2, 2, 2, 2], first tempo 140
+    track 0 at 08331F08: 3 events, 0 notes, ends, 432 ticks, programs []
+    track 1 at 08331F0E: 51 events, 21 notes, ends, 412 ticks, programs [30]
+    track 2 at 08331F7C: 97 events, 36 notes, ends, 405 ticks, programs [96, 107]
+    track 3 at 0833205F: 58 events, 18 notes, ends, 410 ticks, programs [29, 107]
+    track 4 at 083320C6: 72 events, 33 notes, ends, 404 ticks, programs [96]
+    track 6 at 08332162: 50 events, 21 notes, ends, 407 ticks, programs [6]
+    track 8 at 083321CC: 40 events, 16 notes, ends, 412 ticks, programs [6]
+  song 29 at 08332234: 9 track slots, bank map 0823C5DE [2, 2, 2, 2], first tempo 140
+    track 0 at 08332248: 25 events, 0 notes, ends, 714 ticks, programs []
+    track 1 at 0833227B: 64 events, 20 notes, ends, 651 ticks, programs [30, 107]
+    track 2 at 083322FF: 64 events, 20 notes, ends, 637 ticks, programs [30, 107]
+    track 3 at 08332381: 42 events, 17 notes, ends, 637 ticks, programs [30]
+    track 4 at 083323D6: 42 events, 17 notes, ends, 637 ticks, programs [30]
+    track 5 at 0833242B: 74 events, 35 notes, ends, 697 ticks, programs [127]
+    track 6 at 083324AD: 34 events, 13 notes, ends, 666 ticks, programs [29]
+    track 7 at 083324F5: 79 events, 25 notes, ends, 464 ticks, programs [107]
+    track 8 at 0833257E: 103 events, 25 notes, ends, 470 ticks, programs [107]
+  song 30 at 08332654: 10 track slots, bank map 0823C5E0 [2, 2, 2, 2], first tempo 160
+    track 0 at 0833266A: 3 events, 0 notes, ends, 192 ticks, programs []
+    track 1 at 08332670: 30 events, 9 notes, ends, 168 ticks, programs [125]
+    track 2 at 083326B1: 31 events, 14 notes, ends, 177 ticks, programs [91]
+    track 3 at 083326E2: 21 events, 8 notes, ends, 177 ticks, programs [91]
+    track 4 at 08332705: 36 events, 16 notes, ends, 189 ticks, programs [12]
+    track 5 at 083327BB: 21 events, 8 notes, ends, 177 ticks, programs [91]
+    track 6 at 08332752: 22 events, 9 notes, ends, 168 ticks, programs [107]
+    track 7 at 0833277A: 30 events, 9 notes, ends, 168 ticks, programs [125]
+    track 8 at 083327DE: 6 events, 2 notes, ends, 187 ticks, programs [94]
+    track 9 at 083327EA: 6 events, 2 notes, ends, 187 ticks, programs [94]
+  song 31 at 08332814: 9 track slots, bank map 0823C5E2 [2, 2, 2, 2], first tempo 100
+    track 0 at 08332828: 3 events, 0 notes, ends, 102 ticks, programs []
+    track 1 at 0833282D: 45 events, 1 notes, ends, 96 ticks, programs [125]
+    track 2 at 08332889: 45 events, 1 notes, ends, 96 ticks, programs [125]
+    track 3 at 083328E5: 45 events, 1 notes, ends, 96 ticks, programs [125]
+    track 4 at 08332941: 45 events, 1 notes, ends, 96 ticks, programs [125]
+    track 5 at 0833299D: 45 events, 1 notes, ends, 96 ticks, programs [125]
+    track 6 at 083329F9: 45 events, 1 notes, ends, 96 ticks, programs [125]
+    track 7 at 08332A55: 45 events, 1 notes, ends, 96 ticks, programs [125]
+    track 8 at 08332AB1: 45 events, 1 notes, ends, 96 ticks, programs [125]
+  song 32 at 08332B14: 3 track slots, bank map 0823C5E4 [2, 2, 2, 2], first tempo 175
+    track 0 at 08332B1C: 3 events, 0 notes, ends, 54 ticks, programs []
+    track 1 at 08332B21: 36 events, 5 notes, ends, 60 ticks, programs [1]
+    track 2 at 08332B6B: 36 events, 5 notes, ends, 60 ticks, programs [1]
+  song 33 at 08332BD4: 5 track slots, bank map 0823C5E6 [2, 2, 2, 2], first tempo 120
+    track 0 at 08332BE0: 5 events, 0 notes, ends, 192 ticks, programs []
+    track 2 at 08332BEB: 49 events, 21 notes, ends, 165 ticks, programs [3, 106]
+    track 3 at 08332C3D: 17 events, 6 notes, ends, 152 ticks, programs [106]
+    track 4 at 08332C5A: 25 events, 10 notes, ends, 165 ticks, programs [106]
+  song 34 at 08332CB4: 8 track slots, bank map 0823C5E8 [2, 2, 2, 2], first tempo 240
+    track 0 at 08332CC6: 3 events, 0 notes, ends, 579 ticks, programs []
+    track 1 at 08332CCC: 11 events, 3 notes, ends, 493 ticks, programs [39]
+    track 2 at 08332CE4: 12 events, 3 notes, ends, 497 ticks, programs [13]
+    track 3 at 08332CFF: 14 events, 4 notes, ends, 510 ticks, programs [13]
+    track 4 at 08332D22: 16 events, 5 notes, ends, 501 ticks, programs [13]
+    track 5 at 08332D4A: 16 events, 5 notes, ends, 508 ticks, programs [13]
+    track 6 at 08332D72: 16 events, 5 notes, ends, 501 ticks, programs [13]
+    track 7 at 08332D99: 16 events, 5 notes, ends, 505 ticks, programs [13]
+  song 35 at 08332DD4: 5 track slots, bank map 0823C5EA [2, 2, 2, 2], first tempo 125
+    track 0 at 08332DE0: 3 events, 0 notes, ends, 288 ticks, programs []
+    track 1 at 08332DE6: 97 events, 22 notes, ends, 282 ticks, programs [17]
+    track 2 at 08332EA9: 97 events, 22 notes, ends, 282 ticks, programs [17]
+    track 3 at 08332F6E: 97 events, 22 notes, ends, 282 ticks, programs [17]
+    track 4 at 08333033: 97 events, 22 notes, ends, 282 ticks, programs [17]
+  song 36 at 08333114: 5 track slots, bank map 0823C5EC [2, 2, 2, 2], first tempo 125
+    track 0 at 08333120: 3 events, 0 notes, ends, 120 ticks, programs []
+    track 1 at 08333126: 42 events, 8 notes, ends, 114 ticks, programs [17]
+    track 2 at 0833317B: 43 events, 8 notes, ends, 114 ticks, programs [17]
+    track 3 at 083331D2: 43 events, 8 notes, ends, 114 ticks, programs [17]
+    track 4 at 08333229: 43 events, 8 notes, ends, 114 ticks, programs [17]
+  song 37 at 08333294: 9 track slots, bank map 0823C5EE [2, 2, 2, 2], first tempo 100
+    track 0 at 083332A8: 6 events, 0 notes, loops, 4910 ticks (loop at tick 2606), programs []
+    track 1 at 083332B8: 564 events, 535 notes, loops, 4910 ticks (loop at tick 2606), programs [14, 32]
+    track 2 at 083336E1: 291 events, 277 notes, loops, 4910 ticks (loop at tick 2606), programs [17, 32]
+    track 3 at 0833393A: 119 events, 81 notes, loops, 4910 ticks (loop at tick 2606), programs [17, 32, 33]
+    track 4 at 08333A4E: 356 events, 333 notes, loops, 4910 ticks (loop at tick 2606), programs [32, 127]
+    track 5 at 08333DA5: 50 events, 35 notes, loops, 4910 ticks (loop at tick 2606), programs [32, 94]
+    track 6 at 08333E29: 255 events, 237 notes, loops, 4910 ticks (loop at tick 2606), programs [32, 127]
+    track 8 at 08333FDE: 292 events, 276 notes, loops, 4910 ticks (loop at tick 2606), programs [17, 29]
+  song 38 at 08334254: 9 track slots, bank map 0823C5F0 [2, 2, 2, 2], first tempo 125
+    track 0 at 08334268: 6 events, 0 notes, loops, 4910 ticks (loop at tick 2606), programs []
+    track 1 at 08334278: 564 events, 535 notes, loops, 4910 ticks (loop at tick 2606), programs [14, 32]
+    track 2 at 083346A1: 291 events, 277 notes, loops, 4910 ticks (loop at tick 2606), programs [17, 32]
+    track 3 at 083348FA: 119 events, 81 notes, loops, 4910 ticks (loop at tick 2606), programs [17, 32, 33]
+    track 4 at 08334A0E: 356 events, 333 notes, loops, 4910 ticks (loop at tick 2606), programs [32, 127]
+    track 5 at 08334D65: 50 events, 35 notes, loops, 4910 ticks (loop at tick 2606), programs [32, 94]
+    track 6 at 08334DE9: 255 events, 237 notes, loops, 4910 ticks (loop at tick 2606), programs [32, 127]
+    track 8 at 08334F9E: 292 events, 276 notes, loops, 4910 ticks (loop at tick 2606), programs [17, 29]
+  song 39 at 08335214: 5 track slots, bank map 0823C5F2 [2, 2, 2, 2], first tempo 250
+    track 0 at 08335220: 5 events, 0 notes, ends, 556 ticks, programs []
+    track 1 at 0833522B: 101 events, 27 notes, ends, 528 ticks, programs [17]
+    track 2 at 0833530B: 104 events, 27 notes, ends, 534 ticks, programs [17]
+    track 3 at 083353F5: 104 events, 27 notes, ends, 540 ticks, programs [17]
+    track 4 at 083354DF: 93 events, 27 notes, ends, 546 ticks, programs [17, 127]
+  song 40 at 083355B4: 7 track slots, bank map 0823C5F4 [2, 2, 2, 2], first tempo 99
+    track 0 at 083355C4: 7 events, 0 notes, ends, 930 ticks, programs []
+    track 1 at 083355D3: 60 events, 25 notes, ends, 910 ticks, programs [66, 125]
+    track 2 at 0833565B: 60 events, 22 notes, ends, 910 ticks, programs [66, 119, 125]
+    track 3 at 083356D8: 34 events, 12 notes, ends, 910 ticks, programs [66, 125]
+    track 4 at 0833571D: 27 events, 7 notes, ends, 910 ticks, programs [66, 125]
+    track 5 at 08335754: 26 events, 7 notes, ends, 910 ticks, programs [66, 125]
+    track 6 at 08335789: 46 events, 17 notes, ends, 911 ticks, programs [66, 125]
+  song 41 at 083357F4: 9 track slots, bank map 0823C5F6 [2, 2, 2, 2], first tempo 65
+    track 0 at 08335808: 25 events, 0 notes, ends, 396 ticks, programs []
+    track 1 at 0833583A: 37 events, 16 notes, ends, 384 ticks, programs [29]
+    track 2 at 08335879: 36 events, 16 notes, ends, 384 ticks, programs [29]
+    track 3 at 083358B6: 37 events, 16 notes, ends, 384 ticks, programs [29]
+    track 4 at 083358F5: 26 events, 10 notes, ends, 384 ticks, programs [29]
+    track 5 at 08335923: 13 events, 4 notes, ends, 384 ticks, programs [29]
+    track 6 at 0833593B: 37 events, 16 notes, ends, 384 ticks, programs [29]
+    track 8 at 0833597C: 43 events, 20 notes, ends, 384 ticks, programs [127]
+  song 42 at 083359D4: 9 track slots, bank map 0823C5F8 [2, 2, 2, 2], first tempo 140
+    track 0 at 083359E8: 46 events, 0 notes, ends, 10776 ticks, programs []
+    track 1 at 08335A50: 705 events, 340 notes, ends, 7928 ticks, programs [41, 42, 62, 125]
+    track 2 at 083360AD: 679 events, 316 notes, ends, 7928 ticks, programs [39, 40, 41, 42, 61, 87, 125]
+    track 3 at 08336598: 1023 events, 489 notes, ends, 7935 ticks, programs [8, 63]
+    track 4 at 08336C80: 622 events, 293 notes, ends, 7928 ticks, programs [40, 61, 87, 125]
+    track 5 at 08337236: 707 events, 323 notes, ends, 7935 ticks, programs [40, 64, 87, 119, 125]
+    track 6 at 08337874: 801 events, 379 notes, ends, 7935 ticks, programs [41, 61, 87, 119]
+    track 7 at 08337EFC: 392 events, 176 notes, ends, 7659 ticks, programs [39, 41, 42, 61, 87, 125]
+    track 8 at 08338230: 1141 events, 565 notes, ends, 7935 ticks, programs [64, 87, 127]
+  song 43 at 08338BF4: 9 track slots, bank map 0823C5FA [2, 2, 2, 2], first tempo 93
+    track 0 at 08338C08: 3 events, 0 notes, ends, 546 ticks, programs []
+    track 1 at 08338C0E: 43 events, 18 notes, ends, 540 ticks, programs [55, 125]
+    track 2 at 08338C6D: 45 events, 18 notes, ends, 540 ticks, programs [55, 125]
+    track 3 at 08338CD0: 19 events, 5 notes, ends, 540 ticks, programs [55, 125]
+    track 4 at 08338CF7: 39 events, 18 notes, ends, 540 ticks, programs [55, 107]
+    track 5 at 08338D4E: 23 events, 8 notes, ends, 540 ticks, programs [55, 125]
+    track 6 at 08338D85: 19 events, 5 notes, ends, 540 ticks, programs [55, 125]
+    track 7 at 08338DAC: 16 events, 4 notes, ends, 540 ticks, programs [55, 125]
+    track 8 at 08338DCD: 16 events, 4 notes, ends, 540 ticks, programs [55, 125]
+  song 44 at 08338DF4: 9 track slots, bank map 0823C5FC [2, 2, 2, 1], first tempo 110
+    track 0 at 08338E08: 28 events, 0 notes, ends, 5280 ticks, programs []
+    track 1 at 08338E42: 491 events, 235 notes, ends, 5264 ticks, programs [1, 6, 41, 42, 125]
+    track 2 at 08339234: 360 events, 162 notes, ends, 5272 ticks, programs [39, 41, 87, 125]
+    track 3 at 08339507: 433 events, 199 notes, ends, 5280 ticks, programs [8]
+    track 4 at 083398BD: 291 events, 132 notes, ends, 5280 ticks, programs [87, 125]
+    track 5 at 08339B71: 294 events, 128 notes, ends, 5280 ticks, programs [6, 29, 40, 87]
+    track 6 at 08339DE5: 432 events, 203 notes, ends, 5280 ticks, programs [6, 41, 87]
+    track 7 at 0833A16E: 289 events, 129 notes, ends, 5280 ticks, programs [39, 41, 42, 87, 125]
+    track 8 at 0833A38E: 644 events, 320 notes, ends, 4800 ticks, programs [127]
+  song 45 at 0833A894: 9 track slots, bank map 0823C5FE [2, 2, 1, 1], first tempo 136
+    track 0 at 0833A8A8: 3 events, 0 notes, loops, 1536 ticks (loop at tick 768), programs []
+    track 1 at 0833A8B3: 100 events, 96 notes, loops, 1536 ticks (loop at tick 768), programs [125]
+    track 2 at 0833A96D: 65 events, 60 notes, loops, 1536 ticks (loop at tick 768), programs [125]
+    track 3 at 0833A9F1: 65 events, 60 notes, loops, 1536 ticks (loop at tick 768), programs [75]
+    track 4 at 0833AA75: 64 events, 60 notes, loops, 1536 ticks (loop at tick 768), programs [87]
+    track 5 at 0833AAFB: 82 events, 56 notes, loops, 1536 ticks (loop at tick 768), programs [107, 125]
+    track 6 at 0833AB95: 39 events, 32 notes, loops, 1536 ticks (loop at tick 768), programs [107]
+    track 8 at 0833ABDC: 93 events, 90 notes, loops, 1536 ticks (loop at tick 768), programs [127]
+  song 46 at 0833AC74: 7 track slots, bank map 0823C600 [2, 1, 1, 1], first tempo 150
+    track 0 at 0833AC84: 3 events, 0 notes, loops, 1920 ticks (loop at tick 960), programs []
+    track 1 at 0833AC90: 83 events, 76 notes, loops, 1920 ticks (loop at tick 960), programs [102, 106]
+    track 2 at 0833AD42: 98 events, 88 notes, loops, 1920 ticks (loop at tick 960), programs [102]
+    track 3 at 0833ADC0: 159 events, 140 notes, loops, 1920 ticks (loop at tick 960), programs [127]
+    track 4 at 0833AE50: 145 events, 132 notes, loops, 1920 ticks (loop at tick 960), programs [102, 106, 107]
+    track 5 at 0833AF0E: 86 events, 72 notes, loops, 1920 ticks (loop at tick 960), programs [3, 96, 102]
+    track 6 at 0833AF96: 87 events, 72 notes, loops, 1920 ticks (loop at tick 960), programs [3, 96, 102]
+  song 47 at 0833B094: 3 track slots, bank map 0823C602 [1, 1, 1, 1], first tempo 180
+    track 0 at 0833B09C: 3 events, 0 notes, ends, 384 ticks, programs []
+    track 1 at 0833B0A2: 40 events, 18 notes, ends, 384 ticks, programs [2]
+    track 2 at 0833B0F3: 28 events, 12 notes, ends, 384 ticks, programs [12]
+  song 48 at 0833B134: 3 track slots, bank map 0823C604 [1, 1, 1, 1], first tempo 130
+    track 0 at 0833B13C: 3 events, 0 notes, ends, 108 ticks, programs []
+    track 1 at 0833B141: 18 events, 7 notes, ends, 84 ticks, programs [17]
+    track 2 at 0833B163: 24 events, 10 notes, ends, 108 ticks, programs [20]
+  song 49 at 0833B194: 2 track slots, bank map 0823C606 [1, 1, 1, 1], first tempo 150
+    track 0 at 0833B19A: 3 events, 0 notes, ends, 105 ticks, programs []
+    track 1 at 0833B19F: 214 events, 105 notes, ends, 105 ticks, programs [5]
+  song 50 at 0833B2F4: 3 track slots, bank map 0823C608 [1, 1, 1, 1], first tempo 225
+    track 0 at 0833B2FC: 3 events, 0 notes, ends, 462 ticks, programs []
+    track 1 at 0833B302: 42 events, 19 notes, ends, 462 ticks, programs [17]
+    track 2 at 0833B362: 67 events, 31 notes, ends, 462 ticks, programs [13]
+  song 51 at 0833B3F4: 4 track slots, bank map 0823C60A [1, 1, 1, 1], first tempo 200
+    track 0 at 0833B3FE: 3 events, 0 notes, loops, 1536 ticks (loop at tick 768), programs []
+    track 1 at 0833B407: 97 events, 80 notes, loops, 1534 ticks (loop at tick 767), programs [17]
+    track 2 at 0833B443: 146 events, 128 notes, loops, 1534 ticks (loop at tick 767), programs [1]
+    track 3 at 0833B47A: 64 events, 48 notes, loops, 1534 ticks (loop at tick 767), programs [11]
+  song 52 at 0833B554: 9 track slots, bank map 0823C60C [1, 1, 1, 1], first tempo 150
+    track 0 at 0833B568: 3 events, 0 notes, loops, 384 ticks (loop at tick 192), programs []
+    track 1 at 0833B571: 45 events, 40 notes, loops, 384 ticks (loop at tick 192), programs [8]
+    track 2 at 0833B5BD: 33 events, 28 notes, loops, 384 ticks (loop at tick 192), programs [20]
+    track 3 at 0833B5F7: 24 events, 20 notes, loops, 384 ticks (loop at tick 192), programs [11]
+    track 8 at 0833B623: 64 events, 56 notes, loops, 384 ticks (loop at tick 192), programs [124]
+  song 53 at 0833B674: 4 track slots, bank map 0823C60E [1, 1, 1, 1], first tempo 180
+    track 0 at 0833B67E: 3 events, 0 notes, loops, 1152 ticks (loop at tick 576), programs []
+    track 1 at 0833B689: 208 events, 192 notes, loops, 1152 ticks (loop at tick 576), programs [8]
+    track 2 at 0833B6A7: 113 events, 96 notes, loops, 1152 ticks (loop at tick 576), programs [20]
+    track 3 at 0833B6CD: 25 events, 20 notes, loops, 1152 ticks (loop at tick 576), programs [11]
+  song 54 at 0833B7F4: 6 track slots, bank map 0823C610 [1, 1, 1, 1], first tempo 150
+    track 0 at 0833B802: 3 events, 0 notes, ends, 82 ticks, programs []
+    track 1 at 0833B807: 19 events, 7 notes, ends, 82 ticks, programs [8]
+    track 2 at 0833B829: 18 events, 7 notes, ends, 82 ticks, programs [20]
+    track 3 at 0833B849: 15 events, 5 notes, ends, 82 ticks, programs [11]
+    track 4 at 0833B867: 14 events, 5 notes, ends, 50 ticks, programs [3]
+    track 5 at 0833B887: 18 events, 7 notes, ends, 82 ticks, programs [130]
+  song 55 at 0833B8B4: 5 track slots, bank map 0823C612 [1, 1, 1, 1], first tempo 150
+    track 0 at 0833B8C0: 3 events, 0 notes, ends, 102 ticks, programs []
+    track 1 at 0833B8C5: 22 events, 9 notes, ends, 72 ticks, programs [4]
+    track 2 at 0833B8F1: 23 events, 9 notes, ends, 96 ticks, programs [20]
+    track 3 at 0833B920: 20 events, 8 notes, ends, 88 ticks, programs [11]
+    track 4 at 0833B943: 20 events, 6 notes, ends, 102 ticks, programs [3, 92]
+  song 56 at 0833B974: 5 track slots, bank map 0823C614 [1, 1, 1, 1], first tempo 150
+    track 0 at 0833B980: 3 events, 0 notes, ends, 192 ticks, programs []
+    track 1 at 0833B986: 40 events, 17 notes, ends, 184 ticks, programs [4, 8]
+    track 2 at 0833B9D8: 46 events, 17 notes, ends, 184 ticks, programs [0, 20]
+    track 3 at 0833BA36: 32 events, 14 notes, ends, 184 ticks, programs [11]
+    track 4 at 0833BA6F: 32 events, 14 notes, ends, 192 ticks, programs [127]
+  song 57 at 0833BAB4: 5 track slots, bank map 0823C616 [1, 1, 1, 1], first tempo 150
+    track 0 at 0833BAC0: 3 events, 0 notes, ends, 183 ticks, programs []
+    track 1 at 0833BAC6: 28 events, 11 notes, ends, 152 ticks, programs [8, 11]
+    track 2 at 0833BAF4: 28 events, 12 notes, ends, 152 ticks, programs [20]
+    track 3 at 0833BB21: 25 events, 8 notes, ends, 183 ticks, programs [8, 11]
+    track 4 at 0833BB52: 23 events, 9 notes, ends, 146 ticks, programs [3]
+  song 58 at 0833BB94: 6 track slots, bank map 0823C618 [1, 1, 1, 1], first tempo 150
+    track 0 at 0833BBA2: 4 events, 0 notes, loops, 1728 ticks (loop at tick 960), programs []
+    track 1 at 0833BBAE: 116 events, 106 notes, loops, 1728 ticks (loop at tick 960), programs [23]
+    track 2 at 0833BC4C: 124 events, 114 notes, loops, 1728 ticks (loop at tick 960), programs [24]
+    track 3 at 0833BCCA: 177 events, 142 notes, loops, 1728 ticks (loop at tick 960), programs [13]
+    track 4 at 0833BD50: 183 events, 144 notes, loops, 1728 ticks (loop at tick 960), programs [127]
+    track 5 at 0833BD9F: 185 events, 144 notes, loops, 1728 ticks (loop at tick 960), programs [3]
+  song 59 at 0833BE94: 6 track slots, bank map 0823C61A [1, 1, 1, 1], first tempo 90
+    track 0 at 0833BEA2: 3 events, 0 notes, loops, 384 ticks (loop at tick 192), programs []
+    track 1 at 0833BEAB: 41 events, 34 notes, loops, 384 ticks (loop at tick 192), programs [23]
+    track 2 at 0833BF0A: 33 events, 28 notes, loops, 384 ticks (loop at tick 192), programs [20]
+    track 3 at 0833BF52: 45 events, 36 notes, loops, 384 ticks (loop at tick 192), programs [11]
+    track 4 at 0833BF66: 75 events, 54 notes, loops, 432 ticks (loop at tick 216), programs [3]
+    track 5 at 0833BF97: 65 events, 56 notes, loops, 384 ticks (loop at tick 192), programs [124]
+  song 60 at 0833C014: 5 track slots, bank map 0823C61C [1, 1, 1, 1], first tempo 150
+    track 0 at 0833C020: 3 events, 0 notes, ends, 84 ticks, programs []
+    track 1 at 0833C025: 15 events, 4 notes, ends, 84 ticks, programs [23]
+    track 2 at 0833C042: 15 events, 4 notes, ends, 84 ticks, programs [20]
+    track 3 at 0833C05F: 15 events, 4 notes, ends, 84 ticks, programs [11]
+    track 4 at 0833C07E: 14 events, 5 notes, ends, 38 ticks, programs [3]
+  song 61 at 0833C0B4: 5 track slots, bank map 0823C61E [1, 1, 1, 1], first tempo 150
+    track 0 at 0833C0C0: 3 events, 0 notes, ends, 167 ticks, programs []
+    track 1 at 0833C0C6: 15 events, 4 notes, ends, 167 ticks, programs [2]
+    track 2 at 0833C0E3: 50 events, 22 notes, ends, 148 ticks, programs [18, 29]
+    track 3 at 0833C14C: 15 events, 4 notes, ends, 167 ticks, programs [11]
+    track 4 at 0833C169: 35 events, 15 notes, ends, 167 ticks, programs [127]
+  song 62 at 0833C1D4: 6 track slots, bank map 0823C620 [1, 1, 1, 1], first tempo 90
+    track 0 at 0833C1E2: 3 events, 0 notes, ends, 95 ticks, programs []
+    track 3 at 0833C1E7: 12 events, 3 notes, ends, 95 ticks, programs [11]
+    track 4 at 0833C1FF: 28 events, 12 notes, ends, 91 ticks, programs [3]
+    track 5 at 0833C23E: 32 events, 14 notes, ends, 95 ticks, programs [124]
+  song 63 at 0833C294: 6 track slots, bank map 0823C622 [1, 1, 1, 1], first tempo 150
+    track 0 at 0833C2A2: 3 events, 0 notes, loops, 3072 ticks (loop at tick 1536), programs []
+    track 1 at 0833C2AB: 227 events, 214 notes, loops, 3072 ticks (loop at tick 1536), programs [23, 30]
+    track 2 at 0833C418: 239 events, 224 notes, loops, 3072 ticks (loop at tick 1536), programs [20, 24]
+    track 3 at 0833C570: 263 events, 250 notes, loops, 3072 ticks (loop at tick 1536), programs [11]
+    track 4 at 0833C6A5: 191 events, 170 notes, loops, 3072 ticks (loop at tick 1536), programs [127]
+    track 5 at 0833C729: 178 events, 158 notes, loops, 3072 ticks (loop at tick 1536), programs [3]
+  song 64 at 0833C8B4: 6 track slots, bank map 0823C624 [1, 1, 1, 0], first tempo 120
+    track 0 at 0833C8C2: 3 events, 0 notes, loops, 3072 ticks (loop at tick 1536), programs []
+    track 1 at 0833C8CB: 129 events, 108 notes, loops, 3072 ticks (loop at tick 1536), programs [23, 30]
+    track 2 at 0833C976: 129 events, 108 notes, loops, 3072 ticks (loop at tick 1536), programs [24]
+    track 3 at 0833CA21: 210 events, 180 notes, loops, 3072 ticks (loop at tick 1536), programs [11]
+    track 4 at 0833CA79: 245 events, 224 notes, loops, 3072 ticks (loop at tick 1536), programs [127]
+    track 5 at 0833CA9F: 549 events, 512 notes, loops, 3072 ticks (loop at tick 1536), programs [3]
+  song 65 at 0833CC14: 6 track slots, bank map 0823C626 [1, 1, 0, 12], first tempo 150
+    track 0 at 0833CC22: 3 events, 0 notes, loops, 3840 ticks (loop at tick 1920), programs []
+    track 1 at 0833CC2B: 120 events, 114 notes, loops, 3840 ticks (loop at tick 1920), programs [30]
+    track 2 at 0833CD3B: 120 events, 114 notes, loops, 3840 ticks (loop at tick 1920), programs [24]
+    track 3 at 0833CE4B: 275 events, 270 notes, loops, 3840 ticks (loop at tick 1920), programs [11]
+    track 4 at 0833D072: 215 events, 210 notes, loops, 3840 ticks (loop at tick 1920), programs [127]
+    track 5 at 0833D1FD: 311 events, 306 notes, loops, 3840 ticks (loop at tick 1920), programs [3]
+  song 66 at 0833D3F4: 6 track slots, bank map 0823C628 [1, 0, 12, 0], first tempo 150
+    track 0 at 0833D402: 3 events, 0 notes, ends, 190 ticks, programs []
+    track 1 at 0833D408: 30 events, 12 notes, ends, 190 ticks, programs [23]
+    track 2 at 0833D43B: 30 events, 12 notes, ends, 190 ticks, programs [20]
+    track 3 at 0833D46E: 25 events, 10 notes, ends, 190 ticks, programs [11]
+    track 4 at 0833D499: 27 events, 11 notes, ends, 190 ticks, programs [127]
+    track 5 at 0833D4C7: 33 events, 14 notes, ends, 188 ticks, programs [3]
+
+Sound-effect set 0 at 08239C94: 196 sounds, bank map 08239C7C
+    0 at 08239E1C:   5 events,   1 notes,  126 ticks, ends
+    1 at 08239E26:   5 events,   1 notes,   96 ticks, ends
+    2 at 08239E30:   5 events,   1 notes,   66 ticks, ends
+    3 at 08239E3A:   5 events,   1 notes,   66 ticks, ends
+    4 at 0823A953:   9 events,   6 notes,   24 ticks, ends
+    5 at 0823A964:   9 events,   6 notes,   24 ticks, ends
+    6 at 08239E44:   6 events,   4 notes,   20 ticks, ends
+    7 at 08239E4F:   9 events,   4 notes,    8 ticks, ends
+    8 at 08239E56:   9 events,   4 notes,    8 ticks, ends
+    9 at 08239E5D:   9 events,   4 notes,    8 ticks, ends
+   10 at 08239E64:   9 events,   4 notes,    8 ticks, ends
+   11 at 0823B040:   6 events,   3 notes,    6 ticks, ends
+   12 at 0823AF70:   6 events,   2 notes,   22 ticks, ends
+   13 at 08239E89:   4 events,   1 notes,   48 ticks, ends
+   14 at 08239E91:   5 events,   1 notes,   52 ticks, ends
+   15 at 08239E9C:  19 events,   4 notes,   15 ticks, ends, +1 tracks
+   16 at 08239ECA:   3 events,   1 notes,    7 ticks, ends
+   17 at 08239ED6: 1791 events, 270 notes,  835 ticks, ends, +2 tracks
+   18 at 08239ED0:   3 events,   1 notes,    2 ticks, ends
+   19 at 0823A23B:   4 events,   1 notes,   20 ticks, ends
+   20 at 0823A244:   6 events,   3 notes,   17 ticks, ends
+   21 at 0823A252:   8 events,   6 notes,   15 ticks, ends
+   22 at 0823A25F:   4 events,   1 notes,    4 ticks, ends
+   23 at 0823A267:   4 events,   1 notes,   60 ticks, ends
+   24 at 0823A26F:   4 events,   1 notes,   55 ticks, ends
+   25 at 0823A291:  24 events,   8 notes,   18 ticks, ends, +1 tracks
+   26 at 0823A2D3:  24 events,   7 notes,   31 ticks, ends, +1 tracks
+   27 at 0823A317:   4 events,   1 notes,   96 ticks, ends
+   28 at 0823A30C:   5 events,   2 notes,    7 ticks, ends
+   29 at 0823A277:   6 events,   2 notes,  156 ticks, ends
+   30 at 0823A284:   6 events,   2 notes,  158 ticks, ends
+   31 at 0823A2C6:   6 events,   4 notes,    5 ticks, ends
+   32 at 0823A31F:   5 events,   1 notes,   32 ticks, ends
+   33 at 0823A32A:   6 events,   3 notes,    3 ticks, ends
+   34 at 0823A2B9:   6 events,   2 notes,    8 ticks, ends
+   35 at 0823A337:   4 events,   2 notes,    4 ticks, ends
+   36 at 0823A340:  10 events,   5 notes,   37 ticks, ends
+   37 at 0823A358:   5 events,   2 notes,   14 ticks, ends
+   38 at 0823A363:  20 events,   6 notes,   21 ticks, ends, +1 tracks
+   39 at 0823A4BA:  62 events,   9 notes,   62 ticks, ends, +2 tracks
+   40 at 0823A3A0:  12 events,   6 notes,   72 ticks, ends
+   41 at 0823A410:  35 events,  16 notes,  132 ticks, ends
+   42 at 0823A465:  35 events,  16 notes,  132 ticks, ends
+   43 at 0823A410:  35 events,  16 notes,  132 ticks, ends
+   44 at 0823A3BD:  34 events,  16 notes,  132 ticks, ends
+   45 at 0823A542:   8 events,   6 notes,   54 ticks, ends
+   46 at 0823A54F:  24 events,  20 notes,  161 ticks, ends
+   47 at 0823A592:  16 events,  10 notes,   24 ticks, ends
+   48 at 0823A5B8:   4 events,   2 notes,   14 ticks, loops
+   49 at 0823A5F4:   6 events,   2 notes,    8 ticks, ends
+   50 at 0823A601:   4 events,   1 notes,    4 ticks, ends
+   51 at 0823A609:   4 events,   1 notes,   96 ticks, ends
+   52 at 0823A611:   9 events,   1 notes,   96 ticks, ends, +1 tracks
+   53 at 0823A625:  12 events,   7 notes,   20 ticks, ends
+   54 at 0823A643:  31 events,  20 notes,   40 ticks, ends
+   55 at 0823A65F:  23 events,  19 notes,   53 ticks, ends
+   56 at 0823A69F:   7 events,   2 notes,   25 ticks, ends
+   57 at 0823A7DA:   6 events,   4 notes,    5 ticks, ends
+   58 at 0823A7CC:   6 events,   4 notes,   12 ticks, loops
+   59 at 0823A7A1:  28 events,  24 notes,   96 ticks, ends
+   60 at 0823A819:  27 events,  20 notes,   40 ticks, ends
+   61 at 0823A844:   7 events,   4 notes,    4 ticks, ends
+   62 at 0823A87C:   6 events,   3 notes,    9 ticks, ends
+   63 at 0823A88A:   7 events,   3 notes,   16 ticks, ends
+   64 at 0823A898:   7 events,   3 notes,   10 ticks, ends
+   65 at 0823A8A8:   4 events,   2 notes,    2 ticks, ends
+   66 at 0823A7E7:  18 events,  16 notes,   32 ticks, ends
+   67 at 0823A7FC:  15 events,  12 notes,   28 ticks, ends
+   68 at 0823A8AF:  38 events,  14 notes,   78 ticks, ends
+   69 at 0823A908:   5 events,   1 notes,   10 ticks, ends
+   70 at 0823AA44:  21 events,  10 notes,   42 ticks, ends, +1 tracks
+   71 at 0823AA79:  21 events,  18 notes,   36 ticks, ends
+   72 at 0823AAB4:   4 events,   1 notes,   20 ticks, ends
+   73 at 0823AABD:  26 events,  24 notes,  186 ticks, loops
+   74 at 0823AAFE:   8 events,   3 notes,   13 ticks, ends
+   75 at 0823ABE4:  16 events,  12 notes,   46 ticks, ends
+   76 at 0823A913:   5 events,   1 notes,   80 ticks, ends
+   77 at 0823A91D:   4 events,   1 notes,   80 ticks, ends
+   78 at 0823A925:   5 events,   1 notes,  236 ticks, ends
+   79 at 0823A930:   5 events,   1 notes,  233 ticks, ends
+   80 at 0823A93B:   8 events,   3 notes,   17 ticks, ends
+   81 at 0823A94D:   3 events,   1 notes,   12 ticks, ends
+   82 at 0823A975:   4 events,   1 notes,  120 ticks, ends
+   83 at 0823A97D:   5 events,   1 notes,  120 ticks, ends
+   84 at 0823A987:   5 events,   1 notes,  120 ticks, ends
+   85 at 0823A991:   4 events,   1 notes,  120 ticks, ends
+   86 at 0823A999:   5 events,   1 notes,  120 ticks, ends
+   87 at 0823A9A3:   5 events,   1 notes,  120 ticks, ends
+   88 at 0823A9AD:   6 events,   3 notes, 65558 ticks, loops
+   89 at 0823A9BD:  30 events,  16 notes,   32 ticks, ends
+   90 at 0823A9DB:  37 events,  24 notes,   48 ticks, loops
+   91 at 0823AA00:  32 events,  10 notes,  108 ticks, ends, +1 tracks
+   92 at 0823AC78:  26 events,  14 notes,   46 ticks, ends
+   93 at 0823ACEC:   7 events,   1 notes,   48 ticks, ends, +1 tracks
+   94 at 0823ACAB:  27 events,  12 notes,   93 ticks, ends
+   95 at 0823ACFC:  35 events,  24 notes,   48 ticks, ends
+   96 at 0823A5C3:  19 events,  12 notes,  120 ticks, ends
+   97 at 0823A5D0:  14 events,   9 notes,  108 ticks, ends
+   98 at 0823A5DD:   9 events,   6 notes,   81 ticks, ends
+   99 at 0823A5C3:  19 events,  12 notes,  120 ticks, ends
+  100 at 0823AC48:  20 events,   9 notes,   48 ticks, ends
+  101 at 0823AB0E:   4 events,   1 notes,   36 ticks, ends
+  102 at 0823A86E:   7 events,   3 notes,   27 ticks, ends
+  103 at 0823AB17:   5 events,   2 notes,    6 ticks, ends
+  104 at 0823AB22:  33 events,  12 notes,   54 ticks, ends
+  105 at 0823AB6F:  10 events,   4 notes,   25 ticks, ends
+  106 at 0823AB86:   9 events,   6 notes,   25 ticks, loops
+  107 at 0823AB9E:   8 events,   4 notes,   31 ticks, ends
+  108 at 0823ABB1:   5 events,   2 notes,   22 ticks, ends
+  109 at 0823ABBC:   7 events,   2 notes,   17 ticks, ends
+  110 at 0823ABCB:   9 events,   4 notes,   19 ticks, ends
+  111 at 0823ABDE:   3 events,   1 notes,    7 ticks, ends
+  112 at 0823AC0F:  13 events,   6 notes,   22 ticks, ends
+  113 at 0823AC2E:   4 events,   1 notes,    6 ticks, ends
+  114 at 0823AC37:   8 events,   4 notes,   19 ticks, ends
+  115 at 0823AE97:   7 events,   3 notes,   12 ticks, ends
+  116 at 0823B10F:   5 events,   1 notes,    3 ticks, ends
+  117 at 0823A395:   5 events,   1 notes,    3 ticks, ends
+  118 at 0823AFAA:  37 events,  32 notes,   64 ticks, ends
+  119 at 0823AD39:   9 events,   7 notes,   30 ticks, ends
+  120 at 0823AD47:  16 events,   7 notes,   28 ticks, ends
+  121 at 0823B0C9:  29 events,  22 notes,   72 ticks, ends
+  122 at 0823B0F4:   7 events,   2 notes,   31 ticks, ends
+  123 at 0823AD6F:   5 events,   1 notes,   16 ticks, ends
+  124 at 0823AD7A:   8 events,   3 notes,   17 ticks, ends
+  125 at 0823AD8C:   8 events,   3 notes,   15 ticks, ends
+  126 at 0823ADA1:  11 events,   5 notes,   29 ticks, ends
+  127 at 0823AE70:   7 events,   2 notes,   16 ticks, ends
+  128 at 0823B11A:   9 events,   2 notes,   27 ticks, ends
+  129 at 0823B104:   5 events,   1 notes,    3 ticks, ends
+  130 at 0823ADB8:   8 events,   6 notes,   24 ticks, ends
+  131 at 0823ADE1:   6 events,   2 notes,   12 ticks, ends
+  132 at 0823ADEE:   7 events,   4 notes,   30 ticks, ends
+  133 at 0823ADFB:  11 events,   4 notes,   44 ticks, ends
+  134 at 0823B06D:  38 events,  24 notes,   48 ticks, ends
+  135 at 0823B04A:  32 events,  30 notes,   60 ticks, ends
+  136 at 0823AF65:   5 events,   2 notes,   22 ticks, ends
+  137 at 0823AFF5:  14 events,  12 notes,   24 ticks, ends
+  138 at 0823B0B2:  18 events,  15 notes,   33 ticks, ends
+  139 at 0823B0A2:  29 events,  24 notes,   54 ticks, ends
+  140 at 0823B01B:  17 events,  14 notes,   31 ticks, ends
+  141 at 0823B038:   5 events,   3 notes,    6 ticks, ends
+  142 at 0823AF95:  18 events,  16 notes,   32 ticks, ends
+  143 at 0823AF7D:  10 events,   5 notes,   37 ticks, ends
+  144 at 0823B0F4:   7 events,   2 notes,   31 ticks, ends
+  145 at 0823AEE6:   7 events,   2 notes,   28 ticks, ends
+  146 at 0823AEAF:  22 events,   6 notes,   48 ticks, ends
+  147 at 0823AEF6:   9 events,   6 notes,   27 ticks, ends
+  148 at 0823AEA7:   4 events,   1 notes,  127 ticks, ends
+  149 at 0823AE14:   5 events,   2 notes,    5 ticks, ends
+  150 at 0823AE1D:   5 events,   2 notes,    5 ticks, ends
+  151 at 0823AE26:   5 events,   2 notes,    5 ticks, ends
+  152 at 0823AE2F:   5 events,   2 notes,    5 ticks, ends
+  153 at 0823AE38:   5 events,   2 notes,    5 ticks, ends
+  154 at 0823AE41:   5 events,   2 notes,    5 ticks, ends
+  155 at 0823AE4A:   5 events,   2 notes,    5 ticks, ends
+  156 at 0823AE53:   5 events,   2 notes,    5 ticks, ends
+  157 at 0823AE5C:   5 events,   2 notes,    5 ticks, ends
+  158 at 0823B00E:   8 events,   6 notes,   38 ticks, ends
+  159 at 0823AE81:   4 events,   1 notes,    8 ticks, ends
+  160 at 0823AE8A:   7 events,   4 notes,   34 ticks, ends
+  161 at 0823AF03:  10 events,   7 notes,   30 ticks, ends
+  162 at 0823AF13:  43 events,  10 notes,   72 ticks, ends, +1 tracks
+  163 at 0823AE65:   6 events,   2 notes,    5 ticks, ends
+  164 at 0823ADC7:   3 events,   1 notes,  127 ticks, ends
+  165 at 0823ADCD:   3 events,   1 notes,  127 ticks, ends
+  166 at 0823ADD3:   4 events,   1 notes,  127 ticks, ends
+  167 at 0823ADDB:   3 events,   1 notes,  127 ticks, ends
+  168 at 0823A84E:   4 events,   1 notes,   36 ticks, ends
+  169 at 0823A856:   4 events,   1 notes,   36 ticks, ends
+  170 at 0823A85E:   4 events,   1 notes,   24 ticks, ends
+  171 at 0823A866:   4 events,   1 notes,   24 ticks, ends
+  172 at 0823A794:   8 events,   6 notes,   26 ticks, ends
+  173 at 0823A786:   9 events,   7 notes,   30 ticks, ends
+  174 at 0823A77D:   5 events,   2 notes,    5 ticks, ends
+  175 at 0823A775:   4 events,   1 notes,   60 ticks, ends
+  176 at 0823A76D:   4 events,   1 notes,   60 ticks, ends
+  177 at 0823A762:   5 events,   1 notes,  100 ticks, ends
+  178 at 0823A759:   4 events,   1 notes,   24 ticks, ends
+  179 at 0823A74F:   5 events,   1 notes,   80 ticks, ends
+  180 at 0823A747:   4 events,   1 notes,   24 ticks, ends
+  181 at 0823A73F:   4 events,   1 notes,   80 ticks, ends
+  182 at 0823A737:   4 events,   1 notes,   60 ticks, ends
+  183 at 0823A72E:   4 events,   1 notes,  160 ticks, ends
+  184 at 0823A726:   4 events,   1 notes,   24 ticks, ends
+  185 at 0823A71E:   4 events,   1 notes,   24 ticks, ends
+  186 at 0823A6F2:   5 events,   2 notes,  138 ticks, ends
+  187 at 0823A6FD:   5 events,   2 notes,  169 ticks, ends
+  188 at 0823A6EA:   4 events,   1 notes,   48 ticks, ends
+  189 at 0823A6E2:   4 events,   1 notes,   48 ticks, ends
+  190 at 0823A6D8:   5 events,   1 notes,   68 ticks, ends
+  191 at 0823A6BE:   5 events,   1 notes,   68 ticks, ends
+  192 at 0823A6D0:   4 events,   1 notes,  120 ticks, ends
+  193 at 0823A6B6:   4 events,   1 notes,   72 ticks, ends
+  194 at 0823A6C8:   4 events,   1 notes,   48 ticks, ends
+  195 at 0823A6AE:   4 events,   1 notes,   48 ticks, ends
+
+Sound-effect set 1 at 0823B134: 54 sounds, bank map 08239C82
+    0 at 0823B794:   4 events,   1 notes,    2 ticks, ends
+    1 at 0823B78C:   4 events,   1 notes,   28 ticks, ends
+    2 at 0823B639:  21 events,   9 notes,   72 ticks, ends, +1 tracks
+    3 at 0823B79C:  19 events,   6 notes,   96 ticks, ends
+    4 at 0823B765:  18 events,   8 notes,   38 ticks, ends
+    5 at 0823B721:  59 events,  44 notes,  100 ticks, ends
+    6 at 0823B7EA:  20 events,  16 notes,   16 ticks, ends
+    7 at 0823B7DF:   7 events,   4 notes,    4 ticks, ends
+    8 at 0823B7C7:   4 events,   1 notes,    3 ticks, ends
+    9 at 0823B7CF:   4 events,   1 notes,    3 ticks, ends
+   10 at 0823B7D7:   4 events,   1 notes,    3 ticks, ends
+   11 at 0823B832:  17 events,  12 notes,   13 ticks, ends
+   12 at 0823B80F:  18 events,  14 notes,   56 ticks, ends
+   13 at 0823B6D8:  26 events,  22 notes,   83 ticks, ends
+   14 at 0823B6BB:  22 events,  16 notes,   18 ticks, ends
+   15 at 0823B6AA:  11 events,   8 notes,   71 ticks, ends
+   16 at 0823B6A2:   4 events,   1 notes,   20 ticks, ends
+   17 at 0823B682:  12 events,   9 notes,   19 ticks, ends
+   18 at 0823B65F:  59 events,  42 notes,   42 ticks, ends
+   19 at 0823B62C:   6 events,   1 notes,   60 ticks, ends
+   20 at 0823B607:  20 events,  16 notes,   16 ticks, ends
+   21 at 0823B5CB:  33 events,  29 notes,   29 ticks, ends
+   22 at 0823B5BE:   6 events,   2 notes,   32 ticks, ends
+   23 at 0823B58D:  18 events,  14 notes,   31 ticks, ends
+   24 at 0823B558:  22 events,  18 notes,   91 ticks, ends
+   25 at 0823B512:  43 events,  39 notes,   39 ticks, ends
+   26 at 0823B4F3:  18 events,  12 notes,   18 ticks, ends
+   27 at 0823B4D3:  17 events,   8 notes,   36 ticks, ends
+   28 at 0823B4BF:   9 events,   3 notes,   74 ticks, ends
+   29 at 0823B4AE:   8 events,   2 notes,   23 ticks, ends
+   30 at 0823B49A:   9 events,   3 notes,   13 ticks, ends
+   31 at 0823B48C:   9 events,   5 notes,   15 ticks, ends
+   32 at 0823B46D:  19 events,   8 notes,   21 ticks, ends
+   33 at 0823B418:  37 events,  12 notes,   23 ticks, ends
+   34 at 0823B39F:  61 events,  24 notes,   47 ticks, ends
+   35 at 0823B38C:   8 events,   2 notes,   11 ticks, ends
+   36 at 0823B37F:   6 events,   1 notes,    6 ticks, ends
+   37 at 0823B36F:   9 events,   3 notes,    5 ticks, ends
+   38 at 0823B315:  58 events,  27 notes,   54 ticks, ends
+   39 at 0823B300:   9 events,   2 notes,  108 ticks, ends
+   40 at 0823B2EB:  12 events,   8 notes,   16 ticks, ends
+   41 at 0823B2D3:  11 events,   4 notes,   48 ticks, ends
+   42 at 0823B2A6:  20 events,   6 notes,   96 ticks, ends
+   43 at 0823B281:  23 events,  10 notes,   19 ticks, ends
+   44 at 0823B225:  41 events,   5 notes,   24 ticks, ends, +2 tracks
+   45 at 0823B1F1:   7 events,   2 notes,    5 ticks, ends
+   46 at 0823B1FE:   7 events,   2 notes,    5 ticks, ends
+   47 at 0823B20B:   7 events,   2 notes,    5 ticks, ends
+   48 at 0823B218:   7 events,   2 notes,    5 ticks, ends
+   49 at 0823B1D8:  10 events,   6 notes,   48 ticks, ends
+   50 at 0823B1C9:   7 events,   2 notes,   28 ticks, ends
+   51 at 0823B1BF:   5 events,   1 notes,   24 ticks, ends
+   52 at 0823B1B5:   5 events,   1 notes,    6 ticks, ends
+   53 at 0823B1A0:  10 events,   4 notes,    8 ticks, ends
+

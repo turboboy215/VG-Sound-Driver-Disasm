@@ -1,0 +1,187 @@
+Battle of Olympus (GB) - music/SFX data, bank $0F  (notation: [delta] nNN/param, cmds by hex)
+=============================================================================================
+
+SONG HEADER 0F:4018  tracks=4  ptrs=4059 41F1 431D 4464
+  track 0 @4059-41F0  events=136 notes=134  total delta=2079 frames  ends with cmdD9
+    DC(4006) n43/4 [10]n42/4 [10]n43/4 [10]n44/4 [10]n43/5 [20]n41/5 [20]n43/5 [20]n4B/5 [20]n43/7 [40]n41/4 [10]n3F/4 [10]n41/4 [10]n43/4 [10]n44/5 [20]n43/5 [20]n41/5 [20]n4A/5 [20]n41/7 [40]n3F/4 [10]n3E/4 [10]n3F/4 [10]n41/4 [10]n43/5 ...
+  track 1 @41F1-431C  events=100 notes=98  total delta=2120 frames  ends with cmdD9
+    DC(4000) n3F/7 [60]n3E/5 [20]n3F/5 [20]n48/5 [20]n3F/7 [40]n3E/4 [10]n3C/4 [10]n3E/4 [10]n3F/4 [10]n41/5 [20]n3F/5 [20]n3E/5 [20]n46/5 [20]n3E/7 [40]n3A/7 [40]n3F/5 [20]n3E/5 [20]n3C/5 [20]n3F/5 [20]n3C/7 [40]n38/7 [30]n3C/4 [10]n3E/5 ...
+  track 2 @431D-4463  events=109 notes=107  total delta=2180 frames  ends with cmdD9
+    DC(400C) n24/5 [20]n24/5 [40]n1F/5 [20]n24/5 [60]n1F/5 [20]n22/5 [20]n22/5 [40]n1D/5 [20]n22/5 [60]n1D/5 [20]n27/5 [20]n27/5 [40]n22/5 [20]n27/5 [60]n22/5 [20]n26/5 [20]n26/5 [40]n20/5 [20]n1F/5 [20]n2B/5 [40]n26/5 [20]n24/5 [20]n24/5 ...
+  track 3 @4464-447E  events=9 notes=7  total delta=78 frames  ends with cmdE3
+    DC(4012) n02/2 [10]n02/2 [10]n02/2 [10]n02/2 [10]n03/2 [20]n02/2 [10]n02/2 [8]E3
+
+SONG HEADER 0F:447F  tracks=3  ptrs=44B0 45FC 476C
+  track 0 @44B0-45F9  events=110 notes=108  total delta=2462 frames  ends with cmdD9
+    DC(4006) n3E/7 [56]n3C/7 [28]n40/7 [28]n3E/7 [56]n45/7 [56]n3E/7 [56]n3C/7 [28]n40/7 [28]n3E/7 [56]n45/7 [56]n3E/3 [7]n3C/3 [7]n3E/3 [7]n40/3 [7]n41/4 [14]n43/4 [14]n45/4 [14]n43/4 [14]n41/4 [14]n45/4 [14]n43/5 [28]n41/5 [28]n40/4 ...
+  track 1 @45FC-4769  events=122 notes=120  total delta=2640 frames  ends with cmdD9
+    DC(4000) n39/7 [56]n37/7 [28]n3B/7 [28]n39/7 [56]n41/7 [56]n39/7 [56]n37/7 [28]n3B/7 [28]n39/7 [56]n41/7 [56]n2D/4 [14]n2D/4 [28]n2D/4 [28]n2D/4 [14]n2D/4 [14]n2D/4 [14]n2D/4 [14]n2D/4 [28]n2D/4 [28]n2D/4 [14]n2D/4 [14]n2D/4 [14]n2F/4 ...
+  track 2 @476C-477A  events=5 notes=3  total delta=26 frames  ends with cmdE3
+    DC(4012) n02/1 [14]n02/1 [7]n02/1 [5]E3
+
+SONG HEADER 0F:477D  tracks=3  ptrs=4784 4880 4989
+  track 0 @4784-487F  events=84 notes=82  total delta=1427 frames  ends with cmdD9
+    DC(4006) n30/3 [14]n30/3 [14]n30/3 [14]n30/3 [14]n3A/3 [7]n3C/3 [7]n3C/4 [14]n3A/3 [7]n3C/3 [7]n3C/4 [14]n30/3 [14]n30/3 [14]n30/3 [14]n30/3 [28]n3F/7 [42]n30/3 [14]n30/3 [14]n30/3 [14]n30/3 [14]n3A/3 [7]n3C/3 [7]n3C/4 [14]n3A/3 ...
+  track 1 @4880-4988  events=88 notes=86  total delta=1580 frames  ends with cmdD9
+    DC(4000) n2B/4 [14]n2B/4 [14]n2B/4 [14]n2B/4 [14]n35/3 [7]n37/3 [7]n37/4 [14]n35/3 [7]n37/3 [7]n37/4 [14]n2B/4 [14]n2B/4 [14]n2B/4 [14]n2B/4 [28]n3C/7 [42]n2B/4 [14]n2B/4 [14]n2B/4 [14]n2B/4 [14]n35/3 [7]n37/3 [7]n37/4 [14]n35/3 ...
+  track 2 @4989-4997  events=5 notes=3  total delta=26 frames  ends with cmdE3
+    DC(4012) n02/2 [7]n02/2 [7]n02/2 [12]E3
+
+SONG HEADER 0F:4998  tracks=3  ptrs=49AB 4AF6 4D3C
+  track 0 @49AB-4AF5  events=110 notes=107  total delta=2724 frames  ends with cmdD9
+    DC(4000) n43/7 [28]n4A/7 [28]n4A/7 [28]n48/7 [28]n46/7 [14]n48/7 [14]n46/7 [14]n45/7 [14]n43/7 [28]n4B/7 [28]n4B/7 [28]n4A/7 [28]n48/7 [14]n4A/7 [14]n48/7 [14]n46/7 [14]n45/7 [28]n4D/7 [28]n4D/7 [28]n4B/7 [28]n4A/7 [14]n4B/7 [14]n4A/7 ...
+  track 1 @4AF6-4D3B  events=194 notes=192  total delta=2687 frames  ends with cmdD9
+    DC(4006) n2B/7 [14]n32/7 [14]n30/7 [14]n32/7 [14]n2E/7 [14]n32/7 [14]n2B/7 [14]n32/7 [14]n30/7 [14]n32/7 [14]n2E/7 [14]n32/7 [14]n27/7 [14]n33/7 [14]n32/7 [14]n33/7 [14]n2E/7 [14]n33/7 [14]n27/7 [14]n33/7 [14]n32/7 [14]n33/7 [14]n2E/7 ...
+  track 2 @4D3C-4D71  events=18 notes=16  total delta=334 frames  ends with cmdE3
+    DC(4012) n02/2 [28]n03/2 [28]n02/2 [14]n03/2 [14]n02/2 [28]n03/2 [28]n02/2 [14]n03/2 [14]n02/2 [28]n03/2 [28]n02/2 [14]n03/2 [14]n02/2 [28]n03/2 [28]n02/2 [14]n03/2 [12]E3
+
+SONG HEADER 0F:4D72  tracks=3  ptrs=4D79 4F0B 4FF5
+  track 0 @4D79-4F0A  events=134 notes=132  total delta=1439 frames  ends with cmdD9
+    DC(4006) n39/4 [10]n3B/4 [10]n3D/4 [10]n3E/4 [10]n40/4 [10]n41/4 [10]n3E/4 [10]n40/4 [10]n41/4 [10]n43/4 [10]n45/4 [10]n46/4 [10]n45/4 [10]n43/4 [10]n41/4 [10]n43/4 [10]n41/4 [10]n40/4 [10]n41/4 [10]n40/4 [10]n3E/4 [10]n3D/7 [30]n41/4 ...
+  track 1 @4F0B-4FF4  events=78 notes=76  total delta=1530 frames  ends with cmdD9
+    DC(4000) n32/7 [30]n2D/7 [30]n32/7 [30]n35/7 [30]n34/7 [30]n31/7 [30]n3A/7 [30]n39/7 [30]n35/7 [30]n34/7 [30]n32/7 [30]n35/7 [30]n34/7 [30]n31/7 [30]n37/7 [30]n31/7 [30]n32/7 [30]n2D/7 [30]n32/7 [30]n35/7 [30]n34/7 [30]n31/7 [30]n3A/7 ...
+  track 2 @4FF5-500F  events=9 notes=7  total delta=118 frames  ends with cmdE3
+    DC(4012) n02/2 [20]n02/2 [10]n03/2 [30]n02/2 [30]n03/2 [10]n02/2 [10]n02/2 [8]E3
+
+SONG HEADER 0F:5135  tracks=3  ptrs=513C 52EE 54D9
+  track 0 @513C-52EB  events=144 notes=142  total delta=2686 frames  ends with cmdDB
+    DC(4006) n39/5 [28]n40/5 [28]n3E/5 [28]n41/5 [28]n40/4 [14]n3E/4 [14]n3C/4 [14]n3B/4 [14]n3C/5 [28]n39/5 [28]n3B/4 [14]n3C/4 [14]n3E/5 [28]n3C/4 [14]n3E/4 [14]n40/5 [28]n3E/4 [14]n40/4 [14]n41/4 [14]n43/4 [14]n40/7 [56]n39/5 [28]n40/5 ...
+  track 1 @52EE-54D6  events=163 notes=161  total delta=2752 frames  ends with cmdD9
+    DC(4000) n2D/4 [14]n2D/4 [14]n30/4 [14]n2D/4 [14]n2D/4 [14]n2D/4 [14]n30/4 [14]n2D/4 [14]n2C/4 [14]n2C/4 [14]n2F/4 [14]n2C/4 [14]n2D/4 [14]n2D/4 [14]n30/4 [14]n2D/4 [14]n2C/4 [14]n2C/4 [14]n2F/4 [14]n2C/4 [14]n2D/4 [14]n2D/4 [14]n30/4 ...
+  track 2 @54D9-54F6  events=10 notes=8  total delta=110 frames  ends with cmdE3
+    DC(4012) n02/1 [14]n02/1 [14]n04/1 [14]n02/1 [14]n02/1 [14]n02/1 [14]n04/1 [14]n02/1 [12]E3
+
+SONG HEADER 0F:54F7  tracks=3  ptrs=54FE 564E 5756
+  track 0 @54FE-564D  events=112 notes=110  total delta=1566 frames  ends with cmdD9
+    DC(4006) n39/4 [14]n3B/4 [14]n3C/4 [14]n3E/4 [14]n40/4 [14]n39/4 [14]n39/4 [14]n39/4 [14]n3B/4 [14]n3C/4 [14]n3E/4 [14]n40/4 [14]n41/4 [14]n3B/4 [14]n3B/4 [14]n3B/4 [14]n3C/4 [14]n3E/4 [14]n40/4 [14]n41/4 [14]n43/4 [14]n3C/4 [14]n3C/4 ...
+  track 1 @564E-5755  events=88 notes=86  total delta=1660 frames  ends with cmdD9
+    DC(4000) n34/4 [14]n34/4 [14]n34/4 [14]n34/4 [14]n34/4 [14]n34/4 [14]n34/4 [14]n34/4 [14]n38/4 [14]n38/4 [14]n38/4 [14]n38/4 [14]n38/4 [14]n38/4 [14]n38/4 [14]n38/4 [14]n37/4 [14]n37/4 [14]n37/4 [14]n37/4 [14]n37/4 [14]n37/4 [14]n37/4 ...
+  track 2 @5756-5764  events=5 notes=3  total delta=54 frames  ends with cmdE3
+    DC(4012) n01/1 [28]n01/1 [14]n01/1 [12]E3
+
+SONG HEADER 0F:5765  tracks=3  ptrs=5796 5952 5BD1
+  track 0 @5796-5951  events=148 notes=146  total delta=3676 frames  ends with cmdD9
+    DC(4006) n3B/7 [84]n40/3 [7]n3E/3 [7]n41/3 [7]n40/3 [7]n40/7 [84]n47/3 [7]n45/3 [7]n48/3 [7]n47/3 [7]n47/7 [84]n4C/3 [7]n4A/3 [7]n4D/3 [7]n4C/3 [7]n4C/7 [84]n3B/3 [7]n39/3 [7]n37/3 [7]n35/3 [7]n34/7 [56]n35/5 [18]n37/5 ...
+  track 1 @5952-5BD0  events=213 notes=211  total delta=3086 frames  ends with cmdD9
+    DC(4000) n34/7 [112]n3B/7 [112]n40/7 [112]n47/7 [112]n2F/5 [28]n2F/4 [9]n2F/4 [9]n2F/4 [9]n2F/5 [28]n2F/4 [9]n2F/4 [9]n2F/4 [9]n2F/5 [28]n2F/4 [9]n2F/4 [9]n2F/4 [9]n2F/4 [9]n2F/4 [9]n2F/4 [9]n2F/4 [9]n2F/4 [9]n2F/4 [9]n2F/5 ...
+  track 2 @5BD1-5C09  events=19 notes=17  total delta=208 frames  ends with cmdE3
+    DC(4012) n01/2 [28]n01/2 [9]n01/2 [9]n01/2 [9]n01/2 [28]n01/2 [9]n01/2 [9]n01/2 [9]n01/2 [28]n01/2 [9]n01/2 [9]n01/2 [9]n01/2 [9]n01/2 [9]n01/2 [9]n01/2 [9]n01/2 [7]E3
+
+SONG HEADER 0F:5C0A  tracks=3  ptrs=5C11 5CE5 5D03
+  track 0 @5C11-5CE2  events=70 notes=68  total delta=1902 frames  ends with cmdDB
+    DC(4006) [112]n00/0 [112]n00/0 [112]n00/0 [112]n00/0 [112]n00/0 [112]n00/0 [112]n00/0 [112]n00/0 [112]n3F/4 [14]n3C/4 [14]n3F/4 [14]n42/4 [14]n45/4 [14]n42/4 [14]n3F/4 [14]n3C/4 [14]n3E/4 [14]n3B/4 [14]n3E/4 [14]n41/4 [14]n44/4 [14]n41/4 [14]n3E/4 ...
+  track 1 @5CE5-5D02  events=10 notes=8  total delta=222 frames  ends with cmdE3
+    DC(4000) n24/4 [14]n24/4 [56]n27/4 [14]n28/4 [14]n2E/4 [14]n2D/7 [56]n2C/5 [28]n2B/5 [26]E3
+  track 2 @5D03-5D17  events=7 notes=5  total delta=54 frames  ends with cmdE3
+    DC(4012) n02/2 [14]n02/2 [14]n02/2 [7]n02/2 [7]n02/2 [12]E3
+
+SONG HEADER 0F:5D18  tracks=3  ptrs=5D25 5D55 5D69
+  track 0 @5D25-5D54  events=16 notes=14  total delta=893 frames  ends with cmdD9
+    DC(4000) n3C/7 [112]n42/7 [112]n40/7 [84]n3C/4 [9]n39/4 [9]n36/4 [9]n33/7 [112]n39/7 [112]n3F/7 [112]n3C/7 [84]n42/4 [9]n3F/4 [9]n3C/4 [9]n45/7 [111]D9
+  track 1 @5D55-5D66  events=6 notes=4  total delta=26 frames  ends with cmdE3
+    DC(5D1F) n4B/3 [7]n4E/3 [7]n48/3 [7]n51/3 [5]E3
+  track 2 @5D69-5D77  events=5 notes=3  total delta=26 frames  ends with cmdE3
+    DC(4012) n02/2 [14]n02/2 [7]n02/2 [5]E3
+
+SONG HEADER 0F:5D78  tracks=3  ptrs=5D7F 5E32 5F29
+  track 0 @5D7F-5E31  events=55 notes=53  total delta=2272 frames  ends with cmdD9
+    DC(4006) [1]n26/7 [128]n21/7 [128]n26/7 [128]n21/7 [128]n26/7 [128]n21/7 [128]n26/7 [128]n21/7 [128]n26/7 [128]n21/7 [128]n26/7 [128]n21/7 [128]n26/4 [8]n21/4 [8]n26/4 [8]n21/4 [8]n1A/4 [8]n21/4 [8]n26/4 [8]n21/4 [8]n26/5 [16]n21/5 [16]n26/5 ...
+  track 1 @5E32-5F28  events=82 notes=80  total delta=1153 frames  ends with cmdD9
+    DC(4000) [2]n25/4 [8]n26/4 [8]n2A/4 [8]n29/4 [40]n25/4 [8]n26/4 [8]n2D/4 [8]n2C/4 [40]n25/4 [8]n26/4 [8]n2A/4 [8]n29/4 [40]n26/4 [8]n25/4 [8]n2B/4 [8]n2A/4 [40]n25/4 [8]n26/4 [8]n2A/4 [8]n29/4 [40]n25/4 [8]n26/4 [8]n2D/4 ...
+  track 2 @5F29-5F58  events=16 notes=14  total delta=126 frames  ends with cmdE3
+    DC(4012) n02/2 [8]n02/2 [8]n02/2 [8]n02/2 [8]n02/2 [8]n02/2 [16]n02/2 [8]n02/2 [8]n02/2 [8]n02/2 [8]n02/2 [16]n02/2 [8]n02/2 [8]n02/2 [6]E3
+
+SONG HEADER 0F:5F59  tracks=3  ptrs=5F60 5FDB 6056
+  track 0 @5F60-5FDA  events=41 notes=39  total delta=496 frames  ends with cmdDB
+    DC(4006) n2D/2 [4]n2F/2 [4]n30/2 [4]n32/2 [4]n34/2 [4]n35/2 [4]n34/2 [4]n35/2 [4]n37/2 [4]n39/2 [4]n3B/2 [4]n3C/2 [4]n3E/2 [4]n40/7 [28]n40/7 [9]n40/7 [9]n40/7 [9]n40/7 [14]n3E/7 [14]n3C/7 [14]n3E/7 [14]n3F/7 [28]n3F/7 ...
+  track 1 @5FDB-6055  events=41 notes=39  total delta=561 frames  ends with cmdD9
+    DC(4000) n2D/2 [4]n2F/2 [4]n30/2 [4]n32/2 [4]n34/2 [4]n35/2 [4]n34/2 [4]n35/2 [4]n37/2 [4]n39/2 [4]n3B/2 [4]n3C/2 [4]n3E/2 [4]n48/7 [28]n48/7 [9]n48/7 [9]n48/7 [9]n48/7 [14]n47/7 [14]n45/7 [14]n47/7 [14]n48/7 [28]n48/7 ...
+  track 2 @6056-60CA  events=39 notes=37  total delta=593 frames  ends with cmdD9
+    DC(4012) [56]n04/4 [28]n04/2 [9]n04/2 [9]n04/2 [9]n04/2 [14]n04/2 [14]n04/2 [14]n04/2 [14]n04/4 [28]n04/2 [9]n04/2 [9]n04/2 [9]n04/2 [14]n04/2 [14]n04/2 [14]n04/2 [14]n04/4 [28]n04/2 [9]n04/2 [9]n04/2 [9]n04/2 [14]n04/2 [14]n04/2 ...
+
+SONG HEADER 0F:60CB  tracks=2  ptrs=60D0 637D
+  track 0 @60D0-637C  events=227 notes=225  total delta=5042 frames  ends with cmdD9
+    DC(4006) n45/7 [8]n43/7 [8]n45/7 [112]n43/7 [8]n41/7 [8]n40/7 [8]n3E/7 [8]n3D/7 [32]n3E/7 [128]n45/7 [8]n43/7 [8]n45/7 [112]n40/7 [32]n41/7 [32]n3D/7 [32]n3E/7 [128]n39/7 [8]n37/4 [8]n39/7 [112]n37/7 [8]n35/7 [8]n34/7 [8]n32/7 ...
+  track 1 @637D-65C3  events=192 notes=190  total delta=5042 frames  ends with cmdD9
+    DC(4000) n39/4 [8]n37/4 [8]n39/7 [112]n37/4 [8]n35/4 [8]n34/4 [8]n32/4 [8]n31/7 [32]n32/7 [128]n39/4 [8]n37/4 [8]n39/7 [112]n34/7 [32]n35/7 [32]n31/7 [32]n32/7 [128]n2D/4 [8]n2B/4 [8]n2D/5 [112]n2B/4 [8]n29/4 [8]n28/4 [8]n26/4 ...
+
+SONG HEADER 0F:65C4  tracks=2  ptrs=65C9 6665
+  track 0 @65C9-6664  events=52 notes=50  total delta=2038 frames  ends with cmdD9
+    DC(4006) n40/7 [56]n40/7 [14]n3E/7 [14]n3C/7 [14]n3E/7 [14]n3F/7 [56]n3F/7 [14]n3E/7 [14]n3C/7 [14]n3F/7 [14]n3E/7 [56]n3B/7 [14]n3E/7 [28]n42/7 [14]n40/7 [84]n3E/7 [28]n3C/7 [56]n3C/7 [14]n3E/7 [28]n40/7 [14]n42/7 [56]n3B/7 [14]n45/7 ...
+  track 1 @6665-67EA  events=130 notes=128  total delta=1790 frames  ends with cmdDB
+    DC(4000) n2D/7 [14]n30/7 [14]n34/7 [14]n39/7 [14]n34/7 [14]n30/7 [14]n39/7 [14]n34/7 [14]n2B/7 [14]n30/7 [14]n33/7 [14]n37/7 [14]n33/7 [14]n30/7 [14]n37/7 [14]n33/7 [14]n2B/7 [14]n2F/7 [14]n32/7 [14]n37/7 [14]n36/7 [14]n32/7 [14]n36/7 ...
+
+SONG HEADER 0F:67EB  tracks=2  ptrs=67F0 68B6
+  track 0 @67F0-68B5  events=66 notes=64  total delta=894 frames  ends with cmdE3
+    DC(4006) n31/4 [14]n37/4 [14]n3B/4 [14]n37/4 [14]n40/4 [14]n37/4 [14]n3B/4 [14]n37/4 [14]n36/4 [14]n3A/4 [14]n40/4 [14]n3A/4 [14]n43/4 [14]n3A/4 [14]n40/4 [14]n3A/4 [14]n2F/4 [14]n39/4 [14]n3E/4 [14]n39/4 [14]n42/4 [14]n39/4 [14]n3E/4 ...
+  track 1 @68B6-697B  events=66 notes=64  total delta=895 frames  ends with cmdE3
+    DC(4000) [7]n37/4 [14]n31/4 [14]n37/4 [14]n3B/4 [14]n37/4 [14]n40/4 [14]n37/4 [14]n3B/4 [14]n37/4 [14]n36/4 [14]n3A/4 [14]n40/4 [14]n3A/4 [14]n43/4 [14]n3A/4 [14]n40/4 [14]n3A/4 [14]n2F/4 [14]n39/4 [14]n3E/4 [14]n39/4 [14]n42/4 [14]n39/4 ...
+
+SONG HEADER 0F:697C  tracks=3  ptrs=6983 69F8 6A6D
+  track 0 @6983-69F7  events=39 notes=37  total delta=1164 frames  ends with cmdD9
+    DC(4006) n39/7 [12]n39/7 [12]n39/7 [12]n3C/7 [72]n3B/7 [36]n3E/7 [24]n3B/7 [12]n39/7 [108]n37/7 [12]n37/7 [12]n3B/7 [12]n39/7 [36]n3C/7 [36]n3B/7 [36]n37/7 [24]n3B/7 [12]n39/7 [108]n3C/7 [12]n3C/7 [12]n3C/7 [12]n3A/7 [36]n3F/7 [24]n3E/7 ...
+  track 1 @69F8-6A6C  events=39 notes=37  total delta=1164 frames  ends with cmdD9
+    DC(4000) n40/7 [12]n40/7 [12]n40/7 [12]n43/7 [72]n42/7 [36]n45/7 [24]n42/7 [12]n40/7 [108]n3E/7 [12]n3E/7 [12]n42/7 [12]n40/7 [36]n43/7 [36]n42/7 [36]n3E/7 [24]n42/7 [12]n40/7 [108]n43/7 [12]n43/7 [12]n43/7 [12]n41/7 [36]n46/7 [24]n45/7 ...
+  track 2 @6A6D-6B6B  events=85 notes=83  total delta=1254 frames  ends with cmdD9
+    DC(4012) n03/3 [12]n03/3 [12]n03/3 [12]n03/3 [36]n03/3 [6]n03/3 [6]n03/3 [6]n03/3 [6]n03/3 [6]n03/3 [6]n03/3 [18]n03/3 [18]n03/3 [12]n03/3 [12]n03/3 [12]n03/3 [36]n03/3 [6]n03/3 [6]n03/3 [6]n03/3 [6]n03/3 [6]n03/3 [6]n03/3 ...
+
+SONG HEADER 0F:6B6C  tracks=2  ptrs=6B71 6C0D
+  track 0 @6B71-6C0C  events=52 notes=50  total delta=463 frames  ends with cmdDA
+    DC(4006) n28/7 [7]n2F/7 [7]n36/7 [7]n37/7 [7]n3B/7 [7]n40/7 [7]n3B/7 [7]n37/7 [7]n36/7 [7]n2F/7 [7]n28/7 [7]n34/7 [7]n3B/7 [7]n42/7 [7]n43/7 [7]n47/7 [7]n4C/7 [7]n47/7 [7]n43/7 [7]n42/7 [7]n3B/7 [7]n34/7 [7]n40/7 ...
+  track 1 @6C0D-6CA5  events=51 notes=49  total delta=466 frames  ends with cmdDA
+    DC(4000) [10]n28/7 [7]n2F/7 [7]n36/7 [7]n37/7 [7]n3B/7 [7]n40/7 [7]n3B/7 [7]n37/7 [7]n36/7 [7]n2F/7 [7]n28/7 [7]n34/7 [7]n3B/7 [7]n42/7 [7]n43/7 [7]n47/7 [7]n4C/7 [7]n47/7 [7]n43/7 [7]n42/7 [7]n3B/7 [7]n34/7 [7]n40/7 ...
+
+SONG HEADER 0F:6DEA  tracks=3  ptrs=6DF1 6E1E 6E93
+  track 0 @6DF1-6E09  events=8 notes=6  total delta=153 frames  ends with cmdDA
+    DC(4006) n3C/4 [14]n3B/4 [28]n3B/4 [14]n3A/4 [28]n3A/4 [14]n39/7 [55]DA
+  track 1 @6E1E-6E92  events=39 notes=37  total delta=988 frames  ends with cmdD9
+    DC(4000) n39/4 [14]n38/4 [28]n38/4 [14]n37/4 [28]n37/4 [14]n3A/7 [2]n39/7 [2]n38/7 [2]n37/7 [2]n36/7 [2]n35/7 [2]n34/7 [2]n33/7 [2]n32/7 [2]n31/7 [2]n30/7 [2]n2F/7 [2]n2E/7 [2]n2D/7 [2]n2C/7 [2]n2B/7 [2]n2A/7 [2]n29/7 ...
+  track 2 @6E93-6EBC  events=14 notes=12  total delta=938 frames  ends with cmdD9
+    DC(4012) n03/1 [14]n03/1 [28]n03/1 [14]n03/1 [28]n03/1 [14]n03/1 [120]n00/0 [120]n00/0 [120]n00/0 [120]n00/0 [120]n00/0 [120]n00/0 [120]D9
+
+SONG HEADER 0F:6EBD  tracks=2  ptrs=6EC2 6EF6
+  track 0 @6EC2-6F2B  events=35 notes=32  total delta=1731 frames  ends with cmdDA
+    DC(4000) n40/5 [28]n3D/5 [28]n42/5 [28]n3E/7 [56]n44/5 [28]n45/5 [28]n47/5 [28]n40/7 [120]n00/0 [120]n00/0 [120]n00/0 [120]n00/0 [120]n00/0 [120]n00/0 [120]n00/0 [120]n00/0 DC(4006) [8]n40/5 [28]n3D/5 [28]n42/5 [28]n3E/7 [56]n44/5 [28]n45/5 ...
+  track 1 @6EF6-6F2B  events=18 notes=16  total delta=547 frames  ends with cmdDA
+    DC(4006) [8]n40/5 [28]n3D/5 [28]n42/5 [28]n3E/7 [56]n44/5 [28]n45/5 [28]n47/5 [28]n40/7 [64]n40/5 [28]n3D/5 [28]n42/5 [28]n3E/7 [56]n44/5 [28]n45/5 [28]n47/5 [28]n40/7 [27]DA
+
+SONG HEADER 0F:6F2C  tracks=3  ptrs=6F33 6FCF 7182
+  track 0 @6F33-6FCE  events=52 notes=50  total delta=1800 frames  ends with cmdD9
+    DC(4006) n40/7 [56]n40/7 [14]n3E/7 [14]n3D/7 [14]n44/7 [14]n40/7 [56]n40/7 [14]n3E/7 [14]n3D/7 [14]n44/7 [14]n3E/7 [56]n3E/7 [14]n3B/7 [14]n3E/7 [14]n42/7 [14]n40/7 [84]n3E/7 [28]n3C/7 [56]n3C/7 [14]n3E/7 [28]n40/7 [14]n42/7 [56]n3B/7 ...
+  track 1 @6FCF-7181  events=145 notes=143  total delta=1791 frames  ends with cmdD9
+    DC(4000) n39/7 [112]n38/7 [112]n37/7 [112]n2B/7 [7]n2F/7 [7]n32/7 [7]n34/7 [7]n2F/7 [7]n32/7 [7]n34/7 [7]n37/7 [7]n32/7 [7]n34/7 [7]n37/7 [7]n3B/7 [7]n34/7 [7]n37/7 [7]n3B/7 [7]n3E/7 [7]n30/7 [7]n39/7 [7]n35/7 [7]n39/7 ...
+  track 2 @7182-7196  events=7 notes=5  total delta=68 frames  ends with cmdE3
+    DC(4012) n01/2 [14]n01/2 [14]n03/2 [14]n01/2 [14]n01/2 [12]E3
+
+SFX STREAMS (single-track, via Snd_PlaySFX)
+  0F:759B  DC(75A4) n19/2 [9]EA
+  0F:75CE  DC(4006) [3]n4A/2 [6]n48/2 [6]n46/2 [6]n44/2 [6]n42/2 [6]n40/2 [6]n3E/2 [6]n3C/2 [6]EA
+  0F:767E  DC(7699) n63/1 [8]n52/1 [9]n62/3 [12]EA
+  0F:768D  DC(7699) n72/1 [9]n62/3 [12]EA
+  0F:76AB  DC(76BE) n3C/0 [1]n4B/0 [1]DC(76C4) n00/1 [1]EA
+  0F:76D0  DC(76E0) n23/1 DC(76E6) n34/0 [9]EA
+  0F:76EC  DC(76E0) [1]n2D/0 [1]n28/0 [1]n23/0 [1]n1E/0 [1]n19/0 [1]n14/0 [1]n0F/0 [1]DC(76CA) n00/0 EA
+  0F:770E  DC(771E) n05/8 [5]DC(7724) n05/0 [12]EA
+  0F:7739  DC(777D) n19/1 [2]n1C/1 [2]n19/1 [2]n1C/1 [2]n19/1 [2]n1C/1 [2]DC(7783) n1F/1 [2]n1C/1 [2]n1F/1 [2]n1C/1 [2]n1F/1 [2]n1C/1 [2]DC(7789) n1F/1 [2]n22/1 [2]n1F/1 [2]n22/1 [2]n1F/1 [2]n22/1 [5]EA
+  0F:778F  DC(77BF) n28/3 [10]n34/5 [10]EA
+  0F:77CB  DC(77D4) n19/2 [9]EA
+
+INSTRUMENTS referenced by DC (6-byte BO format: ch duty prio sweep transpose vol)
+  0F:4000  00 80 05 08 E8 90
+  0F:4006  01 80 06 08 E8 90
+  0F:400C  02 00 00 00 00 90
+  0F:4012  03 80 07 08 00 50
+  0F:499F  00 00 05 08 E8 20
+  0F:5D1F  01 00 05 08 E8 60
+
+ORPHANED 14-byte (Top Gun format) records after song headers - never read by BO:
+  0F:4021  00 80 00 08 E8 00 00 00 00 80 80 00 80 40
+  0F:402F  01 40 00 08 E8 00 00 00 00 40 40 00 40 20
+  0F:403D  02 80 00 08 F4 00 00 00 00 80 80 00 80 40
+  0F:404B  03 80 00 08 F4 00 00 00 00 80 80 00 80 40
+  0F:4486  00 80 00 08 E8 00 00 00 00 80 80 00 80 40
+  0F:4494  01 40 00 08 E8 00 00 00 00 40 40 00 40 20
+  0F:44A2  03 80 00 08 E8 00 00 00 00 80 80 00 80 40
+  0F:576C  00 80 00 08 E8 00 00 00 00 80 80 00 80 40
+  0F:577A  01 40 00 08 E8 00 00 00 00 40 40 00 40 20
+  0F:5788  03 80 00 08 E8 00 00 00 00 80 80 00 80 40

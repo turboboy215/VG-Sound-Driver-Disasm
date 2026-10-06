@@ -1,0 +1,135 @@
+; Song @ $1A80   instrument table @ $1F74   channel mask FF
+
+; ---- Channel 0  (order list @ $1A93) ----
+x1  $1B05      0 ticks  H2I5J1K64$0
+x3  $1B11    432 ticks  @16O3V10Q0D16D8D24D16[D8&D16]+Q10D8-Q0D16D8D+CP6DP0
+x1  $1B45    144 ticks  @16O3V10Q0D16D8D24D16[D8&D16]+Q10D8-Q0E8E+Q8E-Q0F+Q8F-Q0D
+x4  $1B7F    576 ticks  O3V10Q0#C16#C8#C24#C16[#C8&#C16]+Q8#C8-Q0#C16#C8#CBP6+#CP0
+x3  $1BBA    432 ticks  O3V10Q0C16C8C24C16[C8&C16]+Q8C8-Q0C16C8C#AP5+CP0
+x1  $1BEB    144 ticks  O3V10Q0C16C8C24C16[C8&C16]+Q8C8-Q0C16C8C+F#D
+; FE -> loop to order entry @ $1A96
+; intro 0 ticks, loop 1728 ticks
+
+; ---- Channel 1  (order list @ $1AA8) ----
+x1  $1C19      0 ticks  H2
+x1  $1C1C    576 ticks  @13V9O4R24F+C-B#GAD144R24F+C-B#GF#GFEF24E4&F&E&F6&ED24
+x1  $1C53   1152 ticks  O4R24EB#AGEG#G#A4&B&#A&B&#A&B&#A&#G68R24#G#A#GE-#A#GG#G#AB+#C[D144&D]@4V1[G12^^&G^&G&G36&G72&G144]
+; FE -> loop to order entry @ $1AAB
+; intro 0 ticks, loop 1728 ticks
+
+; ---- Channel 2  (order list @ $1AB4) ----
+x1  $1CB6     14 ticks  H2R14
+x2  $1CBC    576 ticks  )1@5V7=42O4L7C130)0+@17R8[#G6&#G72&#G]
+x2  $1CE3    576 ticks  )1@5V7=20O3L12B130)0@17++R8[#D6&#D72&#D]
+x2  $1D0C    576 ticks  )1@5V7=20O4L12D130)0@17R8[+#D6&#D72&#D]
+; FE -> loop to order entry @ $1AB7
+; intro 14 ticks, loop 1728 ticks
+
+; ---- Channel 3  (order list @ $1AC3) ----
+x1  $1D34      0 ticks  H2
+x2  $1D37    576 ticks  @4O3V1[A12^^&A^^&A^^&A36&A72&A144]
+x2  $1D5A    576 ticks  @4O3V1[#G12^^&#G^^&#G^^&#G36&#G72&#G144]
+x2  $1D83    576 ticks  @4O3V1[#A12^^&#A^^&#A^^&#A36&#A72&#A144]
+; FE -> loop to order entry @ $1AC6
+; intro 0 ticks, loop 1728 ticks
+
+; ---- Channel 4  (order list @ $1AD2) ----
+x1  $1DAC      0 ticks  H2
+x1  $1DAF    144 ticks  V8Q0@8O4F16F8@9A24@8F16@10A8@8F16F8@9Q14A3A5Q0@8F8F@10A8A@8F
+; FE -> loop to order entry @ $1AD5
+; intro 0 ticks, loop 144 ticks
+
+; ---- Channel 5  (order list @ $1ADB) ----
+x1  $1DED      0 ticks  H2
+x2  $1DF0    576 ticks  @5V7=42O4L7C144+@17A16[D56&D72]
+x2  $1E10    576 ticks  @5V7=20O3L12B144++@17E16-[#G56&#G72]
+x2  $1E35    576 ticks  @5V7=20O4L12D144+@17F16[C56&C72]
+; FE -> loop to order entry @ $1ADE
+; intro 0 ticks, loop 1728 ticks
+
+; ---- Channel 6  (order list @ $1AEA) ----
+x1  $1E56     14 ticks  H2R14)1
+x1  $1E5E    576 ticks  @12V5=20L12O4R24F+C-B#GAD144R24F+C-B#GF#GFEF24E4&F&E&F6&ED24
+x1  $1E9B   1152 ticks  O4R24EB#AGEG#G#A4&B&#A&B&#A&B&#A&#G68R24#G#A#GE-#A#GG#G#AB+#C[D144&D]@4V1[G12^&G^&G&G36&G72&G144]
+; FE -> loop to order entry @ $1AED
+; intro 14 ticks, loop 1728 ticks
+
+; ---- Channel 7  (order list @ $1AF6) ----
+x1  $1EFE      0 ticks  H2T100
+x2  $1F05    576 ticks  @4O3V1[E12^^&E^^&E^^&E36&E72&E144]
+x2  $1F28    576 ticks  @4O3V1[E12^^&E^^&E^^&E36&E72&E144]
+x2  $1F4B    576 ticks  @4O3V1[#D12^^&#D^^&#D^^&#D36&#D72&#D144]
+; FE -> loop to order entry @ $1AF9
+; intro 0 ticks, loop 1728 ticks
+
+; ---- Instruments (11 bytes each) ----
+  idx  SRCN ADSR1 ADSR2 TremDepth TremPeriod VibDepth VibPeriod LFOmode VibDelay Tune(lo,hi)
+  @0   06   FF    EA      0   0    13   5   00   20   -28
+  @1   01   FF    E4      0   0    12   5   00   18   -28
+  @2   0F   FF    EC      0   0    15   5   00   20   -28
+  @3   03   FF    EA      0   0    10   5   00   18   +0
+  @4   03   FF    E6      0   0    10   5   00   18   +0
+  @5   03   F4    E3      0   0    10   5   00   18   +0
+  @6   05   FF    EF      0   0    10   9   00    2   +0
+  @7   0D   FF    FA      0   0     0   0   00    0   +30
+  @8   08   FF    E0      0   0     0   0   00    0   +0
+  @9   09   FF    E0      0   0     0   0   00    0   +0
+  @10  0D   FF    FA      0   0     0   0   00    0   +30
+  @11  0B   FF    F2      0   0     0   0   00    0   +0
+  @12  05   FF    EC      0   0    10   9   00   15   +0
+  @13  05   FF    EC      0   0    10   8   00   15   +0
+  @14  0A   FF    E0      0   0     0   0   00    0   +0
+  @15  0B   FF    F2      0   0     0   0   00    0   +0
+  @16  07   FF    EA      0   0     0   0   00    0   -28
+  @17  05   FF    EF      0   0    10   9   00    2   +0
+
+; ==== SFX bank @ $1560 (instrument table @ $1872) ====
+slot 6 @ $17B2: T64V13@39O5C2#DG#A+DF
+slot 7 @ $1812: T64V13@39O6G2FD-#AGF
+  idx  SRCN ADSR1 ADSR2 TremDepth TremPeriod VibDepth VibPeriod LFOmode VibDelay Tune(lo,hi)
+  @0   41   FF    F3      0   0     0   0   00    0   +0
+  @1   49   FF    F3      0   0     0   0   00    0   +0
+  @2   46   FF    F2      0   0     0   0   00    0   +0
+  @3   42   FF    F0      0   0   120  12   01    2   +0
+  @4   48   FF    F8      0   0    20   8   00    2   +0
+  @5   51   FA    98      0   0     0   0   00    2   +0
+  @6   51   FF    92      0   0     0   0   00    2   +0
+  @7   49   FF    EE      0   0   120   5   00    0   +0
+  @8   48   FF    F3      0   0     0   0   00    0   +0
+  @9   48   FF    F2      0   0     0   0   00    0   +0
+  @10  4D   FF    F3      0   0     0   0   00    0   +0
+  @11  43   FF    F6      0   0    10   0   00    0   +0
+  @12  4F   FF    93      0   0     0   0   00    0   +0
+  @13  51   FF    91      0   0     0   0   00    0   +0
+  @14  40   FF    FA      0   0     0   0   00    0   +0
+  @15  4D   FF    F3      0   0     0   0   00    0   +0
+  @16  40   FF    F3      0   0     0   0   00    0   +0
+  @17  41   FF    F2      0   0    12   2   01    0   +0
+  @18  42   FF    F7      0   0     0   0   00    0   +0
+  @19  4A   FF    EE      0   0   120   8   01    0   +0
+  @20  46   FF    F3      0   0     0   0   00    0   +0
+  @21  44   FF    F0      0   0     0   0   00    0   +0
+  @22  40   FF    FA      0   0     0   0   00    0   +0
+  @23  40   FC    F8      0   0     0   0   00    0   +0
+  @24  40   FF    FD      0   0     0   0   00    0   +0
+  @25  40   F8    EF      0   0     0   0   00    0   +0
+  @26  4F   FF    80      0   0     0   0   00    0   +0
+  @27  42   FF    E9      0   0     0   0   00    0   +0
+  @28  4F   FF    80      0   0    20   4   00    0   +0
+  @29  46   FF    B3      0   0     0   0   00    0   +0
+  @30  41   FF    F3      0   0     0   0   00    0   +0
+  @31  50   FB    ED      0   0     0   0   00    0   +0
+  @32  4F   FF    93      0   0     0   0   00    0   +0
+  @33  52   FF    F3      0   0     0   0   00    0   +0
+  @34  48   FF    F8      0   0     0   0   00    0   +0
+  @35  43   FF    FB      0   0     0   0   00    0   +0
+  @36  4C   FF    F3      0   0     0   0   00    0   +0
+  @37  43   FF    B2      0   0     0   0   00    0   +0
+  @38  48   FF    F9      0   0   120   8   00    0   +0
+  @39  45   FF    FA      0   0    12   1   01    0   +0
+  @40  46   FF    AF      0   0    80   5   80    0   +0
+  @41  4E   FF    E0      0   0   120 120   00    0   +0
+  @42  4B   FF    F0      0   0   120   6   01    0   +0
+  @43  53   FF    F2      0   0     0   0   00    0   +0
+  @44  54   FE    B3      0   0     0   0   00    0   +0
+  @45  50   C0    06    171   0    64   2   2D    0   +531

@@ -1,0 +1,100 @@
+; driver revision: Battle Zeque Den
+; Song @ $1B60   instrument table @ $27EA   channel mask FF
+
+; ---- Channel 0  (order list @ $1B73) ----
+x1  $1C1A      0 ticks  T62H11I60J3K64$3V10O4@0=34Q0
+x1  $1C37   1152 ticks  #G96[#A48&#A96]+[#C48&#C96]-[#A48&#A72][#G&#G144&#G144]@1[#D144&#D]@0@11
+x1  $1C80    720 ticks  @16#D72#A24#G#A+#C48-#A24#G#A+#C-[#A144&#A]#D96#A48
+x1  $1CB4    624 ticks  +#C24-#A#G#A#F#G#F#G#F#D#F#D#CQ8#D#DQ0R72#C24Q8#D#DQ0R+#CQ8#D#DQ0R-
+x1  $1C80    720 ticks  @16#D72#A24#G#A+#C48-#A24#G#A+#C-[#A144&#A]#D96#A48
+x1  $1CF8   2544 ticks  F24#FF#C-#A+#CC48F24R48C24-F#F#G#A+C#CC48F+C-#A24+C-#A#G#A48+C48-#G#DF#C-#A+CF#G#A72+C24-#A48+C96-#G48#A144+C12#CC#C______C#CC#C^^^^^^--#AT65+CT68-#AT71+CT74-#A48#GT62#A96+#C48-#A96+#C48-[#A144&#A]R144+
+; FF -> channel end
+
+; ---- Channel 1  (order list @ $1B86) ----
+x1  $1DC4      0 ticks  T62H11V9O4@0=34Q0
+x1  $1DD6    864 ticks  #C96[#D48&#D96][#G48&#G96][#D48&#D72][#C&#C144&#C144]
+x1  $1E0C   6624 ticks  R144RRRRRRRRRR96RR144RRRRRRRRRRRRRRRR96R144RRRRRRRRRRRRRRRRR-
+; FF -> channel end
+
+; ---- Channel 2  (order list @ $1B90) ----
+x1  $1E4B      0 ticks  T62H11V10O2@2=94Q0
+x1  $1E5E    864 ticks  [#D144&#D&#D][#C144&#C&#C]
+x5  $1E79    720 ticks  #D144
+x1  $1E7F    912 ticks  #D96#C48#G144#A#D#C24Q8#D#DQ0R72+#C24Q8#D#DQ0R-R48#C
+x3  $1E79    432 ticks  #D144
+x1  $1EB4    432 ticks  #D96#C48#G144#C96#D48
+x5  $1ECA   1440 ticks  F48F24R72#F144
+x1  $1ED9    816 ticks  R96R#C48#D144#C[#A&#A]
+; FF -> channel end
+
+; ---- Channel 3  (order list @ $1BA9) ----
+x1  $1EF1      0 ticks  T62H11V10O4@3=64Q0
+x1  $1F04    864 ticks  R144R96V0=124#C6#D^=114#C#D^=104#C#D^=94#C#D^=84#C#D^=74#C#D^=64#C#D^=54#C#D#C#D_=44#C8#D_=34#C#D_=24#C#D_=14#C#D_=4#C#D12_=2#C#D_=0#C#DR48V0=4#C6#D^=14#C#D^=24#C#D^=34#C#D^=44#C#D^=54#C#D^=64#C#D^=74#C#D#C#D_=84#C8#D_=94#C#D_=104#C#D_=114#C#D_=124#C#D12_=126#C#D_=127#C#DR96=44V8
+x5  $201D    720 ticks  R48#D24______#D^^^^^^#A4+#C20______#C24^^^^^^-
+x1  $204C    288 ticks  R48-V2#G6#A^+#C#D^-#A+#C^#D#F^#C#D^#F#G^#D#F#G#A#F#G__#A+#C__-#G#A__+#C#D^^^^^^-#D24______#D^^^^^^#A4+#C20______#C24^^^^^^-
+x1  $20C8    144 ticks  R48F24______F^^^^^^#A4+#C20______#C24^^^^^^-
+x1  $201D    144 ticks  R48#D24______#D^^^^^^#A4+#C20______#C24^^^^^^-
+x1  $20F5    336 ticks  -R96@5#G24#A+Q8#C#D#D48Q0@3R96
+x3  $201D    432 ticks  R48#D24______#D^^^^^^#A4+#C20______#C24^^^^^^-
+x1  $2114   2112 ticks  R48-V2#G6#A^+#C#D^-#A+#C^#D#F^#C#D^#F#G^#D#F#G#A#F#G__#A+#C__-#G#A__+#C#D^^^^^^-#D24______#D^^^^^^#G4#A20______#A24^^^^^^R48F24______F^^^^^^-#A______#A^^^^^^+C24______C^^^^^^F48______F^^^^^^______#A12^+C^-#A^+C^-#A^+C^-#A^+C^-#A__+C__-#A__+C^^^^-R48F______F^^^^^^R72#G24#A+#CC48______C96^^^^^^-#A24-#A+#CF#G#A+C48______C^^^^^^-#G______#A12^+C^-#A^+C^-#A^+C^-#A^+C^-#A__+C__-#A__+C^^^^-R96F48#D24F#A48______#A^^^^^^R48+__C12^#C^C#C-R96#G48
+x2  $22CB    288 ticks  R48#A24__#A__#A__#A^^^^^^
+; FF -> channel end
+
+; ---- Channel 4  (order list @ $1BC8) ----
+x1  $22E6      0 ticks  T62H11V8O5@5=110Q0
+x1  $22F9   1440 ticks  R120#D24#D#D16#D#D#D24#D#DR144RRRRRRR
+x1  $231F    288 ticks  #D16#C-#A+#C-#A#G#A#G#F#G#F#D#F#D#C#D#C-#A+
+x1  $234B   1056 ticks  R144RRRR96R48+#C48-#A24+#D#D48RR144
+x1  $231F    288 ticks  #D16#C-#A+#C-#A#G#A#G#F#G#F#D#F#D#C#D#C-#A+
+x1  $236F   2256 ticks  R144RR72#D24F#G#G#A#A96R48+C-#G#A#FRRF+C-______#A12^+C^-#A^+C^-#A^+C^-#A+C-_#A+_C-_#A+_C-^^^^R48#GR#A#FRFFR#A24+C-__#A+C-__#A+C^C12^#C^C^#CR48R144____#D6#C-#A#G+#C-#A#G#F#G#F#D#C#D#C-#A#G#A#G#F#D#F#D#C-#A++^^^^R144
+; FF -> channel end
+
+; ---- Channel 5  (order list @ $1BDB) ----
+x1  $2447      0 ticks  T62H11V12O1@6=38Q0
+x1  $245A    864 ticks  [#D144&#D&#D][#C144&#C&#C]
+x5  $2475    720 ticks  #D144
+x1  $247B    912 ticks  #D96#C48#D144#D#DR144R96R
+x3  $2475    432 ticks  #D144
+x1  $2495    432 ticks  #D96#C48#D144#D144
+x5  $24A8   1440 ticks  #D144#D
+x1  $24B0    816 ticks  R96R#C48#D144#C[#A&#A]
+; FF -> channel end
+
+; ---- Channel 6  (order list @ $1BF4) ----
+x1  $24C8     17 ticks  T62H11V5O4@12)1=64Q0R17
+x1  $24E0   1152 ticks  #G96[#A48&#A96]+[#C48&#C96]-[#A48&#A72][#G&#G144&#G144]@14[#D144&#D]@0@11
+x1  $252A    720 ticks  @17#D72#A24#G#A+#C48-#A24#G#A+#C-[#A144&#A]#D96#A48
+x1  $255E    624 ticks  +#C24-#A#G#A#F#G#F#G#F#D#F#D#CQ8#D#DQ0R72#C24Q8#D#DQ0R+#CQ8#D#DQ0R-
+x1  $252A    720 ticks  @17#D72#A24#G#A+#C48-#A24#G#A+#C-[#A144&#A]#D96#A48
+x1  $25A2   2544 ticks  F24#FF#C-#A+#CC48F24R48C24-F#F#G#A+C#CC48F+C-#A24+C-#A#G#A48+C48-#G#DF#C-#A+CF#G#A72+C24-#A48+C96-#G48#A144+C12#CC#C___C#CC#C^^^--#A+C-#A+C-#A48#G#A96+#C48-#A96+#C48-[#A144&#A]R144+
+; FF -> channel end
+
+; ---- Channel 7  (order list @ $1C07) ----
+x1  $2659     33 ticks  T62H11V4O4@12)1=94Q0R33
+x1  $2671   1152 ticks  #G96[#A48&#A96]+[#C48&#C96]-[#A48&#A72][#G&#G144&#G144]@14[#D144&#D]@0@11
+x1  $26BB    720 ticks  @17#D72#A24#G#A+#C48-#A24#G#A+#C-[#A144&#A]#D96#A48
+x1  $26EF    624 ticks  +#C24-#A#G#A#F#G#F#G#F#D#F#D#CQ8#D#DQ0R72#C24Q8#D#DQ0R+#CQ8#D#DQ0R-
+x1  $26BB    720 ticks  @17#D72#A24#G#A+#C48-#A24#G#A+#C-[#A144&#A]#D96#A48
+x1  $2733   2544 ticks  F24#FF#C-#A+#CC48F24R48C24-F#F#G#A+C#CC48F+C-#A24+C-#A#G#A48+C48-#G#DF#C-#A+CF#G#A72+C24-#A48+C96-#G48#A144+C12#CC#C___C#CC#C^^^--#A+C-#A+C-#A48#G#A96+#C48-#A96+#C48-[#A144&#A]R144+
+; FF -> channel end
+
+; ---- Instruments (11 bytes each) ----
+  idx  SRCN ADSR1 ADSR2 TremDepth TremPeriod VibDepth VibPeriod LFOmode VibDelay Tune(lo,hi)
+  @0   09   F7    EC      0   0     0   0   00   18   +1
+  @1   0A   F2    EE      0   0    12   6   00    0   +0
+  @2   09   FF    EC      0   0     0   0   00    0   +1
+  @3   0A   FF    F2      0   0     6   5   00   15   +0
+  @4   07   FF    8C      0   0    14   6   00   24   -28
+  @5   06   FF    91      0   0     0   0   00    0   -28
+  @6   0B   FE    EC      0   0     0   0   00    0   +0
+  @7   0A   FE    EC      0   0    12   4   00   24   +0
+  @8   06   FC    71      0   0     0   0   00    0   -28
+  @9   02   FF    F7      0   0     0   0   00    0   -60
+  @10  05   FF    F0      0   0     0   0   00    0   -130
+  @11  09   F7    EC      0   0     0   0   00    0   +1
+  @12  09   FD    EC      0   0     0   0   00   18   +3
+  @13  06   FD    93      0   0     0   0   00    0   -27
+  @14  0A   F6    EE      0   0    12   6   00    0   +2
+  @15  07   FF    8C      0   0    14   6   00   24   -26
+  @16  09   FA    EC      0   0     0   0   00   18   +1
+  @17  09   FA    EC      0   0     0   0   00   18   +3

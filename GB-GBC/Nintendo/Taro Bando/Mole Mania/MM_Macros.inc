@@ -1,0 +1,378 @@
+; Mole Mania (Taro Bando) sound driver: data macros and constants
+
+IF !DEF(MM_MACROS_INC)
+DEF MM_MACROS_INC EQU 1
+
+; The driver stores every pointer big-endian.
+MACRO dwb
+	REPT _NARG
+		db HIGH(\1), LOW(\1)
+		SHIFT
+	ENDR
+ENDM
+
+; ---- pattern bytes ----------------------------------------------------
+; $20-$2B: note length, an index into the length table chosen by TEMPO
+; (lengths in frames; 11 = past the 11-byte table, reads the next table)
+DEF L32    EQU $20
+DEF L16    EQU $21
+DEF L8     EQU $22
+DEF L4     EQU $23
+DEF L2     EQU $24
+DEF L1     EQU $25
+DEF L8D    EQU $26
+DEF L4D    EQU $27
+DEF L2D    EQU $28
+DEF L8T    EQU $29
+DEF L4T    EQU $2A
+DEF L11    EQU $2B
+; $2C-$2F: ch3 output level 0-3 (global, read by ch3)
+DEF CH3LVL0 EQU $2C
+DEF CH3LVL1 EQU $2D
+DEF CH3LVL2 EQU $2E
+DEF CH3LVL3 EQU $2F
+; $30-$6F: gate, GATEnn = nn/64 of the note length before the release
+DEF GATE00 EQU $30
+DEF GATE01 EQU $31
+DEF GATE02 EQU $32
+DEF GATE03 EQU $33
+DEF GATE04 EQU $34
+DEF GATE05 EQU $35
+DEF GATE06 EQU $36
+DEF GATE07 EQU $37
+DEF GATE08 EQU $38
+DEF GATE09 EQU $39
+DEF GATE10 EQU $3A
+DEF GATE11 EQU $3B
+DEF GATE12 EQU $3C
+DEF GATE13 EQU $3D
+DEF GATE14 EQU $3E
+DEF GATE15 EQU $3F
+DEF GATE16 EQU $40
+DEF GATE17 EQU $41
+DEF GATE18 EQU $42
+DEF GATE19 EQU $43
+DEF GATE20 EQU $44
+DEF GATE21 EQU $45
+DEF GATE22 EQU $46
+DEF GATE23 EQU $47
+DEF GATE24 EQU $48
+DEF GATE25 EQU $49
+DEF GATE26 EQU $4A
+DEF GATE27 EQU $4B
+DEF GATE28 EQU $4C
+DEF GATE29 EQU $4D
+DEF GATE30 EQU $4E
+DEF GATE31 EQU $4F
+DEF GATE32 EQU $50
+DEF GATE33 EQU $51
+DEF GATE34 EQU $52
+DEF GATE35 EQU $53
+DEF GATE36 EQU $54
+DEF GATE37 EQU $55
+DEF GATE38 EQU $56
+DEF GATE39 EQU $57
+DEF GATE40 EQU $58
+DEF GATE41 EQU $59
+DEF GATE42 EQU $5A
+DEF GATE43 EQU $5B
+DEF GATE44 EQU $5C
+DEF GATE45 EQU $5D
+DEF GATE46 EQU $5E
+DEF GATE47 EQU $5F
+DEF GATE48 EQU $60
+DEF GATE49 EQU $61
+DEF GATE50 EQU $62
+DEF GATE51 EQU $63
+DEF GATE52 EQU $64
+DEF GATE53 EQU $65
+DEF GATE54 EQU $66
+DEF GATE55 EQU $67
+DEF GATE56 EQU $68
+DEF GATE57 EQU $69
+DEF GATE58 EQU $6A
+DEF GATE59 EQU $6B
+DEF GATE60 EQU $6C
+DEF GATE61 EQU $6D
+DEF GATE62 EQU $6E
+DEF GATE63 EQU $6F
+; $70 rest, $71-$B9 notes C2-C8 (index into the frequency tables), $BA tie
+DEF REST   EQU $70
+DEF C2     EQU $71
+DEF Cs2    EQU $72
+DEF D2     EQU $73
+DEF Ds2    EQU $74
+DEF E2     EQU $75
+DEF F2     EQU $76
+DEF Fs2    EQU $77
+DEF G2     EQU $78
+DEF Gs2    EQU $79
+DEF A2     EQU $7A
+DEF As2    EQU $7B
+DEF B2     EQU $7C
+DEF C3     EQU $7D
+DEF Cs3    EQU $7E
+DEF D3     EQU $7F
+DEF Ds3    EQU $80
+DEF E3     EQU $81
+DEF F3     EQU $82
+DEF Fs3    EQU $83
+DEF G3     EQU $84
+DEF Gs3    EQU $85
+DEF A3     EQU $86
+DEF As3    EQU $87
+DEF B3     EQU $88
+DEF C4     EQU $89
+DEF Cs4    EQU $8A
+DEF D4     EQU $8B
+DEF Ds4    EQU $8C
+DEF E4     EQU $8D
+DEF F4     EQU $8E
+DEF Fs4    EQU $8F
+DEF G4     EQU $90
+DEF Gs4    EQU $91
+DEF A4     EQU $92
+DEF As4    EQU $93
+DEF B4     EQU $94
+DEF C5     EQU $95
+DEF Cs5    EQU $96
+DEF D5     EQU $97
+DEF Ds5    EQU $98
+DEF E5     EQU $99
+DEF F5     EQU $9A
+DEF Fs5    EQU $9B
+DEF G5     EQU $9C
+DEF Gs5    EQU $9D
+DEF A5     EQU $9E
+DEF As5    EQU $9F
+DEF B5     EQU $A0
+DEF C6     EQU $A1
+DEF Cs6    EQU $A2
+DEF D6     EQU $A3
+DEF Ds6    EQU $A4
+DEF E6     EQU $A5
+DEF F6     EQU $A6
+DEF Fs6    EQU $A7
+DEF G6     EQU $A8
+DEF Gs6    EQU $A9
+DEF A6     EQU $AA
+DEF As6    EQU $AB
+DEF B6     EQU $AC
+DEF C7     EQU $AD
+DEF Cs7    EQU $AE
+DEF D7     EQU $AF
+DEF Ds7    EQU $B0
+DEF E7     EQU $B1
+DEF F7     EQU $B2
+DEF Fs7    EQU $B3
+DEF G7     EQU $B4
+DEF Gs7    EQU $B5
+DEF A7     EQU $B6
+DEF As7    EQU $B7
+DEF B7     EQU $B8
+DEF C8     EQU $B9
+DEF TIE    EQU $BA
+; ch4: $BC+ = noise NOISEnn (index into NoiseTable)
+DEF NOISE00 EQU $BC
+DEF NOISE01 EQU $BD
+DEF NOISE02 EQU $BE
+DEF NOISE03 EQU $BF
+DEF NOISE04 EQU $C0
+DEF NOISE05 EQU $C1
+DEF NOISE06 EQU $C2
+DEF NOISE07 EQU $C3
+DEF NOISE08 EQU $C4
+DEF NOISE09 EQU $C5
+DEF NOISE10 EQU $C6
+DEF NOISE11 EQU $C7
+DEF NOISE12 EQU $C8
+DEF NOISE13 EQU $C9
+DEF NOISE14 EQU $CA
+DEF NOISE15 EQU $CB
+DEF NOISE16 EQU $CC
+DEF NOISE17 EQU $CD
+DEF NOISE18 EQU $CE
+DEF NOISE19 EQU $CF
+DEF NOISE20 EQU $D0
+DEF NOISE21 EQU $D1
+DEF NOISE22 EQU $D2
+DEF NOISE23 EQU $D3
+DEF NOISE24 EQU $D4
+DEF NOISE25 EQU $D5
+DEF NOISE26 EQU $D6
+DEF NOISE27 EQU $D7
+DEF NOISE28 EQU $D8
+DEF NOISE29 EQU $D9
+DEF NOISE30 EQU $DA
+DEF NOISE31 EQU $DB
+DEF NOISE32 EQU $DC
+DEF NOISE33 EQU $DD
+DEF NOISE34 EQU $DE
+DEF NOISE35 EQU $DF
+DEF NOISE36 EQU $E0
+DEF NOISE37 EQU $E1
+DEF NOISE38 EQU $E2
+DEF NOISE39 EQU $E3
+DEF NOISE40 EQU $E4
+DEF NOISE41 EQU $E5
+DEF NOISE42 EQU $E6
+DEF NOISE43 EQU $E7
+DEF NOISE44 EQU $E8
+DEF NOISE45 EQU $E9
+DEF NOISE46 EQU $EA
+DEF NOISE47 EQU $EB
+DEF NOISE48 EQU $EC
+DEF NOISE49 EQU $ED
+DEF NOISE50 EQU $EE
+DEF NOISE51 EQU $EF
+DEF NOISE52 EQU $F0
+DEF NOISE53 EQU $F1
+DEF NOISE54 EQU $F2
+DEF NOISE55 EQU $F3
+DEF NOISE56 EQU $F4
+DEF NOISE57 EQU $F5
+DEF NOISE58 EQU $F6
+DEF NOISE59 EQU $F7
+DEF NOISE60 EQU $F8
+DEF NOISE61 EQU $F9
+DEF NOISE62 EQU $FA
+DEF NOISE63 EQU $FB
+DEF NOISE64 EQU $FC
+DEF NOISE65 EQU $FD
+DEF NOISE66 EQU $FE
+DEF NOISE67 EQU $FF
+
+; ---- pattern commands ($00-$13) -----------------------------------------
+MACRO PATEND
+	db $00 ; end of pattern: every channel moves to the next step
+ENDM
+MACRO TEMPO ; t
+	db $01, \1 ; length table t (global)
+ENDM
+MACRO WAVE ; w
+	db $02, \1 ; ch3 wave (global)
+ENDM
+MACRO VIBRATO ; delay, rate, depth
+	db $03, \1, \2, \3 ; square vibrato: +-depth, rate frames per phase, after delay frames
+ENDM
+MACRO VIBRATO_OFF
+	db $04
+ENDM
+MACRO RELEASE ; frames, env
+	db $05, \1, \2 ; at gate end: retrigger with env, cut after frames
+ENDM
+MACRO RELEASE_OFF
+	db $06
+ENDM
+MACRO PORTA ; delay, frames, note
+	db $07, \1, \2, \3 ; glide to note over frames, after delay frames
+ENDM
+MACRO FRAMES ; n
+	db $08, \1 ; next notes last n frames
+ENDM
+MACRO TRANSPOSE ; n
+	db $09, \1 ; semitones
+ENDM
+MACRO PAN_CENTRE
+	db $0A
+ENDM
+MACRO PAN_RIGHT
+	db $0B
+ENDM
+MACRO PAN_LEFT
+	db $0C
+ENDM
+MACRO FRAMES_0D ; n
+	db $0D, \1 ; same as FRAMES
+ENDM
+MACRO CH3DECAY ; n
+	db $0E, \1 ; ch3: level drops by one every n frames
+ENDM
+MACRO SCOOP ; xy
+	db $0F, \1 ; start x*y period units low, rise over y frames
+ENDM
+MACRO DUTYSEQ ; n
+	db $10, \1 ; ch1/ch2 duty sequence
+ENDM
+MACRO ENVSEQ ; n
+	db $11, \1 ; ch1/ch2/ch4 envelope sequence
+ENDM
+MACRO PORTA_OFF
+	db $12
+ENDM
+MACRO SCOOP_OFF
+	db $13
+ENDM
+
+; ---- song structure ----------------------------------------------------
+MACRO STEP ; frame
+	dwb \1
+ENDM
+MACRO SONG_END
+	db $00, $00
+ENDM
+MACRO SONG_LOOP ; n: go back n steps
+	db $00, \1
+ENDM
+MACRO FRAME ; ch1, ch2, ch3, ch4 patterns (0 = channel unused)
+	dwb \1, \2, \3, \4
+ENDM
+
+; ---- sequences: value, frames ($FF = hold) ------------------------------
+MACRO SEQ
+	db \1, \2
+ENDM
+MACRO SEQ_HOLD
+	db \1, $FF
+ENDM
+
+; ---- sound effects ------------------------------------------------------
+MACRO SFX_CHANNEL ; 0-3
+	db \1
+ENDM
+; a byte $00-$6F: play for n+1 frames (retriggers unless SFX_LEGATO came first)
+MACRO SFX_LEN
+	db \1
+ENDM
+; a byte $70-$EF: period = FreqTable_DMG[n - $70]; the note constants are the same values
+MACRO SFX_FREQ ; table index
+	db $70 + \1
+ENDM
+MACRO SFX_END
+	db $F0
+ENDM
+MACRO SFX_DUTY ; d
+	db $F1, \1
+ENDM
+MACRO SFX_ENV ; nrx2
+	db $F2, \1
+ENDM
+MACRO SFX_WAVE ; w
+	db $F3, \1
+ENDM
+MACRO SFX_NOISE ; nr43
+	db $F4, \1
+ENDM
+MACRO SFX_CH3LVL ; l
+	db $F5, \1
+ENDM
+MACRO SFX_SWEEP ; delta
+	db $F6, \1
+ENDM
+MACRO SFX_PAN_CENTRE
+	db $F7
+ENDM
+MACRO SFX_PAN_RIGHT
+	db $F8
+ENDM
+MACRO SFX_PAN_LEFT
+	db $F9
+ENDM
+MACRO SFX_LEGATO
+	db $FA
+ENDM
+MACRO SFX_NOP
+	db $FF
+ENDM
+
+ENDC

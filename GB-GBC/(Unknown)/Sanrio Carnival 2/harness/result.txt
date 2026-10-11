@@ -1,0 +1,37 @@
+UserWarning: Using SDL2 binaries from pysdl2-dll 2.32.10
+song  reads  outside  drum3-reads
+   0      8        0            0  
+   1   7679        0            0  
+   2   5814        0            0  
+   3   7929        0            0  
+   4    576        0            0  
+   5   2742        0            0  
+   6    542        0           76  
+   7   9203        0          702  
+   8   7356        0            0  
+   9   6250        0            0  
+   a   7353        0            0  
+   b  11517        0            0  
+   c   3142        0            0  
+   d   7855        0            0  
+   e      8        0            0  
+   f      8        0            0  
+music bytes parsed 3507, never read in 3600 frames/song: 228
+sfx slot 1 effect 0: 18 reads, 0 outside 
+sfx slot 1 effect 1: 18 reads, 0 outside 
+sfx slot 1 effect 2: 53 reads, 0 outside 
+sfx slot 1 effect 3: 13 reads, 0 outside 
+sfx slot 1 effect 4: 13 reads, 0 outside 
+sfx slot 1 effect 5: 29 reads, 0 outside 
+sfx slot 1 effect 6: 24 reads, 0 outside 
+sfx slot 1 effect 7: 9 reads, 0 outside 
+sfx slot 2 effect 0: 84 reads, 0 outside 
+sfx slot 2 effect 1: 78 reads, 0 outside 
+sfx slot 2 effect 2: 29 reads, 0 outside 
+sfx slot 3 effect 0: 21 reads, 0 outside 
+sfx slot 3 effect 1: 16 reads, 0 outside 
+sfx slot 3 effect 2: 9 reads, 0 outside 
+sfx slot 3 effect 3: 14 reads, 0 outside 
+sfx slot 3 effect 4: 19 reads, 0 outside 
+16 effects, 0 reads outside
+TOTAL problems: 0

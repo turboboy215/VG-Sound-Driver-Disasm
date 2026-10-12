@@ -1,4 +1,30 @@
-(`$65C0`) | once per frame |
+# Dr. Mario (GB): sound driver
+ 
+This is Hirokazu Tanaka's driver as used in *Dr. Mario* (`Dr. Mario (W) (V1.0) [!].gb`, 32 KB, no MBC). The whole sound region, bank 1 `$6000–$7FFF`, rebuilds **byte-exact** with RGBDS 0.9.1 (`-Wall` clean) from the sources in `Nint1\DrMario`.
+ 
+| Range | Content | File |
+|---|---|---|
+| `$6000–$6A9E` | SFX tables, song table, driver code, SFX data | `DrM_Driver.inc` |
+| `$6A9F–$6CA7` | vibrato tables, note table, noise table, waves, length tables, pan table | `DrM_Tables.inc` |
+| `$6CA8–$7FD0` | 10 song headers, 36 section lists, 129 patterns | `DrM_Songs.inc` |
+| `$7FD1–$7FFF` | padding, entry stubs | `DrM_Stubs.inc` |
+ 
+```
+DrMario\build_check.sh          # assemble, link over the ROM, compare
+DrMario\harness\build.sh        # test ROM: harness + rebuilt bank 1
+DrMario\harness\verify.py       # play every song/SFX, check every data read
+python DrMario\gen_drmario.py <rom> DrMario   # regenerate the sources (needs tools\)
+```
+ 
+This is the reference version for the family. *SML1* is older (fewer commands), *SML2* / *LA* / *SMB DX* / *Metal Slug 2* are later. The Metroid II / Wario Land driver was built from this version; see `Tanaka_Lineage_Metroid2_WarioLand_Sanrio2.md`.
+ 
+---
+ 
+## 1. API
+ 
+| Address | Routine | |
+|---|---|---|
+| `$7FF0` | `jp Sound_Update` (`$65C0`) | once per frame |
 | `$7FF3` | `jp Sound_Stop` (`$6507`) | stop music and effects, mute |
 | `$7FF6` | `jp Sound_Init` (`$66A4`) | NR52 = `$80`, NR50 = `$77`, NR51 = `$FF`, clear `$DF00–$DFFF` |
  

@@ -1,0 +1,379 @@
+wf2 -- Webfoot sound engine data, Dragon Ball Z: The Legacy of Goku II
+engine version 2; data block ROM 0x08313D10-0x084B8958 (1723464 bytes)
+
+== layout ==
+  08313D10-0837A521    419857  music sample data (101 samples)
+  0837A524-0837A9E0      1212  music sample table
+  0837A9E0-0837A9EE        14  row-mask dictionary
+  0837A9EE-084047AC    564670  songs: order lists, patterns, pattern tables (44 songs)
+  084047AC-08404B1C       880  song table (44 x 20 bytes)
+  08404B1C-084B8658    736060  sfx sample data (64 samples)
+  084B8658-084B8958       768  sfx sample table
+
+== row-mask dictionary (ctrl high nibble 2..15 -> mask) ==
+  2:04  3:61  4:80  5:70  6:08  7:25  8:69  9:40  A:07  B:0F  C:34  D:2D  E:E1  F:0C
+  mask bits: 01 note 02 instr 04 volume 08 effect+param read; 10/20/40/80 = same field repeated
+
+== music samples (instruments) at 0837A524 ==
+  #   header    data      length  loop       loop start-end   rate Hz
+  0   0837A524  08313D10    1920  one-shot                     16000
+  1   0837A530  08314490    2472  forward      1938-2472       16000
+  2   0837A53C  08314E38    4539  ping-pong    3157-4539       16000
+  3   0837A548  08315FF3    3351  forward      2842-3351       11025
+  4   0837A554  08316D0A    3735  forward      1600-3735       12676
+  5   0837A560  08317BA1    1739  forward       803-1739        8749
+  6   0837A56C  0831826C    4468  forward      2988-4468       16100
+  7   0837A578  083193E0    3161  forward      2916-3161       15975
+  8   0837A584  0831A039    9553  ping-pong    2522-9553       14714
+  9   0837A590  0831C58A    6314  forward      6062-6314        8215
+  10  0837A59C  0831DE34    5000  forward        39-5000       15975
+  11  0837A5A8  0831F1BC    3009  one-shot                     16000
+  12  0837A5B4  0831FD7D    6049  one-shot                     16000
+  13  0837A5C0  0832151E    3040  one-shot                     16000
+  14  0837A5CC  083220FE    5728  one-shot                     16000
+  15  0837A5D8  0832375E    5601  one-shot                     16000
+  16  0837A5E4  08324D3F    9510  ping-pong     202-9510       16658
+  17  0837A5F0  08327265    7220  forward        30-7220       16050
+  18  0837A5FC  08328E99    9646  ping-pong      23-9646        8000
+  19  0837A608  0832B447    4116  forward      2851-4116       16000
+  20  0837A614  0832C45B    8670  forward      6343-8670       16000
+  21  0837A620  0832E639   10046  ping-pong     300-10046      16000
+  22  0837A62C  08330D77     124  forward         1-124        16025
+  23  0837A638  08330DF3     126  forward         2-126        16125
+  24  0837A644  08330E71     124  forward         0-124        16100
+  25  0837A650  08330EED     124  forward         0-124        16050
+  26  0837A65C  08330F69     123  forward         0-123        15950
+  27  0837A668  08330FE4     124  forward         0-124        16075
+  28  0837A674  08331060     123  forward         0-123        15975
+  29  0837A680  083310DB     124  forward         0-124        16050
+  30  0837A68C  08331157     123  forward         0-123        15950
+  31  0837A698  083311D2    7035  forward      4099-7035       16000
+  32  0837A6A4  08332D4D    7780  forward      4977-7780       16050
+  33  0837A6B0  08334BB1    1973  forward        12-1973       16000
+  34  0837A6BC  08335366    4113  forward      2648-4113       16000
+  35  0837A6C8  08336377    1210  one-shot                     16000
+  36  0837A6D4  08336831    1488  one-shot                     16000
+  37  0837A6E0  08336E01    2769  ping-pong    2007-2769       16000
+  38  0837A6EC  083378D2    2944  one-shot                     16000
+  39  0837A6F8  08338452    6525  one-shot                     16000
+  40  0837A704  08339DCF    1454  one-shot                     16000
+  41  0837A710  0833A37D    4447  one-shot                     16000
+  42  0837A71C  0833B4DC    1980  one-shot                     11025
+  43  0837A728  0833BC98    2015  one-shot                     16000
+  44  0837A734  0833C477    3442  one-shot                     16000
+  45  0837A740  0833D1E9    1800  one-shot                     16000
+  46  0837A74C  0833D8F1    1872  one-shot                     16000
+  47  0837A758  0833E041    6852  ping-pong     909-6852       12851
+  48  0837A764  0833FB05    5575  forward       451-5575       15154
+  49  0837A770  083410CC    2581  forward       809-2581       11025
+  50  0837A77C  08341AE1    7905  forward      3040-7905       13456
+  51  0837A788  083439C2    2183  forward       876-2183       10730
+  52  0837A794  08344249    2122  forward       862-2122       16000
+  53  0837A7A0  08344A93    4803  forward      4466-4803       16000
+  54  0837A7AC  08345D56    2920  forward      2455-2920       11025
+  55  0837A7B8  083468BE    1316  forward       643-1316       16000
+  56  0837A7C4  08346DE2    2681  one-shot                     11025
+  57  0837A7D0  0834785B    3472  one-shot                     11025
+  58  0837A7DC  083485EB    2231  forward      1733-2231       16000
+  59  0837A7E8  08348EA2    9709  forward        65-9709       16050
+  60  0837A7F4  0834B48F    4189  forward        42-4189       15875
+  61  0837A800  0834C4EC    4564  forward        48-4564       12701
+  62  0837A80C  0834D6C0    4981  forward      4799-4981       11913
+  63  0837A818  0834EA35    2142  forward      2020-2142       15850
+  64  0837A824  0834F293    3610  forward        53-3610       10680
+  65  0837A830  083500AD    4320  forward      2656-4320       16100
+  66  0837A83C  0835118D    2898  forward      1928-2898       16050
+  67  0837A848  08351CDF   11696  forward      9951-11696      16025
+  68  0837A854  08354A8F    5743  forward      4703-5743       16000
+  69  0837A860  083560FE    5258  forward      3587-5258       21361
+  70  0837A86C  08357588    3704  forward      2419-3704       15950
+  71  0837A878  08358400    2489  forward       502-2489       16000
+  72  0837A884  08358DB9   13987  forward      3771-13987      15950
+  73  0837A890  0835C45C    9672  forward      6826-9672       16000
+  74  0837A89C  0835EA24    8097  forward      6512-8097       16000
+  75  0837A8A8  083609C5     999  one-shot                     16000
+  76  0837A8B4  08360DAC     976  forward       571-976        10630
+  77  0837A8C0  0836117C    7828  forward         5-7828       16000
+  78  0837A8CC  08363010    8728  ping-pong       0-8728        7950
+  79  0837A8D8  08365228    4923  forward        64-4923       16000
+  80  0837A8E4  08366563    4395  one-shot                     16000
+  81  0837A8F0  0836768E    9192  forward       239-9192       16000
+  82  0837A8FC  08369A76    3419  one-shot                     16000
+  83  0837A908  0836A7D1    4148  forward      3069-4148       16000
+  84  0837A914  0836B805    3170  one-shot                     16000
+  85  0837A920  0836C467    7135  forward      4481-7135        9632
+  86  0837A92C  0836E046     143  forward        16-143        16704
+  87  0837A938  0836E0D5      32  forward         0-32         16729
+  88  0837A944  0836E0F5      32  forward         0-32         16729
+  89  0837A950  0836E115      32  forward         0-32         16729
+  90  0837A95C  0836E135      16  forward         0-16         16729
+  91  0837A968  0836E145    1557  forward      1295-1557       16050
+  92  0837A974  0836E75A    1669  forward      1247-1669       11025
+  93  0837A980  0836EDDF    6107  one-shot                     19888
+  94  0837A98C  083705BA    7542  forward      1873-7542       16000
+  95  0837A998  08372330   10120  ping-pong    2586-10120      16000
+  96  0837A9A4  08374AB8    4946  forward      2521-4946        3915
+  97  0837A9B0  08375E0A    1867  forward       949-1867       23977
+  98  0837A9BC  08376555    6313  forward      6062-6313        8215
+  99  0837A9C8  08377DFE    3912  one-shot                      8300
+  100 0837A9D4  08378D46    6107  one-shot                     19888
+
+== sfx bank at 084B8658 ==
+  #   header    data      length  loop       loop start-end   rate Hz
+  0   084B8658  08404B1C    8270  forward         0-8270       16000
+  1   084B8664  08406B6A    3393  one-shot                     16000
+  2   084B8670  084078AB    2997  one-shot                     16000
+  3   084B867C  08408460   21072  one-shot                     16000
+  4   084B8688  0840D6B0   25216  one-shot                     16000
+  5   084B8694  08413930   18529  one-shot                     16000
+  6   084B86A0  08418191     661  one-shot                     16000
+  7   084B86AC  08418426   16256  one-shot                     16000
+  8   084B86B8  0841C3A6    5096  one-shot                     16000
+  9   084B86C4  0841D78E   21152  one-shot                     16000
+  10  084B86D0  08422A2E    9019  one-shot                      8000
+  11  084B86DC  08424D69    8328  one-shot                      8000
+  12  084B86E8  08426DF1   10880  one-shot                     16000
+  13  084B86F4  08429871    6271  one-shot                      8000
+  14  084B8700  0842B0F0    5400  one-shot                      8000
+  15  084B870C  0842C608    9744  one-shot                     16000
+  16  084B8718  0842EC18    6940  one-shot                     16000
+  17  084B8724  08430734    7713  forward         0-7713       16000
+  18  084B8730  08432555   15426  one-shot                     16000
+  19  084B873C  08436197    4072  one-shot                     16000
+  20  084B8748  0843717F   16580  one-shot                     16000
+  21  084B8754  0843B243   13504  one-shot                     16000
+  22  084B8760  0843E703   17984  one-shot                     16000
+  23  084B876C  08442D43   16672  one-shot                     16000
+  24  084B8778  08446E63   43135  ping-pong   31168-43135      16000
+  25  084B8784  084516E2    8704  forward         0-8704       16000
+  26  084B8790  084538E2   13236  one-shot                      8000
+  27  084B879C  08456C96   27553  one-shot                     16000
+  28  084B87A8  0845D837    2424  one-shot                     16000
+  29  084B87B4  0845E1AF    7240  one-shot                     16000
+  30  084B87C0  0845FDF7    4438  one-shot                      8000
+  31  084B87CC  08460F4D    7552  one-shot                     16000
+  32  084B87D8  08462CCD    7856  one-shot                     16000
+  33  084B87E4  08464B7D    7040  one-shot                     16000
+  34  084B87F0  084666FD    4396  one-shot                     16000
+  35  084B87FC  08467829    4964  one-shot                     16000
+  36  084B8808  08468B8D    6955  one-shot                     16000
+  37  084B8814  0846A6B8    2414  one-shot                     16000
+  38  084B8820  0846B026    3005  one-shot                     16000
+  39  084B882C  0846BBE3   12512  forward         0-12512      16000
+  40  084B8838  0846ECC3    5922  one-shot                     16000
+  41  084B8844  084703E5   43362  one-shot                     16000
+  42  084B8850  0847AD47   14823  one-shot                     16000
+  43  084B885C  0847E72E   34159  forward         0-34159      16000
+  44  084B8868  08486C9D    7931  one-shot                     16000
+  45  084B8874  08488B98   12331  one-shot                     16000
+  46  084B8880  0848BBC3    3660  forward         0-3660       16000
+  47  084B888C  0848CA0F   17230  one-shot                      8000
+  48  084B8898  08490D5D    2487  one-shot                     16000
+  49  084B88A4  08491714     950  one-shot                     16000
+  50  084B88B0  08491ACA    1510  one-shot                     16000
+  51  084B88BC  084920B0    9904  forward      6464-9904       16000
+  52  084B88C8  08494760   17802  forward     11769-17802      16000
+  53  084B88D4  08498CEA   21361  ping-pong   14187-21361      16000
+  54  084B88E0  0849E05B    3479  one-shot                      8000
+  55  084B88EC  0849EDF2   11573  forward         0-11573      16000
+  56  084B88F8  084A1B27    9697  one-shot                     16000
+  57  084B8904  084A4108    1120  one-shot                     16000
+  58  084B8910  084A4568     739  one-shot                     16000
+  59  084B891C  084A484B    9744  one-shot                     16000
+  60  084B8928  084A6E5B   20032  one-shot                     16000
+  61  084B8934  084ABC9B   29340  one-shot                     16000
+  62  084B8940  084B2F37   10368  one-shot                     16000
+  63  084B894C  084B57B7   11937  forward         0-11937      16000
+
+== songs (table at 084047AC) ==
+song  0  @084047AC  tempo 130  speed 6  orders 0837A9EE  pattab 0837FA9C  patterns 23 (4/32/64 rows)
+         order list: 00 01 02 03 04 05 06 07 08 07 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 15 16 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,3,4,5,16,17,18,20,21,22,23,24,25,26,27,28,29,30,31,33,34,35,37,45,46,47,59,67,72,73,78,83,96
+         effects B x1, D x2041, E x28, G x156, H x274, O x1, Q x41, X x383
+song  1  @084047C0  tempo 112  speed 6  orders 0837FAF8  pattab 083854FC  patterns 25 (64/80 rows)
+         order list: 00 01 02 03 04 05 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 15 16 17 18 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,7,16,18,20,21,31,32,34,36,37,45,48,50,53,57,59,61,72,77,81,83,93
+         effects D x52, E x50, F x6, G x33, O x1, Q x25, T x2, X x368
+song  2  @084047D4  tempo  88  speed 3  orders 08385560  pattab 0838C64C  patterns 33 (9/64 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 09 0A 0B 0C 0D 0C 0E 0F 10 0F 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 20 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,6,8,16,17,18,21,31,39,41,42,43,44,45,59,72,73,74,75,77,78,83,87,93
+         effects B x1, D x189, E x140, F x75, G x197, O x64, Q x49, X x2391
+song  3  @084047E8  tempo  65  speed 3  orders 0838C6D0  pattab 08390FC4  patterns 25 (64 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 0E 10 11 12 13 14 15 16 15 17 18 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,16,17,22,23,24,25,26,27,28,29,36,38,41,43,45,46,48,50,54,56,59,61,62,65,67,72,77,83
+         effects B x1, D x43, E x24, F x2, G x31, O x2, Q x25, X x162
+song  4  @084047FC  tempo 125  speed 6  orders 08391028  pattab 08394C70  patterns 19 (4/64 rows)
+         order list: 00 01 02 03 04 05 06 05 07 08 09 0A 0B 0C 0D 0E 0F 10 11 03 04 05 06 05 07 08 12 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,9,16,18,21,31,34,36,37,45,48,50,59,62,72,73,74,77,83,93
+         effects A x2, B x1, D x5, E x57, F x16, G x91, H x4, O x4, Q x38, X x174
+song  5  @08404810  tempo 125  speed 6  orders 08394CBC  pattab 0839A928  patterns 24 (64 rows)
+         order list: 00 01 02 01 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 15 16 15 17 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,9,16,17,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,36,37,41,43,44,45,46,48,53,59,62,72,74,77,78,79,83,93,96
+         effects B x1, D x67, E x108, F x31, G x229, H x2, O x18, Q x40, X x2087
+song  6  @08404824  tempo 125  speed 6  orders 0839A988  pattab 0839B184  patterns 7 (64/80 rows)
+         order list: 00 01 02 03 04 05 06 FF
+         channels 1,2,3,4,5,6,7; instruments 4,18,20,58,59,78
+         effects D x102, Q x5, T x7, X x6, [ x36
+song  7  @08404838  tempo 130  speed 6  orders 0839B1A0  pattab 0839C82C  patterns 7 (8/34/40/64/96/144 rows)
+         order list: 00 01 02 03 04 04 05 06 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,10,18,48,53,59,64,65,66,67,78,84
+         effects B x1, D x453, E x7, F x7, G x229, O x68, Q x6, T x55, X x58
+song  8  @0840484C  tempo 120  speed 6  orders 0839C848  pattab 0839DE8C  patterns 5 (64/72 rows)
+         order list: 00 01 02 03 04 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,3,9,20,22,23,24,26,31,34,44,45,47,59,68,77,79,83
+         effects D x175, G x72, Q x63, X x97
+song  9  @08404860  tempo 125  speed 6  orders 0839DEA0  pattab 0839F744  patterns 20 (64 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0A 0B 0C 0D 0E 0F 10 11 12 13 FF
+         channels 1,2,3,4,5,6,7,8; instruments 1,3,7,18,44,46,65,78
+         effects D x226, G x31, X x288
+song 10  @08404874  tempo 135  speed 6  orders 0839F794  pattab 0839FFFC  patterns 7 (64 rows)
+         order list: 00 01 02 03 04 05 06 FF
+         channels 1,2,3,4,5,6,7,8; instruments 53,59,72,96
+         effects B x1, D x76, T x7, X x16
+song 11  @08404888  tempo  82  speed 6  orders 083A0018  pattab 083A2D70  patterns 12 (64 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B FF
+         channels 1,2,3,4,5,6,7,8; instruments 48,50,52,53,59,62,67,72,96
+         effects A x1, E x2, F x38, G x91, H x61, O x4, X x779
+song 12  @0840489C  tempo 110  speed 4  orders 083A2DA0  pattab 083A7C78  patterns 20 (64 rows)
+         order list: 00 00 01 02 03 04 05 06 05 07 08 09 0A 0B 0C 0D 0C 0E 0F 10 11 12 13 FF
+         channels 1,2,3,4,5,6,7,8; instruments 5,6,33,36,37,38,39,40,41,42,43,46,59,66,77,78,93,96
+         effects D x172, E x63, F x70, G x120, H x105, Q x78, X x1069
+song 13  @084048B0  tempo 110  speed 6  orders 083A7CC8  pattab 083AAEE8  patterns 15 (6/58/60/64/72/90/92/96 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,20,21,48,50,54,55,58,59,61,62,63,83,96
+         effects A x806, D x91, F x1, G x33, O x11, Q x18, T x29, X x122
+song 14  @084048C4  tempo 105  speed 6  orders 083AAF24  pattab 083AB660  patterns 5 (32/64 rows)
+         order list: 00 01 02 03 04 FF
+         channels 1,2,3,4,5,6,7,8; instruments 18,48,50,59,80
+         effects A x5, G x24, O x73, X x20
+song 15  @084048D8  tempo 110  speed 4  orders 083AB674  pattab 083AF6D0  patterns 17 (32/64/79/96 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 08 0A 0B 0C 0D 0E 08 09 08 0F 10 FF
+         channels 1,2,3,4,5,6,7,8,9,10,11,12,13; instruments 2,7,9,16,18,21,31,32,33,34,36,37,45,59,77,78,79,83,85,93
+         effects B x1, D x132, E x245, F x76, G x158, H x60, O x25, Q x8, X x487
+song 16  @084048EC  tempo 112  speed 6  orders 083AF714  pattab 083B024C  patterns 5 (62/64 rows)
+         order list: 00 01 02 03 04 FF
+         channels 1,2,3,4,5,6,7,8; instruments 5,16,17,20,21,31,48,50,53,54,55,56,57,59,61,62,96
+         effects A x9, B x1, D x14, E x1, G x11, O x9, X x51
+song 17  @08404900  tempo 140  speed 6  orders 083B0260  pattab 083B216C  patterns 13 (64/104 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,7,18,21,31,34,45,59,68,72,77,78,79,93
+         effects B x1, D x23, F x10, G x37, H x24, O x200, Q x12, X x257
+song 18  @08404914  tempo 130  speed 6  orders 083B21A0  pattab 083B8D6C  patterns 35 (36/64/88 rows)
+         order list: 00 01 02 03 04 03 05 06 07 08 09 0A 0B 0A 0C 0D 0E 0F 10 11 12 11 13 14 15 16 17 18 18 19 1A 1B 1C 1B 1D 1E 1F 20 21 22 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,7,16,17,18,20,21,31,32,33,34,36,37,45,48,50,54,59,62,69,72,77,78,79,83,85,87,93,98
+         effects A x7, B x1, D x115, E x39, F x4, G x139, H x32, O x34, Q x35, T x5, X x614
+song 19  @08404928  tempo  90  speed 6  orders 083B8DF8  pattab 083C0CBC  patterns 37 (38/48/56/64/72/96 rows)
+         order list: 00 01 02 03 04 05 05 06 07 08 09 0A 0B 0C 0C 0D 0E 0F 0F 10 11 12 13 14 15 16 17 16 18 19 1A 1B 1C 1D 1E 1F 20 21 22 23 24 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,9,16,18,20,21,31,32,34,45,48,50,53,54,56,57,58,59,61,62,66,67,68,69,72,77,78,79,83,85,91,93
+         effects A x11, B x1, D x430, E x80, F x41, G x174, O x141, Q x110, T x7, X x870
+song 20  @0840493C  tempo  90  speed 6  orders 083C0D50  pattab 083C86AC  patterns 35 (48/56/64/96 rows)
+         order list: 00 01 02 03 03 04 05 06 07 08 09 0A 0A 0B 0C 0D 0D 0E 0F 10 11 12 13 14 15 14 16 17 18 19 1A 1B 1C 1D 1E 1F 20 21 22 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,9,16,18,20,21,31,32,34,45,48,50,53,54,56,57,58,59,61,62,67,72,77,79,83,93
+         effects A x5, B x1, D x418, E x80, F x41, G x172, O x141, Q x101, T x5, X x855
+song 21  @08404950  tempo 125  speed 6  orders 083C8738  pattab 083CBBE0  patterns 32 (12/64 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 0B 0C 15 16 17 18 19 1A 1B 1C 1D 1E 1F FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,21,31,34,36,37,44,55,73,76,79,83
+         effects B x1, D x299, G x26, Q x5, T x32, X x49, [ x40
+song 22  @08404964  tempo 135  speed 6  orders 083CBC60  pattab 083CBFE0  patterns 6 (64 rows)
+         order list: 00 01 02 03 04 05 FF
+         channels 1,3,4,6,7,8; instruments 9,72
+         effects D x4, T x6, X x2
+song 23  @08404978  tempo 125  speed 6  orders 083CBFF8  pattab 083CE014  patterns 12 (16/64/72/108 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 08 0A 0B FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,3,9,18,36,45,59,67,72,96
+         effects B x1, D x332, E x14, F x19, G x89, H x16, Q x8, X x84, [ x6
+song 24  @0840498C  tempo  80  speed 6  orders 083CE044  pattab 083D01B4  patterns 10 (32/64/80 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 FF
+         channels 1,2,3,4,5,6,7,8; instruments 16,17,18,20,21,48,50,53,54,55,56,57,59,61,62,96
+         effects D x36, F x2, G x27, H x5, O x10, Q x13, X x97
+song 25  @084049A0  tempo 121  speed 6  orders 083D01DC  pattab 083D2248  patterns 11 (2/64 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A FF
+         channels 1,2,3,4,5,6,7,8; instruments 1,2,16,19,22,23,24,25,26,27,28,29,30,34,44,48,57,59,72,77,78,79,83,85,87,92
+         effects B x1, D x98, E x115, G x18, O x6, Q x15, X x479
+song 26  @084049B4  tempo 135  speed 6  orders 083D2274  pattab 083D3A7C  patterns 7 (128 rows)
+         order list: 00 01 02 03 04 05 03 06 FF
+         channels 1,2,3,4,5,6,7,8; instruments 4,36,45,72,77,93,95
+         effects A x448, B x1, D x14
+song 27  @084049C8  tempo 125  speed 6  orders 083D3A98  pattab 083D3D40  patterns 3 (20/64 rows)
+         order list: 00 01 02 FF
+         channels 1,2,3,4,5,6,7,8; instruments 20,21,58,59,62,78,79
+         effects D x28, Q x2
+song 28  @084049DC  tempo 100  speed 6  orders 083D3D4C  pattab 083D70E4  patterns 14 (16/52/64/112/128 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D FF
+         channels 1,2,3,4,5,6,7,8; instruments 1,2,5,8,9,10,13,14,16,18,21,22,31,34,35,36,37,44,46,48,56,57,59,62,68,74,79,80,83,93
+         effects B x1, D x99, E x30, G x12, O x33, Q x29, X x138
+song 29  @084049F0  tempo 135  speed 6  orders 083D711C  pattab 083D8C58  patterns 16 (18/64 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F FF
+         channels 1,2,3,4,5,6,7,8; instruments 9,20,21,31,45,58,77,94
+         effects B x1, D x42, G x1, Q x17, T x16, X x26
+song 30  @08404A04  tempo 112  speed 6  orders 083D8C98  pattab 083DC9B4  patterns 17 (64 rows)
+         order list: 00 01 02 03 04 05 06 07 06 08 09 0A 0B 0C 0D 0E 0F 10 FF
+         channels 1,2,3,4,5,6,7,8; instruments 5,18,21,22,23,24,36,37,45,48,50,59,72,73,77,83,93
+         effects B x1, D x31, E x1, F x2, G x18, H x6, Q x1, X x95
+song 31  @08404A18  tempo 115  speed 6  orders 083DC9F8  pattab 083DF83C  patterns 11 (64 rows)
+         order list: 00 00 01 02 03 04 05 06 06 07 08 09 0A FF
+         channels 1,2,3,4,5,6,7,8; instruments 5,7,18,21,48,53,59,61,62,67,78,81
+         effects D x580, F x2, G x28, O x571, Q x4, X x93
+song 32  @08404A2C  tempo 135  speed 6  orders 083DF868  pattab 083DFDAC  patterns 5 (12/48 rows)
+         order list: 00 01 02 03 04 FF
+         channels 1,2,3,4,5,6,7,8; instruments 9,21,44,54,58,63
+         effects B x1, D x16, Q x5, T x5
+song 33  @08404A40  tempo 105  speed 6  orders 083DFDC0  pattab 083E2480  patterns 12 (64 rows)
+         order list: 00 00 01 01 02 03 04 05 06 07 08 09 08 09 0A 0B FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,7,21,22,23,24,25,26,30,46,59,67,72,77,78,92,94
+         effects D x251, E x105, G x72, O x7, Q x8, X x490
+song 34  @08404A54  tempo 135  speed 6  orders 083E24B0  pattab 083E432C  patterns 11 (4/64 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A FF
+         channels 1,2,3,4,5,6,7,8; instruments 9,18,21,36,37,45,59,67,72,73,77,83,100
+         effects B x1, D x159, G x1, O x14, Q x1, T x11, X x351, [ x2
+song 35  @08404A68  tempo 120  speed 6  orders 083E4358  pattab 083E5690  patterns 6 (56/64 rows)
+         order list: 00 01 02 03 04 05 FF
+         channels 1,2,3,4,5,6,7,8; instruments 1,2,9,16,18,21,25,31,32,34,45,69,74,77,79
+         effects B x1, D x43, E x2, F x2, G x21, O x8, Q x15, X x106
+song 36  @08404A7C  tempo  90  speed 6  orders 083E56A8  pattab 083EA3E0  patterns 19 (48/52/64/68/112 rows)
+         order list: 00 01 02 03 04 00 05 06 07 08 09 0A 09 0B 0C 0D 0E 0F 10 11 12 FF
+         channels 1,2,3,4,5,6,7,8; instruments 4,5,17,36,37,38,39,43,51,55,56,68,69,72,92,95,96
+         effects A x546, D x248, E x142, F x10, G x18, H x727, Q x46, X x418
+song 37  @08404A90  tempo  90  speed 6  orders 083EA42C  pattab 083EF4EC  patterns 19 (48 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 0D 10 11 12 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,3,17,18,21,22,23,24,25,26,27,28,30,37,38,39,42,45,53,59,73,77
+         effects B x1, D x324, E x44, F x15, G x70, Q x17, X x1697, [ x18
+song 38  @08404AA4  tempo 140  speed 6  orders 083EF538  pattab 083F0DCC  patterns 6 (35/48/64/128 rows)
+         order list: 00 01 02 03 03 04 05 FF
+         channels 1,2,3,4,5,6,7,8; instruments 1,2,3,4,5,7,14,15,21,25,26,27,29,30,31,32,34,36,44,46,47,72,78,83,84,85
+         effects A x3, B x1, D x263, E x22, F x55, G x35, O x108, Q x25, X x121
+song 39  @08404AB8  tempo  90  speed 3  orders 083F0DE4  pattab 083F5D88  patterns 27 (32/64/96 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 08 10 11 12 13 14 15 16 17 18 19 1A FF
+         channels 1,2,3,4,5,6,7,8; instruments 0,2,9,16,17,18,21,25,31,34,35,37,45,53,59,67,72,74,77,79,83,87,89,93
+         effects A x1, B x1, D x188, E x45, F x68, G x77, H x86, O x5, Q x21, T x24, X x1559, [ x15
+song 40  @08404ACC  tempo 130  speed 6  orders 083F5DF4  pattab 083F6E40  patterns 4 (128/176 rows)
+         order list: 00 01 02 03 FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,20,31,32,44,59,74,79,83
+         effects E x52, F x24, G x94, H x9, O x2, Q x2, X x107
+song 41  @08404AE0  tempo 125  speed 6  orders 083F6E50  pattab 083FCF84  patterns 30 (32/64 rows)
+         order list: 00 01 00 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 11 10 12 13 14 15 16 17 18 19 1A 1B 1C 1B 1D FF
+         channels 1,2,3,4,5,6,7,8; instruments 5,18,22,23,24,25,36,37,46,53,55,59,67,72,77,92,93,96
+         effects A x1408, D x172, E x39, F x133, G x215, H x120, Q x33, X x208
+song 42  @08404AF4  tempo 112  speed 6  orders 083FCFFC  pattab 0840062C  patterns 13 (64/128 rows)
+         order list: 00 01 02 02 03 04 05 06 07 08 09 0A 09 0B 0C FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,5,16,17,18,19,20,21,24,25,27,29,30,31,34,36,37,45,48,50,53,55,59,61,62,72,83,93
+         effects D x29, E x1, F x2, G x39, H x2, O x2, Q x6, X x609
+song 43  @08404B08  tempo 120  speed 6  orders 08400660  pattab 0840476C  patterns 16 (22/64/72/96/120/134 rows)
+         order list: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 09 0A 0D 0E 0F FF
+         channels 1,2,3,4,5,6,7,8; instruments 2,16,20,21,31,33,34,44,45,48,50,53,54,56,57,58,59,61,62,65,67,77,83,93,96
+         effects A x20, B x1, D x112, G x33, H x9, O x88, Q x52, X x824
+
+== effect usage (all songs) ==
+  A  1   A speed          3272
+  B  2   B jump             27
+  D  4   D vol slide      8192
+  E  5   E porta down     1536
+  F  6   F porta up        752
+  G  7   G tone porta     2922
+  H  8   H vibrato        1542
+  O  15  O offset         1650
+  Q  17  Q retrig          979
+  T  20  T tempo           211
+  X  24  X pan           18707
+  [  27  note delay        117
+

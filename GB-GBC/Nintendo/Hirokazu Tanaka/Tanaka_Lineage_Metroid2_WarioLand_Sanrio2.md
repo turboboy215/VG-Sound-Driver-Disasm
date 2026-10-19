@@ -317,3 +317,20 @@ So *Dr. Mario*'s driver was built from the Tetris version.
 ### 6.3 Sanrio Carnival 2
 
 The full disassembly confirms §3. Shadow registers, bit-mask SFX slots with a byte-code interpreter, per-channel byte streams with calls and returns, envelope / pitch / drum macros. Nothing in it matches the Tanaka family.
+
+---
+
+## 7. Addendum: Kirby Tilt 'n' Tumble
+
+From the full disassembly (`KirbyTiltNTumble_SoundDriver.md`).
+
+| Pair | Aligned | Relationship |
+|---|---|---|
+| KTT `$0E` ← SMB DX `$1D` music | 1,127 / 1,383 | same driver, extended (LA `$1B`: 923) |
+| KTT `$0F` ← KTT `$0E` | 1,340 / 1,350 | two copies, split `$01–$3F` / `$40–$7F` like LA's `$1B` / `$1E` |
+| KTT `$11` helpers ← SMB DX `$1F` | 326 / 835 (LA `$1F`: 281) | same helper library; new four-slot dispatch with a priority table |
+| KTT `$14` ← KTT `$11` helpers | 600 / 628 | relocated copy for effects `$80+` |
+
+- **Built from SMB DX:** envelope tables, rest envelopes, `$9A` volume, drop of 32, vibrato type 2, `SetRegsSkip0`. The note table (A♯5 = `$774`, C♯7 = `$7C5`), vibrato table and nine length tables are SMB DX's.
+- **Back from LA:** two music banks, the `$9E` tempo command, a ch3 SFX slot.
+- **New:** per-channel transpose and envelope commands, list-level commands, per-song drum kits, per-song hurry length tables, and PCM played through NR50 from the home bank.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Animorphs (GBC) sound-driver data walker (Jeremy Evers' F.A. tracker player).
+"""Animorphs (GBC) sound-driver data walker (Jeremy Evers' Fatass tracker player).
 Usage: faparse.py ROM [--json out.json] > SongData.txt"""
 import sys, json
 ROM = open(sys.argv[1], 'rb').read()

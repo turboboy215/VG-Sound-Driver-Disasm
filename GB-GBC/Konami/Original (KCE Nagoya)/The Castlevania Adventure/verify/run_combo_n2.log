@@ -1,0 +1,10 @@
+n2 8F@30,0E@400,12@700,13@1200,1C@1600,5C@2000,12@2170,2A@2600,!C794=01@3000,5D@3001,!C794=00@3400,!C0CB=01@4000,90@6000,96@7500,56@8000,56@8010,55@8100,4A@8500,51@9500,32@10000,0@11000,D2@11010: 12061 ticks, 0 ticks with mismatches, 4740 triggers, 5700 frames, game fades 0, dropped 0
+tick 2075: trk4+A0 emu 30 model 40; shadow+07 emu 30 model 40; C0C7 emu 30 model 40
+tick 2076: trk4+A0 emu 30 model 40; shadow+07 emu 30 model 40
+tick 2077: trk4+A0 emu 30 model 40; shadow+07 emu 30 model 40
+tick 2078: trk3+A0 emu 40 model 50; trk4+A0 emu 30 model 40; shadow+02 emu 40 model 50; shadow+07 emu 30 model 40; C0C7 emu 40 model 50
+tick 2079: trk3+A0 emu 40 model 50; trk4+A0 emu 30 model 40; shadow+02 emu 40 model 50; shadow+07 emu 30 model 40
+n2 CE@30,1A@300,19@500,2B@900,53@1500,!C0CB=01@2000,D6@4000,1D@4300,20@4500,D7@6000,48@6200,3D@6600,D0@8000,!C0CB=01@8200,95@10000,17@10200: 12063 ticks, 3642 ticks with mismatches, 4216 triggers, 5700 frames, game fades 0, dropped 0
+n2 91@30,27@200,5D@400,27@410,3D@800,0F@820,10@840,0B@1000,03@1010,94@3000,59@3100,58@3110,57@3120,D9@6000,27@6100,1C@6200: 9105 ticks, 0 ticks with mismatches, 5080 triggers, 4320 frames, game fades 0, dropped 0
+(scenario B rerun after the bank-15 NoteVolume fix:)
+n2 CE@30,1A@300,19@500,2B@900,53@1500,!C0CB=01@2000,D6@4000,1D@4300,20@4500,D7@6000,48@6200,3D@6600,D0@8000,!C0CB=01@8200,95@10000,17@10200: 12063 ticks, 0 ticks with mismatches, 4216 triggers, 5700 frames, game fades 0, dropped 0

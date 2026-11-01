@@ -1,0 +1,4 @@
+sample 1 at E:4413: 1568 bytes, python==cpu True, end 468f/468f, ==emulator True (frame 803), 61294 instructions
+sample 2 at E:468f: 1456 bytes, python==cpu True, end 48c6/48c6, ==emulator True (frame 838), 55356 instructions
+sample 3 at E:48c6: 3488 bytes, python==cpu True, end 4df7/4df7, ==emulator True (frame 883), 131409 instructions
+timer ISR calls per frame while playing: [(8, 1), (16, 1), (51, 1), (52, 2), (53, 1), (69, 17), (70, 73)]

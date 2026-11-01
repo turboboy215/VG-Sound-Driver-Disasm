@@ -1,0 +1,134 @@
+switch 0e 6bdc 03
+call 0e 766c 0e 4df8
+call 0e 4df8 06 4000
+switch 0f 660e 04
+call 0f 7347 0f 79dc
+call 0f 734b 0f 79dc
+call 0f 734f 0f 79dc
+call 0f 72f8 0f 7383
+call 0f 6fc0 09 4000
+call 0f 728f 0f 7383
+switch 0f 5456 14
+call 0f 6030 0f 6131
+call 0f 6034 0d 5944
+call 0d 60a6 0f 65e5
+call 0f 6051 09 6b13
+call 0f 6055 09 6a86
+call 0f 6059 09 6ae2
+call 0f 6025 0f 6131
+call 0f 6029 0e 655f
+call 0e 6b4f 0f 65e5
+call 0f 601a 0f 6131
+call 0f 601e 0e 5e4c
+call 0e 64c8 0f 65e5
+call 0f 6046 09 6b13
+call 0f 604a 09 6a27
+call 0f 5aaf 0f 6131
+call 0f 5f7c 0f 65e5
+call 0f 603b 09 6b13
+call 0f 603f 09 69d3
+call 0f 5480 0f 6131
+call 0f 5a13 0f 65e5
+switch 0a 4000 13
+call 0a 4044 09 4562
+call 09 4562 0a 68f6
+call 09 4e20 0a 7b0e
+call 0a 68f6 0a 72fd
+call 0a 68ff 0e 43b3
+call 0a 409b 0b 4add
+call 0b 4add 0a 40b1
+call 0b 524b 0d 4aae
+call 0d 4aae 0a 7b0e
+call 0d 4ab2 0d 5764
+call 0a 40b1 0a 72fd
+call 0a 40ba 0e 43b3
+call 0a 40a2 0b 4000
+call 0b 4000 0a 40b1
+call 0b 4748 0d 4499
+call 0a 407e 09 50b4
+call 09 50b4 0a 72fd
+call 0a 403d 0b 559c
+call 0b 559c 0a 68f6
+call 0a 4052 0b 5bc8
+call 0b 5bc8 0a 408d
+call 0b 6219 0d 488f
+call 0b 6385 0c 4000
+call 0a 408d 0a 72fd
+call 0a 4096 0e 43b3
+call 0a 4059 0b 6390
+call 0b 6390 0a 408d
+call 0a 40ce 0b 7171
+call 0b 7179 0d 55b7
+call 0b 717d 0a 72fd
+call 0a 404b 0c 66ca
+call 0c 66ca 0a 40d3
+call 0c 6e10 0c 643e
+call 0a 40d3 0a 72fd
+call 0a 40dc 0e 43b3
+call 0a 40bf 0c 5d68
+call 0c 5d68 0a 40d3
+call 0c 6315 0c 643e
+call 0a 4068 09 656b
+call 09 656b 09 6013
+call 09 656f 09 657a
+call 09 6013 0a 72fd
+call 0a 4036 0c 5434
+call 0c 5434 0a 68f6
+call 0c 5a01 0a 7b0e
+call 0a 402f 0c 49ad
+call 0c 49ad 0a 50d0
+call 0c 4f4a 0a 7b0e
+call 0a 50d0 0a 72fd
+call 0a 50d9 0e 43b3
+call 0a 4028 0c 4254
+call 0c 4254 0a 50d0
+call 0a 40e1 0a 50d0
+call 0a 406f 09 5cc5
+call 09 5cc5 09 6013
+call 0a 5e2b 0a 68f6
+call 0a 50de 0a 72fd
+call 0a 578d 0a 5b7c
+call 0a 6912 0a 6904
+call 0a 6904 0a 72fd
+call 0a 690d 0e 43b3
+switch 0e 4000 02
+call 0e 4006 09 69bc
+call 09 69c4 0e 4df8
+switch 0d 4000 11
+call 0d 4024 09 657a
+call 0d 4aa9 0d 4aae
+call 0d 4aa4 0d 4499
+call 0d 4ab7 0d 488f
+call 0d 55ad 0e 4df8
+call 0d 4aca 0a 7b0e
+call 0d 4ac5 0a 5b7c
+call 0d 55b2 0d 55b7
+switch 0f 4000 14
+call 0f 53bd 08 4000
+call 08 4001 08 4030
+call 08 4005 08 4de5
+call 08 4009 08 5e3a
+call 08 400d 07 4000
+call 08 4011 07 481d
+call 08 4015 07 4f28
+call 08 4019 07 544b
+call 08 401d 07 5c2b
+call 08 4021 07 61ff
+call 08 4025 06 477a
+call 08 4029 06 555e
+call 0f 53d2 09 4000
+call 0f 53d6 09 6e6c
+call 0f 53b2 09 4000
+call 0f 53b6 0e 4dfd
+call 0f 53a7 09 4000
+call 0f 53ab 0e 56e5
+call 0f 53cb 08 6965
+call 0f 539c 09 4000
+call 0f 53a0 0e 5cf3
+call 0f 53c4 08 5fc5
+call 0f 4a23 09 4000
+PCM 06:4000 5856 samples 1.385 s
+PCM 0e:402e 2400 samples 0.568 s
+PCM 0e:4413 1568 samples 0.371 s
+PCM 0e:468f 1456 samples 0.344 s
+PCM 0e:48c6 3488 samples 0.825 s

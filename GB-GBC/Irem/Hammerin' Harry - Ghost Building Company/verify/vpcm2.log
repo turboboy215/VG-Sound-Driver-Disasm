@@ -1,0 +1,5 @@
+HH_PCM_06_4000 06:4000 5856 samples: python==cpu True, python==emulator True
+HH_PCM_0E_402E 0e:402e 2400 samples: python==cpu True, python==emulator True
+HH_PCM_0E_4413 0e:4413 1568 samples: python==cpu True, python==emulator True
+HH_PCM_0E_468F 0e:468f 1456 samples: python==cpu True, python==emulator True
+HH_PCM_0E_48C6 0e:48c6 3488 samples: python==cpu True, python==emulator True

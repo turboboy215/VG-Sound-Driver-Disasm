@@ -1,6 +1,6 @@
 # Shisensho: Match-Mania (J) — sound driver
 
-ROM: `Shisenshou - Match-Mania (J).gb` (DMG, 32 KB, no mapper, internal title `SHISENSYO`, licensee `$49` Irem). Title screen: "MATCH-MANIA © IREM CORP. © TAMTEX ALL RIGHTS RESERVED LICENSED BY NINTENDO" (stored as text shifted by $0F).
+ROM: `Shisenshou - Match-Mania (J).gb` (DMG, 32 KB, no mapper, internal title `SHISENSYO`, licensee `$49` Irem). Title screen: "MATCH-MANIA © 1990 IREM CORP. © 1989 TAMTEX ALL RIGHTS RESERVED LICENSED BY NINTENDO" (letters stored shifted by $0F, digits as tiles $6A-$73). The 1989 Tamtex date is the earliest date tied to this driver.
 
 This is the **Tamtex/Irem driver in the form closest to the common ancestor** of Lenar's copy (Mercenary Force, Knight Quest) and Irem's Kid Niki / Hammerin' Harry drivers. 332 of its 338 driver instructions match Mercenary Force's in sequence, and Kid Niki's driver is this one plus additions. Lineage and comparison: `Irem_SoundEngine_Family.md`. The engine itself (tracks, rows, output, commands) is described in full in `Lenar_SoundDriver.md`. This doc lists only what differs.
 

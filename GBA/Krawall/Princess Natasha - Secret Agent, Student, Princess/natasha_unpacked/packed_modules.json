@@ -1,0 +1,459 @@
+[
+ {
+  "blob": "0x3ede00",
+  "samples": [],
+  "size": 1222,
+  "npat": 1,
+  "ninst": 2,
+  "mod_off": "0xf0",
+  "channels": 6,
+  "numOrders": 1,
+  "order": [
+   0
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0"
+  ]
+ },
+ {
+  "blob": "0x3eded0",
+  "samples": [],
+  "size": 5918,
+  "npat": 5,
+  "ninst": 10,
+  "mod_off": "0x9b8",
+  "channels": 6,
+  "numOrders": 7,
+  "order": [
+   0,
+   1,
+   1,
+   2,
+   2,
+   3,
+   4
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0xe0",
+   "0x29c",
+   "0x472",
+   "0x710"
+  ]
+ },
+ {
+  "blob": "0x3ee260",
+  "samples": [],
+  "size": 9510,
+  "npat": 10,
+  "ninst": 14,
+  "mod_off": "0x12ec",
+  "channels": 6,
+  "numOrders": 12,
+  "order": [
+   0,
+   1,
+   2,
+   2,
+   3,
+   4,
+   5,
+   6,
+   5,
+   7,
+   8,
+   9
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0x122",
+   "0x312",
+   "0x568",
+   "0x7d6",
+   "0xa30",
+   "0xbe2",
+   "0xd90",
+   "0xf3e",
+   "0x10d2"
+  ]
+ },
+ {
+  "blob": "0x3ee8d0",
+  "samples": [],
+  "size": 11170,
+  "npat": 10,
+  "ninst": 13,
+  "mod_off": "0x1a98",
+  "channels": 6,
+  "numOrders": 11,
+  "order": [
+   9,
+   3,
+   3,
+   0,
+   6,
+   7,
+   8,
+   1,
+   2,
+   4,
+   5
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0x148",
+   "0x630",
+   "0xb0a",
+   "0xd92",
+   "0x108c",
+   "0x1374",
+   "0x1498",
+   "0x1748",
+   "0x19ea"
+  ]
+ },
+ {
+  "blob": "0x3ef010",
+  "samples": [],
+  "size": 11738,
+  "npat": 9,
+  "ninst": 13,
+  "mod_off": "0x1cd4",
+  "channels": 6,
+  "numOrders": 9,
+  "order": [
+   0,
+   2,
+   3,
+   1,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0x214",
+   "0x626",
+   "0x8b4",
+   "0xb2c",
+   "0xf34",
+   "0x1278",
+   "0x15b8",
+   "0x1944"
+  ]
+ },
+ {
+  "blob": "0x3ef910",
+  "samples": [],
+  "size": 8686,
+  "npat": 9,
+  "ninst": 15,
+  "mod_off": "0xe88",
+  "channels": 6,
+  "numOrders": 10,
+  "order": [
+   0,
+   1,
+   2,
+   3,
+   3,
+   4,
+   5,
+   8,
+   6,
+   7
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0xe0",
+   "0x22c",
+   "0x338",
+   "0x544",
+   "0x792",
+   "0x9b6",
+   "0xbf2",
+   "0xc82"
+  ]
+ },
+ {
+  "blob": "0x3f0010",
+  "samples": [],
+  "size": 10902,
+  "npat": 9,
+  "ninst": 15,
+  "mod_off": "0x1730",
+  "channels": 6,
+  "numOrders": 12,
+  "order": [
+   0,
+   1,
+   2,
+   2,
+   3,
+   4,
+   5,
+   6,
+   5,
+   6,
+   7,
+   8
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0x332",
+   "0x6d2",
+   "0x9c8",
+   "0xc80",
+   "0xf34",
+   "0x1120",
+   "0x130a",
+   "0x151a"
+  ]
+ },
+ {
+  "blob": "0x3f07c0",
+  "samples": [],
+  "size": 7038,
+  "npat": 5,
+  "ninst": 13,
+  "mod_off": "0xa88",
+  "channels": 6,
+  "numOrders": 6,
+  "order": [
+   0,
+   1,
+   2,
+   2,
+   3,
+   4
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0xfe",
+   "0x270",
+   "0x534",
+   "0x7e6"
+  ]
+ },
+ {
+  "blob": "0x3f0c60",
+  "samples": [],
+  "size": 11890,
+  "npat": 8,
+  "ninst": 19,
+  "mod_off": "0x1650",
+  "channels": 6,
+  "numOrders": 9,
+  "order": [
+   3,
+   7,
+   4,
+   2,
+   0,
+   5,
+   5,
+   1,
+   6
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0x3c6",
+   "0x5c6",
+   "0x996",
+   "0xb78",
+   "0xef0",
+   "0x11c0",
+   "0x13c4"
+  ]
+ },
+ {
+  "blob": "0x3f1330",
+  "samples": [],
+  "size": 8058,
+  "npat": 7,
+  "ninst": 13,
+  "mod_off": "0xe7c",
+  "channels": 6,
+  "numOrders": 8,
+  "order": [
+   0,
+   1,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0x148",
+   "0x354",
+   "0x5b0",
+   "0x812",
+   "0xa36",
+   "0xc3c"
+  ]
+ },
+ {
+  "blob": "0x3f19a0",
+  "samples": [],
+  "size": 14230,
+  "npat": 11,
+  "ninst": 13,
+  "mod_off": "0x2688",
+  "channels": 6,
+  "numOrders": 13,
+  "order": [
+   0,
+   1,
+   2,
+   4,
+   3,
+   3,
+   5,
+   6,
+   7,
+   8,
+   2,
+   10,
+   9
+  ],
+  "volGlobal": 128,
+  "speed": 6,
+  "bpm": 125,
+  "flags": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pat_offs": [
+   "0x0",
+   "0x17e",
+   "0x532",
+   "0x938",
+   "0xc84",
+   "0xf08",
+   "0x1342",
+   "0x1786",
+   "0x1a84",
+   "0x1e80",
+   "0x2288"
+  ]
+ }
+]

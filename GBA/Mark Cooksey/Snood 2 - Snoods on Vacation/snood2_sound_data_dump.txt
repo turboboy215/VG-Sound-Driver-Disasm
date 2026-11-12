@@ -1,0 +1,275 @@
+Snood 2: Snoods on Vacation (GBA) -- Mark Cooksey sound driver, Build B: data dump
+Generated from "Snood 2 - Snoods on Vacation (E) (M5).gba".  All addresses are GBA ROM addresses.
+Channels 1-8: 1 square1, 2 square2, 3 wave, 4 noise, 5-8 software-mixed PCM (FIFO A, 10 512 Hz).
+PSG note names assume index 0 = C#2; on channels 5-8 a note selects mcStepTable[0x5F - note]
+(note 48 = 11 025 Hz, valid notes 12-71).
+====================================================================================================
+
+1. SONGS (mcSongTable @ 08091578, 14 x 36 bytes)
+----------------------------------------------------------------------------------------------------
+song  0: tempo 255 (0.996 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s00_c0   @ 0808EC58    1 pattern calls, pass      3 ticks =    0.1 s, ends
+   ch2  seq_s00_c1   @ 0808EC84    1 pattern calls, pass      3 ticks =    0.1 s, ends
+   ch3  seq_s00_c2   @ 0808EC98    1 pattern calls, pass      3 ticks =    0.1 s, ends
+   ch4  seq_s00_c3   @ 0808ECAC    1 pattern calls, pass      3 ticks =    0.1 s, ends
+   ch5  seq_s00_c4   @ 0808ECC0    1 pattern calls, pass     96 ticks =    1.6 s, ends
+   ch6  seq_s00_c4   @ 0808ECC0    1 pattern calls, pass     96 ticks =    1.6 s, ends
+   ch7  seq_s00_c4   @ 0808ECC0    1 pattern calls, pass     96 ticks =    1.6 s, ends
+   ch8  seq_s00_c4   @ 0808ECC0    1 pattern calls, pass     96 ticks =    1.6 s, ends
+song  1: tempo 164 (0.641 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s01_c0   @ 0808ECD4    9 pattern calls, pass   4610 ticks =  120.5 s, loops to word 16 (loop 3457 ticks)
+   ch2  seq_s01_c1   @ 0808ED84    2 pattern calls, pass   3073 ticks =   80.3 s, ends
+   ch3  seq_s01_c2   @ 0808EDB0    2 pattern calls, pass   1537 ticks =   40.2 s, ends
+   ch4  seq_s01_c3   @ 0808EDDC    4 pattern calls, pass   4610 ticks =  120.5 s, loops to word 8 (loop 3457 ticks)
+   ch5  seq_s01_c4   @ 0808EE24    8 pattern calls, pass   4609 ticks =  120.5 s, loops to word 8 (loop 3457 ticks)
+   ch6  seq_s01_c5   @ 0808EEAC    8 pattern calls, pass   4609 ticks =  120.5 s, loops to word 8 (loop 3457 ticks)
+   ch7  seq_s01_c6   @ 0808EF34    7 pattern calls, pass   4609 ticks =  120.5 s, loops to word 4 (loop 3457 ticks)
+   ch8  seq_s01_c7   @ 0808EFAC    3 pattern calls, pass   4609 ticks =  120.5 s, loops to word 4 (loop 3457 ticks)
+song  2: tempo 239 (0.934 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s02_c0   @ 0808EFE4   11 pattern calls, pass  10945 ticks =  196.3 s, loops to word 4
+   ch2  seq_s02_c1   @ 0808F0B4    2 pattern calls, pass    673 ticks =   12.1 s, ends
+   ch3  seq_s02_c2   @ 0808F0D8    2 pattern calls, pass    673 ticks =   12.1 s, ends
+   ch4  seq_s02_c3   @ 0808F0FC    2 pattern calls, pass  10945 ticks =  196.3 s, loops to word 0
+   ch5  seq_s02_c4   @ 0808F124   13 pattern calls, pass  10945 ticks =  196.3 s, loops to word 0
+   ch6  seq_s02_c5   @ 0808F1FC    2 pattern calls, pass  10945 ticks =  196.3 s, loops to word 0
+   ch7  seq_s02_c6   @ 0808F224   11 pattern calls, pass  10945 ticks =  196.3 s, loops to word 0
+   ch8  seq_s02_c7   @ 0808F2DC    2 pattern calls, pass  10945 ticks =  196.3 s, loops to word 0
+song  3: tempo 188 (0.734 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s03_c0   @ 0808F304    6 pattern calls, pass   6529 ticks =  148.9 s, loops to word 4
+   ch2  seq_s03_c1   @ 0808F384    2 pattern calls, pass    673 ticks =   15.3 s, ends
+   ch3  seq_s03_c2   @ 0808F3A8    2 pattern calls, pass    673 ticks =   15.3 s, ends
+   ch4  seq_s03_c3   @ 0808F3CC    2 pattern calls, pass   6529 ticks =  148.9 s, loops to word 0
+   ch5  seq_s03_c4   @ 0808F3F4    8 pattern calls, pass   6529 ticks =  148.9 s, loops to word 0
+   ch6  seq_s03_c5   @ 0808F47C    7 pattern calls, pass   6529 ticks =  148.9 s, loops to word 0
+   ch7  seq_s03_c6   @ 0808F4F4    6 pattern calls, pass   6529 ticks =  148.9 s, loops to word 0
+   ch8  seq_s03_c7   @ 0808F55C    3 pattern calls, pass   6529 ticks =  148.9 s, loops to word 0
+song  4: tempo 171 (0.668 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s04_c0   @ 0808F594   20 pattern calls, pass   7297 ticks =  182.9 s, loops to word 4
+   ch2  seq_s04_c1   @ 0808F6F4    2 pattern calls, pass    673 ticks =   16.9 s, ends
+   ch3  seq_s04_c2   @ 0808F718    2 pattern calls, pass    673 ticks =   16.9 s, ends
+   ch4  seq_s04_c3   @ 0808F73C    2 pattern calls, pass   7297 ticks =  182.9 s, loops to word 0
+   ch5  seq_s04_c4   @ 0808F764   10 pattern calls, pass   7297 ticks =  182.9 s, loops to word 0
+   ch6  seq_s04_c5   @ 0808F80C   10 pattern calls, pass   7297 ticks =  182.9 s, loops to word 0
+   ch7  seq_s04_c6   @ 0808F8B4    9 pattern calls, pass   7297 ticks =  182.9 s, loops to word 0
+   ch8  seq_s04_c7   @ 0808F94C    2 pattern calls, pass   7297 ticks =  182.9 s, loops to word 0
+song  5: tempo 154 (0.602 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s05_c0   @ 0808F974    9 pattern calls, pass   6145 ticks =  171.0 s, loops to word 4
+   ch2  seq_s05_c1   @ 0808FA24    6 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+   ch3  seq_s05_c2   @ 0808FA8C    2 pattern calls, pass    673 ticks =   18.7 s, ends
+   ch4  seq_s05_c3   @ 0808FAB0    2 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+   ch5  seq_s05_c4   @ 0808FAD8    9 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+   ch6  seq_s05_c5   @ 0808FB70    6 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+   ch7  seq_s05_c6   @ 0808FBD8    6 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+   ch8  seq_s05_c7   @ 0808FC40    2 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+song  6: tempo 205 (0.801 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s06_c0   @ 0808FC68    2 pattern calls, pass    193 ticks =    4.0 s, ends
+   ch2  seq_s06_c1   @ 0808FCAC    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch3  seq_s06_c2   @ 0808FCC0    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch4  seq_s06_c3   @ 0808FCD4    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch5  seq_s06_c4   @ 0808FCE8    2 pattern calls, pass    193 ticks =    4.0 s, ends
+   ch6  seq_s06_c5   @ 0808FD0C    2 pattern calls, pass    193 ticks =    4.0 s, ends
+   ch7  seq_s06_c6   @ 0808FD30    2 pattern calls, pass    193 ticks =    4.0 s, ends
+   ch8  seq_s06_c7   @ 0808FD54    2 pattern calls, pass    193 ticks =    4.0 s, ends
+song  7: tempo 154 (0.602 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s07_c0   @ 0808FD78   10 pattern calls, pass   6145 ticks =  171.0 s, loops to word 4
+   ch2  seq_s07_c1   @ 0808FE38    6 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+   ch3  seq_s07_c2   @ 0808FEA0    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch4  seq_s07_c3   @ 0808FEB4    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch5  seq_s07_c4   @ 0808FEC8   17 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+   ch6  seq_s07_c5   @ 0808FFE0    9 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+   ch7  seq_s07_c6   @ 08090078    9 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+   ch8  seq_s07_c7   @ 08090110    2 pattern calls, pass   6145 ticks =  171.0 s, loops to word 0
+song  8: tempo 178 (0.695 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s08_c0   @ 08090138    8 pattern calls, pass   7297 ticks =  175.7 s, loops to word 4
+   ch2  seq_s08_c1   @ 080901D8    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch3  seq_s08_c2   @ 080901EC    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch4  seq_s08_c3   @ 08090200    2 pattern calls, pass   7297 ticks =  175.7 s, loops to word 0
+   ch5  seq_s08_c4   @ 08090228    8 pattern calls, pass   7297 ticks =  175.7 s, loops to word 0
+   ch6  seq_s08_c5   @ 080902B0    9 pattern calls, pass   7297 ticks =  175.7 s, loops to word 0
+   ch7  seq_s08_c6   @ 08090348    8 pattern calls, pass   7297 ticks =  175.7 s, loops to word 0
+   ch8  seq_s08_c7   @ 080903D0    2 pattern calls, pass   7297 ticks =  175.7 s, loops to word 0
+song  9: tempo 193 (0.754 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s09_c0   @ 080903F8    8 pattern calls, pass   6913 ticks =  153.5 s, loops to word 4
+   ch2  seq_s09_c1   @ 08090498    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch3  seq_s09_c2   @ 080904AC    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch4  seq_s09_c3   @ 080904C0    2 pattern calls, pass   6913 ticks =  153.5 s, loops to word 0
+   ch5  seq_s09_c4   @ 080904E8    8 pattern calls, pass   6913 ticks =  153.5 s, loops to word 0
+   ch6  seq_s09_c5   @ 08090570    8 pattern calls, pass   6913 ticks =  153.5 s, loops to word 0
+   ch7  seq_s09_c6   @ 080905F8    8 pattern calls, pass   6913 ticks =  153.5 s, loops to word 0
+   ch8  seq_s09_c7   @ 08090680    2 pattern calls, pass   6913 ticks =  153.5 s, loops to word 0
+song 10: tempo 240 (0.938 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s10_c0   @ 080906A8   10 pattern calls, pass  10513 ticks =  187.8 s, loops to word 4
+   ch2  seq_s10_c1   @ 08090768    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch3  seq_s10_c2   @ 0809077C    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch4  seq_s10_c3   @ 08090790    4 pattern calls, pass  10513 ticks =  187.8 s, loops to word 0
+   ch5  seq_s10_c4   @ 080907D8    9 pattern calls, pass  10513 ticks =  187.8 s, loops to word 0
+   ch6  seq_s10_c5   @ 08090870    9 pattern calls, pass  10513 ticks =  187.8 s, loops to word 0
+   ch7  seq_s10_c6   @ 08090908    9 pattern calls, pass  10513 ticks =  187.8 s, loops to word 0
+   ch8  seq_s10_c7   @ 080909A0    4 pattern calls, pass  10513 ticks =  187.8 s, loops to word 0
+song 11: tempo 154 (0.602 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s11_c0   @ 080909E8   12 pattern calls, pass   6913 ticks =  192.4 s, loops to word 4
+   ch2  seq_s11_c1   @ 08090AC8   12 pattern calls, pass   6913 ticks =  192.4 s, loops to word 0
+   ch3  seq_s11_c2   @ 08090B90    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch4  seq_s11_c3   @ 08090BA4    2 pattern calls, pass   6913 ticks =  192.4 s, loops to word 0
+   ch5  seq_s11_c4   @ 08090BCC    5 pattern calls, pass   6913 ticks =  192.4 s, loops to word 0
+   ch6  seq_s11_c5   @ 08090C24   10 pattern calls, pass   6913 ticks =  192.4 s, loops to word 0
+   ch7  seq_s11_c6   @ 08090CCC    6 pattern calls, pass   6913 ticks =  192.4 s, loops to word 0
+   ch8  seq_s11_c7   @ 08090D34    4 pattern calls, pass   6913 ticks =  192.4 s, loops to word 0
+song 12: tempo 185 (0.723 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s12_c0   @ 08090D7C    8 pattern calls, pass   6913 ticks =  160.2 s, loops to word 4
+   ch2  seq_s12_c1   @ 08090E1C    8 pattern calls, pass   6913 ticks =  160.2 s, loops to word 0
+   ch3  seq_s12_c2   @ 08090EA4    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch4  seq_s12_c3   @ 08090EB8    6 pattern calls, pass   6913 ticks =  160.2 s, loops to word 0
+   ch5  seq_s12_c4   @ 08090F20    8 pattern calls, pass   6913 ticks =  160.2 s, loops to word 0
+   ch6  seq_s12_c5   @ 08090FA8    8 pattern calls, pass   6913 ticks =  160.2 s, loops to word 0
+   ch7  seq_s12_c6   @ 08091030    8 pattern calls, pass   6913 ticks =  160.2 s, loops to word 0
+   ch8  seq_s12_c7   @ 080910B8    6 pattern calls, pass   6913 ticks =  160.2 s, loops to word 0
+song 13: tempo 188 (0.734 ticks/frame), channels [1, 2, 3, 4, 5, 6, 7, 8], length table durTable0
+   ch1  seq_s13_c0   @ 08091120    6 pattern calls, pass   7681 ticks =  175.1 s, loops to word 4
+   ch2  seq_s13_c1   @ 080911A0    9 pattern calls, pass   7681 ticks =  175.1 s, loops to word 0
+   ch3  seq_s13_c2   @ 08091238    1 pattern calls, pass      1 ticks =    0.0 s, ends
+   ch4  seq_s13_c3   @ 0809124C    2 pattern calls, pass   7681 ticks =  175.1 s, loops to word 0
+   ch5  seq_s13_c4   @ 08091274    7 pattern calls, pass   7681 ticks =  175.1 s, loops to word 0
+   ch6  seq_s13_c5   @ 080912EC    9 pattern calls, pass   7681 ticks =  175.1 s, loops to word 0
+   ch7  seq_s13_c6   @ 08091384    9 pattern calls, pass   7681 ticks =  175.1 s, loops to word 0
+   ch8  seq_s13_c7   @ 0809141C    9 pattern calls, pass   7681 ticks =  175.1 s, loops to word 0
+
+2. PCM INSTRUMENTS (mcSmpInstTable @ 0808233C)
+----------------------------------------------------------------------------------------------------
+ inst  address   length  flag        mode      used by (song.channel)
+   0  080128BC   1104  1           one-shot  0.5, 0.6, 0.7, 0.8, 1.5, 1.6, 1.7, 1.8, 2.5, 2.6, 2.7, 2.8, 3.5, 3.6, 3.7, 3.8, 4.5, 4.6, 4.7, 4.8, 5.5, 5.6, 5.7, 5.8, 6.5, 6.6, 6.7, 6.8, 7.5, 7.6, 7.7, 7.8, 8.5, 8.6, 8.7, 8.8, 9.5, 9.6, 9.7, 9.8, 10.5, 10.6, 10.7, 10.8, 11.5, 11.6, 11.7, 11.8, 12.5, 12.6, 12.7, 12.8, 13.5, 13.6, 13.7, 13.8
+   1  0801BB38  22656  1           one-shot  1.5, 2.7, 3.7, 4.7, 5.7, 7.7, 8.7, 9.7, 10.7, 11.7, 12.7, 13.7
+   2  08012D0C   3284  1           one-shot  1.8, 2.6, 2.8, 3.8, 4.8, 5.8, 8.8, 9.8, 10.8, 11.8, 12.8, 13.8
+   3  08013A00   2152  1           one-shot  10.8, 11.8, 12.8, 13.8
+   4  080142E8   3288  1           one-shot  1.8, 2.6
+   5  08015E84   3256  1           one-shot  1.8, 2.8, 3.8, 4.8, 5.8, 8.8, 9.8
+   6  08014FE0   3716  1           one-shot  1.8, 2.8, 3.8, 4.8, 5.8, 8.8, 9.8
+   7  08016B5C   3488  1           one-shot  1.8, 2.8, 3.8, 4.8, 5.8, 8.8, 9.8
+   8  0801791C   4408  1           one-shot  1.8, 2.8, 3.8, 4.8, 5.8, 8.8, 9.8
+   9  08018A74   5904  1           one-shot  1.8, 2.8, 3.8, 4.8, 5.8, 8.8, 9.8
+  10  0801A1A4   6516  1           one-shot  1.8, 2.6, 2.8, 3.8, 4.8, 8.8, 9.8, 11.8, 13.8
+  11  08021438  15224  1           one-shot  1.6, 1.7
+  12  08024FB0   4912  1           one-shot  1.6
+  13  080262E0  22068  1           one-shot  1.7, 4.5, 4.6, 8.6, 9.5
+  14  08032714  22688  1           one-shot  3.6, 6.5, 6.6, 6.7, 6.8, 11.6, 13.5
+  15  0802B914  28160  1           one-shot  2.5, 3.5
+  16  08037FB4  12512  1           one-shot  4.5, 4.6
+  17  0803B094  10880  1           one-shot  5.6
+  18  0803F244  33600  1           one-shot  5.5, 7.5
+  19  08047584  29376  1           one-shot  7.8
+  20  0804E844   9872  1           one-shot  7.6
+  21  08050ED4  20380  1           one-shot  7.5
+  22  0803DB14   5936  1           one-shot  8.5
+  23  08055E70   8512  1           one-shot  9.6, 10.6, 12.6
+  24  08057FB0   8512  1           one-shot  9.6, 10.6, 12.6
+  25  0805A0F0   7216  1           one-shot  10.5, 12.5
+  26  0805A4F0   2048  0x805a0f0   loop@0    10.5
+  27  0805BD20   4880  0x805bd20   loop@0    11.5
+  28  0805D030  12008  0x805d030   loop@0    12.5
+  29  0805FF18   3624  1           one-shot  13.6
+  30  (empty)
+  31  (empty)
+ (WAV copies in wav/snood2_instNN.wav, written at 11 025 Hz = the rate of note 48)
+
+3. SOUND EFFECTS (mcSfxTable @ 0808223C, 12 x 16 bytes)
+----------------------------------------------------------------------------------------------------
+ sfx  address   frames  bytes  loop  
+   0  080128BC      6    1056    no  
+   1  08060D40      9    1584    no  
+   2  080613D0     48    8448    no  
+   3  08063670      6    1056    no  
+   4  08063B6C     24    4224    no  
+   5  08064D3C      5     880    no  
+   6  08065128     23    4048    no  
+   7  08066218     31    5456    no  
+   8  08067868     55    9680    no  
+   9  08069FFC     55    9680    no  
+  10  0806C7E4    273   48048    no  
+  11  08078B3C    211   37136    no  
+ bytes = frames x 176, the amount the SFX mixer actually reads.  WAV copies: wav/snood2_sfxNN.wav
+ at 10 512 Hz (the mixer copies 176 bytes per frame; FIFO B then plays them at 10 261 Hz).
+
+4. PSG INSTRUMENTS (mcInstTable @ 08091F94)
+----------------------------------------------------------------------------------------------------
+ inst  address    b0   lo   hi  env          pitch        arp
+   0  08091B80  00   00   00  -            -            -           
+   1  08091BA4  40   BD   00  mod_08091770 mod_08091998 -           
+   2  08091BC8  00   80   00  mod_08091784 mod_080919A8 -           
+   3  08091BEC  40   BC   41  -            mod_08091A28 -           
+   4  08091C10  40   B8   51  -            mod_08091A38 -           
+   5  08091C34  00   00   00  mod_080917BC mod_08091A38 -           
+   6  08091C58  00   00   00  mod_080917E0 mod_08091A48 -           
+   7  08091C7C  00   40   43  -            mod_08091A84 -           
+   8  08091CA0  00   00   00  mod_08091830 mod_08091A84 -           
+   9  08091CC4  00   40   27  -            -            -           
+  10  08091CE8  00   00   00  mod_08091870 -            -           
+  11  08091D0C  00   00   34  -            -            -           
+  12  08091D30  00   00   00  mod_080918A4 mod_08091A84 -           
+  13  08091D30  00   00   00  mod_080918A4 mod_08091A84 -           
+  14  08091D30  00   00   00  mod_080918A4 mod_08091A84 -           
+  15  08091D30  00   00   00  mod_080918A4 mod_08091A84 -           
+  16  08091D54  00   40   35  -            -            mod_08091AB0
+  17  08091D78  00   40   35  -            -            mod_08091AD0
+  18  08091D9C  00   40   35  -            -            mod_08091AF0
+  19  08091DC0  00   40   35  -            -            mod_08091B10
+  20  08091DE4  00   40   35  -            -            mod_08091B30
+  21  08091E08  00   40   35  -            -            mod_08091B50
+  22  08091E2C  00   40   00  mod_080918D8 -            mod_08091AB0
+  23  08091E50  00   40   00  mod_080918D8 -            mod_08091AD0
+  24  08091E74  00   40   00  mod_080918D8 -            mod_08091AF0
+  25  08091E98  00   40   00  mod_080918D8 -            mod_08091B10
+  26  08091EBC  00   40   00  mod_080918D8 -            mod_08091B30
+  27  08091EE0  00   40   00  mod_080918D8 -            mod_08091B50
+  28  08091F04  00   80   52  -            -            -           
+  29  08091F28  00   80   00  mod_08091900 -            -           
+  30  08091F4C  00   80   54  -            mod_08091A9C -           
+  31  08091F70  00   40   00  mod_08091968 mod_08091A84 -           
+
+5. MODULATION TABLES
+----------------------------------------------------------------------------------------------------
+ mod_08091770  env of inst 1                      240/2 0/1 112/1 0/1 HOLD
+ mod_08091784  env of inst 2                      240/1 176/1 112/2 48/1 32/5 16/15 0/1 HOLD
+ mod_080917BC  env of inst 5                      64/1 48/1 32/2 16/2 16/8 16/2 16/2 0/1 HOLD
+ mod_080917E0  env of inst 6                      144/1 64/1 48/2 32/3 16/6 0/1 HOLD
+ mod_08091830  env of inst 8                      32/1 128/2 64/4 96/9 0/1 HOLD
+ mod_08091870  env of inst 10                     48/4 16/1 0/1 HOLD
+ mod_080918A4  env of inst 12; env of inst 13; env of inst 14; env of inst 15 48/1 16/1 48/1 64/2 48/2 16/5 0/1 HOLD
+ mod_080918D8  env of inst 22; env of inst 23; env of inst 24; env of inst 25; env of inst 26; env of inst 27 32/1 48/2 32/25 32/25 16/175 16/175 16/175 0/1 HOLD
+ mod_08091900  env of inst 29                     16/1 32/1 16/1 48/1 64/1 32/1 16/1 0/6 LOOP->0
+ mod_08091968  env of inst 31                     16/1 32/1 48/2 32/12 32/4 0/4 32/4 0/4 LOOP->8
+ mod_08091998  pitch of inst 1                    97/200 HOLD
+ mod_080919A8  pitch of inst 2                    55/2 100/2 34/1 55/1 34/1 55/1 34/1 34/1 55/1 34/1 55/1 34/1 55/1 34/1 55/1 34/16 HOLD
+ mod_08091A28  pitch of inst 3                    16/200 HOLD
+ mod_08091A38  pitch of inst 4; pitch of inst 5   34/1 16/200 HOLD
+ mod_08091A48  pitch of inst 6                    55/1 70/1 35/1 70/1 35/1 70/1 35/1 70/1 35/1 70/1 35/1 70/1 LOOP->0
+ mod_08091A84  pitch of inst 12; pitch of inst 13; pitch of inst 14; pitch of inst 15; pitch of inst 31; pitch of inst 7; pitch of inst 8 1/3 -1/3 -1/3 1/3 LOOP->0
+ mod_08091A9C  pitch of inst 30                   36/200 36/200 36/200 HOLD
+ mod_08091AB0  arp of inst 16; arp of inst 22     1/0 1/4 1/7 1/0 1/4 1/7 LOOP->0
+ mod_08091AD0  arp of inst 17; arp of inst 23     1/4 1/7 1/12 1/4 1/7 1/12 LOOP->0
+ mod_08091AF0  arp of inst 18; arp of inst 24     1/7 1/12 1/16 1/7 1/12 1/16 LOOP->0
+ mod_08091B10  arp of inst 19; arp of inst 25     1/0 1/3 1/7 1/0 1/3 1/7 LOOP->0
+ mod_08091B30  arp of inst 20; arp of inst 26     1/3 1/7 1/12 1/3 1/7 1/12 LOOP->0
+ mod_08091B50  arp of inst 21; arp of inst 27     1/7 1/12 1/15 1/7 1/12 1/15 LOOP->0
+
+6. NOTE-LENGTH TABLE
+----------------------------------------------------------------------------------------------------
+ durTable0 @ 080827FC: 3 4 6 9 12 18 24 36 48 72 96 144 192 8 16 32 40 64 80 84 15 54 60 42 30 108 132 156 2 120 28 21 51 33 168 1536 288 384 624 216 90 102 66 1 180 56 20 78 3 4 6 9 12 18 24 36 48 72 96 144 192 8 16 32 10 40
+
+7. STEP TABLE (mcStepTable @ 0800FFE0): note -> step (18.14) -> effective rate for an 11 025 Hz sample
+----------------------------------------------------------------------------------------------------
+ n 0 15888  56589 Hz  n 1 15888  56589 Hz  n 2 15888  56589 Hz  n 3 15888  56589 Hz  n 4 15888  56589 Hz  n 5 15888  56589 Hz
+ n 6 15888  56589 Hz  n 7 15888  56589 Hz  n 8 15888  56589 Hz  n 9 15888  56589 Hz  n10 15888  56589 Hz  n11 15888  56589 Hz
+ n12 00863   1378 Hz  n13 008E3   1460 Hz  n14 0096B   1547 Hz  n15 009FA   1639 Hz  n16 00A90   1735 Hz  n17 00B32   1839 Hz
+ n18 00BDC   1948 Hz  n19 00C92   2065 Hz  n20 00D51   2187 Hz  n21 00E1C   2317 Hz  n22 00EF3   2455 Hz  n23 00FD5   2600 Hz
+ n24 010C7   2756 Hz  n25 011C7   2920 Hz  n26 012D6   3094 Hz  n27 013F5   3278 Hz  n28 01520   3470 Hz  n29 01665   3678 Hz
+ n30 017B9   3896 Hz  n31 01925   4130 Hz  n32 01AA3   4375 Hz  n33 01C39   4636 Hz  n34 01DE7   4911 Hz  n35 01FAB   5201 Hz
+ n36 0218F   5512 Hz  n37 0238E   5840 Hz  n38 025AC   6188 Hz  n39 027EA   6556 Hz  n40 02A41   6940 Hz  n41 02CCA   7357 Hz
+ n42 02F72   7793 Hz  n43 0324A   8260 Hz  n44 03546   8750 Hz  n45 03872   9271 Hz  n46 03BCE   9823 Hz  n47 03F57  10404 Hz
+ n48 0431F  11025 Hz  n49 0471D  11680 Hz  n50 04B59  12376 Hz  n51 04FD6  13113 Hz  n52 05483  13881 Hz  n53 05996  14715 Hz
+ n54 05EE5  15586 Hz  n55 06495  16521 Hz  n56 06A8D  17501 Hz  n57 070E4  18542 Hz  n58 0779F  19648 Hz  n59 07EB2  20810 Hz
+ n60 0863F  22050 Hz  n61 08E3A  23361 Hz  n62 096B3  24752 Hz  n63 09FA8  26224 Hz  n64 0A902  27760 Hz  n65 0B327  29426 Hz
+ n66 0BDD2  31178 Hz  n67 0C932  33046 Hz  n68 0D51B  35003 Hz  n69 0E1C8  37085 Hz  n70 0EF3E  39296 Hz  n71 0FD64  41620 Hz
+ n72 0000A      6 Hz  n73 0000A      6 Hz  n74 0000A      6 Hz  n75 0000A      6 Hz  n76 0000A      6 Hz  n77 0000A      6 Hz
+ n78 0000A      6 Hz  n79 0000A      6 Hz  n80 0000A      6 Hz  n81 0000A      6 Hz  n82 0000A      6 Hz  n83 0000A      6 Hz
+ n84 0000A      6 Hz  n85 0000A      6 Hz  n86 0000A      6 Hz  n87 0000A      6 Hz  n88 0000A      6 Hz  n89 0000A      6 Hz
+ n90 0000A      6 Hz  n91 0000A      6 Hz  n92 0000A      6 Hz  n93 0000A      6 Hz  n94 0000A      6 Hz  n95 0000A      6 Hz

@@ -1,0 +1,162 @@
+Snood (GBA) -- Mark Cooksey sound driver, Build A: data dump
+Generated from "Snood (E) (M5).gba".  All addresses are GBA ROM addresses.
+Channels 1-4: square1, square2, wave, noise.  Note names assume index 0 = C#2.
+====================================================================================================
+
+1. SONGS (mcSongTable @ 083FF310, 6 x 28 bytes; length table fixed at 083FC738)
+----------------------------------------------------------------------------------------------------
+song 0: tempo 255 (0.996 ticks/frame)
+   ch1  seq_s00_c0   @ 083FE70C    1 pattern calls, pass 3 ticks = 0.1 s, ends
+   ch2  seq_s00_c1   @ 083FE738    1 pattern calls, pass 3 ticks = 0.1 s, ends
+   ch3  seq_s00_c2   @ 083FE74C    1 pattern calls, pass 3 ticks = 0.1 s, ends
+   ch4  seq_s00_c3   @ 083FE760    1 pattern calls, pass 3 ticks = 0.1 s, ends
+song 1: tempo 223 (0.871 ticks/frame)
+   ch1  seq_s01_c0   @ 083FE774    6 pattern calls, pass 3840 ticks = 73.8 s, loops to word 12
+   ch2  seq_s01_c1   @ 083FE7F4    6 pattern calls, pass 3858284577 ticks, loops to word 4  ** misaligned pattern 083FC8F3: lengths read out of bounds; the channel stalls on its first one (67 976 706 ticks) and never returns (data bug, see snood_sound_data.s)
+   ch3  seq_s01_c2   @ 083FE85C    6 pattern calls, pass 3840 ticks = 73.8 s, loops to word 4
+   ch4  seq_s01_c3   @ 083FE8C4    3 pattern calls, pass 3840 ticks = 73.8 s, loops to word 8
+song 2: tempo 206 (0.805 ticks/frame)
+   ch1  seq_s02_c0   @ 083FE8FC    9 pattern calls, pass 5376 ticks = 111.9 s, loops to word 8
+   ch2  seq_s02_c1   @ 083FE9AC   12 pattern calls, pass 5376 ticks = 111.9 s, loops to word 4
+   ch3  seq_s02_c2   @ 083FEA74    5 pattern calls, pass 5376 ticks = 111.9 s, loops to word 4
+   ch4  seq_s02_c3   @ 083FEACC    3 pattern calls, pass 768 ticks = 16.0 s, loops to word 4
+song 3: tempo 223 (0.871 ticks/frame)
+   ch1  seq_s03_c0   @ 083FEB04    6 pattern calls, pass 3072 ticks = 59.0 s, loops to word 4
+   ch2  seq_s03_c1   @ 083FEB84    6 pattern calls, pass 3072 ticks = 59.0 s, loops to word 0
+   ch3  seq_s03_c2   @ 083FEBEC    6 pattern calls, pass 3072 ticks = 59.0 s, loops to word 0
+   ch4  seq_s03_c3   @ 083FEC54    4 pattern calls, pass 3072 ticks = 59.0 s, loops to word 0
+song 4: tempo 206 (0.805 ticks/frame)
+   ch1  seq_s04_c0   @ 083FEC9C   16 pattern calls, pass 3456 ticks = 71.9 s, loops to word 12
+   ch2  seq_s04_c1   @ 083FEDBC   11 pattern calls, pass 3456 ticks = 71.9 s, loops to word 4
+   ch3  seq_s04_c2   @ 083FEE74   13 pattern calls, pass 3456 ticks = 71.9 s, loops to word 4
+   ch4  seq_s04_c3   @ 083FEF4C   13 pattern calls, pass 3456 ticks = 71.9 s, loops to word 4
+song 5: tempo 223 (0.871 ticks/frame)
+   ch1  seq_s05_c0   @ 083FF024    8 pattern calls, pass 3456 ticks = 66.4 s, loops to word 12
+   ch2  seq_s05_c1   @ 083FF0C4    9 pattern calls, pass 3456 ticks = 66.4 s, loops to word 4
+   ch3  seq_s05_c2   @ 083FF15C    7 pattern calls, pass 3456 ticks = 66.4 s, loops to word 4
+   ch4  seq_s05_c3   @ 083FF1D4    7 pattern calls, pass 3456 ticks = 66.4 s, loops to word 4
+
+2. DIRECTSOUND SFX (mcDsSfxTable @ 083FBEC8, 100 x 12 bytes, 74 used)
+----------------------------------------------------------------------------------------------------
+ sfx  address   frames  ~bytes  loopFrames
+   0  0836D3F8     43    8084  -
+   1  08351218     10    1886  -
+   2  083519D8     13    2452  -
+   3  083523FC     24    4527  -
+   4  083535C4     35    6602  -
+   5  08354F9C     17    3207  -
+   6  08355C88     29    5464  -
+   7  083571E0     68   12800  -
+   8  0835A3E0     57   10688  57
+   9  0835CDA0     26    4904  -
+  10  0835E148      6    1131  -
+  11  0835E638     78   14592  -
+  12  08361F38     44    8300  -
+  13  08363FB8     26    4904  -
+  14  083652E8     19    3584  -
+  15  08366148     26    4904  -
+  16  083674B0     26    4904  -
+  17  083687E0     69   12928  -
+  18  0836BA60     35    6552  -
+  19  0834FEEC     26    4904  26
+  20  0836F38C     15    2820  -
+  21  0836FE90     66   12450  -
+  22  08372F50     41    7712  -
+  23  08375B84    235   44096  -
+  24  083807C4    117   22044  -
+  25  08385DE0     59   11130  -
+  26  0838897C     23    4312  -
+  27  08389A54     20    3773  20
+  28  083571E0     68   12800  -
+  29  0838A990     60   11264  -
+  30  0838D590     48    9055  -
+  31  0838F950     67   12624  -
+  32  08392AA0     23    4338  -
+  33  08393BC8     50    9396  -
+  34  0839607C     75   14148  -
+  35  083997FC     53    9998  -
+  36  0839BF20     62   11696  -
+  37  0839ED00     49    9240  -
+  38  083A1118     51    9621  -
+  39  083A36D8     59   11130  59
+  40  083A6280     63   11884  -
+  41  083A9100     76   14336  -
+  42  083AC900     66   12448  -
+  43  083AF9A0     62   11680  -
+  44  083B2740     88   16568  -
+  45  083B67F8    102   19242  -
+  46  083BB32C     47    8816  -
+  47  083BD59C     66   12384  -
+  48  083C05FC     59   11130  -
+  49  083C31CC     22    4150  -
+  50  083C4260     27    5093  -
+  51  083C5668     27    5093  -
+  52  083C6AC4      7    1320  -
+  53  083C7038     62   11696  -
+  54  083C9E3C     69   13016  -
+  55  083CD12C    117   21964  -
+  56  08374D70     19    3584  -
+  57  0836F38C     15    2820  -
+  58  083D26F8      8    1509  -
+  59  083D2CE0      7    1320  -
+  60  083D320C     67   12639  -
+  61  083D639C     57   10744  -
+  62  083D8D94     48    9055  -
+  63  083DB154     24    4527  -
+  64  083DC340     83   15524  -
+  65  083DFFE4    111   20768  -
+  66  083E5104     63   11840  -
+  67  083E7F44     67   12544  -
+  68  083EB044     84   15804  -
+  69  083EEE00    106   19872  -
+  70  083F3BA0     15    2816  -
+  71  083F46A0     62   11696  -
+  72  083F745C     43    8111  -
+  73  083F9428     58   10912  -
+ ~bytes = what the DMA plays in "frames" frames at 11 268 Hz (capped at the next sample).
+ WAV copies: wav/snood_sfxNN.wav at 11 268 Hz.
+
+3. PSG INSTRUMENTS (mcInstTable @ 083FF834)
+----------------------------------------------------------------------------------------------------
+ inst  address    b0   lo   hi  env          pitch        arp
+   0  083FF684  00   00   00  -            -            -           
+   1  083FF6A8  40   BD   00  mod_083FF3B8 mod_083FF49C -           
+   2  083FF6CC  00   80   00  mod_083FF3CC mod_083FF4AC -           
+   3  083FF6F0  40   BB   91  -            mod_083FF52C -           
+   4  083FF714  00   00   00  -            -            -           
+   5  083FF738  00   00   00  mod_083FF3EC mod_083FF53C -           
+   6  083FF714  00   00   00  -            -            -           
+   7  083FF714  00   00   00  -            -            -           
+   8  083FF714  00   00   00  -            -            -           
+   9  083FF714  00   00   00  -            -            -           
+  10  083FF714  00   00   00  -            -            -           
+  11  083FF714  00   00   00  -            -            -           
+  12  083FF714  00   00   00  -            -            -           
+  13  083FF75C  00   80   72  -            mod_083FF54C mod_083FF654
+  14  083FF780  00   80   77  -            mod_083FF54C mod_083FF654
+  15  083FF7A4  00   80   00  mod_083FF40C mod_083FF564 -           
+  16  083FF7C8  00   00   00  mod_083FF43C mod_083FF5E4 -           
+  17  083FF7EC  00   00   00  mod_083FF45C mod_083FF5E4 -           
+  18  083FF810  00   00   00  mod_083FF47C mod_083FF5E4 -           
+
+4. MODULATION TABLES
+----------------------------------------------------------------------------------------------------
+ mod_083FF3B8  env of inst 1                      240/1 0/1 112/1 0/1 HOLD
+ mod_083FF3CC  env of inst 2                      240/1 112/2 48/1 32/5 16/15 0/1 HOLD
+ mod_083FF3EC  env of inst 5                      80/2 48/4 32/8 16/2 16/2 0/1 HOLD
+ mod_083FF40C  env of inst 15                     32/1 64/1 112/1 96/2 80/5 64/20 48/20 32/80 16/20 0/1 HOLD
+ mod_083FF43C  env of inst 16                     128/2 64/200 64/200 96/200 96/200 0/1 HOLD
+ mod_083FF45C  env of inst 17                     128/2 64/6 96/6 0/1 HOLD
+ mod_083FF47C  env of inst 18                     128/2 64/10 96/30 0/1 HOLD
+ mod_083FF49C  pitch of inst 1                    97/200 HOLD
+ mod_083FF4AC  pitch of inst 2                    55/2 100/2 34/1 55/1 34/1 55/1 34/1 34/1 55/1 34/1 55/1 34/1 55/1 34/1 55/1 34/16 HOLD
+ mod_083FF52C  pitch of inst 3                    18/200 HOLD
+ mod_083FF53C  pitch of inst 5                    34/1 16/200 HOLD
+ mod_083FF54C  pitch of inst 13; pitch of inst 14 2/3 -2/3 -2/3 2/3 LOOP->0
+ mod_083FF564  pitch of inst 15                   1/3 -1/3 -1/3 1/3 1/3 -1/3 -1/3 1/3 1/3 -1/3 -1/3 1/3 1/3 -1/3 -1/3 1/3 2/3 -2/3 -2/3 2/3 LOOP->32
+ mod_083FF5E4  pitch of inst 16; pitch of inst 17; pitch of inst 18 6/2 -6/2 -6/2 6/2 LOOP->0
+ mod_083FF654  arp of inst 13; arp of inst 14     1/0 1/0 1/-12 1/0 1/-12 1/0 1/-12 LOOP->2
+
+5. NOTE-LENGTH TABLE (mcDurTable @ 083FC738): 3 4 6 9 12 18 24 36 48 72 96 144 192 8 16 32
+
+6. PSG SFX (unused): mcPsgSfxMap @ 083FC378, 10 scripts

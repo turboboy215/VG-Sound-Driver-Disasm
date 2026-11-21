@@ -1,0 +1,71 @@
+== rebuild
+ok 1937 instructions, 9170 items, 10 unreferenced ranges
+6:4000-7FFF: OK
+ok 1959 instructions, 9284 items, 16 unreferenced ranges
+6:4000-7FFF: OK
+ok 2030 instructions, 9285 items, 16 unreferenced ranges
+6:4000-7FFF: OK
+ok 1908 instructions, 9125 items, 27 unreferenced ranges
+15:4000-7FFF: OK
+ok 2004 instructions, 8318 items, 29 unreferenced ranges
+15:4000-7FFF: OK
+ok 2059 instructions, 9587 items, 16 unreferenced ranges
+15:4000-7FFF: OK
+ok 2071 instructions, 9884 items, 23 unreferenced ranges
+12:4000-7FFF: OK
+ok 1935 instructions, 8916 items, 30 unreferenced ranges
+2:4000-7FFF: OK
+ok 2208 instructions, 7143 items, 33 unreferenced ranges
+15:4000-7FFF: OK
+ok 1856 instructions, 5275 items, 20 unreferenced ranges
+7:4000-7FFF: OK
+ok 2150 instructions, 8926 items, 25 unreferenced ranges
+15:4000-7FFF: OK
+ok 2155 instructions, 8957 items, 15 unreferenced ranges
+15:4000-7FFF: OK
+labels inside items dropped: [('0x6d5f', 'SfxTable_m2')]
+ok 2075 instructions, 6676 items, 18 unreferenced ranges
+3:4000-7FFF: OK
+ok 1817 instructions, 2209 items, 33 unreferenced ranges
+4:4000-7FFF: OK
+ok 2071 instructions, 2755 items, 25 unreferenced ranges
+2:4000-7FFF: OK
+ok 2096 instructions, 2846 items, 25 unreferenced ranges
+16:4000-7FFF: OK
+== emulator trace
+smurfs: 53 tests, 105980 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 runs, song12 runs, song13 238, song14 168, song15 runs, song16 runs, song17 runs, song18 runs, song19 runs, jingle1 224, jingle2 168, sfx1 36, sfx2 72, sfx3 28, sfx4 24, sfx5 50, sfx6 10, sfx7 46, sfx8 25, sfx9 10, sfx10 10, sfx11 20, sfx12 31, sfx13 8, sfx14 30, sfx15 30, sfx16 16, sfx17 14, sfx18 5, sfx19 8, sfx20 4, sfx21 12, sfx22 13, sfx23 24, sfx24 12, sfx25 11, sfx26 40, sfx27 26, sfx28 44, sfx29 30, sfx30 28, sfx31 5, sfx32 7
+obelixgb: 45 tests, 91332 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 runs, song12 runs, song13 runs, song14 runs, song15 72, song16 runs, sfx1 13, sfx2 9, sfx3 6, sfx4 8, sfx5 8, sfx6 32, sfx7 10, sfx8 18, sfx9 13, sfx10 12, sfx11 18, sfx12 28, sfx13 8, sfx14 25, sfx15 11, sfx16 5, sfx17 3, sfx18 8, sfx19 5, sfx20 28, sfx21 75, sfx22 40, sfx23 5, sfx24 15, sfx25 25, sfx26 24, sfx27 26, sfx28 80, sfx29 57
+obelixgbc: 45 tests, 91332 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 runs, song12 runs, song13 runs, song14 runs, song15 72, song16 runs, sfx1 13, sfx2 9, sfx3 6, sfx4 8, sfx5 8, sfx6 32, sfx7 10, sfx8 18, sfx9 13, sfx10 12, sfx11 18, sfx12 28, sfx13 8, sfx14 25, sfx15 11, sfx16 5, sfx17 3, sfx18 8, sfx19 5, sfx20 28, sfx21 75, sfx22 40, sfx23 5, sfx24 15, sfx25 25, sfx26 24, sfx27 26, sfx28 80, sfx29 57
+tibet: 42 tests, 77171 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 runs, song12 runs, song13 1408, song14 1920, sfx1 40, sfx2 40, sfx3 40, sfx4 40, sfx5 40, sfx6 24, sfx7 24, sfx8 6, sfx9 13, sfx10 9, sfx11 12, sfx12 5, sfx13 25, sfx14 11, sfx15 12, sfx16 3, sfx17 16, sfx18 46, sfx19 13, sfx20 11, sfx21 29, sfx22 6, sfx23 27, sfx24 27, sfx25 12, sfx26 12, sfx27 30, sfx28 28
+sun: 35 tests, 79822 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 runs, song12 runs, song13 runs, song14 880, sfx1 7, sfx2 8, sfx3 13, sfx4 6, sfx5 13, sfx6 9, sfx7 12, sfx8 25, sfx9 11, sfx10 12, sfx11 3, sfx12 16, sfx13 13, sfx14 11, sfx15 12, sfx16 27, sfx17 27, sfx18 28, sfx19 5, sfx20 40, sfx21 9
+spirou: 44 tests, 73946 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 648, song12 runs, song13 runs, sfx1 75, sfx2 15, sfx3 10, sfx4 8, sfx5 27, sfx6 27, sfx7 16, sfx8 10, sfx9 9, sfx10 13, sfx11 28, sfx12 45, sfx13 29, sfx14 10, sfx15 32, sfx16 11, sfx17 36, sfx18 13, sfx19 16, sfx20 30, sfx21 20, sfx22 21, sfx23 30, sfx24 30, sfx25 9, sfx26 25, sfx27 12, sfx28 6, sfx29 3, sfx30 5, sfx31 33
+luckyluke: 57 tests, 93269 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 384, song12 runs, song13 runs, song14 runs, song15 798, song16 runs, song17 runs, sfx1 25, sfx2 13, sfx3 9, sfx4 11, sfx5 28, sfx6 30, sfx7 6, sfx8 33, sfx9 27, sfx10 12, sfx11 13, sfx12 9, sfx13 45, sfx14 10, sfx15 75, sfx16 20, sfx17 8, sfx18 10, sfx19 10, sfx20 15, sfx21 10, sfx22 27, sfx23 27, sfx24 16, sfx25 10, sfx26 9, sfx27 13, sfx28 45, sfx29 29, sfx30 32, sfx31 36, sfx32 13, sfx33 16, sfx34 30, sfx35 30, sfx36 25, sfx37 12, sfx38 3, sfx39 5, sfx40 33
+smurfs3: 34 tests, 93460 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 runs, song12 runs, song13 runs, song14 runs, song15 runs, song16 309, song17 521, song18 379, sfx1 25, sfx2 13, sfx3 9, sfx4 14, sfx5 18, sfx6 24, sfx7 9, sfx8 20, sfx9 7, sfx10 24, sfx11 72, sfx12 90, sfx13 33, sfx14 11, sfx15 36, sfx16 12
+maus: 70 tests, 52624 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 2400, sfx1 25, sfx2 13, sfx3 9, sfx4 40, sfx5 40, sfx6 40, sfx7 40, sfx8 40, sfx9 3, sfx10 58, sfx11 10, sfx12 20, sfx13 33, sfx14 27, sfx15 5, sfx16 10, sfx17 10, sfx18 57, sfx19 65, sfx20 44, sfx21 37, sfx22 14, sfx23 126, sfx24 28, sfx25 17, sfx26 13, sfx27 9, sfx28 11, sfx29 28, sfx30 30, sfx31 6, sfx32 12, sfx33 13, sfx34 9, sfx35 45, sfx36 10, sfx37 75, sfx38 20, sfx39 10, sfx40 10, sfx41 10, sfx42 15, sfx43 10, sfx44 27, sfx45 27, sfx46 16, sfx47 10, sfx48 9, sfx49 13, sfx50 45, sfx51 29, sfx52 32, sfx53 37, sfx54 13, sfx55 16, sfx56 30, sfx57 30, sfx58 25, sfx59 12, sfx60 3, sfx61 33
+hugo2: 24 tests, 38341 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 384, song8 317, sfx1 25, sfx2 11, sfx3 3, sfx4 13, sfx5 9, sfx6 10, sfx7 20, sfx8 33, sfx9 9, sfx10 27, sfx11 12, sfx12 28, sfx13 57, sfx14 66, sfx15 12, sfx16 81
+turok: 52 tests, 74096 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 runs, song9 490, song10 runs, song11 runs, song12 runs, song13 runs, sfx1 12, sfx2 6, sfx3 80, sfx4 30, sfx5 24, sfx6 27, sfx7 36, sfx8 55, sfx9 8, sfx10 30, sfx11 12, sfx12 15, sfx13 23, sfx14 27, sfx15 35, sfx16 40, sfx17 30, sfx18 13, sfx19 30, sfx20 45, sfx21 23, sfx22 40, sfx23 26, sfx24 30, sfx25 20, sfx26 29, sfx27 40, sfx28 7, sfx29 5, sfx30 12, sfx31 25, sfx32 11, sfx33 12, sfx34 16, sfx35 11, sfx36 27, sfx37 28, sfx38 5, sfx39 9
+turok2: 44 tests, 73914 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 448, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 runs, song12 runs, song13 runs, sfx1 12, sfx2 6, sfx3 80, sfx4 30, sfx5 24, sfx6 27, sfx7 36, sfx8 55, sfx9 8, sfx10 30, sfx11 12, sfx12 15, sfx13 23, sfx14 27, sfx15 35, sfx16 40, sfx17 30, sfx18 13, sfx19 30, sfx20 45, sfx21 23, sfx22 40, sfx23 26, sfx24 30, sfx25 20, sfx26 29, sfx27 40, sfx28 7, sfx29 5, sfx30 12, sfx31 12
+otto: 31 tests, 32769 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 1370, song6 runs, sfx1 25, sfx2 30, sfx3 12, sfx4 60, sfx5 6, sfx6 32, sfx7 37, sfx8 32, sfx9 50, sfx10 32, sfx11 61, sfx12 23, sfx13 75, sfx14 45, sfx15 61, sfx16 13, sfx17 9, sfx18 45, sfx19 28, sfx20 20, sfx21 10, sfx22 10, sfx23 14, sfx24 11, sfx25 27
+seabattle: 18 tests, 30368 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, sfx1 20, sfx2 10, sfx3 10, sfx4 55, sfx5 13, sfx6 30, sfx7 23, sfx8 36, sfx9 5, sfx10 28, sfx11 9, sfx12 51, sfx13 60
+vrally: 9 tests, 27380 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 177, song4 runs, song5 448, song6 896, song7 runs, sfx1 5, sfx2 45
+vrallygbc: 10 tests, 28282 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 177, song4 runs, song5 448, song6 896, song7 runs, song8 301, sfx1 5, sfx2 45
+sylvester: 65 tests, 50309 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 runs, song8 414, song9 runs, sfx1 25, sfx2 13, sfx3 9, sfx4 28, sfx5 10, sfx6 20, sfx7 33, sfx8 27, sfx9 10, sfx10 10, sfx11 57, sfx12 44, sfx13 37, sfx14 37, sfx15 10, sfx16 11, sfx17 9, sfx18 21, sfx19 72, sfx20 3, sfx21 40, sfx22 9, sfx23 13, sfx24 6, sfx25 40, sfx26 24, sfx27 40, sfx28 20, sfx29 16, sfx30 13, sfx31 28, sfx32 30, sfx33 6, sfx34 12, sfx35 13, sfx36 9, sfx37 45, sfx38 10, sfx39 10, sfx40 10, sfx41 15, sfx42 10, sfx43 27, sfx44 27, sfx45 16, sfx46 10, sfx47 9, sfx48 13, sfx49 45, sfx50 29, sfx51 32, sfx52 37, sfx53 13, sfx54 30, sfx55 25, sfx56 12
+bugs: 37 tests, 71821 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 768, song5 384, song6 runs, song7 runs, song8 runs, song9 runs, song10 runs, song11 runs, song12 297, song13 448, song14 384, song15 runs, song16 runs, sfx1 16, sfx2 68, sfx3 7, sfx4 14, sfx5 8, sfx6 25, sfx7 7, sfx8 9, sfx9 33, sfx10 28, sfx11 12, sfx12 20, sfx13 11, sfx14 12, sfx15 36, sfx16 52, sfx17 44, sfx18 48, sfx19 9, sfx20 8, sfx21 36

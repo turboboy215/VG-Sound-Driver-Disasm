@@ -1,0 +1,27 @@
+== rebuild
+ok 2383 instructions, 6973 items
+0000-0002: OK
+0008-000B: OK
+0018-001D: OK
+1A90-1A98: OK
+3:4A8C-7F1A: OK
+ok 1972 instructions, 5311 items
+0000-0002: OK
+0008-000B: OK
+0018-001D: OK
+0BA4-0BAC: OK
+0BE7-0BE8: OK
+2:4000-66FC: OK
+ok 2332 instructions, 1551 items
+0000-0002: OK
+0008-000B: OK
+0018-001D: OK
+1719-1721: OK
+2:5A1C-7544: OK
+== emulator trace
+asterix: 37 tests, 56231 ticks, 0 problems
+lengths: song1 576, song2 runs, song3 runs, song4 runs, song5 runs, song6 runs, song7 516, song8 132, song9 runs, song10 runs, song11 476, song12 runs, song13 runs, sfx1 24, sfx2 60, sfx3 17, sfx4 10, sfx5 0, sfx6 7, sfx7 13, sfx8 15, sfx9 19, sfx10 14, sfx11 74, sfx12 39, sfx13 25, sfx14 3, sfx15 27, sfx16 23, sfx17 9, sfx18 0, sfx19 3, sfx20 15, sfx21 9, sfx22 7, sfx23 52, sfx24 29
+pinocchio: 16 tests, 25675 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, song4 runs, song5 1370, sfx1 15, sfx2 15, sfx3 53, sfx4 13, sfx5 39, sfx6 39, sfx7 60, sfx8 6, sfx9 23, sfx10 23, sfx11 3
+metalmasters: 27 tests, 18853 ticks, 0 problems
+lengths: song1 runs, song2 runs, song3 runs, sfx1 18, sfx2 18, sfx3 35, sfx4 35, sfx5 13, sfx6 15, sfx7 261, sfx8 13, sfx9 4, sfx10 4, sfx11 4, sfx12 13, sfx13 14, sfx14 19, sfx15 25, sfx16 17, sfx17 13, sfx18 22, sfx19 9, sfx20 14, sfx21 9, sfx22 199, sfx23 26, sfx24 26

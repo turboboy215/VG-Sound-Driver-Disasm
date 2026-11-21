@@ -1,0 +1,37 @@
+== Pop Up
+popup 0:1: 8000 ticks, 0 mismatching ticks
+popup 0:2: 8247 ticks, 0 mismatching ticks
+popup 0:6: 8004 ticks, 0 mismatching ticks
+popup 0:5,1:3:1: 2000 ticks, 0 mismatching ticks
+popup 0:5,1:3:2: 2003 ticks, 0 mismatching ticks
+popup 0:5,1:3:3: 2005 ticks, 0 mismatching ticks
+popup 0:5,1:3:4: 2000 ticks, 0 mismatching ticks
+popup 0:5,1:3:5: 2000 ticks, 0 mismatching ticks
+popup 0:5,1:3:6: 2005 ticks, 0 mismatching ticks
+popup 0:5,1:3:7: 2006 ticks, 0 mismatching ticks
+popup 0:1,300:3:1,320:3:2,700:3:5,1500:3:7,1600:3:3,2600:4,2700:2,2900:3:6,3500:3:4,5000:1,6000:6,6100:3:5: 7005 ticks, 0 mismatching ticks
+popup 0:2,100:3:3,104:3:3,500:3:1,900:4,950:3:2,1000:1,1010:3:7: 4002 ticks, 0 mismatching ticks
+== Bomb Jack
+bombjack 0:1: 9007 ticks, 0 mismatching ticks
+bombjack 0:2: 9056 ticks, 0 mismatching ticks
+bombjack 0:8: 9049 ticks, 0 mismatching ticks
+bombjack 0:9: 9005 ticks, 0 mismatching ticks
+bombjack 0:10: 9005 ticks, 0 mismatching ticks
+bombjack 1:3:1: 1509 ticks, 0 mismatching ticks
+bombjack 1:3:2: 1563 ticks, 0 mismatching ticks
+bombjack 1:3:3: 1540 ticks, 0 mismatching ticks
+bombjack 1:3:4: 1522 ticks, 0 mismatching ticks
+bombjack 1:3:5: 1514 ticks, 0 mismatching ticks
+bombjack 1:3:6: 1513 ticks, 0 mismatching ticks
+bombjack 1:3:7: 1573 ticks, 0 mismatching ticks
+bombjack 1:3:8: 1508 ticks, 0 mismatching ticks
+bombjack 1:3:9: 1545 ticks, 0 mismatching ticks
+bombjack 1:3:10: 1508 ticks, 0 mismatching ticks
+bombjack 1:3:11: 1552 ticks, 0 mismatching ticks
+bombjack 1:3:12: 1541 ticks, 0 mismatching ticks
+bombjack 1:3:13: 1508 ticks, 0 mismatching ticks
+bombjack 1:3:14: 1545 ticks, 0 mismatching ticks
+bombjack 0:9,200:3:9,260:3:12,262:3:13,600:3:1,900:3:5,903:3:2,1400:11:3,1800:3:14,2000:10,2300:3:11,2600:4,2700:8,3000:3:7,3500:12:1,3510:13:200,3520:3:1,3700:3:4,3900:3:6,4100:13:40,4110:3:8,4500:11:0,4700:6,5200:3:3: 7025 ticks, 0 mismatching ticks
+bombjack 0:1,50:3:10,51:3:11,52:3:9,400:3:13,800:7,1200:3:5,1500:11:5,2500:3:14,2501:3:2: 5071 ticks, 0 mismatching ticks
+bombjack 0:10,10:12:1,20:13:0,30:3:4,300:13:255,310:3:1,600:12:0,700:3:4,1000:11:2,1300:4,1310:3:6,1320:3:6: 3026 ticks, 0 mismatching ticks
+bombjack 0:14,1500:14,1600:3:5,2000:14: 3002 ticks, 0 mismatching ticks
